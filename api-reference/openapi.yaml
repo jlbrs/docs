@@ -15,7 +15,7 @@ paths:
   /auth/action:
     post:
       tags:
-        - Auth
+        - Action Signing
       summary: " Create User Action Signature"
       requestBody:
         content:
@@ -266,7 +266,7 @@ paths:
   /auth/action/init:
     post:
       tags:
-        - Auth
+        - Action Signing
       summary: " Create User Action Challenge"
       requestBody:
         content:
@@ -417,7 +417,7 @@ paths:
   /auth/apps:
     get:
       tags:
-        - Auth
+        - Deprecated
       summary: " List Applications"
       responses:
         "200":
@@ -547,7 +547,7 @@ paths:
   /auth/apps/{appId}:
     get:
       tags:
-        - Auth
+        - Deprecated
       summary: " Get Application"
       parameters:
         - schema:
@@ -677,7 +677,7 @@ paths:
   /auth/credentials:
     post:
       tags:
-        - Auth
+        - Credentials
       summary: " Create Credential"
       parameters:
         - schema:
@@ -936,7 +936,7 @@ paths:
                   - origin
     get:
       tags:
-        - Auth
+        - Credentials
       summary: " List Credentials"
       responses:
         "200":
@@ -991,7 +991,7 @@ paths:
   /auth/credentials/init:
     post:
       tags:
-        - Auth
+        - Credentials
       summary: " Create Credential Challenge"
       requestBody:
         content:
@@ -1404,7 +1404,7 @@ paths:
   /auth/credentials/activate:
     put:
       tags:
-        - Auth
+        - Credentials
       summary: " Activate Credential"
       parameters:
         - schema:
@@ -1439,7 +1439,7 @@ paths:
   /auth/credentials/deactivate:
     put:
       tags:
-        - Auth
+        - Credentials
       summary: " Deactivate Credential"
       parameters:
         - schema:
@@ -1474,7 +1474,7 @@ paths:
   /auth/credentials/code:
     post:
       tags:
-        - Auth
+        - Credentials
       summary: " Create Credential Code"
       parameters:
         - schema:
@@ -1517,7 +1517,7 @@ paths:
   /auth/credentials/code/init:
     post:
       tags:
-        - Auth
+        - Credentials
       summary: " Create Credential Challenge With Code"
       requestBody:
         content:
@@ -1934,7 +1934,7 @@ paths:
   /auth/credentials/code/verify:
     post:
       tags:
-        - Auth
+        - Credentials
       summary: " Create Credential With Code"
       requestBody:
         content:
@@ -2188,7 +2188,7 @@ paths:
   /auth/login/code:
     post:
       tags:
-        - Auth
+        - Login
       summary: " Send Login Code"
       requestBody:
         content:
@@ -2220,7 +2220,7 @@ paths:
   /auth/login/init:
     post:
       tags:
-        - Auth
+        - Login
       summary: " Create Login Challenge"
       requestBody:
         content:
@@ -2362,7 +2362,7 @@ paths:
   /auth/login:
     post:
       tags:
-        - Auth
+        - Login
       summary: " Login"
       requestBody:
         content:
@@ -2613,7 +2613,7 @@ paths:
   /auth/login/delegated:
     post:
       tags:
-        - Auth
+        - Login
       summary: " Delegated Login"
       parameters:
         - schema:
@@ -2647,7 +2647,7 @@ paths:
   /auth/login/social:
     post:
       tags:
-        - Auth
+        - Login
       summary: " Social Login"
       requestBody:
         content:
@@ -2682,7 +2682,7 @@ paths:
   /auth/logout:
     put:
       tags:
-        - Auth
+        - Login
       summary: " Logout"
       requestBody:
         content:
@@ -2707,7 +2707,7 @@ paths:
   /auth/pats:
     get:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " List Personal Access Tokens"
       responses:
         "200":
@@ -2787,7 +2787,7 @@ paths:
                   - items
     post:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Create Personal Access Token"
       parameters:
         - schema:
@@ -2897,7 +2897,7 @@ paths:
   /auth/pats/{tokenId}:
     get:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Get Personal Access Token"
       parameters:
         - schema:
@@ -2977,7 +2977,7 @@ paths:
                   - tokenId
     put:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Update Personal Access Token"
       parameters:
         - schema:
@@ -3073,7 +3073,7 @@ paths:
                   - tokenId
     delete:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Archive Personal Access Token"
       parameters:
         - schema:
@@ -3159,7 +3159,7 @@ paths:
   /auth/pats/{tokenId}/activate:
     put:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Activate Personal Access Token"
       parameters:
         - schema:
@@ -3245,7 +3245,7 @@ paths:
   /auth/pats/{tokenId}/deactivate:
     put:
       tags:
-        - Auth
+        - Personal Access Tokens
       summary: " Deactivate Personal Access Token"
       parameters:
         - schema:
@@ -3331,7 +3331,7 @@ paths:
   /auth/recover/user/delegated:
     post:
       tags:
-        - Auth
+        - Access Recovery
       summary: " Create Delegated Recovery Challenge"
       parameters:
         - schema:
@@ -3509,7 +3509,7 @@ paths:
   /auth/recover/user:
     post:
       tags:
-        - Auth
+        - Access Recovery
       summary: " Recover"
       requestBody:
         content:
@@ -3875,7 +3875,7 @@ paths:
   /auth/recover/user/init:
     post:
       tags:
-        - Auth
+        - Access Recovery
       summary: " Create Recovery Challenge"
       requestBody:
         content:
@@ -4055,7 +4055,7 @@ paths:
   /auth/recover/user/code:
     post:
       tags:
-        - Auth
+        - Access Recovery
       summary: " Send Recovery Code"
       requestBody:
         content:
@@ -4088,7 +4088,7 @@ paths:
   /auth/registration/delegated:
     post:
       tags:
-        - Auth
+        - Registration
       summary: " Create Delegated Registration Challenge"
       parameters:
         - schema:
@@ -4255,7 +4255,7 @@ paths:
   /auth/registration/social:
     post:
       tags:
-        - Auth
+        - Registration
       summary: " Create Social Registration Challenge"
       requestBody:
         content:
@@ -4414,7 +4414,7 @@ paths:
   /auth/registration/init:
     post:
       tags:
-        - Auth
+        - Registration
       summary: " Create Registration Challenge"
       requestBody:
         content:
@@ -4575,7 +4575,7 @@ paths:
   /auth/registration:
     post:
       tags:
-        - Auth
+        - Registration
       summary: " Register"
       requestBody:
         content:
@@ -4903,7 +4903,7 @@ paths:
   /auth/registration/enduser:
     post:
       tags:
-        - Auth
+        - Registration
       summary: " Register End User"
       requestBody:
         content:
@@ -5504,7 +5504,7 @@ paths:
   /auth/registration/code:
     put:
       tags:
-        - Auth
+        - Registration
       summary: " Resend Registration Code"
       requestBody:
         content:
@@ -5537,7 +5537,7 @@ paths:
   /auth/service-accounts:
     get:
       tags:
-        - Auth
+        - Service Accounts
       summary: " List Service Accounts"
       responses:
         "200":
@@ -5684,7 +5684,7 @@ paths:
                   - items
     post:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Create Service Account"
       parameters:
         - schema:
@@ -5856,7 +5856,7 @@ paths:
   /auth/service-accounts/{serviceAccountId}:
     get:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Get Service Account"
       parameters:
         - schema:
@@ -6003,7 +6003,7 @@ paths:
                   - accessTokens
     put:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Update Service Account"
       parameters:
         - schema:
@@ -6166,7 +6166,7 @@ paths:
                   - accessTokens
     delete:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Archive Service Account"
       parameters:
         - schema:
@@ -6319,7 +6319,7 @@ paths:
   /auth/service-accounts/{serviceAccountId}/activate:
     put:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Activate Service Account"
       parameters:
         - schema:
@@ -6472,7 +6472,7 @@ paths:
   /auth/service-accounts/{serviceAccountId}/deactivate:
     put:
       tags:
-        - Auth
+        - Service Accounts
       summary: " Deactivate Service Account"
       parameters:
         - schema:
@@ -6625,7 +6625,7 @@ paths:
   /auth/users/{userId}/activate:
     put:
       tags:
-        - Auth
+        - Users
       summary: " Activate User"
       parameters:
         - schema:
@@ -6706,7 +6706,7 @@ paths:
   /auth/users/{userId}/deactivate:
     put:
       tags:
-        - Auth
+        - Users
       summary: " Deactivate User"
       parameters:
         - schema:
@@ -6787,7 +6787,7 @@ paths:
   /auth/users/{userId}:
     delete:
       tags:
-        - Auth
+        - Users
       summary: " Archive User"
       parameters:
         - schema:
@@ -6867,7 +6867,7 @@ paths:
                   - permissionAssignments
     get:
       tags:
-        - Auth
+        - Users
       summary: " Get User"
       parameters:
         - schema:
@@ -6943,7 +6943,7 @@ paths:
   /auth/users:
     post:
       tags:
-        - Auth
+        - Users
       summary: " Create User"
       parameters:
         - schema:
@@ -7039,7 +7039,7 @@ paths:
                   - permissionAssignments
     get:
       tags:
-        - Auth
+        - Users
       summary: " List Users"
       parameters:
         - schema:
@@ -11433,7 +11433,7 @@ paths:
   /keys/{keyId}/signatures:
     post:
       tags:
-        - Keys
+        - Signature
       summary: " Generate Signature"
       parameters:
         - schema:
@@ -14118,7 +14118,7 @@ paths:
                   - dateRequested
     get:
       tags:
-        - Keys
+        - Signature
       summary: " List Signatures"
       parameters:
         - schema:
@@ -15528,7 +15528,7 @@ paths:
   /keys/{keyId}/signatures/{signatureId}:
     get:
       tags:
-        - Keys
+        - Signature
       summary: " Get Signature"
       parameters:
         - schema:
@@ -17282,7 +17282,7 @@ paths:
   /networks/{network}/validators:
     post:
       tags:
-        - Networks
+        - Canton Validators
       summary: " Create Canton Validator"
       parameters:
         - schema:
@@ -17401,7 +17401,7 @@ paths:
                   - partyHint
     get:
       tags:
-        - Networks
+        - Canton Validators
       summary: " List Canton Validators"
       parameters:
         - schema:
@@ -17469,7 +17469,7 @@ paths:
   /networks/{network}/validators/{validatorId}:
     put:
       tags:
-        - Networks
+        - Canton Validators
       summary: " Update Canton Validator"
       parameters:
         - schema:
@@ -17553,7 +17553,7 @@ paths:
                   - partyHint
     delete:
       tags:
-        - Networks
+        - Canton Validators
       summary: " Delete Canton Validator"
       parameters:
         - schema:
@@ -22724,7 +22724,7 @@ paths:
   /v2/policy-approvals/{approvalId}/decisions:
     post:
       tags:
-        - Policies
+        - Approval
       summary: " Create Approval Decision"
       parameters:
         - schema:
@@ -32534,7 +32534,7 @@ paths:
   /v2/policy-approvals/{approvalId}:
     get:
       tags:
-        - Policies
+        - Approval
       summary: " Get Approval"
       parameters:
         - schema:
@@ -38920,7 +38920,7 @@ paths:
   /v2/policy-approvals:
     get:
       tags:
-        - Policies
+        - Approval
       summary: " List Approvals"
       parameters:
         - schema:
@@ -49718,7 +49718,7 @@ paths:
   /wallets/{walletId}/signatures:
     post:
       tags:
-        - Wallets
+        - Signatures
       summary: " Generate Signature"
       parameters:
         - schema:
@@ -52413,7 +52413,7 @@ paths:
                   - walletId
     get:
       tags:
-        - Wallets
+        - Signatures
       summary: " List Signatures"
       parameters:
         - schema:
@@ -53823,7 +53823,7 @@ paths:
   /wallets/{walletId}/signatures/{signatureId}:
     get:
       tags:
-        - Wallets
+        - Signatures
       summary: " Get Signature"
       parameters:
         - schema:
@@ -55215,7 +55215,7 @@ paths:
   /wallets/{walletId}/transactions/{transactionId}:
     get:
       tags:
-        - Wallets
+        - Transactions
       summary: " Get Transaction"
       parameters:
         - schema:
@@ -55557,7 +55557,7 @@ paths:
   /wallets/{walletId}/transfers/{transferId}:
     get:
       tags:
-        - Wallets
+        - Transfers
       summary: " Get Transfer"
       parameters:
         - schema:
@@ -60251,7 +60251,7 @@ paths:
   /wallets/{walletId}/transfers:
     get:
       tags:
-        - Wallets
+        - Transfers
       summary: " List Transfers"
       parameters:
         - schema:
@@ -61186,7 +61186,7 @@ paths:
                   - items
     post:
       tags:
-        - Wallets
+        - Transfers
       summary: " Transfer Asset"
       parameters:
         - schema:
@@ -63543,3 +63543,125 @@ paths:
                     type: string
                 required:
                   - items
+
+tags:
+  - name: Authentication
+    description: Insert the page description here. 
+  - name: Action Signing
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Credentials
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Login
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Personal Access Tokens
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Access Recovery
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Registration
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Service Accounts
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+  - name: Users
+    x-parent: Authentication
+    description: Insert the page description here. 
+
+
+  - name: Exchanges
+    description: Insert the page description here. 
+
+
+  - name: Fee Sponsors
+    description: Insert the page description here. 
+
+
+  - name: Keys
+    description: Insert the page description here. 
+
+  - name: Signature
+    x-parent: Keys
+    description: Insert the page description here. 
+
+
+  - name: Networks
+    description: Insert the page description here. 
+
+
+  - name: Canton Validators
+    x-parent: Networks
+    description: Insert the page description here. 
+
+
+  - name: Permissions
+    description: Insert the page description here. 
+
+
+  - name: Policies
+    description: Insert the page description here. 
+
+
+  - name: Approval
+    x-parent: Policies
+    description: Insert the page description here. 
+
+
+  - name: Signers
+    description: Insert the page description here. 
+
+
+  - name: Staking
+    description: Insert the page description here. 
+
+
+  - name: Wallets
+    description: Insert the page description here. 
+
+
+  - name: Signatures
+    x-parent: Wallets
+    description: Insert the page description here. 
+
+
+  - name: Transactions
+    x-parent: Wallets
+    description: Insert the page description here. 
+
+
+  - name: Transfers
+    x-parent: Wallets
+    description: Insert the page description here. 
+
+
+  - name: Webhooks
+    description: Insert the page description here. 
+
+
+  - name: Deprecated
+    description: Insert the page description here. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
