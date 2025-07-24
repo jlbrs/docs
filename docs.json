@@ -1,35 +1,111 @@
 {
     "$schema": "https://mintlify.com/docs.json",
-    "theme": "aspen",
+    "theme": "palm",
     "name": "Dfns documentation",
     "colors": {
-        "primary": "#16A34A",
-        "light": "#D6D7EB",
+        "primary": "#8b8cda",
+        "light": "#E1FF0B",
         "dark": "#170C33"
     },
-    "favicon": "/favicon.avif",
+    "description": "Dfns documentation",
+    "logo": {
+        "light": "/images/logo/logo-light.png",
+        "dark": "/images/logo/logo-dark.png"
+    },
+    "favicon": {
+        "light": "/favicon.avif",
+        "dark": "/favicon.avif"
+    },
+    "thumbnails":{
+        "appearance": "light",
+        "background": "#ffffff"
+    },
+    "styling": {
+        "eyebrows": "breadcrumbs",
+        "codeblocks": "system"
+    },
+    "fonts": {
+        "family": "Open Sans"
+    },
+    "appearance": {
+        "default": "system",
+        "strict": false
+    },
+    "navbar": {
+        "links": [
+            {
+                "label": "Blog",
+                "href": "https://www.dfns.co/blog",
+                "icon": "newspaper"
+            },
+            {
+                "label": "Support",
+                "href": "https://support.dfns.co",
+                "icon": "life-ring"
+            }, 
+            {
+                "label": "Dashboard",
+                "href": "https://app.dfns.io",
+                "icon": "house"
+            }
+        ],
+        "primary": {
+            "type": "button",
+            "label": "Get started",
+            "href": "https://app.dfns.io/get-started"
+        }
+    },
     "navigation": {
         "tabs": [
             {
-                "tab": "Guides",
-                "groups": [
+                "tab": "Documentation",
+                "icon": "book-open",
+                "pages":[
+                    "documentation/index",
                     {
-                        "group": "Getting started",
+                        "group": "Getting Started",
                         "pages": [
-                            "index",
-                            "quickstart",
-                            "development"
+                            {
+                                "group": "Onboarding to Dfns",
+                                "icon": "rocket",
+                                "pages": [
+                                    "documentation/onboarding/1",
+                                    "documentation/onboarding/2",
+                                    "documentation/onboarding/3",
+                                    "documentation/onboarding/4",
+                                    "documentation/onboarding/5",
+                                    "documentation/onboarding/6",
+                                    "documentation/onboarding/7"
+                                ]
+                            },
+                            {
+                                "group": "Dfns Essentials",
+                                "icon": "cog",
+                                "pages": [
+                                    "essentials/introduction",
+                                    "essentials/organization",
+                                    "essentials/permissions",
+                                    "essentials/policies",
+                                    "essentials/wallets",
+                                    "essentials/transactions",
+                                    "essentials/notifications",
+                                    "essentials/keys",
+                                    "essentials/addresses",
+                                    "essentials/audits",
+                                    "essentials/teams"
+                                ]
+                            }
                         ]
                     },
                     {
-                        "group": "Customization",
+                        "group": "Wallets",
                         "pages": [
                             "essentials/settings",
                             "essentials/navigation"
                         ]
                     },
                     {
-                        "group": "Writing content",
+                        "group": "Networks",
                         "pages": [
                             "essentials/markdown",
                             "essentials/code",
@@ -38,7 +114,8 @@
                         ]
                     },
                     {
-                        "group": "AI tools",
+                        "group": "Blockchains Operations",
+                        "tag": "NEW",
                         "pages": [
                             "ai-tools/cursor",
                             "ai-tools/claude-code",
@@ -49,6 +126,7 @@
             },
             {
                 "tab": "API reference",
+                "icon": "code",
                 "groups": [
                     {
                         "group": "API documentation",
@@ -59,53 +137,47 @@
                     {
                         "group": "Endpoints",
                         "openapi": {
-                            "source": "api-reference/openapi.yaml",
-                            "directory": "generated"
+                            "source": "openapi.yaml"
                         }
                     }
                 ]
+            },
+            {
+                "tab": "SDKs",
+                "icon": "square-terminal",
+                "groups": [
+                    {
+                        "group": "JavaScript",
+                        "pages": [
+                            "sdks/development"
+                        ]
+                    },
+                    {
+                        "group": "Python",
+                        "pages": [
+                            "sdks/python/installation",
+                            "sdks/python/usage"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tab": "Change Log",
+                "icon": "newspaper",
+                "pages": [
+                            "changelog"
+                        ]
             }
         ],
         "global": {
             "anchors": [
-                {
-                    "anchor": "Documentation",
-                    "href": "https://mintlify.com/docs",
-                    "icon": "book-open-cover"
-                },
-                {
-                    "anchor": "Community",
-                    "href": "https://mintlify.com/community",
-                    "icon": "slack"
-                },
-                {
-                    "anchor": "Blog",
-                    "href": "https://mintlify.com/blog",
-                    "icon": "newspaper"
-                }
             ]
         }
     },
-    "logo": {
-        "light": "/logo/light.svg",
-        "dark": "/logo/dark.svg"
-    },
     "banner": {
-        "content": "🚀 Banner is live! [Learn more](mintlify.com)"
+        "content": "🚀 Deblock, a leading crypto-native neobank, has selected Dfns to power its self-custody wallet infrastructure! [Learn more](https://www.dfns.co/article/announcing-deblock)"
     },
-    "navbar": {
-        "links": [
-            {
-                "label": "Support",
-                "href": "mailto:hi@mintlify.com"
-            }
-        ],
-        "primary": {
-            "type": "button",
-            "label": "Dashboard",
-            "href": "https://dashboard.mintlify.com"
-        }
-    },
+
     "footer": {
         "socials": {
             "x": "https://x.com/mintlify",

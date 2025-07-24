@@ -1,0 +1,27 @@
+#navbar {
+  background: #fffff2;
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+#sidebar-content {
+    background-color: #f4f5fa;
+}
+
+.dark #sidebar-content {
+    background-color: #170C33;
+}
+/*
+.max-w-8xl {
+    max-width: 100%;
+}
+
+.peer.is-not-custom~.peer-\[\.is-not-custom\]\:max-w-8xl {
+    // max-width: 100%;
+}
+.peer.is-not-custom~.peer-\[\.is-not-custom\]\:lg\:px-5 {
+    padding-left: 0;
+    padding-right: 0;
+} */
