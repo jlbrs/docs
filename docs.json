@@ -69,57 +69,60 @@
                                 "group": "Onboarding to Dfns",
                                 "icon": "rocket",
                                 "pages": [
-                                    "documentation/onboarding/1",
-                                    "documentation/onboarding/2",
-                                    "documentation/onboarding/3",
-                                    "documentation/onboarding/4",
-                                    "documentation/onboarding/5",
-                                    "documentation/onboarding/6",
-                                    "documentation/onboarding/7"
+                                    "documentation/getting-started/onboarding/index",
+                                    "documentation/getting-started/onboarding/1",
+                                    "documentation/getting-started/onboarding/2",
+                                    "documentation/getting-started/onboarding/3",
+                                    "documentation/getting-started/onboarding/4",
+                                    "documentation/getting-started/onboarding/5",
+                                    "documentation/getting-started/onboarding/6",
+                                    "documentation/getting-started/onboarding/7"
                                 ]
                             },
-                            {
-                                "group": "Dfns Essentials",
-                                "icon": "cog",
-                                "pages": [
-                                    "essentials/introduction",
-                                    "essentials/organization",
-                                    "essentials/permissions",
-                                    "essentials/policies",
-                                    "essentials/wallets",
-                                    "essentials/transactions",
-                                    "essentials/notifications",
-                                    "essentials/keys",
-                                    "essentials/addresses",
-                                    "essentials/audits",
-                                    "essentials/teams"
-                                ]
-                            }
+                            "documentation/getting-started/environments",
+                            "documentation/getting-started/how-it-works",
+                            "documentation/getting-started/users",
+                            "documentation/getting-started/permissions",
+                            "documentation/getting-started/policies"
+
+                        ]
+                    },
+                    {
+                        "group": "Guides",
+                        "pages": [
+                            "documentation/guides/1",
+                            "documentation/guides/2",
+                            "documentation/guides/3",
+                            "documentation/guides/4"
                         ]
                     },
                     {
                         "group": "Wallets",
                         "pages": [
-                            "essentials/settings",
-                            "essentials/navigation"
+                            "documentation/wallets/1",
+                            "documentation/wallets/2",
+                            "documentation/wallets/3",
+                            "documentation/wallets/4"
                         ]
                     },
                     {
                         "group": "Networks",
                         "pages": [
-                            "essentials/markdown",
-                            "essentials/code",
-                            "essentials/images",
-                            "essentials/reusable-snippets"
+                            "documentation/networks/1",
+                            "documentation/networks/2",
+                            "documentation/networks/3",
+                            "documentation/networks/4"
                         ]
                     },
                     {
-                        "group": "Blockchains Operations",
+                        "group": "Operations",
+                        "icon": "signs-post",
                         "tag": "NEW",
                         "pages": [
-                            "ai-tools/cursor",
-                            "ai-tools/claude-code",
-                            "ai-tools/windsurf"
+                            "documentation/operations/1",
+                            "documentation/operations/2",
+                            "documentation/operations/3",
+                            "documentation/operations/4"
                         ]
                     }
                 ]
