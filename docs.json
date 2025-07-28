@@ -24,6 +24,9 @@
         "eyebrows": "breadcrumbs",
         "codeblocks": "system"
     },
+    "icons": {
+        "library": "fontawesome"
+    },
     "fonts": {
         "family": "Open Sans"
     },
@@ -82,6 +85,7 @@
                             "documentation/getting-started/environments",
                             "documentation/getting-started/how-it-works",
                             "documentation/getting-started/users",
+                            "documentation/getting-started/authentication",
                             "documentation/getting-started/permissions",
                             "documentation/getting-started/policies"
 
@@ -116,7 +120,7 @@
                     },
                     {
                         "group": "Operations",
-                        "icon": "signs-post",
+                        "icon": "square-terminal",
                         "tag": "NEW",
                         "pages": [
                             "documentation/operations/1",
@@ -132,15 +136,20 @@
                 "icon": "code",
                 "groups": [
                     {
-                        "group": "API documentation",
+                        "group": "API reference",
                         "pages": [
-                            "api-reference/introduction"
+                            "api-reference/introduction",
+                            "api-reference/core-objects",
+                            "api-reference/authentication"
                         ]
                     },
                     {
                         "group": "Endpoints",
                         "openapi": {
                             "source": "openapi.yaml"
+                        },
+                        "params": {
+                            "expanded": "all"
                         }
                     }
                 ]
@@ -188,4 +197,5 @@
             "linkedin": "https://linkedin.com/company/mintlify"
         }
     }
+
 }
