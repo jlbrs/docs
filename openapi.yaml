@@ -9,6 +9,21 @@ servers:
   - url: https://api.dfns.ninja
     description: Staging
 components:
+  securitySchemes:
+    authenticationToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |-
+        **Bearer Token:** Used to authenticate API requests.
+        More details how to generate the token: [Get an authentication token](https://docs.dfns.co/d/advanced-topics/authentication/authentication-authorization#get-an-authentication-token)
+    userActionSignature:
+      type: apiKey
+      in: header
+      name: X-DFNS-USERACTION
+      description: |-
+        **User Action Signature:** Used to sign the change-inducing API requests.
+        More details how to generate the token: [Get an authentication token](https://docs.dfns.co/d/advanced-topics/authentication/authentication-authorization#sign-api-requests-user-action-signing)
   schemas: {}
   parameters: {}
 paths:
@@ -17,6 +32,14 @@ paths:
       tags:
         - Auth
       summary: " Create User Action Signature"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -268,6 +291,14 @@ paths:
       tags:
         - Auth
       summary: " Create User Action Challenge"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -419,7 +450,14 @@ paths:
       tags:
         - Auth
       summary: " List Applications"
-      deprecated: true
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       responses:
         "200":
           description: Success
@@ -550,7 +588,14 @@ paths:
       tags:
         - Auth
       summary: " Get Application"
-      deprecated: true
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -681,12 +726,15 @@ paths:
       tags:
         - Auth
       summary: " Create Credential"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -940,6 +988,14 @@ paths:
       tags:
         - Auth
       summary: " List Credentials"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User, Delegated User
       responses:
         "200":
           description: Success
@@ -995,6 +1051,14 @@ paths:
       tags:
         - Auth
       summary: " Create Credential Challenge"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -1408,12 +1472,15 @@ paths:
       tags:
         - Auth
       summary: " Activate Credential"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -1443,12 +1510,15 @@ paths:
       tags:
         - Auth
       summary: " Deactivate Credential"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -1478,12 +1548,15 @@ paths:
       tags:
         - Auth
       summary: " Create Credential Code"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -1521,6 +1594,9 @@ paths:
       tags:
         - Auth
       summary: " Create Credential Challenge With Code"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -1938,6 +2014,9 @@ paths:
       tags:
         - Auth
       summary: " Create Credential With Code"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -2192,6 +2271,9 @@ paths:
       tags:
         - Auth
       summary: " Send Login Code"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -2224,6 +2306,9 @@ paths:
       tags:
         - Auth
       summary: " Create Login Challenge"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -2366,6 +2451,9 @@ paths:
       tags:
         - Auth
       summary: " Login"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -2617,12 +2705,19 @@ paths:
       tags:
         - Auth
       summary: " Delegated Login"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Login:Delegated | Always required. |
+
+        ### Token Kinds Allowed
+        Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -2651,6 +2746,9 @@ paths:
       tags:
         - Auth
       summary: " Social Login"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -2686,6 +2784,14 @@ paths:
       tags:
         - Auth
       summary: " Logout"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -2711,6 +2817,14 @@ paths:
       tags:
         - Auth
       summary: " List Personal Access Tokens"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       responses:
         "200":
           description: Success
@@ -2791,12 +2905,19 @@ paths:
       tags:
         - Auth
       summary: " Create Personal Access Token"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Pats:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -2901,6 +3022,14 @@ paths:
       tags:
         - Auth
       summary: " Get Personal Access Token"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -2981,6 +3110,15 @@ paths:
       tags:
         - Auth
       summary: " Update Personal Access Token"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -2988,11 +3126,6 @@ paths:
           required: true
           name: tokenId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -3077,6 +3210,15 @@ paths:
       tags:
         - Auth
       summary: " Archive Personal Access Token"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -3084,11 +3226,6 @@ paths:
           required: true
           name: tokenId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -3163,6 +3300,15 @@ paths:
       tags:
         - Auth
       summary: " Activate Personal Access Token"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -3170,11 +3316,6 @@ paths:
           required: true
           name: tokenId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -3249,6 +3390,15 @@ paths:
       tags:
         - Auth
       summary: " Deactivate Personal Access Token"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -3256,11 +3406,6 @@ paths:
           required: true
           name: tokenId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -3335,12 +3480,19 @@ paths:
       tags:
         - Auth
       summary: " Create Delegated Recovery Challenge"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Recover:Delegated | Always required. |
+
+        ### Token Kinds Allowed
+        Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -3513,6 +3665,14 @@ paths:
       tags:
         - Auth
       summary: " Recover"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Recovery Code
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -3879,6 +4039,9 @@ paths:
       tags:
         - Auth
       summary: " Create Recovery Challenge"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -4059,6 +4222,9 @@ paths:
       tags:
         - Auth
       summary: " Send Recovery Code"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -4092,12 +4258,19 @@ paths:
       tags:
         - Auth
       summary: " Create Delegated Registration Challenge"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Register:Delegated | Always required. |
+
+        ### Token Kinds Allowed
+        Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -4259,6 +4432,9 @@ paths:
       tags:
         - Auth
       summary: " Create Social Registration Challenge"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -4418,6 +4594,9 @@ paths:
       tags:
         - Auth
       summary: " Create Registration Challenge"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -4579,6 +4758,14 @@ paths:
       tags:
         - Auth
       summary: " Register"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Registration Code
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -4907,6 +5094,14 @@ paths:
       tags:
         - Auth
       summary: " Register End User"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Registration Code
+        ### User allowed
+        Delegated User
       requestBody:
         content:
           application/json:
@@ -5520,6 +5715,9 @@ paths:
       tags:
         - Auth
       summary: " Resend Registration Code"
+      security:
+        - authenticationToken: []
+      description: ""
       requestBody:
         content:
           application/json:
@@ -5553,6 +5751,18 @@ paths:
       tags:
         - Auth
       summary: " List Service Accounts"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       responses:
         "200":
           description: Success
@@ -5700,12 +5910,19 @@ paths:
       tags:
         - Auth
       summary: " Create Service Account"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -5872,6 +6089,18 @@ paths:
       tags:
         - Auth
       summary: " Get Service Account"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6019,6 +6248,19 @@ paths:
       tags:
         - Auth
       summary: " Update Service Account"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6026,11 +6268,6 @@ paths:
           required: true
           name: serviceAccountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -6182,6 +6419,19 @@ paths:
       tags:
         - Auth
       summary: " Archive Service Account"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6189,11 +6439,6 @@ paths:
           required: true
           name: serviceAccountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6335,6 +6580,19 @@ paths:
       tags:
         - Auth
       summary: " Activate Service Account"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Activate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6342,11 +6600,6 @@ paths:
           required: true
           name: serviceAccountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6488,6 +6741,19 @@ paths:
       tags:
         - Auth
       summary: " Deactivate Service Account"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:ServiceAccounts:Deactivate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6495,11 +6761,6 @@ paths:
           required: true
           name: serviceAccountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6641,6 +6902,19 @@ paths:
       tags:
         - Auth
       summary: " Activate User"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Activate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6648,11 +6922,6 @@ paths:
           required: true
           name: userId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6722,6 +6991,19 @@ paths:
       tags:
         - Auth
       summary: " Deactivate User"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Deactivate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6729,11 +7011,6 @@ paths:
           required: true
           name: userId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6803,6 +7080,19 @@ paths:
       tags:
         - Auth
       summary: " Archive User"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6810,11 +7100,6 @@ paths:
           required: true
           name: userId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -6883,6 +7168,18 @@ paths:
       tags:
         - Auth
       summary: " Get User"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -6959,12 +7256,19 @@ paths:
       tags:
         - Auth
       summary: " Create User"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -7055,6 +7359,18 @@ paths:
       tags:
         - Auth
       summary: " List Users"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Auth:Users:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: integer
@@ -7156,6 +7472,18 @@ paths:
       tags:
         - Exchanges
       summary: " Get Exchange"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7192,6 +7520,19 @@ paths:
       tags:
         - Exchanges
       summary: " Delete Exchange"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7199,11 +7540,6 @@ paths:
           required: true
           name: exchangeId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -7223,12 +7559,19 @@ paths:
       tags:
         - Exchanges
       summary: " Create Exchange"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -7308,6 +7651,18 @@ paths:
       tags:
         - Exchanges
       summary: " List Exchanges"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: integer
@@ -7362,6 +7717,18 @@ paths:
       tags:
         - Exchanges
       summary: " List Accounts"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7416,6 +7783,18 @@ paths:
       tags:
         - Exchanges
       summary: " List Account Assets"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7472,6 +7851,18 @@ paths:
       tags:
         - Exchanges
       summary: " List Asset Withdrawal Networks"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7719,6 +8110,20 @@ paths:
       tags:
         - Exchanges
       summary: " Create Deposit"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Deposits:Create | Always required. |
+        | Wallets:Transfers:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -7732,11 +8137,6 @@ paths:
           required: true
           name: accountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -8800,6 +9200,19 @@ paths:
       tags:
         - Exchanges
       summary: " Create Withdrawal"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Exchanges:Withdrawals:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -8813,11 +9226,6 @@ paths:
           required: true
           name: accountId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -9877,12 +10285,19 @@ paths:
       tags:
         - Fee Sponsors
       summary: " Create Fee Sponsor"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -10025,6 +10440,18 @@ paths:
       tags:
         - Fee Sponsors
       summary: " List Fee Sponsors"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10173,6 +10600,18 @@ paths:
       tags:
         - Fee Sponsors
       summary: " Get Fee Sponsor"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10305,6 +10744,19 @@ paths:
       tags:
         - Fee Sponsors
       summary: " Delete Fee Sponsor"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10312,11 +10764,6 @@ paths:
           required: true
           name: feeSponsorId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -10443,6 +10890,19 @@ paths:
       tags:
         - Fee Sponsors
       summary: " Deactivate Fee Sponsor"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10450,11 +10910,6 @@ paths:
           required: true
           name: feeSponsorId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -10581,6 +11036,19 @@ paths:
       tags:
         - Fee Sponsors
       summary: " Activate Fee Sponsor"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10588,11 +11056,6 @@ paths:
           required: true
           name: feeSponsorId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -10719,6 +11182,18 @@ paths:
       tags:
         - Fee Sponsors
       summary: " List Sponsored Fees"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | FeeSponsors:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10783,12 +11258,20 @@ paths:
       tags:
         - Keys
       summary: " Create Key"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Create | Always required |
+        | Keys:Delegate | Required if `delegateTo` is specified. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -10887,6 +11370,18 @@ paths:
       tags:
         - Keys
       summary: " List Keys"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -10970,6 +11465,19 @@ paths:
       tags:
         - Keys
       summary: " Delegate Key"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Delegate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -10977,11 +11485,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -11016,6 +11519,19 @@ paths:
       tags:
         - Keys
       summary: " Delete Key"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -11023,11 +11539,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -11083,6 +11594,18 @@ paths:
       tags:
         - Keys
       summary: " Get Key"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -11268,6 +11791,19 @@ paths:
       tags:
         - Keys
       summary: " Update Key"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -11275,11 +11811,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -11349,6 +11880,19 @@ paths:
       tags:
         - Keys
       summary: " Derive Key"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Derive | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -11356,11 +11900,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -11394,6 +11933,19 @@ paths:
       tags:
         - Keys
       summary: " Export Key"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Export | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -11401,11 +11953,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -11497,6 +12044,19 @@ paths:
       tags:
         - Keys
       summary: " Generate Signature"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -11504,11 +12064,6 @@ paths:
           required: true
           name: keyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -14314,6 +14869,18 @@ paths:
       tags:
         - Keys
       summary: " List Signatures"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -15793,6 +16360,18 @@ paths:
       tags:
         - Keys
       summary: " Get Signature"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -17254,12 +17833,19 @@ paths:
       tags:
         - Keys
       summary: " Import Key"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Import | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -17363,6 +17949,14 @@ paths:
       tags:
         - Networks
       summary: " Get Fees"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -17568,6 +18162,14 @@ paths:
       tags:
         - Networks
       summary: " Read Contract"
+      security:
+        - authenticationToken: []
+      description: |-
+        
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -17616,6 +18218,19 @@ paths:
       tags:
         - Networks
       summary: " Create Canton Validator"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Networks:CantonValidators:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -17626,11 +18241,6 @@ paths:
           required: true
           name: network
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -17735,6 +18345,18 @@ paths:
       tags:
         - Networks
       summary: " List Canton Validators"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Networks:CantonValidators:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -17803,6 +18425,19 @@ paths:
       tags:
         - Networks
       summary: " Update Canton Validator"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Networks:CantonValidators:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -17818,11 +18453,6 @@ paths:
           required: true
           name: validatorId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -17887,6 +18517,19 @@ paths:
       tags:
         - Networks
       summary: " Delete Canton Validator"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Networks:CantonValidators:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -17902,11 +18545,6 @@ paths:
           required: true
           name: validatorId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -17942,6 +18580,19 @@ paths:
       tags:
         - Permissions
       summary: " Create Assignment"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Assign | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -17949,11 +18600,6 @@ paths:
           required: true
           name: permissionId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -17998,6 +18644,18 @@ paths:
       tags:
         - Permissions
       summary: " List Assignments"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Assignments:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18120,6 +18778,19 @@ paths:
       tags:
         - Permissions
       summary: " Delete Assignment"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Revoke | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18139,11 +18810,6 @@ paths:
           required: false
           name: force
           in: query
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -18152,6 +18818,19 @@ paths:
       tags:
         - Permissions
       summary: " Archive Permission"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Archive | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18159,11 +18838,6 @@ paths:
           required: true
           name: permissionId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -18218,12 +18892,19 @@ paths:
       tags:
         - Permissions
       summary: " Create Permission"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -18393,6 +19074,18 @@ paths:
       tags:
         - Permissions
       summary: " List Permissions"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18540,6 +19233,18 @@ paths:
       tags:
         - Permissions
       summary: " Get Permission"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18670,6 +19375,19 @@ paths:
       tags:
         - Permissions
       summary: " Update Permission"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Permissions:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -18677,11 +19395,6 @@ paths:
           required: true
           name: permissionId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -18849,6 +19562,19 @@ paths:
       tags:
         - Policies
       summary: " Archive Policy"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Archive | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -18856,11 +19582,6 @@ paths:
           required: true
           name: policyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -19703,6 +20424,18 @@ paths:
       tags:
         - Policies
       summary: " Get Policy"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -21436,6 +22169,19 @@ paths:
       tags:
         - Policies
       summary: " Update Policy"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -21443,11 +22189,6 @@ paths:
           required: true
           name: policyId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -23058,6 +23799,19 @@ paths:
       tags:
         - Policies
       summary: " Create Approval Decision"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Approvals:Approve | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -23065,11 +23819,6 @@ paths:
           required: true
           name: approvalId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -25790,289 +26539,65 @@ paths:
                                   - Failed
                                   - Rejected
                               quotedSourceAsset:
-                                allOf:
-                                  - oneOf:
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Native
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - amount
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Erc20
-                                          contract:
-                                            type: string
-                                            pattern: ^0x[0-9a-fA-F]{40}$
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - contract
-                                          - amount
+                                oneOf:
                                   - type: object
                                     properties:
-                                      metadata:
-                                        type: object
-                                        properties:
-                                          network:
-                                            type: string
-                                            enum:
-                                              - Algorand
-                                              - AlgorandTestnet
-                                              - Aptos
-                                              - AptosTestnet
-                                              - ArbitrumOne
-                                              - ArbitrumGoerli
-                                              - ArbitrumSepolia
-                                              - AvalancheC
-                                              - AvalancheCFuji
-                                              - BabylonGenesis
-                                              - BabylonTestnet5
-                                              - Base
-                                              - BaseGoerli
-                                              - BaseSepolia
-                                              - Berachain
-                                              - BerachainBArtio
-                                              - BerachainBepolia
-                                              - Bitcoin
-                                              - BitcoinSignet
-                                              - BitcoinTestnet3
-                                              - BitcoinCash
-                                              - BitcoinCashTestnet
-                                              - Bob
-                                              - BobSepolia
-                                              - Bsc
-                                              - BscTestnet
-                                              - Canton
-                                              - CantonDevnet
-                                              - CantonTestnet
-                                              - Cardano
-                                              - CardanoPreprod
-                                              - Celo
-                                              - CeloAlfajores
-                                              - Codex
-                                              - CodexSepolia
-                                              - CosmosHub4
-                                              - CosmosIcsTestnet
-                                              - Dogecoin
-                                              - DogecoinTestnet
-                                              - Ethereum
-                                              - EthereumGoerli
-                                              - EthereumSepolia
-                                              - EthereumHolesky
-                                              - EthereumHoodi
-                                              - FantomOpera
-                                              - FantomTestnet
-                                              - InternetComputer
-                                              - Ion
-                                              - IonTestnet
-                                              - Iota
-                                              - IotaTestnet
-                                              - IotaZodianet
-                                              - Kaspa
-                                              - KaspaTestnet11
-                                              - Kusama
-                                              - Litecoin
-                                              - LitecoinTestnet
-                                              - Near
-                                              - NearTestnet
-                                              - Optimism
-                                              - OptimismGoerli
-                                              - OptimismSepolia
-                                              - Origyn
-                                              - Plume
-                                              - PlumeSepolia
-                                              - Polkadot
-                                              - Polygon
-                                              - PolygonAmoy
-                                              - PolygonMumbai
-                                              - Polymesh
-                                              - PolymeshTestnet
-                                              - Race
-                                              - RaceSepolia
-                                              - SeiAtlantic2
-                                              - SeiPacific1
-                                              - Solana
-                                              - SolanaDevnet
-                                              - Stellar
-                                              - StellarTestnet
-                                              - Sui
-                                              - SuiTestnet
-                                              - Tezos
-                                              - TezosGhostnet
-                                              - Ton
-                                              - TonTestnet
-                                              - Tron
-                                              - TronNile
-                                              - Westend
-                                              - XrpLedger
-                                              - XrpLedgerTestnet
-                                          name:
-                                            type: string
-                                          symbol:
-                                            type: string
-                                          decimals:
-                                            type: number
-                                        required:
-                                          - network
-                                          - name
-                                          - symbol
-                                          - decimals
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Native
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
                                     required:
-                                      - metadata
+                                      - kind
+                                      - amount
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Erc20
+                                      contract:
+                                        type: string
+                                        pattern: ^0x[0-9a-fA-F]{40}$
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
+                                    required:
+                                      - kind
+                                      - contract
+                                      - amount
                               quotedTargetAsset:
-                                allOf:
-                                  - oneOf:
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Native
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - amount
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Erc20
-                                          contract:
-                                            type: string
-                                            pattern: ^0x[0-9a-fA-F]{40}$
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - contract
-                                          - amount
+                                oneOf:
                                   - type: object
                                     properties:
-                                      metadata:
-                                        type: object
-                                        properties:
-                                          network:
-                                            type: string
-                                            enum:
-                                              - Algorand
-                                              - AlgorandTestnet
-                                              - Aptos
-                                              - AptosTestnet
-                                              - ArbitrumOne
-                                              - ArbitrumGoerli
-                                              - ArbitrumSepolia
-                                              - AvalancheC
-                                              - AvalancheCFuji
-                                              - BabylonGenesis
-                                              - BabylonTestnet5
-                                              - Base
-                                              - BaseGoerli
-                                              - BaseSepolia
-                                              - Berachain
-                                              - BerachainBArtio
-                                              - BerachainBepolia
-                                              - Bitcoin
-                                              - BitcoinSignet
-                                              - BitcoinTestnet3
-                                              - BitcoinCash
-                                              - BitcoinCashTestnet
-                                              - Bob
-                                              - BobSepolia
-                                              - Bsc
-                                              - BscTestnet
-                                              - Canton
-                                              - CantonDevnet
-                                              - CantonTestnet
-                                              - Cardano
-                                              - CardanoPreprod
-                                              - Celo
-                                              - CeloAlfajores
-                                              - Codex
-                                              - CodexSepolia
-                                              - CosmosHub4
-                                              - CosmosIcsTestnet
-                                              - Dogecoin
-                                              - DogecoinTestnet
-                                              - Ethereum
-                                              - EthereumGoerli
-                                              - EthereumSepolia
-                                              - EthereumHolesky
-                                              - EthereumHoodi
-                                              - FantomOpera
-                                              - FantomTestnet
-                                              - InternetComputer
-                                              - Ion
-                                              - IonTestnet
-                                              - Iota
-                                              - IotaTestnet
-                                              - IotaZodianet
-                                              - Kaspa
-                                              - KaspaTestnet11
-                                              - Kusama
-                                              - Litecoin
-                                              - LitecoinTestnet
-                                              - Near
-                                              - NearTestnet
-                                              - Optimism
-                                              - OptimismGoerli
-                                              - OptimismSepolia
-                                              - Origyn
-                                              - Plume
-                                              - PlumeSepolia
-                                              - Polkadot
-                                              - Polygon
-                                              - PolygonAmoy
-                                              - PolygonMumbai
-                                              - Polymesh
-                                              - PolymeshTestnet
-                                              - Race
-                                              - RaceSepolia
-                                              - SeiAtlantic2
-                                              - SeiPacific1
-                                              - Solana
-                                              - SolanaDevnet
-                                              - Stellar
-                                              - StellarTestnet
-                                              - Sui
-                                              - SuiTestnet
-                                              - Tezos
-                                              - TezosGhostnet
-                                              - Ton
-                                              - TonTestnet
-                                              - Tron
-                                              - TronNile
-                                              - Westend
-                                              - XrpLedger
-                                              - XrpLedgerTestnet
-                                          name:
-                                            type: string
-                                          symbol:
-                                            type: string
-                                          decimals:
-                                            type: number
-                                        required:
-                                          - network
-                                          - name
-                                          - symbol
-                                          - decimals
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Native
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
                                     required:
-                                      - metadata
+                                      - kind
+                                      - amount
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Erc20
+                                      contract:
+                                        type: string
+                                        pattern: ^0x[0-9a-fA-F]{40}$
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
+                                    required:
+                                      - kind
+                                      - contract
+                                      - amount
                               slippageToleranceInBps:
                                 type: number
                               dateCreated:
@@ -29864,12 +30389,19 @@ paths:
       tags:
         - Policies
       summary: " Create Policy"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -31508,6 +32040,18 @@ paths:
       tags:
         - Policies
       summary: " List Policies"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -33264,6 +33808,18 @@ paths:
       tags:
         - Policies
       summary: " Get Approval"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Approvals:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -35974,289 +36530,65 @@ paths:
                                   - Failed
                                   - Rejected
                               quotedSourceAsset:
-                                allOf:
-                                  - oneOf:
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Native
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - amount
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Erc20
-                                          contract:
-                                            type: string
-                                            pattern: ^0x[0-9a-fA-F]{40}$
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - contract
-                                          - amount
+                                oneOf:
                                   - type: object
                                     properties:
-                                      metadata:
-                                        type: object
-                                        properties:
-                                          network:
-                                            type: string
-                                            enum:
-                                              - Algorand
-                                              - AlgorandTestnet
-                                              - Aptos
-                                              - AptosTestnet
-                                              - ArbitrumOne
-                                              - ArbitrumGoerli
-                                              - ArbitrumSepolia
-                                              - AvalancheC
-                                              - AvalancheCFuji
-                                              - BabylonGenesis
-                                              - BabylonTestnet5
-                                              - Base
-                                              - BaseGoerli
-                                              - BaseSepolia
-                                              - Berachain
-                                              - BerachainBArtio
-                                              - BerachainBepolia
-                                              - Bitcoin
-                                              - BitcoinSignet
-                                              - BitcoinTestnet3
-                                              - BitcoinCash
-                                              - BitcoinCashTestnet
-                                              - Bob
-                                              - BobSepolia
-                                              - Bsc
-                                              - BscTestnet
-                                              - Canton
-                                              - CantonDevnet
-                                              - CantonTestnet
-                                              - Cardano
-                                              - CardanoPreprod
-                                              - Celo
-                                              - CeloAlfajores
-                                              - Codex
-                                              - CodexSepolia
-                                              - CosmosHub4
-                                              - CosmosIcsTestnet
-                                              - Dogecoin
-                                              - DogecoinTestnet
-                                              - Ethereum
-                                              - EthereumGoerli
-                                              - EthereumSepolia
-                                              - EthereumHolesky
-                                              - EthereumHoodi
-                                              - FantomOpera
-                                              - FantomTestnet
-                                              - InternetComputer
-                                              - Ion
-                                              - IonTestnet
-                                              - Iota
-                                              - IotaTestnet
-                                              - IotaZodianet
-                                              - Kaspa
-                                              - KaspaTestnet11
-                                              - Kusama
-                                              - Litecoin
-                                              - LitecoinTestnet
-                                              - Near
-                                              - NearTestnet
-                                              - Optimism
-                                              - OptimismGoerli
-                                              - OptimismSepolia
-                                              - Origyn
-                                              - Plume
-                                              - PlumeSepolia
-                                              - Polkadot
-                                              - Polygon
-                                              - PolygonAmoy
-                                              - PolygonMumbai
-                                              - Polymesh
-                                              - PolymeshTestnet
-                                              - Race
-                                              - RaceSepolia
-                                              - SeiAtlantic2
-                                              - SeiPacific1
-                                              - Solana
-                                              - SolanaDevnet
-                                              - Stellar
-                                              - StellarTestnet
-                                              - Sui
-                                              - SuiTestnet
-                                              - Tezos
-                                              - TezosGhostnet
-                                              - Ton
-                                              - TonTestnet
-                                              - Tron
-                                              - TronNile
-                                              - Westend
-                                              - XrpLedger
-                                              - XrpLedgerTestnet
-                                          name:
-                                            type: string
-                                          symbol:
-                                            type: string
-                                          decimals:
-                                            type: number
-                                        required:
-                                          - network
-                                          - name
-                                          - symbol
-                                          - decimals
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Native
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
                                     required:
-                                      - metadata
+                                      - kind
+                                      - amount
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Erc20
+                                      contract:
+                                        type: string
+                                        pattern: ^0x[0-9a-fA-F]{40}$
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
+                                    required:
+                                      - kind
+                                      - contract
+                                      - amount
                               quotedTargetAsset:
-                                allOf:
-                                  - oneOf:
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Native
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - amount
-                                      - type: object
-                                        properties:
-                                          kind:
-                                            type: string
-                                            enum:
-                                              - Erc20
-                                          contract:
-                                            type: string
-                                            pattern: ^0x[0-9a-fA-F]{40}$
-                                          amount:
-                                            type: string
-                                            pattern: ^\d+$
-                                        required:
-                                          - kind
-                                          - contract
-                                          - amount
+                                oneOf:
                                   - type: object
                                     properties:
-                                      metadata:
-                                        type: object
-                                        properties:
-                                          network:
-                                            type: string
-                                            enum:
-                                              - Algorand
-                                              - AlgorandTestnet
-                                              - Aptos
-                                              - AptosTestnet
-                                              - ArbitrumOne
-                                              - ArbitrumGoerli
-                                              - ArbitrumSepolia
-                                              - AvalancheC
-                                              - AvalancheCFuji
-                                              - BabylonGenesis
-                                              - BabylonTestnet5
-                                              - Base
-                                              - BaseGoerli
-                                              - BaseSepolia
-                                              - Berachain
-                                              - BerachainBArtio
-                                              - BerachainBepolia
-                                              - Bitcoin
-                                              - BitcoinSignet
-                                              - BitcoinTestnet3
-                                              - BitcoinCash
-                                              - BitcoinCashTestnet
-                                              - Bob
-                                              - BobSepolia
-                                              - Bsc
-                                              - BscTestnet
-                                              - Canton
-                                              - CantonDevnet
-                                              - CantonTestnet
-                                              - Cardano
-                                              - CardanoPreprod
-                                              - Celo
-                                              - CeloAlfajores
-                                              - Codex
-                                              - CodexSepolia
-                                              - CosmosHub4
-                                              - CosmosIcsTestnet
-                                              - Dogecoin
-                                              - DogecoinTestnet
-                                              - Ethereum
-                                              - EthereumGoerli
-                                              - EthereumSepolia
-                                              - EthereumHolesky
-                                              - EthereumHoodi
-                                              - FantomOpera
-                                              - FantomTestnet
-                                              - InternetComputer
-                                              - Ion
-                                              - IonTestnet
-                                              - Iota
-                                              - IotaTestnet
-                                              - IotaZodianet
-                                              - Kaspa
-                                              - KaspaTestnet11
-                                              - Kusama
-                                              - Litecoin
-                                              - LitecoinTestnet
-                                              - Near
-                                              - NearTestnet
-                                              - Optimism
-                                              - OptimismGoerli
-                                              - OptimismSepolia
-                                              - Origyn
-                                              - Plume
-                                              - PlumeSepolia
-                                              - Polkadot
-                                              - Polygon
-                                              - PolygonAmoy
-                                              - PolygonMumbai
-                                              - Polymesh
-                                              - PolymeshTestnet
-                                              - Race
-                                              - RaceSepolia
-                                              - SeiAtlantic2
-                                              - SeiPacific1
-                                              - Solana
-                                              - SolanaDevnet
-                                              - Stellar
-                                              - StellarTestnet
-                                              - Sui
-                                              - SuiTestnet
-                                              - Tezos
-                                              - TezosGhostnet
-                                              - Ton
-                                              - TonTestnet
-                                              - Tron
-                                              - TronNile
-                                              - Westend
-                                              - XrpLedger
-                                              - XrpLedgerTestnet
-                                          name:
-                                            type: string
-                                          symbol:
-                                            type: string
-                                          decimals:
-                                            type: number
-                                        required:
-                                          - network
-                                          - name
-                                          - symbol
-                                          - decimals
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Native
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
                                     required:
-                                      - metadata
+                                      - kind
+                                      - amount
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - Erc20
+                                      contract:
+                                        type: string
+                                        pattern: ^0x[0-9a-fA-F]{40}$
+                                      amount:
+                                        type: string
+                                        pattern: ^\d+$
+                                    required:
+                                      - kind
+                                      - contract
+                                      - amount
                               slippageToleranceInBps:
                                 type: number
                               dateCreated:
@@ -40046,6 +40378,18 @@ paths:
       tags:
         - Policies
       summary: " List Approvals"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Policies:Approvals:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -42788,289 +43132,65 @@ paths:
                                         - Failed
                                         - Rejected
                                     quotedSourceAsset:
-                                      allOf:
-                                        - oneOf:
-                                            - type: object
-                                              properties:
-                                                kind:
-                                                  type: string
-                                                  enum:
-                                                    - Native
-                                                amount:
-                                                  type: string
-                                                  pattern: ^\d+$
-                                              required:
-                                                - kind
-                                                - amount
-                                            - type: object
-                                              properties:
-                                                kind:
-                                                  type: string
-                                                  enum:
-                                                    - Erc20
-                                                contract:
-                                                  type: string
-                                                  pattern: ^0x[0-9a-fA-F]{40}$
-                                                amount:
-                                                  type: string
-                                                  pattern: ^\d+$
-                                              required:
-                                                - kind
-                                                - contract
-                                                - amount
+                                      oneOf:
                                         - type: object
                                           properties:
-                                            metadata:
-                                              type: object
-                                              properties:
-                                                network:
-                                                  type: string
-                                                  enum:
-                                                    - Algorand
-                                                    - AlgorandTestnet
-                                                    - Aptos
-                                                    - AptosTestnet
-                                                    - ArbitrumOne
-                                                    - ArbitrumGoerli
-                                                    - ArbitrumSepolia
-                                                    - AvalancheC
-                                                    - AvalancheCFuji
-                                                    - BabylonGenesis
-                                                    - BabylonTestnet5
-                                                    - Base
-                                                    - BaseGoerli
-                                                    - BaseSepolia
-                                                    - Berachain
-                                                    - BerachainBArtio
-                                                    - BerachainBepolia
-                                                    - Bitcoin
-                                                    - BitcoinSignet
-                                                    - BitcoinTestnet3
-                                                    - BitcoinCash
-                                                    - BitcoinCashTestnet
-                                                    - Bob
-                                                    - BobSepolia
-                                                    - Bsc
-                                                    - BscTestnet
-                                                    - Canton
-                                                    - CantonDevnet
-                                                    - CantonTestnet
-                                                    - Cardano
-                                                    - CardanoPreprod
-                                                    - Celo
-                                                    - CeloAlfajores
-                                                    - Codex
-                                                    - CodexSepolia
-                                                    - CosmosHub4
-                                                    - CosmosIcsTestnet
-                                                    - Dogecoin
-                                                    - DogecoinTestnet
-                                                    - Ethereum
-                                                    - EthereumGoerli
-                                                    - EthereumSepolia
-                                                    - EthereumHolesky
-                                                    - EthereumHoodi
-                                                    - FantomOpera
-                                                    - FantomTestnet
-                                                    - InternetComputer
-                                                    - Ion
-                                                    - IonTestnet
-                                                    - Iota
-                                                    - IotaTestnet
-                                                    - IotaZodianet
-                                                    - Kaspa
-                                                    - KaspaTestnet11
-                                                    - Kusama
-                                                    - Litecoin
-                                                    - LitecoinTestnet
-                                                    - Near
-                                                    - NearTestnet
-                                                    - Optimism
-                                                    - OptimismGoerli
-                                                    - OptimismSepolia
-                                                    - Origyn
-                                                    - Plume
-                                                    - PlumeSepolia
-                                                    - Polkadot
-                                                    - Polygon
-                                                    - PolygonAmoy
-                                                    - PolygonMumbai
-                                                    - Polymesh
-                                                    - PolymeshTestnet
-                                                    - Race
-                                                    - RaceSepolia
-                                                    - SeiAtlantic2
-                                                    - SeiPacific1
-                                                    - Solana
-                                                    - SolanaDevnet
-                                                    - Stellar
-                                                    - StellarTestnet
-                                                    - Sui
-                                                    - SuiTestnet
-                                                    - Tezos
-                                                    - TezosGhostnet
-                                                    - Ton
-                                                    - TonTestnet
-                                                    - Tron
-                                                    - TronNile
-                                                    - Westend
-                                                    - XrpLedger
-                                                    - XrpLedgerTestnet
-                                                name:
-                                                  type: string
-                                                symbol:
-                                                  type: string
-                                                decimals:
-                                                  type: number
-                                              required:
-                                                - network
-                                                - name
-                                                - symbol
-                                                - decimals
+                                            kind:
+                                              type: string
+                                              enum:
+                                                - Native
+                                            amount:
+                                              type: string
+                                              pattern: ^\d+$
                                           required:
-                                            - metadata
+                                            - kind
+                                            - amount
+                                        - type: object
+                                          properties:
+                                            kind:
+                                              type: string
+                                              enum:
+                                                - Erc20
+                                            contract:
+                                              type: string
+                                              pattern: ^0x[0-9a-fA-F]{40}$
+                                            amount:
+                                              type: string
+                                              pattern: ^\d+$
+                                          required:
+                                            - kind
+                                            - contract
+                                            - amount
                                     quotedTargetAsset:
-                                      allOf:
-                                        - oneOf:
-                                            - type: object
-                                              properties:
-                                                kind:
-                                                  type: string
-                                                  enum:
-                                                    - Native
-                                                amount:
-                                                  type: string
-                                                  pattern: ^\d+$
-                                              required:
-                                                - kind
-                                                - amount
-                                            - type: object
-                                              properties:
-                                                kind:
-                                                  type: string
-                                                  enum:
-                                                    - Erc20
-                                                contract:
-                                                  type: string
-                                                  pattern: ^0x[0-9a-fA-F]{40}$
-                                                amount:
-                                                  type: string
-                                                  pattern: ^\d+$
-                                              required:
-                                                - kind
-                                                - contract
-                                                - amount
+                                      oneOf:
                                         - type: object
                                           properties:
-                                            metadata:
-                                              type: object
-                                              properties:
-                                                network:
-                                                  type: string
-                                                  enum:
-                                                    - Algorand
-                                                    - AlgorandTestnet
-                                                    - Aptos
-                                                    - AptosTestnet
-                                                    - ArbitrumOne
-                                                    - ArbitrumGoerli
-                                                    - ArbitrumSepolia
-                                                    - AvalancheC
-                                                    - AvalancheCFuji
-                                                    - BabylonGenesis
-                                                    - BabylonTestnet5
-                                                    - Base
-                                                    - BaseGoerli
-                                                    - BaseSepolia
-                                                    - Berachain
-                                                    - BerachainBArtio
-                                                    - BerachainBepolia
-                                                    - Bitcoin
-                                                    - BitcoinSignet
-                                                    - BitcoinTestnet3
-                                                    - BitcoinCash
-                                                    - BitcoinCashTestnet
-                                                    - Bob
-                                                    - BobSepolia
-                                                    - Bsc
-                                                    - BscTestnet
-                                                    - Canton
-                                                    - CantonDevnet
-                                                    - CantonTestnet
-                                                    - Cardano
-                                                    - CardanoPreprod
-                                                    - Celo
-                                                    - CeloAlfajores
-                                                    - Codex
-                                                    - CodexSepolia
-                                                    - CosmosHub4
-                                                    - CosmosIcsTestnet
-                                                    - Dogecoin
-                                                    - DogecoinTestnet
-                                                    - Ethereum
-                                                    - EthereumGoerli
-                                                    - EthereumSepolia
-                                                    - EthereumHolesky
-                                                    - EthereumHoodi
-                                                    - FantomOpera
-                                                    - FantomTestnet
-                                                    - InternetComputer
-                                                    - Ion
-                                                    - IonTestnet
-                                                    - Iota
-                                                    - IotaTestnet
-                                                    - IotaZodianet
-                                                    - Kaspa
-                                                    - KaspaTestnet11
-                                                    - Kusama
-                                                    - Litecoin
-                                                    - LitecoinTestnet
-                                                    - Near
-                                                    - NearTestnet
-                                                    - Optimism
-                                                    - OptimismGoerli
-                                                    - OptimismSepolia
-                                                    - Origyn
-                                                    - Plume
-                                                    - PlumeSepolia
-                                                    - Polkadot
-                                                    - Polygon
-                                                    - PolygonAmoy
-                                                    - PolygonMumbai
-                                                    - Polymesh
-                                                    - PolymeshTestnet
-                                                    - Race
-                                                    - RaceSepolia
-                                                    - SeiAtlantic2
-                                                    - SeiPacific1
-                                                    - Solana
-                                                    - SolanaDevnet
-                                                    - Stellar
-                                                    - StellarTestnet
-                                                    - Sui
-                                                    - SuiTestnet
-                                                    - Tezos
-                                                    - TezosGhostnet
-                                                    - Ton
-                                                    - TonTestnet
-                                                    - Tron
-                                                    - TronNile
-                                                    - Westend
-                                                    - XrpLedger
-                                                    - XrpLedgerTestnet
-                                                name:
-                                                  type: string
-                                                symbol:
-                                                  type: string
-                                                decimals:
-                                                  type: number
-                                              required:
-                                                - network
-                                                - name
-                                                - symbol
-                                                - decimals
+                                            kind:
+                                              type: string
+                                              enum:
+                                                - Native
+                                            amount:
+                                              type: string
+                                              pattern: ^\d+$
                                           required:
-                                            - metadata
+                                            - kind
+                                            - amount
+                                        - type: object
+                                          properties:
+                                            kind:
+                                              type: string
+                                              enum:
+                                                - Erc20
+                                            contract:
+                                              type: string
+                                              pattern: ^0x[0-9a-fA-F]{40}$
+                                            amount:
+                                              type: string
+                                              pattern: ^\d+$
+                                          required:
+                                            - kind
+                                            - contract
+                                            - amount
                                     slippageToleranceInBps:
                                       type: number
                                     dateCreated:
@@ -46864,6 +46984,18 @@ paths:
       tags:
         - Signers
       summary: " List Signers"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Signers:ListSigners | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       responses:
         "200":
           description: Success
@@ -46901,12 +47033,19 @@ paths:
       tags:
         - Staking
       summary: " Create Stake"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -47598,6 +47737,18 @@ paths:
       tags:
         - Staking
       summary: " List Stakes"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: integer
@@ -48041,6 +48192,19 @@ paths:
       tags:
         - Staking
       summary: " Create Stake Action"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -48048,11 +48212,6 @@ paths:
           required: true
           name: stakeId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -48748,6 +48907,18 @@ paths:
       tags:
         - Staking
       summary: " List Stake Actions"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -48974,6 +49145,18 @@ paths:
       tags:
         - Staking
       summary: " Get Stakes"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -49607,6 +49790,18 @@ paths:
       tags:
         - Staking
       summary: " Get Stake Rewards"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Stakes:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -49634,6 +49829,19 @@ paths:
       tags:
         - Wallets
       summary: " Broadcast Transaction"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transactions:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -49641,11 +49849,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -50201,6 +50404,18 @@ paths:
       tags:
         - Wallets
       summary: " List Transactions"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transactions:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -50567,12 +50782,36 @@ paths:
       tags:
         - Wallets
       summary: " Create Wallet"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: >-
+        ### Required Permissions
+
+        | Name        | Conditions   |
+
+        | ----------- | -------------|
+
+        | Wallets:Create | Always required |
+
+        | Keys:Create | Required if wallet creation also creates a new [Key
+        entity](../keys/create-key). This is the default behavior. |
+
+        | Keys:Reuse | Required if `signingKey.id` is specified. Wallet will
+        reuse an existing key instead of creating a new one. |
+
+        | Keys:Delegate | Required if `delegateTo` is specified. |
+
+        | Wallets:Tags:Add | Required if `tags` are specified. |
+
+
+        ### Token Kinds Allowed
+
+        Access Token, Personal Access Token, Service Account Access Token
+
+        ### User allowed
+
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -50905,6 +51144,18 @@ paths:
       tags:
         - Wallets
       summary: " List Wallets"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -51121,6 +51372,19 @@ paths:
       tags:
         - Wallets
       summary: " Delegate Wallet"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Delegate | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -51128,11 +51392,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -51167,6 +51426,19 @@ paths:
       tags:
         - Wallets
       summary: " Export Wallet"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Export | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -51174,11 +51446,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -51270,6 +51537,19 @@ paths:
       tags:
         - Wallets
       summary: " Generate Signature"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -51277,11 +51557,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -54097,6 +54372,18 @@ paths:
       tags:
         - Wallets
       summary: " List Signatures"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -55576,6 +55863,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Signature"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Signatures:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -57037,6 +57336,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Transaction"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transactions:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -57385,6 +57696,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Transfer"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transfers:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -58297,6 +58620,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Wallet"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -58475,6 +58810,19 @@ paths:
       tags:
         - Wallets
       summary: " Update Wallet"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -58482,11 +58830,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -58675,6 +59018,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Wallet Assets"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -58936,6 +59291,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Wallet History"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -61729,6 +62096,18 @@ paths:
       tags:
         - Wallets
       summary: " Get Wallet Nfts"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -61886,12 +62265,20 @@ paths:
       tags:
         - Wallets
       summary: " Import Wallet"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Keys:Import | Always required. |
+        | Wallets:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       requestBody:
         content:
           application/json:
@@ -62217,6 +62604,18 @@ paths:
       tags:
         - Wallets
       summary: " List Transfers"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transfers:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -63158,6 +63557,19 @@ paths:
       tags:
         - Wallets
       summary: " Transfer Asset"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Transfers:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -63165,11 +63577,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -64870,6 +65277,19 @@ paths:
       tags:
         - Wallets
       summary: " Tag Wallet"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Tags:Add | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -64877,11 +65297,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -64910,6 +65325,19 @@ paths:
       tags:
         - Wallets
       summary: " Untag Wallet"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Wallets:Tags:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -64917,11 +65345,6 @@ paths:
           required: true
           name: walletId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -64949,12 +65372,19 @@ paths:
       tags:
         - Webhooks
       summary: " Create Webhook"
-      parameters:
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Create | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       requestBody:
         content:
           application/json:
@@ -65074,6 +65504,18 @@ paths:
       tags:
         - Webhooks
       summary: " List Webhooks"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: integer
@@ -65153,6 +65595,19 @@ paths:
       tags:
         - Webhooks
       summary: " Delete Webhook"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Delete | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -65160,11 +65615,6 @@ paths:
           required: true
           name: webhookId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -65183,6 +65633,18 @@ paths:
       tags:
         - Webhooks
       summary: " Get Webhook"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -65243,6 +65705,19 @@ paths:
       tags:
         - Webhooks
       summary: " Update Webhook"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Update | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -65250,11 +65725,6 @@ paths:
           required: true
           name: webhookId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       requestBody:
         content:
           application/json:
@@ -65341,6 +65811,19 @@ paths:
       tags:
         - Webhooks
       summary: " Ping Webhook"
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Ping | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -65348,11 +65831,6 @@ paths:
           required: true
           name: webhookId
           in: path
-        - schema:
-            type: string
-          required: true
-          name: X-DFNS-USERACTION
-          in: header
       responses:
         "200":
           description: Success
@@ -65373,6 +65851,18 @@ paths:
       tags:
         - Webhooks
       summary: " Get Webhook Event"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Events:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string
@@ -65433,6 +65923,18 @@ paths:
       tags:
         - Webhooks
       summary: " List Webhook Events"
+      security:
+        - authenticationToken: []
+      description: |-
+        ### Required Permissions
+        | Name        | Conditions   |
+        | ----------- | -------------|
+        | Webhooks:Events:Read | Always required. |
+
+        ### Token Kinds Allowed
+        Access Token, Personal Access Token, Service Account Access Token
+        ### User allowed
+        User
       parameters:
         - schema:
             type: string

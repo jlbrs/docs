@@ -64,57 +64,57 @@
         "tab": "Documentation",
         "icon": "book-open",
         "pages": [
-          "documentation/index",
+          "index",
           {
             "group": "Getting Started",
             "pages": [
+              "getting-started/key-concepts",
               {
                 "group": "Onboarding to Dfns",
                 "icon": "rocket",
                 "pages": [
-                  "documentation/getting-started/onboarding/index",
-                  "documentation/getting-started/onboarding/1",
-                  "documentation/getting-started/onboarding/2",
-                  "documentation/getting-started/onboarding/3",
-                  "documentation/getting-started/onboarding/4",
-                  "documentation/getting-started/onboarding/5",
-                  "documentation/getting-started/onboarding/6",
-                  "documentation/getting-started/onboarding/7"
+                  "getting-started/onboarding/index",
+                  "getting-started/onboarding/1",
+                  "getting-started/onboarding/2",
+                  "getting-started/onboarding/3",
+                  "getting-started/onboarding/4",
+                  "getting-started/onboarding/5",
+                  "getting-started/onboarding/6",
+                  "getting-started/onboarding/7"
                 ]
               },
-              "documentation/getting-started/environments",
-              "documentation/getting-started/how-it-works",
-              "documentation/getting-started/users",
-              "documentation/getting-started/authentication",
-              "documentation/getting-started/permissions",
-              "documentation/getting-started/policies"
+              "getting-started/how-it-works",
+              "getting-started/users",
+              "getting-started/authentication",
+              "getting-started/permissions",
+              "getting-started/policies"
             ]
           },
           {
             "group": "Guides",
             "pages": [
-              "documentation/guides/1",
-              "documentation/guides/2",
-              "documentation/guides/3",
-              "documentation/guides/4"
+              "guides/1",
+              "guides/2",
+              "guides/3",
+              "guides/4"
             ]
           },
           {
             "group": "Wallets",
             "pages": [
-              "documentation/wallets/1",
-              "documentation/wallets/2",
-              "documentation/wallets/3",
-              "documentation/wallets/4"
+              "wallets/1",
+              "wallets/2",
+              "wallets/3",
+              "wallets/4"
             ]
           },
           {
             "group": "Networks",
             "pages": [
-              "documentation/networks/1",
-              "documentation/networks/2",
-              "documentation/networks/3",
-              "documentation/networks/4"
+              "networks/1",
+              "networks/2",
+              "networks/3",
+              "networks/4"
             ]
           },
           {
@@ -122,10 +122,10 @@
             "icon": "square-terminal",
             "tag": "NEW",
             "pages": [
-              "documentation/operations/1",
-              "documentation/operations/2",
-              "documentation/operations/3",
-              "documentation/operations/4"
+              "operations/1",
+              "operations/2",
+              "operations/3",
+              "operations/4"
             ]
           }
         ]
@@ -133,16 +133,16 @@
       {
         "tab": "API reference",
         "icon": "code",
-        "groups": [
+        "pages": [
+          
+              "api-reference/index",
+              "api-reference/environments",
+              "api-reference/postman-collection",
+              "api-reference/core-objects",
+              "api-reference/error-codes",
+              "api-reference/idempotency",
           {
-            "group": "API reference",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/core-objects"
-            ]
-          },
-          {
-            "group": "API Authentication",
+            "group": "Authentication",
             "pages": [
               "api-reference/authentication-flows",
               "api-reference/endpoints/auth/send-login-code",
@@ -174,7 +174,7 @@
             ]
           },
           {
-            "group": "Employees Management",
+            "group": "Employee Users",
             "pages": [
               "api-reference/endpoints/auth/list-users",
               "api-reference/endpoints/auth/create-user",
@@ -185,7 +185,7 @@
             ]
           },
           {
-            "group": "Credentials",
+            "group": "User Credentials",
             "pages": [
               "api-reference/endpoints/auth/list-credentials",
               "api-reference/endpoints/auth/create-credential-challenge",
@@ -228,14 +228,6 @@
               "api-reference/endpoints/auth/activate-service-account",
               "api-reference/endpoints/auth/deactivate-service-account",
               "api-reference/endpoints/auth/archive-service-account"
-            ]
-          },
-          {
-            "group": "Applications",
-            "tag": "Deprecated",
-            "pages": [
-              "api-reference/endpoints/auth/list-applications",
-              "api-reference/endpoints/auth/get-application"
             ]
           },
           {
@@ -299,24 +291,24 @@
           {
             "group": "Permissions",
             "pages": [
-              "api-reference/endpoints/permissions/list-assignments",
-              "api-reference/endpoints/permissions/create-assignment",
-              "api-reference/endpoints/permissions/delete-assignment",
-              "api-reference/endpoints/permissions/archive-permission",
               "api-reference/endpoints/permissions/list-permissions",
               "api-reference/endpoints/permissions/create-permission",
               "api-reference/endpoints/permissions/get-permission",
-              "api-reference/endpoints/permissions/update-permission"
+              "api-reference/endpoints/permissions/update-permission",
+              "api-reference/endpoints/permissions/archive-permission",
+              "api-reference/endpoints/permissions/list-assignments",
+              "api-reference/endpoints/permissions/create-assignment",
+              "api-reference/endpoints/permissions/delete-assignment"
             ]
           },
           {
             "group": "Policies",
             "pages": [
+              "api-reference/endpoints/policies/list-policies",
+              "api-reference/endpoints/policies/create-policy",
               "api-reference/endpoints/policies/get-policy",
               "api-reference/endpoints/policies/update-policy",
-              "api-reference/endpoints/policies/archive-policy",
-              "api-reference/endpoints/policies/list-policies",
-              "api-reference/endpoints/policies/create-policy"
+              "api-reference/endpoints/policies/archive-policy"
             ]
           },
           {
@@ -338,9 +330,9 @@
             "pages": [
               "api-reference/endpoints/staking/list-stakes",
               "api-reference/endpoints/staking/create-stake",
+              "api-reference/endpoints/staking/get-stakes",
               "api-reference/endpoints/staking/list-stake-actions",
               "api-reference/endpoints/staking/create-stake-action",
-              "api-reference/endpoints/staking/get-stakes",
               "api-reference/endpoints/staking/get-stake-rewards"
             ]
           },
@@ -349,16 +341,16 @@
             "pages": [
               "api-reference/endpoints/wallets/list-wallets",
               "api-reference/endpoints/wallets/create-wallet",
-              "api-reference/endpoints/wallets/delegate-wallet",
-              "api-reference/endpoints/wallets/export-wallet",
               "api-reference/endpoints/wallets/get-wallet",
               "api-reference/endpoints/wallets/update-wallet",
               "api-reference/endpoints/wallets/get-wallet-assets",
               "api-reference/endpoints/wallets/get-wallet-history",
               "api-reference/endpoints/wallets/get-wallet-nfts",
+              "api-reference/endpoints/wallets/import-wallet",
+              "api-reference/endpoints/wallets/delegate-wallet",
+              "api-reference/endpoints/wallets/export-wallet",
               "api-reference/endpoints/wallets/list-signatures",
               "api-reference/endpoints/wallets/get-signature",
-              "api-reference/endpoints/wallets/import-wallet",
               {
                 "group": "Wallet  Tags",
                 "pages": [
@@ -403,24 +395,76 @@
               "api-reference/endpoints/webhooks/get-webhook-event",
               "api-reference/endpoints/webhooks/list-webhook-events"
             ]
+          },
+          {
+            "group": "Applications",
+            "tag": "Deprecated",
+            "pages": [
+              "api-reference/endpoints/auth/list-applications",
+              "api-reference/endpoints/auth/get-application"
+            ]
           }
         ]
       },
       {
         "tab": "SDK reference",
         "icon": "square-terminal",
-        "groups": [
+        "pages": [
+          "sdks/index",
           {
-            "group": "JavaScript",
+            "group": "Typescript",
             "pages": [
-              "sdks/development"
+              "sdks/typescript/installation",
+              "sdks/typescript/development",
+              "sdks/typescript/examples"
+            ]
+          },
+          {
+            "group": "Go",
+            "pages": [
+              "sdks/go/installation",
+              "sdks/go/development",
+              "sdks/go/examples"
+            ]
+          },
+          {
+            "group": "Flutter",
+            "pages": [
+              "sdks/flutter/installation",
+              "sdks/flutter/development",
+              "sdks/flutter/examples"
+            ]
+          },
+          {
+            "group": "Kotlin",
+            "pages": [
+              "sdks/kotlin/installation",
+              "sdks/kotlin/development",
+              "sdks/kotlin/examples"
+            ]
+          },
+          {
+            "group": "Swift",
+            "pages": [
+              "sdks/swift/installation",
+              "sdks/swift/development",
+              "sdks/swift/examples"
+            ]
+          },
+          {
+            "group": "Rust",
+            "pages": [
+              "sdks/rust/installation",
+              "sdks/rust/development",
+              "sdks/rust/examples"
             ]
           },
           {
             "group": "Python",
             "pages": [
               "sdks/python/installation",
-              "sdks/python/usage"
+              "sdks/python/development",
+              "sdks/python/examples"
             ]
           }
         ]
