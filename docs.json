@@ -452,6 +452,7 @@
           {
             "group": "Webhook Configuration",
             "pages": [
+              "api-reference/endpoints/webhooks/index",
               "api-reference/endpoints/webhooks/list-webhooks",
               "api-reference/endpoints/webhooks/create-webhook",
               "api-reference/endpoints/webhooks/get-webhook",
@@ -461,7 +462,7 @@
             ]
           },
           {
-            "group": "Webhook Events",
+            "group": "Webhooks History",
             "pages": [
               "api-reference/endpoints/webhooks/get-webhook-event",
               "api-reference/endpoints/webhooks/list-webhook-events"
