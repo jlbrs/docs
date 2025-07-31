@@ -83,7 +83,6 @@
                   "getting-started/onboarding/7"
                 ]
               },
-              "getting-started/how-it-works",
               "getting-started/users",
               "getting-started/authentication",
               "getting-started/permissions",
@@ -91,30 +90,64 @@
             ]
           },
           {
-            "group": "Guides",
+            "group": "How Dfns works",
             "pages": [
-              "guides/1",
-              "guides/2",
-              "guides/3",
-              "guides/4"
+              "how-it-works",
+              "how-it-works/architecture",
+              "how-it-works/security",
+              "how-it-works/passkeys",
+              "how-it-works/transactions"
             ]
           },
           {
-            "group": "Wallets",
+            "group": "Use cases",
             "pages": [
-              "wallets/1",
-              "wallets/2",
-              "wallets/3",
-              "wallets/4"
+              "use-cases",
+              "use-cases/banking",
+              "use-cases/tokenization",
+              "use-cases/asset-management",
+              "use-cases/crypto-exchanges",
+              "use-cases/custody",
+              "use-cases/crypto-payments"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/wallets-delegation",
+              "guides/user-account-recovery",
+              "guides/dashboard-onboarding-a-new-device",
+              "guides/permission-based-access-control",
+              "guides/passkey-settings-migration-guide",
+              "guides/keys-and-multichain-migration-guide",
+              "guides/applications-deprecation",
+              "guides/using-hardware-security-modules-hsms",
+              "guides/on-premise-deployment"
             ]
           },
           {
             "group": "Networks",
             "pages": [
-              "networks/1",
-              "networks/2",
-              "networks/3",
-              "networks/4"
+              "networks/index",
+              "networks/multichain wallets",
+              {
+                "group": "Chains specificities",
+                "pages": [
+                  "networks/algorand",
+                  "networks/aptos",
+                  "networks/bitcoin",
+                  "networks/canton",
+                  "networks/cardano",
+                  "networks/cosmos",
+                  "networks/evm",
+                  "networks/solana",
+                  "networks/stellar",
+                  "networks/polkadot",
+                  "networks/tezos",
+                  "networks/tron",
+                  "networks/xrp"
+                ]
+              }
             ]
           },
           {
@@ -122,10 +155,49 @@
             "icon": "square-terminal",
             "tag": "NEW",
             "pages": [
-              "operations/1",
-              "operations/2",
-              "operations/3",
-              "operations/4"
+              "operations/index",
+              {
+                "group": "Transactions",
+                "pages": [
+                  "operations/transactions/index",
+                  "operations/transactions/transfers",
+                  "operations/transactions/raw-transactions",
+                  "operations/transactions/fee-sponsor"
+                ]
+              },
+              {
+                "group": "Staking",
+                "pages": [
+                  "operations/staking/index",
+                  "operations/staking/tron"
+                ]
+              },
+              "operations/fiat-on-offboarding",
+              {
+                "group": "Exchanges",
+                "pages": [
+                  "operations/exchanges/index",
+                  "operations/exchanges/kraken",
+                  "operations/exchanges/binance",
+                  "operations/exchanges/coinbase"
+                ]
+              },
+              {
+                "group": "Travel Rules",
+                "pages": [
+                  "operations/travel-rules/index",
+                  "operations/travel-rules/notabene"
+                ]
+              },
+              {
+                "group": "AML / KYT",
+                "pages": [
+                  "operations/aml-kyt/index",
+                  "operations/aml-kyt/chainalysis",
+                  "operations/aml-kyt/elliptic"
+                ]
+              },
+              "operations/account-abstraction-on-evms"
             ]
           }
         ]
@@ -134,13 +206,12 @@
         "tab": "API reference",
         "icon": "code",
         "pages": [
-          
-              "api-reference/index",
-              "api-reference/environments",
-              "api-reference/postman-collection",
-              "api-reference/core-objects",
-              "api-reference/error-codes",
-              "api-reference/idempotency",
+          "api-reference/index",
+          "api-reference/environments",
+          "api-reference/postman-collection",
+          "api-reference/core-objects",
+          "api-reference/error-codes",
+          "api-reference/idempotency",
           {
             "group": "Authentication",
             "pages": [
