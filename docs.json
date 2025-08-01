@@ -252,7 +252,7 @@
           "api-reference/idempotency",
           "api-reference/rate-limits",
           {
-            "group": "Identity & Access Management",
+            "group": "API Authorization headers",
             "pages": [
               {
                 "group": "Authentication",
@@ -273,9 +273,14 @@
                   "api-reference/endpoints/auth/create-user-action-challenge",
                   "api-reference/endpoints/auth/create-user-action-signature"
                 ]
-              },
+              }
+            ]
+          },
+          {
+            "group": "Identity & Access Management",
+            "pages": [
               {
-                "group": "User Registration",
+                "group": "Registration",
                 "pages": [
                   "api-reference/registration-flows",
                   "api-reference/endpoints/auth/create-registration-challenge",
@@ -287,7 +292,7 @@
                 ]
               },
               {
-                "group": "Employee Users",
+                "group": "Users management",
                 "pages": [
                   "api-reference/endpoints/auth/list-users",
                   "api-reference/endpoints/auth/create-user",
@@ -298,7 +303,20 @@
                 ]
               },
               {
-                "group": "User Credentials",
+                "group": "Permissions",
+                "pages": [
+                  "api-reference/endpoints/permissions/list-permissions",
+                  "api-reference/endpoints/permissions/create-permission",
+                  "api-reference/endpoints/permissions/get-permission",
+                  "api-reference/endpoints/permissions/update-permission",
+                  "api-reference/endpoints/permissions/archive-permission",
+                  "api-reference/endpoints/permissions/list-assignments",
+                  "api-reference/endpoints/permissions/create-assignment",
+                  "api-reference/endpoints/permissions/delete-assignment"
+                ]
+              },
+              {
+                "group": "Credentials",
                 "pages": [
                   "api-reference/endpoints/auth/list-credentials",
                   "api-reference/endpoints/auth/create-credential-challenge",
@@ -401,19 +419,6 @@
                   "api-reference/endpoints/networks/delete-canton-validator"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Permissions",
-            "pages": [
-              "api-reference/endpoints/permissions/list-permissions",
-              "api-reference/endpoints/permissions/create-permission",
-              "api-reference/endpoints/permissions/get-permission",
-              "api-reference/endpoints/permissions/update-permission",
-              "api-reference/endpoints/permissions/archive-permission",
-              "api-reference/endpoints/permissions/list-assignments",
-              "api-reference/endpoints/permissions/create-assignment",
-              "api-reference/endpoints/permissions/delete-assignment"
             ]
           },
           {
