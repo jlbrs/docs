@@ -92,125 +92,111 @@
               "core-concepts/how-mpc-wallets-work",
               "core-concepts/architecture",
               "core-concepts/dfns-security-model",
-              "core-concepts/passkeys",
-              "core-concepts/choosing-the-right-custody-model",
-              {
-                "group": "Security Deep Dive",
-                "pages": [
-                  "core-concepts/security/index",
-                  "core-concepts/security/dfns-vs-self-hosted-solutions",
-                  "core-concepts/security/the-state-of-account-abstraction-security",
-                  "core-concepts/security/analyzing-wallet-iframe-security",
-                  "core-concepts/security/how-dfns-approaches-hashing-and-data-integrity",
-                  "core-concepts/security/our-soc-2-type-ii-compliance-and-what-it-means"
-                ]
-              }
+              "core-concepts/passkeys"
+            ]
+          },
+          {
+            "group": "Security & Compliance",
+            "icon": "shield-check",
+            "pages": [
+              "security/overview",
+              "security/our-soc-2-type-ii-compliance",
+              "security/configuring-institutional-grade-policies",
+              "security/audit-log-deep-dive",
+              "security/dfns-vs-self-hosted-solutions",
+              "security/meeting-fiduciary-duties-with-dfns",
+              "security/compliance-for-micar-and-travel-rule"
             ]
           },
           {
             "group": "Platform Features",
             "icon": "square-terminal",
-            "tag": "NEW",
             "pages": [
               "features/index",
-              {
-                "group": "Transaction types",
-                "pages": [
-                  "features/transactions/understanding-transfers",
-                  "features/transactions/understanding-raw-transactions",
-                  "features/transactions/understanding-account-abstraction"
-                ]
-              },
-              {
-                "group": "DeFi & Financial Operations",
-                "pages": [
-                  "features/defi/understanding-staking",
-                  "features/defi/understanding-fiat-on-offboarding",
-                  "features/defi/understanding-fee-sponsorship"
-                ]
-              },
-              {
-                "group": "Ecosystem Integrations",
-                "pages": [
-                  "features/integrations/understanding-exchange-integrations",
-                  "features/integrations/understanding-aml-kyt-integrations",
-                  "features/integrations/understanding-travel-rule-integrations"
-                ]
-              }
+              "features/transactions",
+              "features/staking",
+              "features/fee-sponsorship",
+              "features/exchange-integrations",
+              "features/aml-kyt-integrations",
+              "features/travel-rule-integrations",
+              "features/fiat-on-offboarding"
             ]
           },
           {
-            "group": "Solutions & Use Cases",
+            "group": "Solutions",
+            "icon": "briefcase",
             "pages": [
-              "use-cases",
-              "use-cases/integrating-crypto-payments",
-              "use-cases/building-a-tokenization-platform",
-              "use-cases/managing-corporate-treasury-with-dfns"
+              "solutions/index",
+              {
+                "group": "For Business Leaders",
+                "pages": [
+                  "solutions/strategy/accelerating-time-to-market",
+                  "solutions/strategy/total-cost-of-ownership-tco",
+                  "solutions/strategy/de-risking-your-digital-asset-strategy",
+                  "solutions/strategy/a-phased-approach-for-banks"
+                ]
+              },
+              {
+                "group": "For Verticals",
+                "pages": [
+                  "solutions/verticals/psp-and-payments",
+                  "solutions/verticals/neobanks",
+                  "solutions/verticals/custody-and-exchanges",
+                  "solutions/verticals/tokenization",
+                  "solutions/verticals/enterprise-and-loyalty"
+                ]
+              },
+              {
+                "group": "Operational Playbooks",
+                "pages": [
+                  "solutions/playbooks/daily-treasury-reconciliation",
+                  "solutions/playbooks/onboarding-an-institutional-client",
+                  "solutions/playbooks/processing-large-otc-trades",
+                  "solutions/playbooks/secure-user-and-device-lifecycle"
+                ]
+              }
             ]
           },
           {
             "group": "Developer Guides",
             "icon": "code",
             "pages": [
+              "developers/index",
               {
-                "group": "Setup & Authentication",
+                "group": "Core Skills",
                 "pages": [
-                  "developers/setup/authentication",
-                  "developers/setup/permissions"
+                  "developers/core/setup-and-authentication",
+                  "developers/core/creating-and-managing-wallets",
+                  "developers/core/displaying-portfolio-history",
+                  "developers/core/handling-webhook-events"
                 ]
               },
               {
-                "group": "Solutions Guides",
+                "group": "Building Blocks",
                 "pages": [
-                  "developers/solutions/index",
-                  "developers/solutions/guide-to-stablecoin-transfers",
-                  "developers/solutions/guide-to-receiving-webhook-events"
+                  "developers/building/wallets-and-transactions",
+                  "developers/building/policies-and-permissions",
+                  "developers/building/staking",
+                  "developers/building/exchange-integrations",
+                  "developers/building/aml-and-travel-rule"
                 ]
               },
               {
-                "group": "Wallets & Transactions",
+                "group": "Architectural Patterns",
                 "pages": [
-                  "developers/wallets/transactions",
-                  "developers/wallets/transfers",
-                  "developers/wallets/raw-transactions",
-                  "developers/wallets/fee-sponsor",
-                  "developers/wallets/wallets-delegation",
-                  "developers/wallets/account-abstraction-on-evms"
-                ]
-              },
-              {
-                "group": "Security & Policies",
-                "pages": [
-                  "developers/security/policies",
-                  "developers/security/permission-based-access-control",
-                  "developers/security/user-account-recovery"
-                ]
-              },
-              {
-                "group": "Integrations",
-                "pages": [
-                  "developers/integrations/exchanges/index",
-                  "developers/integrations/staking/index",
-                  "developers/integrations/travel-rules/index",
-                  "developers/integrations/aml-kyt/index",
-                  "developers/integrations/fiat-on-offboarding"
-                ]
-              },
-              {
-                "group": "Advanced Topics",
-                "icon": "cog",
-                "pages": [
-                  "developers/advanced/using-the-api",
-                  "developers/advanced/using-the-sdk",
-                  "developers/advanced/using-the-dashboard"
+                  "developers/architecture/designing-an-exchange-hot-wallet",
+                  "developers/architecture/managing-wallets-for-millions-of-users",
+                  "developers/architecture/designing-for-high-availability",
+                  "developers/architecture/event-driven-architecture",
+                  "developers/architecture/scalability-and-performance"
                 ]
               },
               {
                 "group": "Advanced Topics",
                 "pages": [
-                  "developers/advanced/using-hardware-security-modules-hsms",
+                  "developers/advanced/using-hsms",
                   "developers/advanced/on-premise-deployment",
-                  "developers/advanced/keys-and-multichain-migration-guide"
+                  "developers/advanced/keys-and-multichain-migration"
                 ]
               }
             ]
@@ -264,93 +250,99 @@
           "api-reference/core-objects",
           "api-reference/error-codes",
           "api-reference/idempotency",
+          "api-reference/rate-limits",
           {
-            "group": "Authentication",
+            "group": "Identity & Access Management",
             "pages": [
-              "api-reference/authentication-flows",
-              "api-reference/endpoints/auth/send-login-code",
-              "api-reference/endpoints/auth/create-login-challenge",
-              "api-reference/endpoints/auth/login",
-              "api-reference/endpoints/auth/delegated-login",
-              "api-reference/endpoints/auth/social-login",
-              "api-reference/endpoints/auth/logout"
-            ]
-          },
-          {
-            "group": "User Action Signature",
-            "pages": [
-              "api-reference/signing-flows",
-              "api-reference/endpoints/auth/create-user-action-challenge",
-              "api-reference/endpoints/auth/create-user-action-signature"
-            ]
-          },
-          {
-            "group": "User Registration",
-            "pages": [
-              "api-reference/registration-flows",
-              "api-reference/endpoints/auth/create-registration-challenge",
-              "api-reference/endpoints/auth/create-delegated-registration-challenge",
-              "api-reference/endpoints/auth/create-social-registration-challenge",
-              "api-reference/endpoints/auth/register",
-              "api-reference/endpoints/auth/register-end-user",
-              "api-reference/endpoints/auth/resend-registration-code"
-            ]
-          },
-          {
-            "group": "Employee Users",
-            "pages": [
-              "api-reference/endpoints/auth/list-users",
-              "api-reference/endpoints/auth/create-user",
-              "api-reference/endpoints/auth/get-user",
-              "api-reference/endpoints/auth/activate-user",
-              "api-reference/endpoints/auth/deactivate-user",
-              "api-reference/endpoints/auth/archive-user"
-            ]
-          },
-          {
-            "group": "User Credentials",
-            "pages": [
-              "api-reference/endpoints/auth/list-credentials",
-              "api-reference/endpoints/auth/create-credential-challenge",
-              "api-reference/endpoints/auth/create-credential",
-              "api-reference/endpoints/auth/create-credential-challenge-with-code",
-              "api-reference/endpoints/auth/create-credential-with-code",
-              "api-reference/endpoints/auth/activate-credential",
-              "api-reference/endpoints/auth/deactivate-credential",
-              "api-reference/endpoints/auth/create-credential-code"
-            ]
-          },
-          {
-            "group": "Personal Access Tokens",
-            "pages": [
-              "api-reference/endpoints/auth/list-personal-access-tokens",
-              "api-reference/endpoints/auth/create-personal-access-token",
-              "api-reference/endpoints/auth/get-personal-access-token",
-              "api-reference/endpoints/auth/update-personal-access-token",
-              "api-reference/endpoints/auth/activate-personal-access-token",
-              "api-reference/endpoints/auth/deactivate-personal-access-token",
-              "api-reference/endpoints/auth/archive-personal-access-token"
-            ]
-          },
-          {
-            "group": "Account recovery",
-            "pages": [
-              "api-reference/endpoints/auth/send-recovery-code",
-              "api-reference/endpoints/auth/create-recovery-challenge",
-              "api-reference/endpoints/auth/create-delegated-recovery-challenge",
-              "api-reference/endpoints/auth/recover"
-            ]
-          },
-          {
-            "group": "Service Accounts",
-            "pages": [
-              "api-reference/endpoints/auth/list-service-accounts",
-              "api-reference/endpoints/auth/create-service-account",
-              "api-reference/endpoints/auth/get-service-account",
-              "api-reference/endpoints/auth/update-service-account",
-              "api-reference/endpoints/auth/activate-service-account",
-              "api-reference/endpoints/auth/deactivate-service-account",
-              "api-reference/endpoints/auth/archive-service-account"
+              {
+                "group": "Authentication",
+                "pages": [
+                  "api-reference/authentication-flows",
+                  "api-reference/endpoints/auth/send-login-code",
+                  "api-reference/endpoints/auth/create-login-challenge",
+                  "api-reference/endpoints/auth/login",
+                  "api-reference/endpoints/auth/delegated-login",
+                  "api-reference/endpoints/auth/social-login",
+                  "api-reference/endpoints/auth/logout"
+                ]
+              },
+              {
+                "group": "User Action Signature",
+                "pages": [
+                  "api-reference/signing-flows",
+                  "api-reference/endpoints/auth/create-user-action-challenge",
+                  "api-reference/endpoints/auth/create-user-action-signature"
+                ]
+              },
+              {
+                "group": "User Registration",
+                "pages": [
+                  "api-reference/registration-flows",
+                  "api-reference/endpoints/auth/create-registration-challenge",
+                  "api-reference/endpoints/auth/create-delegated-registration-challenge",
+                  "api-reference/endpoints/auth/create-social-registration-challenge",
+                  "api-reference/endpoints/auth/register",
+                  "api-reference/endpoints/auth/register-end-user",
+                  "api-reference/endpoints/auth/resend-registration-code"
+                ]
+              },
+              {
+                "group": "Employee Users",
+                "pages": [
+                  "api-reference/endpoints/auth/list-users",
+                  "api-reference/endpoints/auth/create-user",
+                  "api-reference/endpoints/auth/get-user",
+                  "api-reference/endpoints/auth/activate-user",
+                  "api-reference/endpoints/auth/deactivate-user",
+                  "api-reference/endpoints/auth/archive-user"
+                ]
+              },
+              {
+                "group": "User Credentials",
+                "pages": [
+                  "api-reference/endpoints/auth/list-credentials",
+                  "api-reference/endpoints/auth/create-credential-challenge",
+                  "api-reference/endpoints/auth/create-credential",
+                  "api-reference/endpoints/auth/create-credential-challenge-with-code",
+                  "api-reference/endpoints/auth/create-credential-with-code",
+                  "api-reference/endpoints/auth/activate-credential",
+                  "api-reference/endpoints/auth/deactivate-credential",
+                  "api-reference/endpoints/auth/create-credential-code"
+                ]
+              },
+              {
+                "group": "Personal Access Tokens",
+                "pages": [
+                  "api-reference/endpoints/auth/list-personal-access-tokens",
+                  "api-reference/endpoints/auth/create-personal-access-token",
+                  "api-reference/endpoints/auth/get-personal-access-token",
+                  "api-reference/endpoints/auth/update-personal-access-token",
+                  "api-reference/endpoints/auth/activate-personal-access-token",
+                  "api-reference/endpoints/auth/deactivate-personal-access-token",
+                  "api-reference/endpoints/auth/archive-personal-access-token"
+                ]
+              },
+              {
+                "group": "Account recovery",
+                "pages": [
+                  "api-reference/endpoints/auth/send-recovery-code",
+                  "api-reference/endpoints/auth/create-recovery-challenge",
+                  "api-reference/endpoints/auth/create-delegated-recovery-challenge",
+                  "api-reference/endpoints/auth/recover"
+                ]
+              },
+              {
+                "group": "Service Accounts",
+                "pages": [
+                  "api-reference/endpoints/auth/list-service-accounts",
+                  "api-reference/endpoints/auth/create-service-account",
+                  "api-reference/endpoints/auth/get-service-account",
+                  "api-reference/endpoints/auth/update-service-account",
+                  "api-reference/endpoints/auth/activate-service-account",
+                  "api-reference/endpoints/auth/deactivate-service-account",
+                  "api-reference/endpoints/auth/archive-service-account"
+                ]
+              }
             ]
           },
           {
