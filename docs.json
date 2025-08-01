@@ -63,14 +63,14 @@
       {
         "tab": "Documentation",
         "icon": "book-open",
-        "pages": [
-          "index",
+        "groups": [
           {
-            "group": "Getting Started",
+            "group": "Introduction",
             "pages": [
-              "getting-started/key-concepts",
+              "index",
+              "platform-overview",
               {
-                "group": "Onboarding to Dfns",
+                "group": "Quickstart Guide",
                 "icon": "rocket",
                 "pages": [
                   "getting-started/onboarding/index",
@@ -82,54 +82,156 @@
                   "getting-started/onboarding/6",
                   "getting-started/onboarding/7"
                 ]
-              },
-              "getting-started/users",
-              "getting-started/authentication",
-              "getting-started/permissions",
-              "getting-started/policies"
+              }
             ]
           },
           {
-            "group": "How Dfns works",
+            "group": "Core Concepts",
             "pages": [
-              "how-it-works",
-              "how-it-works/architecture",
-              "how-it-works/security",
-              "how-it-works/passkeys",
-              "how-it-works/transactions"
+              "core-concepts/what-is-a-wallet-as-a-service",
+              "core-concepts/how-mpc-wallets-work",
+              "core-concepts/architecture",
+              "core-concepts/dfns-security-model",
+              "core-concepts/passkeys",
+              "core-concepts/choosing-the-right-custody-model",
+              {
+                "group": "Security Deep Dive",
+                "pages": [
+                  "core-concepts/security/index",
+                  "core-concepts/security/dfns-vs-self-hosted-solutions",
+                  "core-concepts/security/the-state-of-account-abstraction-security",
+                  "core-concepts/security/analyzing-wallet-iframe-security",
+                  "core-concepts/security/how-dfns-approaches-hashing-and-data-integrity",
+                  "core-concepts/security/our-soc-2-type-ii-compliance-and-what-it-means"
+                ]
+              }
             ]
           },
           {
-            "group": "Use cases",
+            "group": "Platform Features",
+            "icon": "square-terminal",
+            "tag": "NEW",
+            "pages": [
+              "features/index",
+              {
+                "group": "Transaction types",
+                "pages": [
+                  "features/transactions/understanding-transfers",
+                  "features/transactions/understanding-raw-transactions",
+                  "features/transactions/understanding-account-abstraction"
+                ]
+              },
+              {
+                "group": "DeFi & Financial Operations",
+                "pages": [
+                  "features/defi/understanding-staking",
+                  "features/defi/understanding-fiat-on-offboarding",
+                  "features/defi/understanding-fee-sponsorship"
+                ]
+              },
+              {
+                "group": "Ecosystem Integrations",
+                "pages": [
+                  "features/integrations/understanding-exchange-integrations",
+                  "features/integrations/understanding-aml-kyt-integrations",
+                  "features/integrations/understanding-travel-rule-integrations"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Solutions & Use Cases",
             "pages": [
               "use-cases",
-              "use-cases/banking",
-              "use-cases/tokenization",
-              "use-cases/asset-management",
-              "use-cases/crypto-exchanges",
-              "use-cases/custody",
-              "use-cases/crypto-payments"
+              "use-cases/integrating-crypto-payments",
+              "use-cases/building-a-tokenization-platform",
+              "use-cases/managing-corporate-treasury-with-dfns"
             ]
           },
           {
-            "group": "Guides",
+            "group": "Developer Guides",
+            "icon": "code",
             "pages": [
-              "guides/wallets-delegation",
-              "guides/user-account-recovery",
-              "guides/dashboard-onboarding-a-new-device",
-              "guides/permission-based-access-control",
-              "guides/passkey-settings-migration-guide",
-              "guides/keys-and-multichain-migration-guide",
-              "guides/applications-deprecation",
-              "guides/using-hardware-security-modules-hsms",
-              "guides/on-premise-deployment"
+              {
+                "group": "Setup & Authentication",
+                "pages": [
+                  "developers/setup/authentication",
+                  "developers/setup/permissions"
+                ]
+              },
+              {
+                "group": "Solutions Guides",
+                "pages": [
+                  "developers/solutions/index",
+                  "developers/solutions/guide-to-stablecoin-transfers",
+                  "developers/solutions/guide-to-receiving-webhook-events"
+                ]
+              },
+              {
+                "group": "Wallets & Transactions",
+                "pages": [
+                  "developers/wallets/transactions",
+                  "developers/wallets/transfers",
+                  "developers/wallets/raw-transactions",
+                  "developers/wallets/fee-sponsor",
+                  "developers/wallets/wallets-delegation",
+                  "developers/wallets/account-abstraction-on-evms"
+                ]
+              },
+              {
+                "group": "Security & Policies",
+                "pages": [
+                  "developers/security/policies",
+                  "developers/security/permission-based-access-control",
+                  "developers/security/user-account-recovery"
+                ]
+              },
+              {
+                "group": "Integrations",
+                "pages": [
+                  "developers/integrations/exchanges/index",
+                  "developers/integrations/staking/index",
+                  "developers/integrations/travel-rules/index",
+                  "developers/integrations/aml-kyt/index",
+                  "developers/integrations/fiat-on-offboarding"
+                ]
+              },
+              {
+                "group": "Advanced Topics",
+                "icon": "cog",
+                "pages": [
+                  "developers/advanced/using-the-api",
+                  "developers/advanced/using-the-sdk",
+                  "developers/advanced/using-the-dashboard"
+                ]
+              },
+              {
+                "group": "Advanced Topics",
+                "pages": [
+                  "developers/advanced/using-hardware-security-modules-hsms",
+                  "developers/advanced/on-premise-deployment",
+                  "developers/advanced/keys-and-multichain-migration-guide"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Dashboard Guides",
+            "icon": "layout-dashboard",
+            "pages": [
+              "dashboard/overview",
+              "dashboard/onboarding-a-new-device",
+              "dashboard/managing-users-and-roles",
+              "dashboard/creating-policies",
+              "dashboard/approving-transactions",
+              "dashboard/user-account-recovery"
             ]
           },
           {
             "group": "Networks",
             "pages": [
               "networks/index",
-              "networks/multichain wallets",
+              "networks/multichain-wallets",
               {
                 "group": "Chains specificities",
                 "pages": [
@@ -148,56 +250,6 @@
                   "networks/xrp"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Operations",
-            "icon": "square-terminal",
-            "tag": "NEW",
-            "pages": [
-              "operations/index",
-              {
-                "group": "Transactions",
-                "pages": [
-                  "operations/transactions/index",
-                  "operations/transactions/transfers",
-                  "operations/transactions/raw-transactions",
-                  "operations/transactions/fee-sponsor"
-                ]
-              },
-              {
-                "group": "Staking",
-                "pages": [
-                  "operations/staking/index",
-                  "operations/staking/tron"
-                ]
-              },
-              "operations/fiat-on-offboarding",
-              {
-                "group": "Exchanges",
-                "pages": [
-                  "operations/exchanges/index",
-                  "operations/exchanges/kraken",
-                  "operations/exchanges/binance",
-                  "operations/exchanges/coinbase"
-                ]
-              },
-              {
-                "group": "Travel Rules",
-                "pages": [
-                  "operations/travel-rules/index",
-                  "operations/travel-rules/notabene"
-                ]
-              },
-              {
-                "group": "AML / KYT",
-                "pages": [
-                  "operations/aml-kyt/index",
-                  "operations/aml-kyt/chainalysis",
-                  "operations/aml-kyt/elliptic"
-                ]
-              },
-              "operations/account-abstraction-on-evms"
             ]
           }
         ]
