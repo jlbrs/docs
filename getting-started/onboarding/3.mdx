@@ -1,5 +1,120 @@
 ---
-title: "Create your organization and invite employees"
-description: "Create your organization with you as the first user, then invite coworkers to join you."
+title: "Create policies"
+description: "Make sure your internal processes are directly replicated into your Dfns org."
 icon: "3"
 ---
+
+
+> _This feature is available starting from our Basic plan. For more details see_ [_our pricing page_](https://www.dfns.co/pricing)_._&#x20;
+
+Policies are a programmable set of safeguards behind all actions on the Dfns infrastructure. You can configure them to validate actions taken in your organization.&#x20;
+
+For more details, please read the dedicated section: [policy-engine](../../api-docs/policy-engine "mention")
+
+{% hint style="success" %}
+#### Pro tip: initial policies you should create
+
+We recommend setting up three initial Policies in order to lock down your organization:
+
+1. **Permission Assignment:** requiring quorum approval before assigning permissions to any user. This way a rogue admin cannot create fake users with elevated permissions by himself.&#x20;
+2. **Permission Modification:** ensure permission sets cannot be modified without quorum approval, to prevent a rogue actor to elevate existing roles by whitelisting extra actions.&#x20;
+3. **Policy Modification:** a policy preventing to change policies. That's to make sure your established policies stay in place and a quorum approval is required for modifications.&#x20;
+
+Those are actually the first 3 options available when you follow the policy creation flow on the dashboard.&#x20;
+{% endhint %}
+
+
+
+{% hint style="info" %}
+#### Follow this tutorial in a video!&#x20;
+
+Tired of reading? Head to the [end of the page](#new-follow-this-tutorial-in-a-video) to see a video demo of this tutorial!
+{% endhint %}
+
+In this example, we are going to control transactions whitelisting specific recipient addresses, and requiring approvals for others.&#x20;
+
+{% stepper %}
+{% step %}
+### Create a new Policy
+
+On the dashboard, head to Org > Policies (direct link: [https://app.dfns.io/v3/org/policies](https://app.dfns.io/v3/org/policies)) and click <i class="fa-plus">:plus:</i> New Policy.&#x20;
+
+<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FWTxdGWlNQZGesWCDbWju%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2014.12.15.png?alt=media&#x26;token=a7a33e1e-d1d1-4743-99f8-82819bd4469b" alt="" width="375"><figcaption></figcaption></figure>
+{% endstep %}
+
+{% step %}
+### Select the targeted activity
+
+What should the policy apply on?&#x20;
+
+For our example, select "Wallet usage (transfer, transaction, signature)"
+
+<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2F1xU1cUxLJb5RpuUr55SK%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2014.16.05.png?alt=media&#x26;token=0bde9421-1d3a-4f62-86c1-06cede74939b" alt="" width="375"><figcaption></figcaption></figure>
+{% endstep %}
+
+{% step %}
+### Select the criteria to evaluate
+
+In which case should the policy trigger?
+
+For our example, select "Transaction recipient whitelist", then click Configuration and paste the whitelisted destination wallet address. All transactions to this wallet address will go through, while all others will trigger the policy.&#x20;
+
+<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FszDUoPpDz3Scqf2uRL9e%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2014.21.23.png?alt=media&#x26;token=7920133e-e848-4e48-b901-fb8fc4edd93a" alt="" width="375"><figcaption></figcaption></figure>
+{% endstep %}
+
+{% step %}
+### Select the action to take
+
+When a transaction triggers the policy filters, then there are different actions you can take.
+
+In our case, we'll request approval from another employee. Select "Request Approval", and add an "Approver" group, with a quorum of 1, then click "Any Employee" and select the employee who should approve the transaction.&#x20;
+
+{% hint style="info" %}
+The user triggering the action can never approve it himself. Make sure the approvers are not the same users who will issue the requests!
+{% endhint %}
+
+<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FvhFWhd151c6195YbjaG8%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2014.27.40.png?alt=media&#x26;token=6d7ef166-fd2f-4e46-bab9-2b972242d524" alt="" width="375"><figcaption></figcaption></figure>
+
+
+{% endstep %}
+
+{% step %}
+### Finish the configuration
+
+Hit "Continue", give a name to your policy, and keep going until you get to the Summary.&#x20;
+
+Click Save and :key: sign the request with your passkey.&#x20;
+
+<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FXANwIJBr4f4qadFLgzVl%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2014.32.49.png?alt=media&#x26;token=bc1c4374-ea1c-4e13-87f1-036d07eecb3b" alt="" width="375"><figcaption></figcaption></figure>
+{% endstep %}
+{% endstepper %}
+
+{% hint style="success" %}
+Congratulation! you have created a policy requesting approval from your coworker when a transaction is requested, unless it's for transferring to the designated wallet. You can refine these rules and add as many as you need to match your internal policies and safeguards.
+{% endhint %}
+
+From there, your organization is already well configured, you are good to start really using Dfns! Next step is to create wallets and use them!&#x20;
+
+Depending on what you want to do, you can use different routes here:
+
+* Keep using the dashboard, create wallets that you (or your team) will manage manually:&#x20;
+
+{% content-ref url="using-the-dashboard-create-your-first-wallet" %}
+[using-the-dashboard-create-your-first-wallet](using-the-dashboard-create-your-first-wallet)
+{% endcontent-ref %}
+
+* Integrate Dfns into your own application and manage wallets programmatically:&#x20;
+
+{% content-ref url="start-building-login-and-create-a-wallet-via-api" %}
+[start-building-login-and-create-a-wallet-via-api](start-building-login-and-create-a-wallet-via-api)
+{% endcontent-ref %}
+
+* Offer non-custodial wallets to your customers:&#x20;
+
+{% content-ref url="non-custody-1-2-dfns-api-using-a-service-account" %}
+[non-custody-1-2-dfns-api-using-a-service-account](non-custody-1-2-dfns-api-using-a-service-account)
+{% endcontent-ref %}
+
+### :star: New! Follow this tutorial in a video! :star:
+
+{% embed url="https://www.youtube.com/watch?v=IICkUb4ZmL4" %}
