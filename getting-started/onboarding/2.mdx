@@ -6,55 +6,46 @@ description: >-
 icon: "2"
 ---
 
+Permissions are a whitelist of actions that a user will be allowed to take. Please refer to the complete documentation for more details, including the full list of actions: [permissions-overview](../../api-docs/permissions/permissions-overview)
 
-Permissions are a whitelist of actions that a user will be allowed to take. Please refer to the complete documentation for more details, including the full list of actions: [permissions-overview](../../api-docs/permissions/permissions-overview "mention")
+<Steps>
+  <Step title="Create a new Permission">
+    Head to the Permissions page: Settings > Permissions (direct link: [https://app.dfns.io/v3/settings/organization/permissions](https://app.dfns.io/v3/settings/organization/permissions)). Then click "New Permission".
+    
+    <img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FOfqbG98tgwKvBc2YwoYV%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2017.17.51.png?alt=media&token=557b9ce3-fa54-44d2-95a0-0a46b6558118" alt="" width="375" />
+  </Step>
 
-{% stepper %}
-{% step %}
-### Create a new Permission
+  <Step title="Define the authorized actions">
+    Give a name to your permission, in our example: "Approver", a user whose only job will be to validate transactions. Select the Operations as shown below:
+    
+    <img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FiOnh988TfvgQnjntYB8c%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2018.03.21.png?alt=media&token=7915cbc1-d122-49f0-aa5a-580d5efc9d8a" alt="" width="375" />
+    
+    <Info>
+      Some actions here are not directly related to approving transactions, but are required to use the dashboard.
+    </Info>
 
-Head to the Permissions page : Settings > Permissions (direct link: [https://app.dfns.io/v3/settings/organization/permissions](https://app.dfns.io/v3/settings/organization/permissions)). Then click "New Permission".&#x20;
+    Then create and 🔑 sign the operation with your passkey.
+    
+    <Check>
+      You have successfully created a new permission! It's now usable with any user (employees, service accounts, etc).
+    </Check>
+  </Step>
 
-<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FOfqbG98tgwKvBc2YwoYV%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2017.17.51.png?alt=media&#x26;token=557b9ce3-fa54-44d2-95a0-0a46b6558118" alt="" width="375"><figcaption></figcaption></figure>
-{% endstep %}
+  <Step title="Assign the permission to users">
+    Head back to the users list Org > Users (direct link: [https://app.dfns.io/v3/org/users](https://app.dfns.io/v3/org/users)) and select the user you need to assign the permission to. Click "Add Permission" and select your newly created permission. Confirm and 🔑 sign the operation with your passkey.
+    
+    <img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2F1vGxPItKPtssSq47WTh1%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2018.07.13.png?alt=media&token=355bf3a7-cb77-4e60-8f56-00d89be5e389" alt="" />
+    
+    <Check>
+      Your user is now able to approve transactions!
+    </Check>
+  </Step>
+</Steps>
 
-{% step %}
-### Define the authorized actions
+<Check>
+  #### You can now create as many Permissions as you need to enforce the least privilege principle in your organization.
+</Check>
 
-Give a name to your permission, in our example: "Approver", a user whose only job will be to validate transactions. Select the Operations as shown below:&#x20;
+You can now head to the next step:
 
-<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FiOnh988TfvgQnjntYB8c%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2018.03.21.png?alt=media&#x26;token=7915cbc1-d122-49f0-aa5a-580d5efc9d8a" alt="" width="375"><figcaption></figcaption></figure>
-
-{% hint style="info" %}
-Some actions here are not directly related to approving transactions, but are required to use the dashboard.
-{% endhint %}
-
-Then create and :key: sign the operation with your passkey.&#x20;
-
-{% hint style="success" %}
-You have successfully created a new permission! It's now usable with any user (employees, service accounts, etc).
-{% endhint %}
-{% endstep %}
-
-{% step %}
-### Assign the permission to users
-
-Head back to the users list Org > Users (direct link: [https://app.dfns.io/v3/org/users](https://app.dfns.io/v3/org/users)) and select the user you need to assign the permission to. Click "Add Permission" and select your newly created permission. Confirm and :key: sign the operation with your passkey.&#x20;
-
-<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2F1vGxPItKPtssSq47WTh1%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-15%20a%CC%80%2018.07.13.png?alt=media&#x26;token=355bf3a7-cb77-4e60-8f56-00d89be5e389" alt=""><figcaption></figcaption></figure>
-
-{% hint style="success" %}
-Your user is now able to approve transactions!&#x20;
-{% endhint %}
-{% endstep %}
-{% endstepper %}
-
-{% hint style="success" %}
-#### You can now create as many Permissions as you need to enforce the least privilege principle in your organization.&#x20;
-{% endhint %}
-
-You can now head to the next step:&#x20;
-
-{% content-ref url="create-policies" %}
-[create-policies](create-policies)
-{% endcontent-ref %}
+[Create Policies](./create-policies)

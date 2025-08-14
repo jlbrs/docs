@@ -4,41 +4,33 @@ description: "Building your own app? Learn how to consume the Dfns APIs using yo
 icon: "5"
 ---
 
+There are many ways to authenticate to the Dfns API, you can find all the details on [authentication](../../advanced-topics/authentication). In this example we will simply follow the normal [login](../../api-docs/authentication/login) flow.
 
-There are many ways to authenticate to the Dfns API, you can find all the details on [authentication](../../advanced-topics/authentication "mention"). In this example we will simply follow the normal [login](../../api-docs/authentication/login) flow.&#x20;
+This flow requires using your credentials to sign challenges. For convenience we will use a web front-end to do this.
 
-This flow requires using your credentials to sign challenges. For convenience we will use a web front-end to do this.&#x20;
+<Info>
+  Note: the pre-built example in Typescript is available on our [Github](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/auth-direct)
+</Info>
 
-{% hint style="info" %}
-Note: the pre-built example in Typescript is available on our [Github](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/auth-direct)
-{% endhint %}
-
-{% stepper %}
-{% step %}
-### Setup the environment
-
-For this example, we'll use a basic React app. Let's first prepare the environment: run&#x20;
-
-```sh
-npx create-react-app dfns-direct-login
-```
-
-and answer the few questions in order to get set. You can then run the server with
-
-```sh
-npm start
-```
-
-Then copy-paste the base page for starter:&#x20;
-
-{% tabs %}
-{% tab title="src/App.js" %}
-```javascript
-import "./App.css";
+<Steps>
+  <Step title="Setup the environment">
+    For this example, we'll use a basic React app. Let's first prepare the environment: run
+    <CodeBlock lang="sh">
+      npx create-react-app dfns-direct-login
+    </CodeBlock>
+    and answer the few questions in order to get set. You can then run the server with
+    <CodeBlock lang="sh">
+      npm start
+    </CodeBlock>
+    Then copy-paste the base page for starter:
+    <Tabs>
+      <Tab title="src/App.js">
+        <CodeBlock lang="javascript">
+          {`import "./App.css";
 import { useRef, useState } from "react";
 
 const baseURL = "https://api.dfns.io"; // .io for prod, .ninja for staging
-const credentialName = "DemoLogin"; 
+const credentialName = "DemoLogin";
 const DEFAULT_ORG_ID = "or-*****-*****-****************"; // your org id here for convenience
 const DEFAULT_EMAIL = "*******@mycompany.com"; // your email here for convenience
 
@@ -52,7 +44,6 @@ function App() {
     //  .then(setRegistrationState)
     //  .catch(setRegistrationState)
   };
-
   const orgIdRef = useRef(DEFAULT_ORG_ID);
   const emailRef = useRef(DEFAULT_EMAIL);
   const [loginState, setLoginState] = useState({});
@@ -64,13 +55,12 @@ function App() {
     //  .then(setLoginState)
     //  .catch(setLoginState)
   };
-
   return (
     <div className="App">
       <h1>User login demo app</h1>
       <h2>1. Credential registration</h2>
       <div>
-        <p>If not done already, you need to register on this website. Get a Credential Code from the <a rel="noreferrer" href="https://app.dfns.io/v3/settings/authentication/credentials" target="_blank">dashboard</a> (Settings &gt; Authentication &gt; Credentials)</p>
+        <p>If not done already, you need to register on this website. Get a Credential Code from the <a rel="noreferrer" href="https://app.dfns.io/v3/settings/authentication/credentials" target="_blank">dashboard</a> (Settings > Authentication > Credentials)</p>
         <p><label>Enter your Credential Code: <input type="text" ref={codeRef}></input></label></p>
         <p><button onClick={handleRegister}>Register</button></p>
         <p>Current state: <small><code>{JSON.stringify(registrationState, null, 2)}</code></small></p>
@@ -109,8 +99,8 @@ function base64url_encode(buffer) {
   return btoa(
     Array.from(new Uint8Array(buffer), (b) => String.fromCharCode(b)).join("")
   )
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
+    .replace(/\\+/g, "-")
+    .replace(/\\//g, "_")
     .replace(/=+$/, "");
 }
 
@@ -118,50 +108,40 @@ function string_to_ArrayBuffer(value) {
   var enc = new TextEncoder();
   return enc.encode(value).buffer;
 }
+`}
+        </CodeBlock>
+      </Tab>
+    </Tabs>
+  </Step>
 
-```
-{% endtab %}
-{% endtabs %}
-{% endstep %}
-
-{% step %}
-### Registering a new credential
-
-WebAuthn credentials, that Dfns uses for logging you in and signing all your requests, are platform-specific. In particular, you cannot reuse the dashboard credentials for another front-end. In this case we are using localhost as a front-end, so we need to create a dedicated credentials for it.&#x20;
-
-There is an easy way to enable this use case from the dashboard: head to your credentials and click "Get Cred. Code". This code will then be usage to register a new credentials from a new front-end. That could be a new device, but in our case it's just a new URL. This code is valid for 60 seconds only so you will have to request it only when you are ready.&#x20;
-
-We have already prepared the function for you to fill-in:&#x20;
-
-```javascript
-const handleRegister = () => {
+  <Step title="Registering a new credential">
+    WebAuthn credentials, that Dfns uses for logging you in and signing all your requests, are platform-specific. In particular, you cannot reuse the dashboard credentials for another front-end. In this case we are using localhost as a front-end, so we need to create a dedicated credentials for it.
+    There is an easy way to enable this use case from the dashboard: head to your credentials and click "Get Cred. Code". This code will then be usage to register a new credentials from a new front-end. That could be a new device, but in our case it's just a new URL. This code is valid for 60 seconds only so you will have to request it only when you are ready.
+    We have already prepared the function for you to fill-in:
+    <CodeBlock lang="javascript">
+      {`const handleRegister = () => {
     const code = codeRef.current.value;
     /* HERE GOES THE CODE FOR REGISTERING A CREDENTIAL */
     // uncomment when completed
     //  .then(setRegistrationState)
     //  .catch(setRegistrationState)
-};
-```
-
-As explained in [#create-credential-with-code-flow](../../../advanced-topics/authentication/credentials#create-credential-with-code-flow "mention"), in order to register the credentials we need to&#x20;
-
-1. Get a challenge code using  `POST /auth/credentials/code/init`
-
-```javascript
-fetch(`${baseURL}/auth/credentials/code/init`, {
+};`}
+    </CodeBlock>
+    As explained in [#create-credential-with-code-flow](../../../advanced-topics/authentication/credentials#create-credential-with-code-flow), in order to register the credentials we need to
+    1. Get a challenge code using `POST /auth/credentials/code/init`
+    <CodeBlock lang="javascript">
+      {`fetch(\`\${baseURL}/auth/credentials/code/init\`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     code: registrationCode,
     credentialKind: "Fido2",
   }),
-}).then((response) => response.json())
-```
-
-2. Create a credentials from our browser based on the challenge we received. This steps requires some adaptation as Dfns send Base64URL-encoded strings when the browsers expect ArrayBuffers, hence the length of this code:&#x20;
-
-```javascript
-.then((dfnsChallenge) => {
+}).then((response) => response.json())`}
+    </CodeBlock>
+    2. Create a credentials from our browser based on the challenge we received. This steps requires some adaptation as Dfns send Base64URL-encoded strings when the browsers expect ArrayBuffers, hence the length of this code:
+    <CodeBlock lang="javascript">
+      {`.then((dfnsChallenge) => {
   return navigator.credentials.create({
     publicKey: {
       challenge: string_to_ArrayBuffer(dfnsChallenge.challenge),
@@ -191,65 +171,51 @@ fetch(`${baseURL}/auth/credentials/code/init`, {
       },
     };
   });
-})
-```
-
-3. Register those new credentials using `POST /auth/credentials/code/verify`
-
-```javascript
-.then((signedChallenge) => fetch(`${baseURL}/auth/credentials/code/verify`, {
+})`}
+    </CodeBlock>
+    3. Register those new credentials using `POST /auth/credentials/code/verify`
+    <CodeBlock lang="javascript">
+      {`.then((signedChallenge) => fetch(\`\${baseURL}/auth/credentials/code/verify\`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(signedChallenge)
-}).then((response) => response.json())
-```
+}).then((response) => response.json())`}
+    </CodeBlock>
+    Run this code and your browser will ask you to create a new passkey for your localhost website. You only need to do this once, as later your browser will offer to use the 🔑 passkey automatically.
+    Now you can also check on the dashboard in Settings > Credentials, your new credential (default name is "DemoLogin") has been registered!
+  </Step>
 
-Run this code and your browser will ask you to create a new passkey for your localhost website. You only need to do this once, as later your browser will offer to use the :key: passkey automatically.&#x20;
-
-Now you can also check on the dashboard in Settings > Credentials, your new credential (default name is "DemoLogin") has been registered!
-{% endstep %}
-
-{% step %}
-### Login using your :key: Passkey&#x20;
-
-In a very similar way, as explained in [login](../../api-docs/authentication/login "mention"), you need to request a Bearer token for authenticating all your API requests.&#x20;
-
-The placeholder is there for you already:
-
-```javascript
-const handleLogin = () => {
+  <Step title="Login using your 🔑 Passkey">
+    In a very similar way, as explained in [login](../../api-docs/authentication/login), you need to request a Bearer token for authenticating all your API requests.
+    The placeholder is there for you already:
+    <CodeBlock lang="javascript">
+      {`const handleLogin = () => {
   const orgId = orgIdRef.current.value;
   const email = emailRef.current.value;
   /* HERE GOES THE CODE FOR LOGIN */
   // uncomment when completed
   //  .then(setLoginState)
   //  .catch(setLoginState)
-};
-```
-
-For this we need to:&#x20;
-
-1. Get a "User Login Challenge" using  `POST /auth/login/init`
-
-```javascript
-fetch(`${baseURL}/auth/login/init`, {
+};`}
+    </CodeBlock>
+    For this we need to:
+    1. Get a "User Login Challenge" using `POST /auth/login/init`
+    <CodeBlock lang="javascript">
+      {`fetch(\`\${baseURL}/auth/login/init\`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     orgId: orgId,
     username: email,
   })
-}).then((response) => response.json())
-```
-
-2. Get the browser to :key: sign the challenge to prove identity. This steps requires some adaptation as Dfns send Base64URL-encoded strings when the browsers expect ArrayBuffers, hence the length of this code. :bulb: We recommend creating a function for this, as you will need to reuse it for all your API requests later. &#x20;
-
-```javascript
-.then(signChallenge)
-```
-
-```javascript
-function signChallenge(dfnsChallenge) {
+}).then((response) => response.json())`}
+    </CodeBlock>
+    2. Get the browser to 🔑 sign the challenge to prove identity. This steps requires some adaptation as Dfns send Base64URL-encoded strings when the browsers expect ArrayBuffers, hence the length of this code. 💡 We recommend creating a function for this, as you will need to reuse it for all your API requests later.
+    <CodeBlock lang="javascript">
+      .then(signChallenge)
+    </CodeBlock>
+    <CodeBlock lang="javascript">
+      {`function signChallenge(dfnsChallenge) {
   return navigator.credentials.get({
     publicKey: {
       challenge: string_to_ArrayBuffer(dfnsChallenge.challenge),
@@ -276,132 +242,105 @@ function signChallenge(dfnsChallenge) {
       },
     };
   });
-}
-```
-
-3. Verify the signature and get a Bearer token using `POST /auth/login`
-
-```javascript
-.then((signedChallenge) => fetch(`${baseURL}/auth/login`, {
+}`}
+    </CodeBlock>
+    3. Verify the signature and get a Bearer token using `POST /auth/login`
+    <CodeBlock lang="javascript">
+      {`.then((signedChallenge) => fetch(\`\${baseURL}/auth/login\`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(signedChallenge),
-  }).then((response) => response.json())
-```
+  }).then((response) => response.json())`}
+    </CodeBlock>
+    Run this code and your browser will ask you to sign in with the passkey created earlier for your localhost website. You then get a token! Hooray!
+    Now you can use the Bearer token in a `Authorization` header in all your requests.
+  </Step>
 
-Run this code and your browser will ask you to sign in with the passkey created earlier for your localhost website. You then get a token! Hooray!&#x20;
-
-Now you can use the Bearer token in a `Authorization` header in all your requests.&#x20;
-{% endstep %}
-
-{% step %}
-### First API request: read the wallet list
-
-Use your Bearer token to list the wallets:&#x20;
-
-{% tabs %}
-{% tab title="JavaScript" %}
-```javascript
-fetch(`${baseURL}/wallets`, {
+  <Step title="First API request: read the wallet list">
+    Use your Bearer token to list the wallets:
+    <Tabs>
+      <Tab title="JavaScript">
+        <CodeBlock lang="javascript">
+          {`fetch(\`\${baseURL}/wallets\`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`
+    Authorization: \`Bearer \${token}\`
   }
-}).then((response) => response.json());
-```
-{% endtab %}
+}).then((response) => response.json());`}
+        </CodeBlock>
+      </Tab>
+      <Tab title="Shell">
+        <CodeBlock lang="sh">
+          {`curl -H "Authorization: Bearer <token>" -H "Content-Type: application/json" https://api.dfns.io/wallets`}
+        </CodeBlock>
+      </Tab>
+    </Tabs>
+    <Check>
+      Congratulations! you are already able to query data from your account after login in!
+    </Check>
+  </Step>
 
-{% tab title="Shell" %}
-```sh
-curl -H "Authorization: Bearer <token>" -H "Content-Type: application/json" https://api.dfns.io/wallets
-```
-{% endtab %}
-{% endtabs %}
-
-{% hint style="success" %}
-Congratulations! you are already able to query data from your account after login in!
-{% endhint %}
-{% endstep %}
-
-{% step %}
-### User Actions: signing requests
-
-For any action that's modifying things in your account (e.g.: creating a wallet), Dfns asks for a signature, which is done by using your :key: passkey as earlier with the login.&#x20;
-
-As before this process requires multiple steps:&#x20;
-
-1. Get a "User Action Signature Challenge" from `POST /auth/action/init`. See details on [inituseractionsigning](../../api-docs/authentication/user-action-signing/inituseractionsigning "mention").
-
-```javascript
-const userActionPayload = { network: "Ethereum" };
+  <Step title="User Actions: signing requests">
+    For any action that's modifying things in your account (e.g.: creating a wallet), Dfns asks for a signature, which is done by using your 🔑 passkey as earlier with the login. As before this process requires multiple steps:
+    1. Get a "User Action Signature Challenge" from `POST /auth/action/init`. See details on [inituseractionsigning](../../api-docs/authentication/user-action-signing/inituseractionsigning).
+    <CodeBlock lang="javascript">
+      {`const userActionPayload = { network: "Ethereum" };
 const userActionHttpMethod = "POST";
-const userActionHttpPath = "/wallets";
-```
-
-```javascript
-fetch(`${baseURL}/auth/action/init`, {
+const userActionHttpPath = "/wallets";`}
+    </CodeBlock>
+    <CodeBlock lang="javascript">
+      {`fetch(\`\${baseURL}/auth/action/init\`, {
   method: "POST",
   headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: \`Bearer \${token}\`,
   },
   body: JSON.stringify({
       userActionPayload: JSON.stringify(userActionPayload),
       userActionHttpMethod,
       userActionHttpPath,
   }),
-}).then((response) => response.json())
-```
-
-2. Sign the challenge
-
-For this we can reuse the previously-created function:&#x20;
-
-```javascript
-.then(signChallenge)
-```
-
-3. Return to the Dfns system and request a "User Action Token" using `POST /auth/action`  and get the the token!
-
-```javascript
-.then((signedChallenge) => fetch(`${baseURL}/auth/action`, {
+}).then((response) => response.json())`}
+    </CodeBlock>
+    2. Sign the challenge
+    For this we can reuse the previously-created function:
+    <CodeBlock lang="javascript">
+      .then(signChallenge)
+    </CodeBlock>
+    3. Return to the Dfns system and request a "User Action Token" using `POST /auth/action` and get the the token!
+    <CodeBlock lang="javascript">
+      {`.then((signedChallenge) => fetch(\`\${baseURL}/auth/action\`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: \`Bearer \${token}\`,
   },
   body: JSON.stringify(signedChallenge),
 }))
 .then((response) => response.json())
-.then((response) => response.userAction)
-```
-
-Awesome! you got a token! note that it is only usable once so you will have to request a new one (and sign that request) every time you need to do an action on your account.&#x20;
-
-4. Include the new token on top of your login token in your requests
-
-```javascript
-.then((userAction) => fetch(`${baseURL}${userActionHttpPath}`, {
+.then((response) => response.userAction)`}
+    </CodeBlock>
+    Awesome! you got a token! note that it is only usable once so you will have to request a new one (and sign that request) every time you need to do an action on your account.
+    4. Include the new token on top of your login token in your requests
+    <CodeBlock lang="javascript">
+      {`.then((userAction) => fetch(\`\${baseURL}\${userActionHttpPath}\`, {
   method: userActionHttpMethod,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: \`Bearer \${token}\`,
     "X-DFNS-USERACTION": userAction,
   },
   body: JSON.stringify(userActionPayload)
 }))
-.then((response) => response.json());
-```
-{% endstep %}
-{% endstepper %}
+.then((response) => response.json());`}
+    </CodeBlock>
+  </Step>
+</Steps>
 
-{% hint style="success" %}
-Congratulations! You can now make server-side API calls using your service account. Now start building your app using [our Typescript SDK](https://docs.dfns.co/dfns-docs/getting-started/typescript-sdk) and specifically [the Service Account sample app](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account).
-{% endhint %}
+<Check>
+  Congratulations! You can now make server-side API calls using your service account. Now start building your app using [our Typescript SDK](https://docs.dfns.co/dfns-docs/getting-started/typescript-sdk) and specifically [the Service Account sample app](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account).
+</Check>
 
-That was a key step into integrating our platform. You can head back to the previous page:&#x20;
-
-{% content-ref url="" %}
-[]()
-{% endcontent-ref %}
+That was a key step into integrating our platform. You can head back to the previous page:
+[Getting Started](./)

@@ -4,64 +4,43 @@ description: "Building your own app? Learn how to consume the Dfns APIs using a 
 icon: "6"
 ---
 
-Once you have registered in your Dfns org and invited your Users, the next step is to create a Service Account, which you can think of as a machine user.
+Once you have registered in your Dfns org and invited your Users, the next step is to create a Service Account, which you can think of as a machine user. For more details on what service accounts are and when to use them, please refer to [service-account-management](../../api-docs/authentication/service-account-management).
 
-For more details on what service accounts are and when to use them, please refer to [service-account-management](../../api-docs/authentication/service-account-management "mention").&#x20;
+<Steps>
+  <Step title="Prepare a key pair">
+    Your service account will need its own key pair to sign its requests. The easiest way to create a Public / Private Key pair is from the command line. You can use the commands shown below or see our [documentation on key generation](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair):
+    ```sh
+# Generate RSA Private Key
+openssl genrsa -out rsa2048.pem 2048
+# Generate the Public Key
+openssl pkey -in rsa2048.pem -pubout -out rsa2048.public.pem
+      ```
+  </Step>
 
-{% stepper %}
-{% step %}
-### Prepare a key pair
+  <Step title="Create the Service Account">
+    Navigate to Settings > Developers > Service Accounts and click "New Service Account". Name the Service Account, copy in the public key (including begin/end lines like `-----BEGIN PUBLIC KEY-----`), click “Create” and 🔑 sign the action with your passkey.
+    <img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FCfESlklcDcV1Ljkarnks%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2015.12.47.png?alt=media&token=cd6da4d5-5a33-48c1-a17b-8c5f7b64c303" alt="" width="375" />
+  </Step>
 
-Your service account will need its own key pair to sign its requests.
+  <Step title="Store your Service Account authentication token">
+    The last page shows the masked Service Account JWT. Copy it to a secure location before leaving the page.
+    <Warning>
+      The token will not be shown later!
+    </Warning>
+    <img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FqVosPbnJnYgQ66qDLjxp%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2015.11.04.png?alt=media&token=9f419372-3283-4290-88ae-a308bf244850" alt="" width="375" />
+  </Step>
 
-The easiest way to create a Public / Private Key pair is from the command line. You can use the commands shown below or see our [documentation on key generation](https://docs.dfns.co/dfns-docs/advanced-topics/authentication/credentials/generate-a-key-pair):
+  <Step title="Use the Service Account">
+    You now have:
+    * A Service Account Token: use it for [authentication](../../advanced-topics/authentication/authentication-authorization) in all your API requests.
+    * A Private/Public key pair: use it to [sign your action](../../api-docs/authentication/user-action-signing) requests.
+  </Step>
+</Steps>
 
-* ```sh
-  # Generate RSA Private Key
-  openssl genrsa -out rsa2048.pem 2048
-  # Generate the Public Key
-  openssl pkey -in rsa2048.pem -pubout -out rsa2048.public.pem
-  ```
-{% endstep %}
+<Check>
+  Congratulations! You can now make server-side API calls using your service account. Now start building your app using [our Typescript SDK](https://docs.dfns.co/dfns-docs/getting-started/typescript-sdk) and specifically [the Service Account sample app](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account).
+</Check>
 
-{% step %}
-### Create the Service Account
+This service account will next be used to log your customers (end-users) in and let them create their own wallets on your organization.
 
-Navigate to Settings > Developers > Service Accounts and click "New Service Account".
-
-Name the Service Account, copy in the public key (including begin/end lines like `-----BEGIN PUBLIC KEY-----`), click “Create” and :key: sign the action with your passkey.&#x20;
-
-<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FCfESlklcDcV1Ljkarnks%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2015.12.47.png?alt=media&#x26;token=cd6da4d5-5a33-48c1-a17b-8c5f7b64c303" alt="" width="375"><figcaption></figcaption></figure>
-{% endstep %}
-
-{% step %}
-### Store your Service Account authentication token
-
-The last page shows the masked Service Account JWT. Copy it to a secure location before leaving the page.
-
-{% hint style="warning" %}
-The token will not be shown later!
-{% endhint %}
-
-<figure><img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FqVosPbnJnYgQ66qDLjxp%2FCapture%20d%E2%80%99e%CC%81cran%202025-07-16%20a%CC%80%2015.11.04.png?alt=media&#x26;token=9f419372-3283-4290-88ae-a308bf244850" alt="" width="375"><figcaption></figcaption></figure>
-{% endstep %}
-
-{% step %}
-### Use the Service Account
-
-You now have:&#x20;
-
-* A Service Account Token: use it for [authentication](../../advanced-topics/authentication/authentication-authorization) in all your API requests.
-* A Private/Public key pair: use it to [sign your action](../../api-docs/authentication/user-action-signing) requests.&#x20;
-{% endstep %}
-{% endstepper %}
-
-{% hint style="success" %}
-Congratulations! You can now make server-side API calls using your service account. Now start building your app using [our Typescript SDK](https://docs.dfns.co/dfns-docs/getting-started/typescript-sdk) and specifically [the Service Account sample app](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/service-account).
-{% endhint %}
-
-This service account will next be used to log your customers (end-users) in and let them create their own wallets on your organization.&#x20;
-
-{% content-ref url="non-custody-2-2-customer-login-and-delegated-wallets" %}
-[non-custody-2-2-customer-login-and-delegated-wallets](non-custody-2-2-customer-login-and-delegated-wallets)
-{% endcontent-ref %}
+[Non-custody 2/2: customer login and delegated wallets](./non-custody-2-2-customer-login-and-delegated-wallets)

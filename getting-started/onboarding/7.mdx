@@ -4,76 +4,54 @@ description: "Give your users ownership and power to use their wallets directly.
 icon: "7"
 ---
 
-For this example we will use Dfns [typescript SDK](https://dfns.github.io/dfns-sdk-ts/index.html) to register end users (your customers) to the Dfns API and let them own their wallets and use it directly.&#x20;
+[cite_start]For this example we will use Dfns [typescript SDK](https://dfns.github.io/dfns-sdk-ts/index.html) to register end users (your customers) to the Dfns API and let them own their wallets and use it directly. [cite: 62] [cite_start]In this scenario, the wallets live in your organization but belong to your end users. [cite: 63] [cite_start]Only they can do transactions and use the private key to sign messages. [cite: 64] All actions require to be signed by their passkey. [cite_start]The SDK greatly simplifies that process. [cite: 65]
 
-In this scenario, the wallets live in your organization but belong to your end users. Only they can do transactions and use the private key to sign messages. All actions require to be signed by their passkey. The SDK greatly simplifies that process.&#x20;
-
-{% stepper %}
-{% step %}
-### Clone the example
-
-This example contains all the functions you need to get started with login and wallets delegation.&#x20;
-
-```sh
-git clone https://github.com/dfns/dfns-sdk-ts.git --no-checkout
+<Steps>
+  <Step title="Clone the example">
+    [cite_start]This example contains all the functions you need to get started with login and wallets delegation. [cite: 66]
+    <CodeBlock lang="sh">
+      {`git clone https://github.com/dfns/dfns-sdk-ts.git --no-checkout
 cd dfns-sdk-ts
 git sparse-checkout set examples/sdk/nextjs-delegated
 git checkout m
-cd examples/sdk/nextjs-delegated/
-```
+cd examples/sdk/nextjs-delegated/`}
+    </CodeBlock>
+    Edit next.config.ts to remove the line:
+    <CodeBlock title="line to remove from next.config.ts:" lang="javascript">
+      transpilePackages: ['@dfns/sdk-browser'],
+    </CodeBlock>
+    [cite_start]Update the hardcoded dependencies and install the project: [cite: 67]
+    <CodeBlock lang="sh">
+      npm i && npm remove @dfns/sdk @dfns/sdk-browser @dfns/sdk-keysigner && npm i @dfns/sdk @dfns/sdk-browser @dfns/sdk-keysigner
+    </CodeBlock>
+  </Step>
 
-Edit next.config.ts to remove the line:
+  <Step title="Prepare the environment">
+    <Info>
+      [cite_start]You can follow the README instructions. [cite: 68] [cite_start]For convenience the steps are gathered here. [cite: 68]
+    </Info>
+    Copy `.env.example` to a new file `.env.local` and set the following values,
+    * `DFNS_API_URL`: `https://api.dfns.io` or `.ninja` depending on the environment you are using
+    * `DFNS_ORG_ID`: your Organization ID (found in the Dashboard: click you email then "Account")
+    * [cite_start]`DFNS_CRED_ID`: the `Signing Key Cred ID` created when you registered the service account. [cite: 69] [cite_start]On the dashboard head to Settings > Service Accounts to copy it. [cite: 70]
+    * `DFNS_PRIVATE_KEY`: the private key from the step 'generate a keypair', the newlines should not be a problem
+    * `DFNS_AUTH_TOKEN`: the `authToken` from above, the value should start with `eyJ0...`
+    * [cite_start]`NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID`: the passkey relying party id, aka, the domain where your app lives (Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp)). [cite: 71] [cite_start]We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). [cite: 72] [cite_start]During development on localhost, you can set it to `localhost`. [cite: 73]
+    * [cite_start]`NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME`: A string representing the name of the relying party, aka, your company name (e.g. "Acme"). [cite: 74] [cite_start]The user will be presented with that name when creating or using a passkey. [cite: 75]
+    Run the development server
+    <CodeBlock lang="sh">
+      npm run dev
+    </CodeBlock>
+    And finally open [http://localhost:3000](http://localhost:3000/)
+  </Step>
 
-{% code title="line to remove from next.config.ts: " %}
-```javascript
-  transpilePackages: ['@dfns/sdk-browser'],
-```
-{% endcode %}
-
-Update the hardcoded dependencies and install the project:&#x20;
-
-```sh
-npm i && npm remove @dfns/sdk @dfns/sdk-browser @dfns/sdk-keysigner && npm i @dfns/sdk @dfns/sdk-browser @dfns/sdk-keysigner
-```
-{% endstep %}
-
-{% step %}
-### Prepare the environment
-
-{% hint style="info" %}
-You can follow the README instructions. For convenience the steps are gathered here.&#x20;
-{% endhint %}
-
-Copy `.env.example` to a new file `.env.local` and set the following values,
-
-* `DFNS_API_URL`:  `https://api.dfns.io`  or `.ninja`  depending on the environment you are using
-* `DFNS_ORG_ID`: your Organization ID (found in the Dashboard: click you email then "Account")
-* `DFNS_CRED_ID`: the `Signing Key Cred ID` created when you registered the service account. On the dashboard head to Settings > Service Accounts to copy it.&#x20;
-* `DFNS_PRIVATE_KEY`: the private key from the step 'generate a keypair', the newlines should not be a problem
-* `DFNS_AUTH_TOKEN`: the `authToken` from above, the value should start with `eyJ0...`
-* `NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_ID`: the passkey relying party id, aka, the domain where your app lives (Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredentialCreationOptions#rp)). We advise using the root domain (eg. `acme.com`, not `app.acme.com`) for more passkey flexibility (so that passkey is re-usable on subdomains). During development on localhost, you can set it to `localhost`.
-* `NEXT_PUBLIC_PASSKEYS_RELYING_PARTY_NAME`: A string representing the name of the relying party, aka, your company name (e.g. "Acme"). The user will be presented with that name when creating or using a passkey.
-
-Run the development server
-
-```sh
-npm run dev
-```
-
-And finally open [http://localhost:3000](http://localhost:3000/)&#x20;
-{% endstep %}
-
-{% step %}
-### Service account action signing
-
-As any user on Dfns, your service account needs to sign its actions. The file `app/api/clients.ts` uses the Dfns SDK to register the service account private key into a signer, as well as a API client that will take care of gathering the right information and requesting signing when necessary.&#x20;
-
-{% code title="[Backend] app/api/clients.ts" %}
-```typescript
-export const apiClient = (authToken?: string) => {
+  <Step title="Service account action signing">
+    [cite_start]As any user on Dfns, your service account needs to sign its actions. [cite: 76] [cite_start]The file `app/api/clients.ts` uses the Dfns SDK to register the service account private key into a signer, as well as a API client that will take care of gathering the right information and requesting signing when necessary. [cite: 77]
+    <CodeBlock title="[Backend] app/api/clients.ts" lang="typescript">
+      {`export const apiClient = (authToken?: string) => {
   const signer = new AsymmetricKeySigner({
     credId: process.env.DFNS_CRED_ID!,
-    privateKey: process.env.DFNS_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+    privateKey: process.env.DFNS_PRIVATE_KEY!.replace(/\\\\n/g, '\\n'),
   })
 
   return new DfnsApiClient({
@@ -82,124 +60,77 @@ export const apiClient = (authToken?: string) => {
     baseUrl: process.env.DFNS_API_URL!,
     signer,
   })
-}
-```
-{% endcode %}
+}`}
+    </CodeBlock>
+  </Step>
 
-
-{% endstep %}
-
-{% step %}
-### Delegated registration
-
-The service account can use [delegatedregistration](../../api-docs/authentication/delegated-auth/delegatedregistration "mention") to register an end user (a.k.a. one of your customers) to Dfns. Registering this user to your platform and validating his login is out of scope here, we just consider that you have properly authenticated your user before creating his Dfns account. The flow is similar to users registration:&#x20;
-
-1. Requesting a challenge from Dfns. Note that the username comes from the frontend in this example, but it doesn't have to, you could be providing it directly from your backend.&#x20;
-
-{% code title="[Backend] app/api/register/init/route.ts" %}
-```typescript
-  const client = apiClient()
-  const challenge = await client.auth.createDelegatedRegistrationChallenge({
-    body: { kind: 'EndUser', email: username },
-  })
-```
-{% endcode %}
-
-2. Asking the customer to create a new credentials and sign the challenge with it. This is done via the web front end:&#x20;
-
-{% code title="[Frontend] app/register/page.tsx" %}
-```typescript
-import { WebAuthnSigner } from '@dfns/sdk-browser'
+  <Step title="Delegated registration">
+    [cite_start]The service account can use [delegatedregistration](../../api-docs/authentication/delegated-auth/delegatedregistration) to register an end user (a.k.a. one of your customers) to Dfns. [cite: 78] [cite_start]Registering this user to your platform and validating his login is out of scope here, we just consider that you have properly authenticated your user before creating his Dfns account. [cite: 79] The flow is similar to users registration:
+    1. [cite_start]Requesting a challenge from Dfns. [cite: 80] [cite_start]Note that the username comes from the frontend in this example, but it doesn't have to, you could be providing it directly from your backend. [cite: 81]
+    <CodeBlock title="[Backend] app/api/register/init/route.ts" lang="typescript">
+      {`const client = apiClient()
+const challenge = await client.auth.createDelegatedRegistrationChallenge({
+  body: { kind: 'EndUser', email: username },
+})`}
+    </CodeBlock>
+    2. [cite_start]Asking the customer to create a new credentials and sign the challenge with it. [cite: 82] This is done via the web front end:
+    <CodeBlock title="[Frontend] app/register/page.tsx" lang="typescript">
+      {`import { WebAuthnSigner } from '@dfns/sdk-browser'
 [...]
-const attestation = await webauthn.create(challenge)
-```
-{% endcode %}
+const attestation = await webauthn.create(challenge)`}
+    </CodeBlock>
+    3. Registering the end user credentials
+    [cite_start]Note that you can directly create a delegated wallet directly during registration. [cite: 83]
+    <CodeBlock title="[Backend] app/api/register/complete/route.ts" lang="typescript">
+      {`const client = apiClient(temporaryAuthenticationToken)
+const registration = await client.auth.registerEndUser({
+  body: {
+    ...signedChallenge,
+    wallets: [{ network: 'EthereumSepolia' }],
+  },
+})`}
+    </CodeBlock>
+  </Step>
 
-3. Registering the end user credentials
+  <Step title="Delegated login">
+    [cite_start]In a similar flow, once you have authenticated your user on your platform, you can log him into Dfns in order to let him use his wallet. [cite: 84]
+    <CodeBlock title="[Backend] app/api/login/route.ts" lang="typescript">
+      {`const client = apiClient()
+const login = await client.auth.delegatedLogin({ body: { username } })`}
+    </CodeBlock>
+    [cite_start]You will get a token back from this call, that you can later use in all for all delegated actions. [cite: 85]
+    <Info>
+      [cite_start]The user token will allow the user to call the Dfns API directly. [cite: 86] [cite_start]Make sure you only use it from your backend and don't share it with the frontend to make sure no one can obtain that token. [cite: 87] [cite_start]That's particularly important if you need to control your users actions. [cite: 88]
+    </Info>
+  </Step>
 
-Note that you can directly create a delegated wallet directly during registration.&#x20;
-
-{% code title="[Backend] app/api/register/complete/route.ts" %}
-```typescript
-  const client = apiClient(temporaryAuthenticationToken)
-  const registration = await client.auth.registerEndUser({
-    body: {
-      ...signedChallenge,
-      wallets: [{ network: 'EthereumSepolia' }],
-    },
-  })
-```
-{% endcode %}
-
-
-{% endstep %}
-
-{% step %}
-### Delegated login
-
-In a similar flow, once you have authenticated your user on your platform, you can log him into Dfns in order to let him use his wallet.&#x20;
-
-{% code title="[Backend] app/api/login/route.ts" %}
-```typescript
-  const client = apiClient()
-  const login = await client.auth.delegatedLogin({ body: { username } })
-```
-{% endcode %}
-
-You will get a token back from this call, that you can later use in all for all delegated actions.&#x20;
-
-{% hint style="info" %}
-The user token will allow the user to call the Dfns API directly. Make sure you only use it from your backend and don't share it with the frontend to make sure no one can obtain that token. That's particularly important if you need to control your users actions.&#x20;
-{% endhint %}
-
-
-{% endstep %}
-
-{% step %}
-### Delegated calls to the API
-
-The SDK provides an easy way to call the API with your delegated end user credentials:&#x20;
-
-{% code title="[Backend] app/api/clients.ts" %}
-```typescript
-export const delegatedClient = (authToken: string) => {
+  <Step title="Delegated calls to the API">
+    [cite_start]The SDK provides an easy way to call the API with your delegated end user credentials: [cite: 89]
+    <CodeBlock title="[Backend] app/api/clients.ts" lang="typescript">
+      {`export const delegatedClient = (authToken: string) => {
   return new DfnsDelegatedApiClient({
     orgId: process.env.DFNS_ORG_ID!,
     authToken,
     baseUrl: process.env.DFNS_API_URL!,
   })
-}
-```
-{% endcode %}
-
-The API requires the end user to sign any modifying action with his passkey. For instance when requesting Dfns to issue a signature using his wallet:&#x20;
-
-1. Request a challenge from Dfns. Note that the username comes from the frontend in this example, but it doesn't have to, you could be providing it directly from your backend.&#x20;
-
-{% code title="[Backend] app/api/wallets/signatures/init/route.ts" %}
-```typescript
-const client = delegatedClient(authToken) // end user token here
+}`}
+    </CodeBlock>
+    [cite_start]The API requires the end user to sign any modifying action with his passkey. [cite: 90] For instance when requesting Dfns to issue a signature using his wallet:
+    1. [cite_start]Request a challenge from Dfns. [cite: 91] [cite_start]Note that the username comes from the frontend in this example, but it doesn't have to, you could be providing it directly from your backend. [cite: 92]
+    <CodeBlock title="[Backend] app/api/wallets/signatures/init/route.ts" lang="typescript">
+      {`const client = delegatedClient(authToken) // end user token here
 [...]
-const challenge = await client.wallets.generateSignatureInit({ walletId, body })
-
-```
-{% endcode %}
-
-2. Asking the customer to create a new credentials and sign the challenge with it. This is done via the web front end:&#x20;
-
-{% code title="[Frontend] app/wallets/page.tsx" %}
-```typescript
-import { WebAuthnSigner } from '@dfns/sdk-browser'
+const challenge = await client.wallets.generateSignatureInit({ walletId, body })`}
+    </CodeBlock>
+    2. [cite_start]Asking the customer to create a new credentials and sign the challenge with it. [cite: 93] This is done via the web front end:
+    <CodeBlock title="[Frontend] app/wallets/page.tsx" lang="typescript">
+      {`import { WebAuthnSigner } from '@dfns/sdk-browser'
 [...]
-const attestation = await webauthn.sign(challenge)
-```
-{% endcode %}
-
-3. Finally calling the signature API to trigger the action.&#x20;
-
-{% code title="[Backend] app/api/register/complete/route.ts" %}
-```typescript
-const client = delegatedClient(authToken)
+const attestation = await webauthn.sign(challenge)`}
+    </CodeBlock>
+    3. [cite_start]Finally calling the signature API to trigger the action. [cite: 94]
+    <CodeBlock title="[Backend] app/api/register/complete/route.ts" lang="typescript">
+      {`const client = delegatedClient(authToken)
 [...]
 const signature = await client.wallets.generateSignatureComplete(
     {
@@ -207,32 +138,23 @@ const signature = await client.wallets.generateSignatureComplete(
       body: requestBody,
     },
     signedChallenge
-  )
-```
-{% endcode %}
+  )`}
+    </CodeBlock>
+  </Step>
 
+  <Step title="Going further">
+    [cite_start]Head to the SDK docs to better understand: [cite: 95]
+    * The [backend client](https://dfns.github.io/dfns-sdk-ts/#md:dfnsapiclient), used with your service account token, with the action [key signer](https://dfns.github.io/dfns-sdk-ts/#md:asymmetrickeysigner) for your service account to sign its actions automatically
+    * The [backend "delegated" client](https://dfns.github.io/dfns-sdk-ts/#md:dfnsdelegatedapiclient), used with your delegated end user token
+    * The [frontend browser sdk](https://dfns.github.io/dfns-sdk-ts/#md:browser-signers), to simplify the signing process with WebAuthn
+    More information about the other SDKs: [dfns-sdks](../dfns-sdks)
+  </Step>
+</Steps>
 
-{% endstep %}
+<Check>
+  [cite_start]Congratulations! [cite: 96] [cite_start]you now have all the tools to integrate Dfns into your own application. [cite: 97]
+</Check>
 
-{% step %}
-### Going further
+This is the end the Getting Started wizard.
 
-Head to the SDK docs to better understand:&#x20;
-
-* The [backend client](https://dfns.github.io/dfns-sdk-ts/#md:dfnsapiclient), used with your service account token, with the action [key signer](https://dfns.github.io/dfns-sdk-ts/#md:asymmetrickeysigner) for your service account to sign its actions automatically
-* The [backend "delegated" client](https://dfns.github.io/dfns-sdk-ts/#md:dfnsdelegatedapiclient), used with your delegated end user token
-* The [frontend browser sdk](https://dfns.github.io/dfns-sdk-ts/#md:browser-signers), to simplify the signing process with WebAuthn
-
-More information about the other SDKs: [dfns-sdks](../dfns-sdks "mention")
-{% endstep %}
-{% endstepper %}
-
-{% hint style="success" %}
-Congratulations! you now have all the tools to integrate Dfns into your own application.&#x20;
-{% endhint %}
-
-This is the end the Getting Started wizard.&#x20;
-
-{% content-ref url="" %}
 []()
-{% endcontent-ref %}
