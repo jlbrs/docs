@@ -13,6 +13,10 @@ footer {
 .dark #sidebar-content {
     background-color: #000;
 }
+
+.tracking-tight {
+     letter-spacing: 0.02rem; 
+}
 /*
 .max-w-8xl {
     max-width: 100%;
