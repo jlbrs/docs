@@ -10,6 +10,9 @@ footer {
     background-color: #ffffff;
 }
 
+.dark #sidebar-content {
+    background-color: #000;
+}
 /*
 .max-w-8xl {
     max-width: 100%;
