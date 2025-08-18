@@ -25,11 +25,13 @@
     "codeblocks": "system"
   },
   "icons": {
-    "library": "fontawesome"
+    "library": "lucide"
   },
   "fonts": {
-    "family": "Inter"
+    "family": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2"
   },
+
+
   "appearance": {
     "default": "system",
     "strict": false
