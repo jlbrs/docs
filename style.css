@@ -43,6 +43,16 @@ header > .text-lg {
     color: rgb(var(--primary));
     border-bottom: 0px solid rgb(var(--primary));
 }
+
+.card .block {
+
+    border-bottom: 1px solid #rgb(var(--gray-200));;
+
+}
+
+.hover\:\!border-primary:hover {
+    border-color: #94a0bc !important;
+}
 /*
 .max-w-8xl {
     max-width: 100%;
