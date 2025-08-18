@@ -9,7 +9,7 @@
   },
   "description": "Dfns documentation",
   "logo": {
-    "light": "/images/logo/logo-light.png",
+    "light": "/images/logo/dfnsdocs.png",
     "dark": "/images/logo/logo-dark.png"
   },
   "favicon": {
@@ -48,7 +48,7 @@
       {
         "label": "Support",
         "href": "https://support.dfns.co",
-        "icon": "life-ring"
+        "icon": "life-buoy"
       },
       {
         "label": "Dashboard",

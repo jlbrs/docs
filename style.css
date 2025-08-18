@@ -36,22 +36,25 @@ header > .text-lg {
 
 }
 
-.prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
-    color: var(--tw-prose-links);
-    text-decoration: none;
-    font-weight: 600;
-    color: rgb(var(--primary));
-    border-bottom: 0px solid rgb(var(--primary));
-}
+ .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
 
+    color: rgb(var(--primary));
+
+}
+/*
 .card .block {
 
-    border-bottom: 1px solid #rgb(var(--gray-200));;
+    border-bottom: 1px solid rgb(var(--gray-200));;
 
-}
+} */
 
 .hover\:\!border-primary:hover {
     border-color: #94a0bc !important;
+}
+
+.nav-logo {
+
+    height: 2rem;
 }
 /*
 .max-w-8xl {
