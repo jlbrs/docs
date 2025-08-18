@@ -7,11 +7,54 @@ footer {
 }
 
 #sidebar-content {
-    background-color: #f4f5fa;
+    background-color: #ffffff;
 }
 
 .dark #sidebar-content {
-    background-color: #170C33;
+    background-color: #000;
+}
+
+.tracking-tight {
+     letter-spacing: 0.02rem; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+         letter-spacing: 0.02rem !important; 
+    
+}
+
+header > .text-lg {
+    font-size: 1rem; 
+    line-height: 1.75rem;
+    color: #6c717d;
+}
+
+.mdx-content {
+
+        color: #6c717d !important;
+
+}
+
+ .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
+
+    color: rgb(var(--primary));
+
+}
+/*
+.card .block {
+
+    border-bottom: 1px solid rgb(var(--gray-200));;
+
+} */
+
+.hover\:\!border-primary:hover {
+    border-color: #94a0bc !important;
+}
+
+.nav-logo {
+
+    height: 2rem;
 }
 /*
 .max-w-8xl {

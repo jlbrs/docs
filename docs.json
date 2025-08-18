@@ -3,13 +3,13 @@
   "theme": "palm",
   "name": "Dfns documentation",
   "colors": {
-    "primary": "#8b8cda",
+    "primary": "#713DFF",
     "light": "#E1FF0B",
-    "dark": "#170C33"
+    "dark": "#713DFF"
   },
   "description": "Dfns documentation",
   "logo": {
-    "light": "/images/logo/logo-light.png",
+    "light": "/images/logo/dfnsdocs.png",
     "dark": "/images/logo/logo-dark.png"
   },
   "favicon": {
@@ -25,14 +25,18 @@
     "codeblocks": "system"
   },
   "icons": {
-    "library": "fontawesome"
+    "library": "lucide"
   },
   "fonts": {
-    "family": "Open Sans"
+  "family": "PP Neue Montreal",
+  "weight": 500,
+  "source": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2",
+  "format": "woff2"
   },
+
   "appearance": {
-    "default": "system",
-    "strict": false
+    "default": "light",
+    "strict": true
   },
   "navbar": {
     "links": [
@@ -44,7 +48,7 @@
       {
         "label": "Support",
         "href": "https://support.dfns.co",
-        "icon": "life-ring"
+        "icon": "life-buoy"
       },
       {
         "label": "Dashboard",
@@ -605,9 +609,6 @@
     "global": {
       "anchors": []
     }
-  },
-  "banner": {
-    "content": "🚀 Deblock, a leading crypto-native neobank, has selected Dfns to power its self-custody wallet infrastructure! [Learn more](https://www.dfns.co/article/announcing-deblock)"
   },
   "footer": {
     "socials": {
