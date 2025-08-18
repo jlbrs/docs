@@ -74,13 +74,13 @@
                 "icon": "rocket",
                 "pages": [
                   "getting-started/onboarding/index",
-                  "getting-started/onboarding/1",
-                  "getting-started/onboarding/2",
-                  "getting-started/onboarding/3",
-                  "getting-started/onboarding/4",
-                  "getting-started/onboarding/5",
-                  "getting-started/onboarding/6",
-                  "getting-started/onboarding/7"
+                  "getting-started/onboarding/1-create-your-organization-and-invite-employees",
+                  "getting-started/onboarding/2-define-and-assign-permissions",
+                  "getting-started/onboarding/3-create-policies",
+                  "getting-started/onboarding/4-using-the-dashboard-create-your-first-wallet",
+                  "getting-started/onboarding/5-start-building-login-and-create-a-wallet-via-api",
+                  "getting-started/onboarding/6-non-custody-1-2-dfns-api-using-a-service-account",
+                  "getting-started/onboarding/7-non-custody-2-2-customer-login-and-delegated-wallets"
                 ]
               }
             ]
@@ -362,6 +362,10 @@
                 ]
               }
             ]
+          },
+          {
+            "group": "Wallets & Transactions",
+            "pages": []
           },
           {
             "group": "Exchanges",
