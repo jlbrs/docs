@@ -28,15 +28,15 @@
     "library": "lucide"
   },
   "fonts": {
- "family": "PP Neue Montreal",
+  "family": "PP Neue Montreal",
   "weight": 500,
   "source": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2",
   "format": "woff2"
   },
 
   "appearance": {
-    "default": "system",
-    "strict": false
+    "default": "light",
+    "strict": true
   },
   "navbar": {
     "links": [
