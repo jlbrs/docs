@@ -3,7 +3,7 @@
   "theme": "palm",
   "name": "Dfns documentation",
   "colors": {
-    "primary": "#8b8cda",
+    "primary": "#713DFF",
     "light": "#E1FF0B",
     "dark": "#170C33"
   },
@@ -28,7 +28,7 @@
     "library": "fontawesome"
   },
   "fonts": {
-    "family": "Open Sans"
+    "family": "Inter"
   },
   "appearance": {
     "default": "system",
