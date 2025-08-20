@@ -28,12 +28,11 @@
     "library": "lucide"
   },
   "fonts": {
-  "family": "PP Neue Montreal",
-  "weight": 500,
-  "source": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2",
-  "format": "woff2"
+    "family": "PP Neue Montreal",
+    "weight": 500,
+    "source": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2",
+    "format": "woff2"
   },
-
   "appearance": {
     "default": "light",
     "strict": true
@@ -63,6 +62,9 @@
     }
   },
   "navigation": {
+    "global": {
+      "anchors": []
+    },
     "tabs": [
       {
         "tab": "Documentation",
@@ -246,6 +248,7 @@
       },
       {
         "tab": "API reference",
+        "openapi": "openapi.yaml",
         "icon": "code",
         "pages": [
           "api-reference/index",
@@ -255,6 +258,7 @@
           "api-reference/error-codes",
           "api-reference/idempotency",
           "api-reference/rate-limits",
+          "GET /exchanges/{exchangeId}",
           {
             "group": "API Authorization headers",
             "pages": [
@@ -262,20 +266,20 @@
                 "group": "Authentication",
                 "pages": [
                   "api-reference/authentication-flows",
-                  "api-reference/endpoints/auth/send-login-code",
-                  "api-reference/endpoints/auth/create-login-challenge",
-                  "api-reference/endpoints/auth/login",
-                  "api-reference/endpoints/auth/delegated-login",
-                  "api-reference/endpoints/auth/social-login",
-                  "api-reference/endpoints/auth/logout"
+                  "post /auth/login/code",
+                  "post /auth/login/init",
+                  "post /auth/login",
+                  "post /auth/login/delegated",
+                  "post /auth/login/social",
+                  "put /auth/logout"
                 ]
               },
               {
                 "group": "User Action Signature",
                 "pages": [
                   "api-reference/signing-flows",
-                  "api-reference/endpoints/auth/create-user-action-challenge",
-                  "api-reference/endpoints/auth/create-user-action-signature"
+                  "post /auth/action/init",
+                  "post /auth/action"
                 ]
               }
             ]
@@ -287,82 +291,82 @@
                 "group": "Registration",
                 "pages": [
                   "api-reference/registration-flows",
-                  "api-reference/endpoints/auth/create-registration-challenge",
-                  "api-reference/endpoints/auth/create-delegated-registration-challenge",
-                  "api-reference/endpoints/auth/create-social-registration-challenge",
-                  "api-reference/endpoints/auth/register",
-                  "api-reference/endpoints/auth/register-end-user",
-                  "api-reference/endpoints/auth/resend-registration-code"
+                  "post /auth/registration/init",
+                  "post /auth/registration/delegated",
+                  "post /auth/registration/social",
+                  "post /auth/registration",
+                  "post /auth/registration/enduser",
+                  "put /auth/registration/code"
                 ]
               },
               {
                 "group": "Users management",
                 "pages": [
-                  "api-reference/endpoints/auth/list-users",
-                  "api-reference/endpoints/auth/create-user",
-                  "api-reference/endpoints/auth/get-user",
-                  "api-reference/endpoints/auth/activate-user",
-                  "api-reference/endpoints/auth/deactivate-user",
-                  "api-reference/endpoints/auth/archive-user"
+                  "get /auth/users",
+                  "post /auth/users",
+                  "get /auth/users/{userId}",
+                  "put /auth/users/{userId}/activate",
+                  "put /auth/users/{userId}/deactivate",
+                  "delete /auth/users/{userId}"
                 ]
               },
               {
                 "group": "Permissions",
                 "pages": [
-                  "api-reference/endpoints/permissions/list-permissions",
-                  "api-reference/endpoints/permissions/create-permission",
-                  "api-reference/endpoints/permissions/get-permission",
-                  "api-reference/endpoints/permissions/update-permission",
-                  "api-reference/endpoints/permissions/archive-permission",
-                  "api-reference/endpoints/permissions/list-assignments",
-                  "api-reference/endpoints/permissions/create-assignment",
-                  "api-reference/endpoints/permissions/delete-assignment"
+                  "get /permissions",
+                  "post /permissions",
+                  "get /permissions/{permissionId}",
+                  "put /permissions/{permissionId}",
+                  "put /permissions/{permissionId}/archive",
+                  "get /permissions/{permissionId}/assignments",
+                  "post /permissions/{permissionId}/assignments",
+                  "delete /permissions/{permissionId}/assignments/{assignmentId}"
                 ]
               },
               {
                 "group": "Credentials",
                 "pages": [
-                  "api-reference/endpoints/auth/list-credentials",
-                  "api-reference/endpoints/auth/create-credential-challenge",
-                  "api-reference/endpoints/auth/create-credential",
-                  "api-reference/endpoints/auth/create-credential-challenge-with-code",
-                  "api-reference/endpoints/auth/create-credential-with-code",
-                  "api-reference/endpoints/auth/activate-credential",
-                  "api-reference/endpoints/auth/deactivate-credential",
-                  "api-reference/endpoints/auth/create-credential-code"
+                  "get /auth/credentials",
+                  "post /auth/credentials/init",
+                  "post /auth/credentials",
+                  "post /auth/credentials/code/init",
+                  "post /auth/credentials/code/verify",
+                  "put /auth/credentials/activate",
+                  "put /auth/credentials/deactivate",
+                  "post /auth/credentials/code"
                 ]
               },
               {
                 "group": "Personal Access Tokens",
                 "pages": [
-                  "api-reference/endpoints/auth/list-personal-access-tokens",
-                  "api-reference/endpoints/auth/create-personal-access-token",
-                  "api-reference/endpoints/auth/get-personal-access-token",
-                  "api-reference/endpoints/auth/update-personal-access-token",
-                  "api-reference/endpoints/auth/activate-personal-access-token",
-                  "api-reference/endpoints/auth/deactivate-personal-access-token",
-                  "api-reference/endpoints/auth/archive-personal-access-token"
+                  "get /auth/pats",
+                  "post /auth/pats",
+                  "get /auth/pats/{tokenId}",
+                  "put /auth/pats/{tokenId}",
+                  "put /auth/pats/{tokenId}/activate",
+                  "put /auth/pats/{tokenId}/deactivate",
+                  "delete /auth/pats/{tokenId}"
                 ]
               },
               {
                 "group": "Account recovery",
                 "pages": [
-                  "api-reference/endpoints/auth/send-recovery-code",
-                  "api-reference/endpoints/auth/create-recovery-challenge",
-                  "api-reference/endpoints/auth/create-delegated-recovery-challenge",
-                  "api-reference/endpoints/auth/recover"
+                  "post /auth/recover/user/code",
+                  "post /auth/recover/user/init",
+                  "post /auth/recover/user/delegated",
+                  "post /auth/recover/user"
                 ]
               },
               {
                 "group": "Service Accounts",
                 "pages": [
-                  "api-reference/endpoints/auth/list-service-accounts",
-                  "api-reference/endpoints/auth/create-service-account",
-                  "api-reference/endpoints/auth/get-service-account",
-                  "api-reference/endpoints/auth/update-service-account",
-                  "api-reference/endpoints/auth/activate-service-account",
-                  "api-reference/endpoints/auth/deactivate-service-account",
-                  "api-reference/endpoints/auth/archive-service-account"
+                  "get /auth/service-accounts",
+                  "post /auth/service-accounts",
+                  "get /auth/service-accounts/{serviceAccountId}",
+                  "put /auth/service-accounts/{serviceAccountId}",
+                  "put /auth/service-accounts/{serviceAccountId}/activate",
+                  "put /auth/service-accounts/{serviceAccountId}/deactivate",
+                  "delete /auth/service-accounts/{serviceAccountId}"
                 ]
               }
             ]
@@ -374,57 +378,58 @@
           {
             "group": "Exchanges",
             "pages": [
-              "api-reference/endpoints/exchanges/list-exchanges",
-              "api-reference/endpoints/exchanges/create-exchange",
-              "api-reference/endpoints/exchanges/get-exchange",
-              "api-reference/endpoints/exchanges/list-accounts",
-              "api-reference/endpoints/exchanges/list-account-assets",
-              "api-reference/endpoints/exchanges/list-asset-withdrawal-networks",
-              "api-reference/endpoints/exchanges/create-deposit",
-              "api-reference/endpoints/exchanges/create-withdrawal",
-              "api-reference/endpoints/exchanges/delete-exchange"
+              "GET /exchanges",
+              "get /exchanges",
+              "post /exchanges",
+              "get /exchanges/{exchangeId}",
+              "get /exchanges/{exchangeId}/accounts",
+              "get /exchanges/{exchangeId}/accounts/{accountId}/assets",
+              "get /exchanges/{exchangeId}/accounts/{accountId}/assets/{asset}/withdrawal-networks",
+              "post /exchanges/{exchangeId}/accounts/{accountId}/deposits",
+              "post /exchanges/{exchangeId}/accounts/{accountId}/withdrawals",
+              "delete /exchanges/{exchangeId}"
             ]
           },
           {
             "group": "Fee Sponsors",
             "pages": [
-              "api-reference/endpoints/fee-sponsors/list-fee-sponsors",
-              "api-reference/endpoints/fee-sponsors/create-fee-sponsor",
-              "api-reference/endpoints/fee-sponsors/get-fee-sponsor",
-              "api-reference/endpoints/fee-sponsors/activate-fee-sponsor",
-              "api-reference/endpoints/fee-sponsors/deactivate-fee-sponsor",
-              "api-reference/endpoints/fee-sponsors/delete-fee-sponsor",
-              "api-reference/endpoints/fee-sponsors/list-sponsored-fees"
+              "get /fee-sponsors",
+              "post /fee-sponsors",
+              "get /fee-sponsors/{feeSponsorId}",
+              "put /fee-sponsors/{feeSponsorId}/activate",
+              "put /fee-sponsors/{feeSponsorId}/deactivate",
+              "delete /fee-sponsors/{feeSponsorId}",
+              "get /fee-sponsors/{feeSponsorId}/fees"
             ]
           },
           {
             "group": "Keys",
             "pages": [
-              "api-reference/endpoints/keys/list-keys",
-              "api-reference/endpoints/keys/create-key",
-              "api-reference/endpoints/keys/delegate-key",
-              "api-reference/endpoints/keys/get-key",
-              "api-reference/endpoints/keys/update-key",
-              "api-reference/endpoints/keys/delete-key",
-              "api-reference/endpoints/keys/derive-key",
-              "api-reference/endpoints/keys/export-key",
-              "api-reference/endpoints/keys/import-key",
-              "api-reference/endpoints/keys/list-signatures",
-              "api-reference/endpoints/keys/get-signature"
+              "get /keys",
+              "post /keys",
+              "post /keys/{keyId}/delegate",
+              "get /keys/{keyId}",
+              "put /keys/{keyId}",
+              "delete /keys/{keyId}",
+              "post /keys/{keyId}/derive",
+              "post /keys/{keyId}/export",
+              "post /keys/import",
+              "get /keys/{keyId}/signatures",
+              "get /keys/{keyId}/signatures/{signatureId}"
             ]
           },
           {
             "group": "Networks",
             "pages": [
-              "api-reference/endpoints/networks/get-fees",
-              "api-reference/endpoints/networks/read-contract",
+              "get /networks/fees",
+              "post /networks/read-contract",
               {
                 "group": "Canton Validators",
                 "pages": [
-                  "api-reference/endpoints/networks/list-canton-validators",
-                  "api-reference/endpoints/networks/create-canton-validator",
-                  "api-reference/endpoints/networks/update-canton-validator",
-                  "api-reference/endpoints/networks/delete-canton-validator"
+                  "get /networks/{network}/validators",
+                  "post /networks/{network}/validators",
+                  "put /networks/{network}/validators/{validatorId}",
+                  "delete /networks/{network}/validators/{validatorId}"
                 ]
               }
             ]
@@ -432,58 +437,58 @@
           {
             "group": "Policies",
             "pages": [
-              "api-reference/endpoints/policies/list-policies",
-              "api-reference/endpoints/policies/create-policy",
-              "api-reference/endpoints/policies/get-policy",
-              "api-reference/endpoints/policies/update-policy",
-              "api-reference/endpoints/policies/archive-policy"
+              "get /v2/policies",
+              "post /v2/policies",
+              "get /v2/policies/{policyId}",
+              "put /v2/policies/{policyId}",
+              "delete /v2/policies/{policyId}"
             ]
           },
           {
             "group": "Approval management",
             "pages": [
-              "api-reference/endpoints/policies/create-approval-decision",
-              "api-reference/endpoints/policies/get-approval",
-              "api-reference/endpoints/policies/list-approvals"
+              "post /v2/policy-approvals/{approvalId}/decisions",
+              "get /v2/policy-approvals/{approvalId}",
+              "get /v2/policy-approvals"
             ]
           },
           {
             "group": "Signers",
             "pages": [
-              "api-reference/endpoints/signers/list-signers"
+              "get /signers"
             ]
           },
           {
             "group": "Staking",
             "pages": [
-              "api-reference/endpoints/staking/list-stakes",
-              "api-reference/endpoints/staking/create-stake",
-              "api-reference/endpoints/staking/get-stakes",
-              "api-reference/endpoints/staking/list-stake-actions",
-              "api-reference/endpoints/staking/create-stake-action",
-              "api-reference/endpoints/staking/get-stake-rewards"
+              "get /staking/stakes",
+              "post /staking/stakes",
+              "get /staking/stakes/{stakeId}",
+              "get /staking/stakes/{stakeId}/actions",
+              "post /staking/stakes/{stakeId}/actions",
+              "get /staking/stakes/{stakeId}/rewards"
             ]
           },
           {
             "group": "Wallets",
             "pages": [
-              "api-reference/endpoints/wallets/list-wallets",
-              "api-reference/endpoints/wallets/create-wallet",
-              "api-reference/endpoints/wallets/get-wallet",
-              "api-reference/endpoints/wallets/update-wallet",
-              "api-reference/endpoints/wallets/get-wallet-assets",
-              "api-reference/endpoints/wallets/get-wallet-history",
-              "api-reference/endpoints/wallets/get-wallet-nfts",
-              "api-reference/endpoints/wallets/import-wallet",
-              "api-reference/endpoints/wallets/delegate-wallet",
-              "api-reference/endpoints/wallets/export-wallet",
-              "api-reference/endpoints/wallets/list-signatures",
-              "api-reference/endpoints/wallets/get-signature",
+              "get /wallets",
+              "post /wallets",
+              "get /wallets/{walletId}",
+              "put /wallets/{walletId}",
+              "get /wallets/{walletId}/assets",
+              "get /wallets/{walletId}/history",
+              "get /wallets/{walletId}/nfts",
+              "post /wallets/import",
+              "post /wallets/{walletId}/delegate",
+              "post /wallets/{walletId}/export",
+              "get /wallets/{walletId}/signatures",
+              "get /wallets/{walletId}/signatures/{signatureId}",
               {
                 "group": "Wallet  Tags",
                 "pages": [
-                  "api-reference/endpoints/wallets/tag-wallet",
-                  "api-reference/endpoints/wallets/untag-wallet"
+                  "put /wallets/{walletId}/tags",
+                  "delete /wallets/{walletId}/tags"
                 ]
               }
             ]
@@ -491,46 +496,46 @@
           {
             "group": "Transfers",
             "pages": [
-              "api-reference/endpoints/wallets/transfer-asset",
-              "api-reference/endpoints/wallets/list-transfers",
-              "api-reference/endpoints/wallets/get-transfer"
+              "post /wallets/{walletId}/transfers",
+              "get /wallets/{walletId}/transfers",
+              "get /wallets/{walletId}/transfers/{transferId}"
             ]
           },
           {
             "group": "Raw Transactions",
             "pages": [
-              "api-reference/endpoints/wallets/list-transactions",
-              "api-reference/endpoints/wallets/get-transaction",
-              "api-reference/endpoints/wallets/generate-signature",
-              "api-reference/endpoints/keys/generate-signature",
-              "api-reference/endpoints/wallets/broadcast-transaction"
+              "get /wallets/{walletId}/transactions",
+              "get /wallets/{walletId}/transactions/{transactionId}",
+              "post /wallets/{walletId}/signatures",
+              "post /keys/{keyId}/signatures",
+              "post /wallets/{walletId}/transactions"
             ]
           },
           {
             "group": "Webhook Configuration",
             "pages": [
               "api-reference/endpoints/webhooks/index",
-              "api-reference/endpoints/webhooks/list-webhooks",
-              "api-reference/endpoints/webhooks/create-webhook",
-              "api-reference/endpoints/webhooks/get-webhook",
-              "api-reference/endpoints/webhooks/update-webhook",
-              "api-reference/endpoints/webhooks/delete-webhook",
-              "api-reference/endpoints/webhooks/ping-webhook"
+              "get /webhooks",
+              "post /webhooks",
+              "get /webhooks/{webhookId}",
+              "put /webhooks/{webhookId}",
+              "delete /webhooks/{webhookId}",
+              "post /webhooks/{webhookId}/ping"
             ]
           },
           {
             "group": "Webhooks History",
             "pages": [
-              "api-reference/endpoints/webhooks/get-webhook-event",
-              "api-reference/endpoints/webhooks/list-webhook-events"
+              "get /webhooks/{webhookId}/events/{webhookEventId}",
+              "get /webhooks/{webhookId}/events"
             ]
           },
           {
             "group": "Applications",
             "tag": "Deprecated",
             "pages": [
-              "api-reference/endpoints/auth/list-applications",
-              "api-reference/endpoints/auth/get-application"
+              "get /auth/apps",
+              "get /auth/apps/{appId}"
             ]
           }
         ]
@@ -605,10 +610,7 @@
           "changelog"
         ]
       }
-    ],
-    "global": {
-      "anchors": []
-    }
+    ]
   },
   "footer": {
     "socials": {
