@@ -10,7 +10,7 @@
   "description": "Dfns documentation",
   "logo": {
     "light": "/images/logo/dfnsdocs.png",
-    "dark": "/images/logo/logo-dark.png"
+    "dark": "/images/logo/dfnsdocs.png"
   },
   "favicon": {
     "light": "favicon.png",
@@ -25,13 +25,21 @@
     "codeblocks": "system"
   },
   "icons": {
-    "library": "lucide"
+    "library": "fontawesome"
   },
   "fonts": {
-    "family": "PP Neue Montreal",
-    "weight": 500,
-    "source": "https://cdn.prod.website-files.com/665842dea2404b0e1ffaa674/66587ed7e8bfcdd3d22a151f_pp-500.woff2",
-    "format": "woff2"
+    "heading": {
+      "family": "PP Neue Montreal Medium",
+      "weight": 500,
+      "source": "https://app.dfns.io/fonts/PPNeueMontreal/PPNeueMontreal-Medium.woff2",
+      "format": "woff2"
+    },
+    "body": {
+      "family": "PP Neue Montreal Book",
+      "weight": 400,
+      "source": "https://app.dfns.io/fonts/PPNeueMontreal/PPNeueMontreal-Book.woff2",
+      "format": "woff2"
+    }
   },
   "appearance": {
     "default": "light",
@@ -258,7 +266,6 @@
           "api-reference/error-codes",
           "api-reference/idempotency",
           "api-reference/rate-limits",
-          "GET /exchanges/{exchangeId}",
           {
             "group": "API Authorization headers",
             "pages": [

@@ -1,9 +1,20 @@
+@property --text-size {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1rem;
+}
+
+body {
+    font-size: var(--text-size);
+    color: #6c717d
+}
+
 #navbar {
-  background: #fffff2;
+    background: #fffff2;
 }
 
 footer {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 #sidebar-content {
@@ -15,32 +26,70 @@ footer {
 }
 
 .tracking-tight {
-     letter-spacing: 0.02rem; 
+    letter-spacing: 0.02rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-
-         letter-spacing: 0.02rem !important; 
-    
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: 0.02rem !important;
 }
 
-header > .text-lg {
-    font-size: 1rem; 
-    line-height: 1.75rem;
+/*
+#navigation-items {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+*/
+
+/* This is for aligning the METHOD (POST GET etc) with the icons in the sidebar menu */
+#sidebar-content li>a:has(:nth-child(2))> :first-child {
+    mask-size: contain !important;
+    flex-basis: 2rem;
+}
+
+/* Left alignment for sub-menu items in the sidebar */
+#sidebar-content ul>li>ul>li>a {
+    padding-left: 2rem !important;
+}
+
+#sidebar-content a:hover {
+    background-color: #f2f2f4;
+}
+
+/* Left alignment for sub-menu items in the sidebar */
+#sidebar-content ul>li>a {
+    font-weight: 300;
+
+}
+
+/* pages description (1st paragraph under the title) */
+#content-area header > .text-lg {
+    font-size: var(--text-size);
+    line-height: 1.5rem;
     color: #6c717d;
 }
 
-.mdx-content {
-
-        color: #6c717d !important;
-
+/* general text */
+.prose {
+    color: #6c717d !important;
+    font-size: var(--text-size);
 }
 
- .prose :where(a):not(:where([class~=not-prose],[class~=not-prose] *)) {
-
+/* general links in text */
+.prose a {
     color: rgb(var(--primary));
+    font-weight: var(--font-weight-body-custom);
+    border-bottom: 0;
 
+    &:hover {
+        border-bottom: 1px solid rgb(var(--primary));
+    }
 }
+
 /*
 .card .block {
 
@@ -53,9 +102,16 @@ header > .text-lg {
 }
 
 .nav-logo {
-
     height: 2rem;
 }
+
+.steps div[data-component-part="step-number"]>div {
+    background-color: #160c32;
+    color: white;
+    font-weight: 600;
+    font-size: large;
+}
+
 /*
 .max-w-8xl {
     max-width: 100%;
