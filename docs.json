@@ -30,14 +30,14 @@
   "fonts": {
     "heading": {
       "family": "PP Neue Montreal Medium",
-      "weight": 500,
-      "source": "https://app.dfns.io/fonts/PPNeueMontreal/PPNeueMontreal-Medium.woff2",
+      "weight": 600,
+      "source": "https://db.onlinewebfonts.com/t/b76e589398b734c21453bb17d93dd7ff.woff2",
       "format": "woff2"
     },
     "body": {
       "family": "PP Neue Montreal Book",
       "weight": 400,
-      "source": "https://app.dfns.io/fonts/PPNeueMontreal/PPNeueMontreal-Book.woff2",
+      "source": "https://db.onlinewebfonts.com/t/f78ded712623f1ae701b6fa49add526b.woff2",
       "format": "woff2"
     }
   },
@@ -385,7 +385,6 @@
           {
             "group": "Exchanges",
             "pages": [
-              "GET /exchanges",
               "get /exchanges",
               "post /exchanges",
               "get /exchanges/{exchangeId}",
@@ -527,7 +526,13 @@
               "get /webhooks/{webhookId}",
               "put /webhooks/{webhookId}",
               "delete /webhooks/{webhookId}",
-              "post /webhooks/{webhookId}/ping"
+              "post /webhooks/{webhookId}/ping",
+          {
+            "group": "Webhook description",
+            "pages": [
+              "webhook policy.triggered"
+            ]
+          }
             ]
           },
           {

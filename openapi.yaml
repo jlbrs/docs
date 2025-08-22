@@ -24,6 +24,7 @@ components:
       description: |-
         **User Action Signature:** Used to sign the change-inducing API requests.
         More details how to generate the token: [Get an authentication token](https://docs.dfns.co/d/advanced-topics/authentication/authentication-authorization#sign-api-requests-user-action-signing)
+
   schemas: {}
   parameters: {}
 paths:
@@ -294,6 +295,7 @@ paths:
                   - userAction
   /auth/action/init:
     post:
+      deprecated: true
       tags:
         - Auth
       summary: " Create User Action Challenge"
@@ -7762,24 +7764,29 @@ paths:
     post:
       tags:
         - Exchanges
-      summary: " Create Exchange"
+      summary: Create Exchange
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
+      description: Create Exchange
+      x-mint:
+        content: |-
+          #### Required Permissions
 
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Create | Always required. |
+          `Exchanges:Create`: Always required  
 
-        #### Token Kinds Allowed
+          #### Token Kinds Allowed
 
-        `Access Token`, `Personal Access Token`
+          ✅ Access Token  
+          ✅ Personal Access Token  
+          ❌ Service Account Token. 
 
-        #### User Kinds allowed
+          #### User Kinds allowed
 
-        `User`
+          ✅ User (`CustomerEmployee`)  
+          ❌ End User (`EndUser`)  
+          ❌ Service Account (`ServiceAccount`)  
+
       requestBody:
         content:
           application/json:
@@ -7861,20 +7868,52 @@ paths:
       summary: " List Exchanges"
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
+      description: List all available exchanges
+      externalDocs:
+        description: Find more info here
+        url: https://docs.dfns.co/api-reference/core-objects#list-exchanges
+      x-mint: 
+        content: >-
+          <div class="api-section"><div class="api-section-heading flex flex-col gap-y-4 w-full"><div class="flex items-baseline border-b pb-2.5 border-gray-100 dark:border-gray-800 w-full"><h4 class="api-section-heading-title flex-1 mb-0">Required Permissions</h4>[<Icon icon="arrow-up-right-from-square" /> More info](https://docs.dfns.co/api-reference/core-objects#required-permissions)</div></div><div class="border-gray-100 dark:border-gray-800 border-b last:border-b-0"><div class="py-6">`Exchanges:Read`: Always required.<br/></div></div></div>
 
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
 
-        #### Token Kinds Allowed
+          <div class="api-section">
+            <div class="api-section-heading flex flex-col gap-y-4 w-full">
+              <div class="flex items-baseline border-b pb-2.5 border-gray-100 dark:border-gray-800 w-full">
+                <h4 class="api-section-heading-title flex-1 mb-0">
+                Token Kinds Allowed
+                </h4>
+                [<Icon icon="arrow-up-right-from-square" /> More info](https://docs.dfns.co/api-reference/core-objects#token-kinds-allowed)
+              </div>
+            </div>
 
-        `Access Token`, `Personal Access Token`
+            <div class="border-gray-100 dark:border-gray-800 border-b last:border-b-0">
+              <div class="py-6">
+                ✅ User Access Token    
+                ✅ Personal Access Token   
+                ❌ Service Account Token
+              </div>
+            </div>
+            </div>
 
-        #### User Kinds allowed
+          <div class="api-section">
+            <div class="api-section-heading flex flex-col gap-y-4 w-full">
+              <div class="flex items-baseline border-b pb-2.5 border-gray-100 dark:border-gray-800 w-full">
+                <h4 class="api-section-heading-title flex-1 mb-0">
+                User Kinds Allowed
+                </h4>
+                [<Icon icon="arrow-up-right-from-square" /> More info](https://docs.dfns.co/api-reference/core-objects#token-kinds-allowed)
+              </div>
+            </div>
 
-        `User`
+            <div class="border-gray-100 dark:border-gray-800 border-b last:border-b-0">
+              <div class="py-6">
+                ✅ User (`CustomerEmployee`)    
+                ❌ End User (`EndUser`)    
+                ❌ Service Account (`ServiceAccount`)    
+              </div>
+            </div>
+          </div>
       parameters:
         - schema:
             type: integer
@@ -73039,3 +73078,1968 @@ paths:
                     type: string
                 required:
                   - items
+webhooks:
+  policy.triggered:
+    post:
+      tags:
+        - Policies
+      summary: Policy Triggered
+      description: A policy got triggered upon some activity (the policy rule got evaluated, and it triggered)
+      parameters:
+        - in: header
+          name: X-DFNS-WEBHOOK-SIGNATURE
+          schema:
+            type: string
+            format: sha256=[signature]
+          required: true
+          description: |-
+            Verify webhook signature to confirm that received events are sent from Dfns. This allows you to verify that the events were sent by Dfns, not by a third party. Dfns signatures is a HMAC of the received event payload, using SHA-256 hash function and the webhook secret as the secret.
+            
+            More details how to generate the token: [Verify events are sent from Dfns](https://docs.dfns.co/d/api-docs/webhooks#verify-events-1)
+          example: sha256=33008aa9673b764cc752362034dfe49ef466315c45d62b3e8cb8588b23d0d06a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                  - oneOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Alias:Modify
+                          rule:
+                            type: object
+                            properties:
+                              kind:
+                                type: string
+                                enum:
+                                  - AlwaysTrigger
+                              configuration:
+                                type: object
+                                properties: {}
+                                additionalProperties: false
+                            required:
+                              - kind
+                            additionalProperties: false
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - RequestApproval
+                                  approvalGroups:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        quorum:
+                                          type: integer
+                                          minimum: 1
+                                        approvers:
+                                          type: object
+                                          properties:
+                                            userId:
+                                              type: object
+                                              properties:
+                                                in:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                    minLength: 1
+                                                  minItems: 1
+                                                  maxItems: 100
+                                              required:
+                                                - in
+                                              additionalProperties: false
+                                          additionalProperties: false
+                                      required:
+                                        - quorum
+                                        - approvers
+                                      additionalProperties: false
+                                    minItems: 1
+                                  autoRejectTimeout:
+                                    type: integer
+                                    nullable: true
+                                    minimum: 1
+                                required:
+                                  - kind
+                                  - approvalGroups
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - Block
+                                required:
+                                  - kind
+                                additionalProperties: false
+                          filters:
+                            type: object
+                            properties: {}
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Permissions:Assign
+                          rule:
+                            type: object
+                            properties:
+                              kind:
+                                type: string
+                                enum:
+                                  - AlwaysTrigger
+                              configuration:
+                                type: object
+                                properties: {}
+                                additionalProperties: false
+                            required:
+                              - kind
+                            additionalProperties: false
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - RequestApproval
+                                  approvalGroups:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        quorum:
+                                          type: integer
+                                          minimum: 1
+                                        approvers:
+                                          type: object
+                                          properties:
+                                            userId:
+                                              type: object
+                                              properties:
+                                                in:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                    minLength: 1
+                                                  minItems: 1
+                                                  maxItems: 100
+                                              required:
+                                                - in
+                                              additionalProperties: false
+                                          additionalProperties: false
+                                      required:
+                                        - quorum
+                                        - approvers
+                                      additionalProperties: false
+                                    minItems: 1
+                                  autoRejectTimeout:
+                                    type: integer
+                                    nullable: true
+                                    minimum: 1
+                                required:
+                                  - kind
+                                  - approvalGroups
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - Block
+                                required:
+                                  - kind
+                                additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              permissionId:
+                                type: object
+                                properties:
+                                  in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                required:
+                                  - in
+                                additionalProperties: false
+                            required:
+                              - permissionId
+                            additionalProperties: false
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Permissions:Modify
+                          rule:
+                            type: object
+                            properties:
+                              kind:
+                                type: string
+                                enum:
+                                  - AlwaysTrigger
+                              configuration:
+                                type: object
+                                properties: {}
+                                additionalProperties: false
+                            required:
+                              - kind
+                            additionalProperties: false
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - RequestApproval
+                                  approvalGroups:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        quorum:
+                                          type: integer
+                                          minimum: 1
+                                        approvers:
+                                          type: object
+                                          properties:
+                                            userId:
+                                              type: object
+                                              properties:
+                                                in:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                    minLength: 1
+                                                  minItems: 1
+                                                  maxItems: 100
+                                              required:
+                                                - in
+                                              additionalProperties: false
+                                          additionalProperties: false
+                                      required:
+                                        - quorum
+                                        - approvers
+                                      additionalProperties: false
+                                    minItems: 1
+                                  autoRejectTimeout:
+                                    type: integer
+                                    nullable: true
+                                    minimum: 1
+                                required:
+                                  - kind
+                                  - approvalGroups
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - Block
+                                required:
+                                  - kind
+                                additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              permissionId:
+                                type: object
+                                properties:
+                                  in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                required:
+                                  - in
+                                additionalProperties: false
+                            required:
+                              - permissionId
+                            additionalProperties: false
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Policies:Modify
+                          rule:
+                            type: object
+                            properties:
+                              kind:
+                                type: string
+                                enum:
+                                  - AlwaysTrigger
+                              configuration:
+                                type: object
+                                properties: {}
+                                additionalProperties: false
+                            required:
+                              - kind
+                            additionalProperties: false
+                          action:
+                            type: object
+                            properties:
+                              kind:
+                                type: string
+                                enum:
+                                  - RequestApproval
+                              approvalGroups:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    quorum:
+                                      type: integer
+                                      minimum: 1
+                                    approvers:
+                                      type: object
+                                      properties:
+                                        userId:
+                                          type: object
+                                          properties:
+                                            in:
+                                              type: array
+                                              items:
+                                                type: string
+                                                minLength: 1
+                                              minItems: 1
+                                              maxItems: 100
+                                          required:
+                                            - in
+                                          additionalProperties: false
+                                      additionalProperties: false
+                                  required:
+                                    - quorum
+                                    - approvers
+                                  additionalProperties: false
+                                minItems: 1
+                              autoRejectTimeout:
+                                type: integer
+                                nullable: true
+                                minimum: 1
+                            required:
+                              - kind
+                              - approvalGroups
+                            additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              policyId:
+                                type: object
+                                properties:
+                                  in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                required:
+                                  - in
+                                additionalProperties: false
+                            required:
+                              - policyId
+                            additionalProperties: false
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Wallets:Sign
+                          rule:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - AlwaysTrigger
+                                  configuration:
+                                    type: object
+                                    properties: {}
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - TransactionRecipientWhitelist
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      addresses:
+                                        type: array
+                                        items:
+                                          type: string
+                                          minLength: 1
+                                    required:
+                                      - addresses
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - TransactionAmountLimit
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      limit:
+                                        type: number
+                                      currency:
+                                        type: string
+                                        enum: *a6
+                                    required:
+                                      - limit
+                                      - currency
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - TransactionAmountVelocity
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      limit:
+                                        type: number
+                                      currency:
+                                        type: string
+                                        enum: *a7
+                                      timeframe:
+                                        type: integer
+                                        minimum: 1
+                                        maximum: 43200
+                                    required:
+                                      - limit
+                                      - currency
+                                      - timeframe
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - TransactionCountVelocity
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      limit:
+                                        type: number
+                                      timeframe:
+                                        type: integer
+                                        minimum: 1
+                                        maximum: 43200
+                                    required:
+                                      - limit
+                                      - timeframe
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - ChainalysisTransactionPrescreening
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      alerts:
+                                        type: object
+                                        properties:
+                                          alertLevel:
+                                            type: string
+                                            enum:
+                                              - LOW
+                                              - MEDIUM
+                                              - HIGH
+                                              - SEVERE
+                                          categoryIds:
+                                            type: array
+                                            items:
+                                              type: integer
+                                              minimum: 0
+                                              exclusiveMinimum: true
+                                        required:
+                                          - alertLevel
+                                          - categoryIds
+                                      exposures:
+                                        type: object
+                                        properties:
+                                          direct:
+                                            type: object
+                                            properties:
+                                              categoryIds:
+                                                type: array
+                                                items:
+                                                  type: integer
+                                                  minimum: 0
+                                                  exclusiveMinimum: true
+                                            required:
+                                              - categoryIds
+                                        required:
+                                          - direct
+                                      addresses:
+                                        type: object
+                                        properties:
+                                          categoryIds:
+                                            type: array
+                                            items:
+                                              type: integer
+                                              minimum: 0
+                                              exclusiveMinimum: true
+                                        required:
+                                          - categoryIds
+                                      fallbackBehaviours:
+                                        type: object
+                                        properties:
+                                          skipUnscreenableTransaction:
+                                            type: boolean
+                                          skipUnsupportedNetwork:
+                                            type: boolean
+                                          skipUnsupportedAsset:
+                                            type: boolean
+                                          skipChainalysisFailure:
+                                            type: boolean
+                                        required:
+                                          - skipUnscreenableTransaction
+                                          - skipUnsupportedNetwork
+                                          - skipUnsupportedAsset
+                                          - skipChainalysisFailure
+                                    required:
+                                      - alerts
+                                      - exposures
+                                      - addresses
+                                      - fallbackBehaviours
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - TravelRuleTransactionPrescreening
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      vendor:
+                                        type: string
+                                        enum:
+                                          - Notabene
+                                      autoTriggerTimeoutSeconds:
+                                        type: integer
+                                        minimum: 0
+                                      autoClearAfterDeliveredTimeoutSeconds:
+                                        type: integer
+                                        minimum: 0
+                                    required:
+                                      - vendor
+                                      - autoTriggerTimeoutSeconds
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - RequestApproval
+                                  approvalGroups:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        quorum:
+                                          type: integer
+                                          minimum: 1
+                                        approvers:
+                                          type: object
+                                          properties:
+                                            userId:
+                                              type: object
+                                              properties:
+                                                in:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                    minLength: 1
+                                                  minItems: 1
+                                                  maxItems: 100
+                                              required:
+                                                - in
+                                              additionalProperties: false
+                                          additionalProperties: false
+                                      required:
+                                        - quorum
+                                        - approvers
+                                      additionalProperties: false
+                                    minItems: 1
+                                  autoRejectTimeout:
+                                    type: integer
+                                    nullable: true
+                                    minimum: 1
+                                required:
+                                  - kind
+                                  - approvalGroups
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - Block
+                                required:
+                                  - kind
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - NoAction
+                                required:
+                                  - kind
+                                additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              walletId:
+                                type: object
+                                properties:
+                                  in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                required:
+                                  - in
+                                additionalProperties: false
+                              walletTags:
+                                type: object
+                                properties:
+                                  hasAny:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                  hasAll:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                additionalProperties: false
+                            additionalProperties: false
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          status:
+                            type: string
+                            enum:
+                              - Active
+                              - Archived
+                          dateCreated:
+                            type: string
+                          dateUpdated:
+                            type: string
+                          activityKind:
+                            type: string
+                            enum:
+                              - Wallets:IncomingTransaction
+                          rule:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - ChainalysisTransactionScreening
+                                  configuration:
+                                    type: object
+                                    properties:
+                                      alerts:
+                                        type: object
+                                        properties:
+                                          alertLevel:
+                                            type: string
+                                            enum:
+                                              - LOW
+                                              - MEDIUM
+                                              - HIGH
+                                              - SEVERE
+                                          categoryIds:
+                                            type: array
+                                            items:
+                                              type: integer
+                                              minimum: 0
+                                              exclusiveMinimum: true
+                                        required:
+                                          - alertLevel
+                                          - categoryIds
+                                      exposures:
+                                        type: object
+                                        properties:
+                                          direct:
+                                            type: object
+                                            properties:
+                                              categoryIds:
+                                                type: array
+                                                items:
+                                                  type: integer
+                                                  minimum: 0
+                                                  exclusiveMinimum: true
+                                            required:
+                                              - categoryIds
+                                        required:
+                                          - direct
+                                      fallbackBehaviours:
+                                        type: object
+                                        properties:
+                                          skipUnscreenableTransaction:
+                                            type: boolean
+                                          skipUnsupportedNetwork:
+                                            type: boolean
+                                          skipUnsupportedAsset:
+                                            type: boolean
+                                          skipChainalysisFailure:
+                                            type: boolean
+                                        required:
+                                          - skipUnscreenableTransaction
+                                          - skipUnsupportedNetwork
+                                          - skipUnsupportedAsset
+                                          - skipChainalysisFailure
+                                    required:
+                                      - alerts
+                                      - exposures
+                                      - fallbackBehaviours
+                                    additionalProperties: false
+                                required:
+                                  - kind
+                                  - configuration
+                                additionalProperties: false
+                          action:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  kind:
+                                    type: string
+                                    enum:
+                                      - NoAction
+                                required:
+                                  - kind
+                                additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              walletId:
+                                type: object
+                                properties:
+                                  in:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                required:
+                                  - in
+                                additionalProperties: false
+                              walletTags:
+                                type: object
+                                properties:
+                                  hasAny:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                  hasAll:
+                                    type: array
+                                    items:
+                                      type: string
+                                      minLength: 1
+                                    minItems: 1
+                                    maxItems: 100
+                                additionalProperties: false
+                            additionalProperties: false
+                        required:
+                          - id
+                          - name
+                          - status
+                          - activityKind
+                          - rule
+                          - action
+                        additionalProperties: false
+                  - type: object
+                    properties:
+                      pendingChangeRequest:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          requester:
+                            type: object
+                            properties:
+                              userId:
+                                type: string
+                              tokenId:
+                                type: string
+                              appId:
+                                type: string
+                            required:
+                              - userId
+                            additionalProperties: false
+                          kind:
+                            type: string
+                            enum:
+                              - Policy
+                          operationKind:
+                            type: string
+                            enum: &a43
+                              - Update
+                          status:
+                            type: string
+                            enum:
+                              - Applied
+                              - Failed
+                              - Pending
+                              - Rejected
+                          entityId:
+                            type: string
+                          dateCreated:
+                            type: string
+                            format: date-time
+                          dateResolved:
+                            type: string
+                            format: date-time
+                          approvalId:
+                            type: string
+                          body:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Alias:Modify
+                                  rule:
+                                    type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - AlwaysTrigger
+                                      configuration:
+                                        type: object
+                                        properties: {}
+                                        additionalProperties: false
+                                    required:
+                                      - kind
+                                    additionalProperties: false
+                                  action:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - RequestApproval
+                                          approvalGroups:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                quorum:
+                                                  type: integer
+                                                  minimum: 1
+                                                approvers:
+                                                  type: object
+                                                  properties:
+                                                    userId:
+                                                      type: object
+                                                      properties:
+                                                        in:
+                                                          type: array
+                                                          items:
+                                                            type: string
+                                                            minLength: 1
+                                                          minItems: 1
+                                                          maxItems: 100
+                                                      required:
+                                                        - in
+                                                      additionalProperties: false
+                                                  additionalProperties: false
+                                              required:
+                                                - quorum
+                                                - approvers
+                                              additionalProperties: false
+                                            minItems: 1
+                                          autoRejectTimeout:
+                                            type: integer
+                                            nullable: true
+                                            minimum: 1
+                                        required:
+                                          - kind
+                                          - approvalGroups
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - Block
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties: {}
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Permissions:Assign
+                                  rule:
+                                    type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - AlwaysTrigger
+                                      configuration:
+                                        type: object
+                                        properties: {}
+                                        additionalProperties: false
+                                    required:
+                                      - kind
+                                    additionalProperties: false
+                                  action:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - RequestApproval
+                                          approvalGroups:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                quorum:
+                                                  type: integer
+                                                  minimum: 1
+                                                approvers:
+                                                  type: object
+                                                  properties:
+                                                    userId:
+                                                      type: object
+                                                      properties:
+                                                        in:
+                                                          type: array
+                                                          items:
+                                                            type: string
+                                                            minLength: 1
+                                                          minItems: 1
+                                                          maxItems: 100
+                                                      required:
+                                                        - in
+                                                      additionalProperties: false
+                                                  additionalProperties: false
+                                              required:
+                                                - quorum
+                                                - approvers
+                                              additionalProperties: false
+                                            minItems: 1
+                                          autoRejectTimeout:
+                                            type: integer
+                                            nullable: true
+                                            minimum: 1
+                                        required:
+                                          - kind
+                                          - approvalGroups
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - Block
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties:
+                                      permissionId:
+                                        type: object
+                                        properties:
+                                          in:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        required:
+                                          - in
+                                        additionalProperties: false
+                                    required:
+                                      - permissionId
+                                    additionalProperties: false
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Permissions:Modify
+                                  rule:
+                                    type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - AlwaysTrigger
+                                      configuration:
+                                        type: object
+                                        properties: {}
+                                        additionalProperties: false
+                                    required:
+                                      - kind
+                                    additionalProperties: false
+                                  action:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - RequestApproval
+                                          approvalGroups:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                quorum:
+                                                  type: integer
+                                                  minimum: 1
+                                                approvers:
+                                                  type: object
+                                                  properties:
+                                                    userId:
+                                                      type: object
+                                                      properties:
+                                                        in:
+                                                          type: array
+                                                          items:
+                                                            type: string
+                                                            minLength: 1
+                                                          minItems: 1
+                                                          maxItems: 100
+                                                      required:
+                                                        - in
+                                                      additionalProperties: false
+                                                  additionalProperties: false
+                                              required:
+                                                - quorum
+                                                - approvers
+                                              additionalProperties: false
+                                            minItems: 1
+                                          autoRejectTimeout:
+                                            type: integer
+                                            nullable: true
+                                            minimum: 1
+                                        required:
+                                          - kind
+                                          - approvalGroups
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - Block
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties:
+                                      permissionId:
+                                        type: object
+                                        properties:
+                                          in:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        required:
+                                          - in
+                                        additionalProperties: false
+                                    required:
+                                      - permissionId
+                                    additionalProperties: false
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Policies:Modify
+                                  rule:
+                                    type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - AlwaysTrigger
+                                      configuration:
+                                        type: object
+                                        properties: {}
+                                        additionalProperties: false
+                                    required:
+                                      - kind
+                                    additionalProperties: false
+                                  action:
+                                    type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - RequestApproval
+                                      approvalGroups:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            name:
+                                              type: string
+                                            quorum:
+                                              type: integer
+                                              minimum: 1
+                                            approvers:
+                                              type: object
+                                              properties:
+                                                userId:
+                                                  type: object
+                                                  properties:
+                                                    in:
+                                                      type: array
+                                                      items:
+                                                        type: string
+                                                        minLength: 1
+                                                      minItems: 1
+                                                      maxItems: 100
+                                                  required:
+                                                    - in
+                                                  additionalProperties: false
+                                              additionalProperties: false
+                                          required:
+                                            - quorum
+                                            - approvers
+                                          additionalProperties: false
+                                        minItems: 1
+                                      autoRejectTimeout:
+                                        type: integer
+                                        nullable: true
+                                        minimum: 1
+                                    required:
+                                      - kind
+                                      - approvalGroups
+                                    additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties:
+                                      policyId:
+                                        type: object
+                                        properties:
+                                          in:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        required:
+                                          - in
+                                        additionalProperties: false
+                                    required:
+                                      - policyId
+                                    additionalProperties: false
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Wallets:Sign
+                                  rule:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - AlwaysTrigger
+                                          configuration:
+                                            type: object
+                                            properties: {}
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - TransactionRecipientWhitelist
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              addresses:
+                                                type: array
+                                                items:
+                                                  type: string
+                                                  minLength: 1
+                                            required:
+                                              - addresses
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - TransactionAmountLimit
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              limit:
+                                                type: number
+                                              currency:
+                                                type: string
+                                                enum: *a6
+                                            required:
+                                              - limit
+                                              - currency
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - TransactionAmountVelocity
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              limit:
+                                                type: number
+                                              currency:
+                                                type: string
+                                                enum: *a7
+                                              timeframe:
+                                                type: integer
+                                                minimum: 1
+                                                maximum: 43200
+                                            required:
+                                              - limit
+                                              - currency
+                                              - timeframe
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - TransactionCountVelocity
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              limit:
+                                                type: number
+                                              timeframe:
+                                                type: integer
+                                                minimum: 1
+                                                maximum: 43200
+                                            required:
+                                              - limit
+                                              - timeframe
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - ChainalysisTransactionPrescreening
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              alerts:
+                                                type: object
+                                                properties:
+                                                  alertLevel:
+                                                    type: string
+                                                    enum:
+                                                      - LOW
+                                                      - MEDIUM
+                                                      - HIGH
+                                                      - SEVERE
+                                                  categoryIds:
+                                                    type: array
+                                                    items:
+                                                      type: integer
+                                                      minimum: 0
+                                                      exclusiveMinimum: true
+                                                required:
+                                                  - alertLevel
+                                                  - categoryIds
+                                              exposures:
+                                                type: object
+                                                properties:
+                                                  direct:
+                                                    type: object
+                                                    properties:
+                                                      categoryIds:
+                                                        type: array
+                                                        items:
+                                                          type: integer
+                                                          minimum: 0
+                                                          exclusiveMinimum: true
+                                                    required:
+                                                      - categoryIds
+                                                required:
+                                                  - direct
+                                              addresses:
+                                                type: object
+                                                properties:
+                                                  categoryIds:
+                                                    type: array
+                                                    items:
+                                                      type: integer
+                                                      minimum: 0
+                                                      exclusiveMinimum: true
+                                                required:
+                                                  - categoryIds
+                                              fallbackBehaviours:
+                                                type: object
+                                                properties:
+                                                  skipUnscreenableTransaction:
+                                                    type: boolean
+                                                  skipUnsupportedNetwork:
+                                                    type: boolean
+                                                  skipUnsupportedAsset:
+                                                    type: boolean
+                                                  skipChainalysisFailure:
+                                                    type: boolean
+                                                required:
+                                                  - skipUnscreenableTransaction
+                                                  - skipUnsupportedNetwork
+                                                  - skipUnsupportedAsset
+                                                  - skipChainalysisFailure
+                                            required:
+                                              - alerts
+                                              - exposures
+                                              - addresses
+                                              - fallbackBehaviours
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - TravelRuleTransactionPrescreening
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              vendor:
+                                                type: string
+                                                enum:
+                                                  - Notabene
+                                              autoTriggerTimeoutSeconds:
+                                                type: integer
+                                                minimum: 0
+                                              autoClearAfterDeliveredTimeoutSeconds:
+                                                type: integer
+                                                minimum: 0
+                                            required:
+                                              - vendor
+                                              - autoTriggerTimeoutSeconds
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                  action:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - RequestApproval
+                                          approvalGroups:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                name:
+                                                  type: string
+                                                quorum:
+                                                  type: integer
+                                                  minimum: 1
+                                                approvers:
+                                                  type: object
+                                                  properties:
+                                                    userId:
+                                                      type: object
+                                                      properties:
+                                                        in:
+                                                          type: array
+                                                          items:
+                                                            type: string
+                                                            minLength: 1
+                                                          minItems: 1
+                                                          maxItems: 100
+                                                      required:
+                                                        - in
+                                                      additionalProperties: false
+                                                  additionalProperties: false
+                                              required:
+                                                - quorum
+                                                - approvers
+                                              additionalProperties: false
+                                            minItems: 1
+                                          autoRejectTimeout:
+                                            type: integer
+                                            nullable: true
+                                            minimum: 1
+                                        required:
+                                          - kind
+                                          - approvalGroups
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - Block
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - NoAction
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties:
+                                      walletId:
+                                        type: object
+                                        properties:
+                                          in:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        required:
+                                          - in
+                                        additionalProperties: false
+                                      walletTags:
+                                        type: object
+                                        properties:
+                                          hasAny:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                          hasAll:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        additionalProperties: false
+                                    additionalProperties: false
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                    enum:
+                                      - Active
+                                      - Archived
+                                  dateCreated:
+                                    type: string
+                                  dateUpdated:
+                                    type: string
+                                  activityKind:
+                                    type: string
+                                    enum:
+                                      - Wallets:IncomingTransaction
+                                  rule:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - ChainalysisTransactionScreening
+                                          configuration:
+                                            type: object
+                                            properties:
+                                              alerts:
+                                                type: object
+                                                properties:
+                                                  alertLevel:
+                                                    type: string
+                                                    enum:
+                                                      - LOW
+                                                      - MEDIUM
+                                                      - HIGH
+                                                      - SEVERE
+                                                  categoryIds:
+                                                    type: array
+                                                    items:
+                                                      type: integer
+                                                      minimum: 0
+                                                      exclusiveMinimum: true
+                                                required:
+                                                  - alertLevel
+                                                  - categoryIds
+                                              exposures:
+                                                type: object
+                                                properties:
+                                                  direct:
+                                                    type: object
+                                                    properties:
+                                                      categoryIds:
+                                                        type: array
+                                                        items:
+                                                          type: integer
+                                                          minimum: 0
+                                                          exclusiveMinimum: true
+                                                    required:
+                                                      - categoryIds
+                                                required:
+                                                  - direct
+                                              fallbackBehaviours:
+                                                type: object
+                                                properties:
+                                                  skipUnscreenableTransaction:
+                                                    type: boolean
+                                                  skipUnsupportedNetwork:
+                                                    type: boolean
+                                                  skipUnsupportedAsset:
+                                                    type: boolean
+                                                  skipChainalysisFailure:
+                                                    type: boolean
+                                                required:
+                                                  - skipUnscreenableTransaction
+                                                  - skipUnsupportedNetwork
+                                                  - skipUnsupportedAsset
+                                                  - skipChainalysisFailure
+                                            required:
+                                              - alerts
+                                              - exposures
+                                              - fallbackBehaviours
+                                            additionalProperties: false
+                                        required:
+                                          - kind
+                                          - configuration
+                                        additionalProperties: false
+                                  action:
+                                    oneOf:
+                                      - type: object
+                                        properties:
+                                          kind:
+                                            type: string
+                                            enum:
+                                              - NoAction
+                                        required:
+                                          - kind
+                                        additionalProperties: false
+                                  filters:
+                                    type: object
+                                    properties:
+                                      walletId:
+                                        type: object
+                                        properties:
+                                          in:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        required:
+                                          - in
+                                        additionalProperties: false
+                                      walletTags:
+                                        type: object
+                                        properties:
+                                          hasAny:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                          hasAll:
+                                            type: array
+                                            items:
+                                              type: string
+                                              minLength: 1
+                                            minItems: 1
+                                            maxItems: 100
+                                        additionalProperties: false
+                                    additionalProperties: false
+                                required:
+                                  - id
+                                  - name
+                                  - status
+                                  - activityKind
+                                  - rule
+                                  - action
+                                additionalProperties: false
+                        required:
+                          - id
+                          - requester
+                          - kind
+                          - operationKind
+                          - status
+                          - entityId
+                          - dateCreated
+                          - body
+                        additionalProperties: false
+            examples:
+              policy.triggered:
+                value:
+                  "policyEvaluation": 
+                    "id": "plce-xxxxxxx"
+                    "triggered": true
+                    "reason": "Transfer amount (USD 10000) is above limit (USD 5000). "
+                    "date": "2024-06-28T09:09:54.437Z"
+
+                    "policy":
+                      "id": "plc-xxxxxxx"
+                      "name": "Accounting wallet transfer limit"
+                      
+                    "activity": 
+                      "kind": "Wallets:Sign"
+                      "transferRequest": 
+                        "id": "xfr-xxxxxxx"
+                        
+                    
+
+                    "context":  
+                      "transactionAmount": 
+                        "value": "10000"
+                        "currency": "USD"
