@@ -9,6 +9,20 @@ body {
     /* letter-spacing: 0.02rem; */
 }
 
+#table-of-contents-layout:has(div) {
+    border: 1px solid rgb(var(--gray-200));
+    background-color: #fcfcfc;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    &>#table-of-contents>div {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-weight: bold;
+        font-size: large;
+    }
+}
+
 #navbar {
     background: #fffff2;
 }
@@ -35,7 +49,7 @@ h3,
 h4,
 h5,
 h6 {
-    /* letter-spacing: 0.02rem !important; */
+    letter-spacing: 0.02rem !important;
     font-weight: bold;
 }
 
@@ -67,13 +81,23 @@ h6 {
     background-color: #f2f2f4;
 }
 
-/* Deprecated tag */
+/* Deprecated tag in nav */
 .nav-tag-pill>.nav-tag-pill-text[data-nav-tag="Deprecated"] {
     background-color: #fffaeb;
     color: #b45309;
     border: 1px solid #fcd34d;    
     font-weight: normal;
 }
+/* deprecated component */
+.deprecated {
+    opacity: 0.75;
+}
+
+/* bug fix: callout bold was displayed in black */
+.callout strong {  
+    color: inherit
+}
+
 /* Left alignment for sub-menu items in the sidebar */
 /* #sidebar-content ul>li>a {
     font-weight: 300;
