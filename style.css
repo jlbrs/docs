@@ -6,7 +6,7 @@
 
 body {
     font-size: var(--text-size);
-    color: #6c717d
+    /* letter-spacing: 0.02rem; */
 }
 
 #navbar {
@@ -25,9 +25,9 @@ footer {
     background-color: #000;
 }
 
-.tracking-tight {
+/* .tracking-tight {
     letter-spacing: 0.02rem;
-}
+} */
 
 h1,
 h2,
@@ -35,7 +35,8 @@ h3,
 h4,
 h5,
 h6 {
-    letter-spacing: 0.02rem !important;
+    /* letter-spacing: 0.02rem !important; */
+    font-weight: bold;
 }
 
 /*
@@ -56,40 +57,54 @@ h6 {
     padding-left: 2rem !important;
 }
 
+/* Left alignment for sub-menu items in the sidebar */
+#sidebar-content ul>li>ul>li>a {
+    padding-left: 2rem !important;
+}
+
+/* Sidebar links hover effect */
 #sidebar-content a:hover {
     background-color: #f2f2f4;
 }
 
 /* Left alignment for sub-menu items in the sidebar */
-#sidebar-content ul>li>a {
+/* #sidebar-content ul>li>a {
     font-weight: 300;
 
-}
+} */
 
 /* pages description (1st paragraph under the title) */
 #content-area header > .text-lg {
     font-size: var(--text-size);
     line-height: 1.5rem;
-    color: #6c717d;
+    /* color: #6c717d; */
 }
 
 /* general text */
 .prose {
-    color: #6c717d !important;
+    /* /* color: #6c717d !important; too light !! */
     font-size: var(--text-size);
 }
 
 /* general links in text */
-.prose a {
+a.link {
     color: rgb(var(--primary));
     font-weight: var(--font-weight-body-custom);
     border-bottom: 0;
+    padding-right: 1px;
 
+    /* underline on hover only */
     &:hover {
         border-bottom: 1px solid rgb(var(--primary));
     }
-}
 
+    /* display icon for external links */
+    &[target="_blank"]:before {
+        content: '\29C9 ';
+        padding-right: 2px;
+        padding-left: 1px;
+    } 
+}
 /*
 .card .block {
 
@@ -97,18 +112,24 @@ h6 {
 
 } */
 
-.hover\:\!border-primary:hover {
-    border-color: #94a0bc !important;
+/* Put the card icon (in horizontal card setup) at the top */
+.card > .flex > div[data-component-part="card-icon"] {
+    align-self: start;
 }
 
+/* .hover\:\!border-primary:hover {
+    border-color: #94a0bc !important;
+} */
+
+/* Dfns logo bigger */
 .nav-logo {
     height: 2rem;
 }
 
+/* Stepper component : step number formatting */
 .steps div[data-component-part="step-number"]>div {
     background-color: #160c32;
     color: white;
-    font-weight: 600;
     font-size: large;
 }
 

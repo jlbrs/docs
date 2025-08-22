@@ -29,16 +29,14 @@
   },
   "fonts": {
     "heading": {
-      "family": "PP Neue Montreal Medium",
-      "weight": 600,
-      "source": "https://db.onlinewebfonts.com/t/b76e589398b734c21453bb17d93dd7ff.woff2",
-      "format": "woff2"
+      "family": "PP Neue Montreal",
+      "source": "https://fonts.cdnfonts.com/s/100431/ppneuemontreal-medium.woff",
+      "format": "woff"
     },
     "body": {
-      "family": "PP Neue Montreal Book",
-      "weight": 400,
-      "source": "https://db.onlinewebfonts.com/t/f78ded712623f1ae701b6fa49add526b.woff2",
-      "format": "woff2"
+      "family": "PP Neue Montreal",
+      "source": "https://fonts.cdnfonts.com/s/100431/ppneuemontreal-book.woff",
+      "format": "woff"
     }
   },
   "appearance": {
