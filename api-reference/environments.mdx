@@ -1,34 +1,39 @@
 ---
-title: 'Environments'
-description: 'Example section for showcasing API endpoints'
-tag: To do
+title: Dfns Environments
+description: Everything you need to know about our cloud platform.
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+import { Deprecated } from "/snippets/deprecated.jsx"
 
-## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+### Environments overview
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
 
-## Authentication
+| Environment | API base URL | Dashboard URL | Chains | SLAs | Webhook origin IP  |
+|:-------------|:---------------|:----------------|:--------|:------|:---------------------|
+| Production | `api.dfns.io` | [app.dfns.io](https://app.dfns.io/) | <Icon icon="check" /> Mainnet<br/><Icon icon="check" /> Testnet | Yes | `35.181.116.68`  |
+| <Deprecated>Staging</Deprecated> | <Deprecated nopill>`api.dfns.ninja`</Deprecated> | <Deprecated nopill>[app.dfns.ninja](https://app.dfns.ninja/)</Deprecated> | <Deprecated nopill><Icon icon="xmark-large" />  Mainnet<br/><Icon icon="check" />  Testnet</Deprecated> | <Deprecated nopill>No</Deprecated> | <Deprecated nopill>`52.47.197.63`  </Deprecated>|
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+<Warning>
+
+**_The staging environment is to use only with test funds_**
+
+This constraint exists to prevent customers from accidentally moving real funds into the staging environment. Dfns cannot prevent customers from using the staging environment to send funds to a mainnet chain. This is however against our terms of use, so please don't do it - thanks!
+
+</Warning>
+
+### Building API endpoint URLs
+
+Throughout our documentation, assume that you should prepend the environment base URL in front of the API paths given.
+
+For example: `GET /wallets/` should be interpreted as:
+
+* For production:  `GET https://api.dfns.io/wallets/`
+* <Deprecated>For staging:    `GET https://api.dfns.ninja/wallets/`</Deprecated>
+
+
+### Whitelisting webhooks origin IPs
+
+Our webhooks will always be originated from the same IP address (see table above). You can therefore use these if you want to whitelist Dfns IPs for filtering webhook delivery.
+
