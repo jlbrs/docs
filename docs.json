@@ -75,7 +75,7 @@
       {
         "tab": "Documentation",
         "icon": "book-open",
-        "groups": [
+        "pages": [
           {
             "group": "Introduction",
             "pages": [
@@ -85,14 +85,14 @@
                 "group": "Quickstart Guide",
                 "icon": "rocket",
                 "pages": [
-                  "getting-started/onboarding/index",
-                  "getting-started/onboarding/1-create-your-organization-and-invite-employees",
-                  "getting-started/onboarding/2-define-and-assign-permissions",
-                  "getting-started/onboarding/3-create-policies",
-                  "getting-started/onboarding/4-using-the-dashboard-create-your-first-wallet",
-                  "getting-started/onboarding/5-start-building-login-and-create-a-wallet-via-api",
-                  "getting-started/onboarding/6-non-custody-1-2-dfns-api-using-a-service-account",
-                  "getting-started/onboarding/7-non-custody-2-2-customer-login-and-delegated-wallets"
+                  "introduction/quickstart/index",
+                  "introduction/quickstart/1-create-your-organization-and-invite-employees",
+                  "introduction/quickstart/2-define-and-assign-permissions",
+                  "introduction/quickstart/3-create-policies",
+                  "introduction/quickstart/4-using-the-dashboard-create-your-first-wallet",
+                  "introduction/quickstart/5-start-building-login-and-create-a-wallet-via-api",
+                  "introduction/quickstart/6-non-custody-1-2-dfns-api-using-a-service-account",
+                  "introduction/quickstart/7-non-custody-2-2-customer-login-and-delegated-wallets"
                 ]
               }
             ]
