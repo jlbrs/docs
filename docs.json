@@ -100,6 +100,7 @@
           {
             "group": "Core Concepts",
             "pages": [
+              "core-concepts/non-custodial-wallets",
               "core-concepts/what-is-a-wallet-as-a-service",
               "core-concepts/how-mpc-wallets-work",
               "core-concepts/architecture",
@@ -174,6 +175,8 @@
             "icon": "code",
             "pages": [
               "developers/index",
+              "developers/guides/wallet-delegation",
+              "developers/guides/user-action-signature",
               {
                 "group": "Core Skills",
                 "pages": [
@@ -218,6 +221,7 @@
             "icon": "layout-dashboard",
             "pages": [
               "dashboard/overview",
+              "dashboard/videos",
               "dashboard/onboarding-a-new-device",
               "dashboard/managing-users-and-roles",
               "dashboard/creating-policies",
@@ -229,6 +233,7 @@
             "group": "Networks",
             "pages": [
               "networks/index",
+              "networks/supported-assets",
               "networks/multichain-wallets",
               {
                 "group": "Chains specificities",
@@ -259,11 +264,11 @@
         "pages": [
           "api-reference/index",
           "api-reference/environments",
-          "api-reference/postman-collection",
           "api-reference/core-objects",
           "api-reference/error-codes",
           "api-reference/idempotency",
           "api-reference/rate-limits",
+          "api-reference/postman-collection",
           {
             "group": "API Authorization headers",
             "pages": [
@@ -558,7 +563,7 @@
           {
             "group": "Typescript",
             "pages": [
-              "sdks/typescript/installation",
+              "sdks/typescript/index",
               "sdks/typescript/development",
               "sdks/typescript/examples"
             ]
@@ -566,7 +571,7 @@
           {
             "group": "Go",
             "pages": [
-              "sdks/go/installation",
+              "sdks/go/index",
               "sdks/go/development",
               "sdks/go/examples"
             ]
@@ -574,7 +579,7 @@
           {
             "group": "Flutter",
             "pages": [
-              "sdks/flutter/installation",
+              "sdks/flutter/index",
               "sdks/flutter/development",
               "sdks/flutter/examples"
             ]
@@ -582,7 +587,7 @@
           {
             "group": "Kotlin",
             "pages": [
-              "sdks/kotlin/installation",
+              "sdks/kotlin/index",
               "sdks/kotlin/development",
               "sdks/kotlin/examples"
             ]
@@ -590,7 +595,7 @@
           {
             "group": "Swift",
             "pages": [
-              "sdks/swift/installation",
+              "sdks/swift/index",
               "sdks/swift/development",
               "sdks/swift/examples"
             ]
@@ -598,7 +603,7 @@
           {
             "group": "Rust",
             "pages": [
-              "sdks/rust/installation",
+              "sdks/rust/index",
               "sdks/rust/development",
               "sdks/rust/examples"
             ]
@@ -606,7 +611,7 @@
           {
             "group": "Python",
             "pages": [
-              "sdks/python/installation",
+              "sdks/python/index",
               "sdks/python/development",
               "sdks/python/examples"
             ]

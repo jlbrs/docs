@@ -125,12 +125,12 @@ a.link:not(.nav-tabs-item), .api-section>div:not(.api-section-heading) a {
     padding-right: 1px;
 
     /* underline on hover only */
-    &:hover {
+    &:hover:not(:has(img:only-child)) {
         border-bottom: 1px solid rgb(var(--primary));
     }
 
-    /* display icon for external links */
-    &:is([target="_blank"], .api-section>div:not(.api-section-heading) a)::before {
+    /* display icon for external links, but not when it's just an image button */
+    &:is([target="_blank"]:not(:has(img:only-child)), .api-section>div:not(.api-section-heading) a)::before {
         content: '\29C9 ';
         padding-right: 2px;
         padding-left: 1px;

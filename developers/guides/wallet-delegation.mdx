@@ -1,0 +1,89 @@
+---
+title: Wallet Delegation
+description: Learn how to implement wallet-delegation in your application
+---
+
+In order to create delegated wallets for your end users, you will need to use a service account to authenticate your backend with Dfns.
+
+## Registering delegated users
+
+<Steps>
+<Step title="Create an End User">
+
+Use the [Create Delegated Registration Challenge](/api-reference/auth/create-delegated-registration-challenge) endpoint to register a new User in your organization, without your user needing to receive an email from Dfns.
+
+This endpoint will:
+
+1. Create a new End User attached to your organization
+
+2. Initiate a first credential registration for this user and provide you with the registration challenge.
+
+</Step>
+
+<Step title="Get the user to create a passkey">
+You then need to head to the user to register a Fido2 passkey from your frontend.
+
+The device or the browser will prompt the user to create a passkey (e.g.: using a fingerprint reader, a pin code, etc.). 
+
+When the user has completed the creation, you obtain the signed challenge in return. You will need to use the returned signature in the next step.
+
+</Step>
+
+<Step title="Complete the registration">
+Finally, you can either call:
+* the [Register](/api-reference/auth/register) endpoint to complete the user's registration, 
+* the [Register End User](/api-reference/auth/register-end-user) endpoint to complete the registration and create wallets for that user in one go.
+</Step>
+</Steps>
+
+<Check>
+You can now create wallets for the user, and log them in using the Delegated Login flow!
+</Check>
+
+## Creating a Delegated wallet
+
+Use the [Create Wallet](/api-reference/wallets/create-wallet) endpoint to create a new wallet for the user. Use the `delegateTo` field to specify the user id of the End User you created in the previous step.
+
+The created wallet will be a delegated wallet, meaning that the End User will have sole control over it, and will need to sign all actions using their own passkey.
+
+## Login your Delegated User
+
+
+Use your own authentication system to login the user into your platform, then use the [Delegated Login](/api-reference/auth/delegated-login) endpoint to authenticate the user with the Dfns API when you need to interact with the wallets.
+
+The delegated login endpoint will return an auth token that you can use to call the Dfns API on behalf of your user.
+
+Note that write operations will still require the user to sign the action using their passkey.
+
+## Delegated actions
+
+When you need to perform actions on behalf of the user, you can use the auth token obtained from the delegated login endpoint to authenticate your requests to the Dfns API.
+
+<Steps>
+<Step title="Create an action signing challenge">
+
+Use the usual [Create Action Signing Challenge](/api-reference/auth/create-user-action-challenge) endpoint to request a signing challenge for the user.
+
+
+
+This endpoint will provide you with the challenge to sign.
+
+</Step>
+
+<Step title="Get the user to sign the challenge">
+You then need to head to the user ( from your frontend) to prompt for a Fido2 signature using their passkey.
+
+The device or the browser will prompt the user to use the registered passkey (e.g.: using a fingerprint reader, a pin code, etc.). 
+
+When the user has completed the signature, you obtain the signed challenge in return. You will need to use it in the next step.
+
+</Step>
+
+<Step title="Request a User Action token">
+Call the [Create User Action Signature](/api-reference/auth/create-user-action-signature) endpoint to obtain a User Action token that you can use to authenticate your write requests.
+</Step>
+
+<Step title="Perform the action">
+Use the User Action token obtained from the previous step to authenticate your write requests to the Dfns API by including it as the `X-DFNS-USERACTION` header.
+</Step>
+</Steps>

@@ -2,16 +2,52 @@
 title: 'Authentication flows'
 description: 'How Dfns handles authentication'
 icon: 'key'
-tag: To do
 ---
-Dfns is designed to be used by a variety of users, from developers to end-users. Here’s a breakdown of the different user roles and how they interact with Dfns:
 
-1. **Developers**: They use Dfns to integrate wallet functionality into their applications. They interact with our APIs and SDKs to build and customize their solutions.
+import { Post } from "/snippets/post.jsx"
 
-2. **Admins**: Admins manage the Dfns account and settings. They have access to the dashboard where they can configure policies, view analytics, and manage users.
+## Regular user login flow
 
-3. **End-users**: These are the customers using applications built on Dfns. They interact with the wallet through the frontend interfaces provided by the developers.
+User login is a two step process.
 
-4. **Support**: Our support team uses Dfns to assist users with any issues they encounter. They have access to logs and analytics to help diagnose problems.
+<Steps>
 
-Each user role has different permissions and access levels within the Dfns platform, ensuring a secure and tailored experience for everyone.
+<Step title="Create a user login challenge">
+
+Use <Post>/auth/login/init</Post> : [Create Login Challenge](/api-reference/auth/create-login-challenge).
+
+This will generate a challenge to be signed by the user.
+
+If the user has a credential of kind `PasswordProtectedKey` a temporary one time code needs to be passed in the `loginCode` field. 
+Send this code first by using <Post>/auth/login/code</Post> : [Send Login Code](/api-reference/auth/send-login-code). 
+That's required because the [Create Login Challenge](/api-reference/auth/create-login-challenge) endpoint is unauthenticated and returns the encrypted private key of the user. So we need a first step to verify the identity of the user to prevent anybody from fetching the encrypted private key and trying to brute force it offline.
+
+If the user has at least one discoverable webauthn credential, `username` is optional (usernamless flow).
+
+
+</Step>
+<Step title="Get the user to sign the challenge">
+Depending on the type of credentials being used, the challenge can be signed in different ways:
+* passkey: the browser or the OS will handle the signing operation using WebAuthn APIs by creating a new passkey on the user device.
+* personal access token: the private key associated with the token can be used to sign the challenge.
+* service account token: the private key associated with the service account can be used to sign the challenge.
+</Step>
+<Step title="Complete the user login">
+
+Use <Post>/auth/login</Post>  : [Login](/api-reference/auth/login).
+
+Completes the login process and provides the authenticated user with their authentication token.
+
+The type of credentials used to login is determined by the kind field in the nested objects (`firstFactor` and `secondFactor`). Supported credential kinds are:
+
+- `Fido2`: Login challenge is signed by a user's signing device using WebAuthn.
+- `Key`: Login challenge is signed by a user's private key.
+- `PasswordProtectedKey`: Login challenge is signed by the decrypted user's private key that was sent during Create User Login Challenge step.
+</Step>
+</Steps>
+
+## Social login flow
+
+Use <Post>/auth/login/social</Post> to obtain an authentication token for the user. 
+
+See [Social Login](/api-reference/auth/social-login) for more details.

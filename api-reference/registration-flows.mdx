@@ -2,16 +2,103 @@
 title: 'Registration flows'
 description: 'How Dfns handles registration'
 icon: 'key'
-tag: To do
 ---
-Dfns is designed to be used by a variety of users, from developers to end-users. Here’s a breakdown of the different user roles and how they interact with Dfns:
 
-1. **Developers**: They use Dfns to integrate wallet functionality into their applications. They interact with our APIs and SDKs to build and customize their solutions.
+import { Post } from "/snippets/post.jsx"
+import { Put } from "/snippets/put.jsx"
 
-2. **Admins**: Admins manage the Dfns account and settings. They have access to the dashboard where they can configure policies, view analytics, and manage users.
+When new users are created within your organization, they will receive a registration email containing a registration code. These endpoints allow this user to complete the registration process.
 
-3. **End-users**: These are the customers using applications built on Dfns. They interact with the wallet through the frontend interfaces provided by the developers.
+This registration process includes registering the user's authentication method. Either:
 
-4. **Support**: Our support team uses Dfns to assist users with any issues they encounter. They have access to logs and analytics to help diagnose problems.
+* WebAuthn (Passwordless MFA)
+* a custom Key (public key of a public/private keypair) if this user will only interact programatically.
 
-Each user role has different permissions and access levels within the Dfns platform, ensuring a secure and tailored experience for everyone.
+## Regular users registration flow
+<Steps>
+<Step title="Send a registration code">
+
+Use <Put>/auth/registration/code</Put> to send a registration code to the user.
+
+Your user receives an email from Dfns with a registration code they will need to provide in the next step.
+
+See [Send Registration Code](/api-reference/auth/send-registration-code) for more details.
+
+</Step>
+<Step title="Create a user registration challenge">
+
+Use <Post>/auth/registration/init</Post> providing the user's registration code.
+
+Dfns will verify the registration code sent to the user, and generate a challenge to be signed and passed to the second endpoint. A temporary authentication token is also sent back, to be passed in the `Authorization: Bearer [temporary token]` header of the next registration endpoint.
+
+</Step>
+<Step title="Get the user to sign the challenge">
+Depending on the type of credentials being used, the challenge can be signed in different ways:
+* passkey: the browser or the OS will handle the signing operation using WebAuthn APIs by creating a new passkey on the user device.
+* personal access token: the private key associated with the token can be used to sign the challenge.
+* service account token: the private key associated with the service account can be used to sign the challenge.
+</Step>
+<Step title="Complete the user registration">
+
+Use <Post>/auth/registration</Post>  : [Register](/api-reference/auth/register).
+
+Here you will register an authentication method, and send the previous challenge with a signature.
+
+The type of credentials being registered is determined by the `credentialKind` field in the nested objects (`firstFactorCredential` , `secondFactorCredential` and `RecoveryCredential`). Supported credential kinds are:
+
+* `Fido2`: User action is signed by a user's signing device using `WebAuthn`.
+* `Key`: User action is signed by a user's, or token's, private key.
+* `PasswordProtectedKey`: User action is signed by a user's, or token's, private key. The encrypted version of the private key is stored by Dfns and returns during the signing flow for the user to decrypt it.
+* `RecoveryKey` : Similar to `PasswordProtectedKey`, but this credential can only be used to recover an account not to sign an action or login. Once this credential is used all the other user's credentials are invalidated.
+
+</Step>
+</Steps>
+
+## Social registration flow
+
+<Steps>
+<Step title="Send a registration code">
+
+Use <Post>/auth/registration/social</Post> to initiate the social login process and get a challenge for the user to sign. 
+
+See [Create Social Registration Challenge](/api-reference/auth/create-social-registration-challenge) for more details.
+
+</Step>
+<Step>
+
+Follow the next steps to complete the social registration process as explained above.
+
+</Step>
+
+</Steps>
+
+## Delegated users registration flow
+
+<Steps>
+<Step title="Create an End User">
+
+Use <Post>/auth/registration/delegated</Post> : [Create Delegated Registration Challenge](/api-reference/auth/create-delegated-registration-challenge)  to register a new User in your organization, without your user needing to receive an email from Dfns.
+
+This endpoint will:
+
+1. Create a new End User attached to your organization
+
+2. Initiate a first credential registration for this user and provide you with the registration challenge.
+
+</Step>
+
+<Step title="Get the user to create a passkey">
+You then need to head to the user to register a Fido2 passkey from your frontend.
+
+The device or the browser will prompt the user to create a passkey (e.g.: using a fingerprint reader, a pin code, etc.). 
+
+When the user has completed the creation, you obtain the signed challenge in return. You will need to use the returned signature in the next step.
+
+</Step>
+
+<Step title="Complete the registration">
+Finally, you can either call:
+* <Post>/auth/registration</Post> : the [Register](/api-reference/auth/register) endpoint to complete the user's registration: 
+* <Post>/auth/registration/enduser</Post> : the [Register End User](/api-reference/auth/register-end-user) endpoint to complete the registration and create wallets for that user in one go: 
+</Step>
+</Steps>

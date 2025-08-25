@@ -1,34 +1,78 @@
 ---
 title: 'OpenAPI & Postman'
-description: 'Example section for showcasing API endpoints'
-tag: To do
+description: 'Standardized specifications of the Dfns API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# OpenAPI
 
-## Welcome
+You can find the OpenAPI specification of the Dfns API here: [OpenAPI Specification](/openapi.yaml)
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+# Postman
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+If you are using [Postman](https://www.postman.com/), you can fork our Postman collection: 
 
-## Authentication
+<a href="https://app.getpostman.com/run-collection/45971326-a83900e3-8aa1-4812-96ef-607f13d19924?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D45971326-a83900e3-8aa1-4812-96ef-607f13d19924%26entityType%3Dcollection%26workspaceId%3D7d5b8af2-ddaf-4fc0-bbe2-1b6b14de353a" target="_blank">
+  <img src="https://run.pstmn.io/button.svg" noZoom alt="Run In Postman"/>
+</a>
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+This collection includes:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+* Dfns api endpoints
+* An environment to fill out
+* A pre-request script that handles [User Action Signing](../../advanced-topics/authentication/authentication-authorization#sign-api-requests-user-action-signing) for you for every POST requests.
+
+The purpose of the pre-request script is to populate some of the [required headers](../advanced-topics/authentication/request-headers) for authentication. If you're interested in what it does and how it works, you can check the detail of the pre-request script in the collection itself, here:
+
+<Frame>
+<img src="https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FB7ntcsMg0McJDLLHF6XI%2Fimage.png?alt=media&#x26;token=e1947af0-c642-4f80-9f14-9d2a176b305f" />
+</Frame>
+
+#### Setup
+
+To make calls within postman you need to:
+
+<Steps>
+
+<Step title="Create a public / private key pair">
+
+The public private key pair will be used to sign user actions within the Dfns API.
+
+```shell
+# Generate a ECDSA Private Key and the public key pair
+openssl ecparam -genkey -name prime256v1 -noout -out prime256v1.pem
+openssl pkey -in prime256v1.pem -pubout -out prime256v1.public.pem
 ```
+
+</Step>
+
+<Step title="Create a Personal Access Token or Service Account in the Dfns Dashboard">
+
+```shell
+# Create a Personal Access Token or Service Account
+```
+
+
+Personal access tokens can be created in the Dfns dashboard under the Settings page.
+
+When creating a new Personal Access Token, you will need to copy the public key (in `prime256v1.public.pem`) you create earlier into the Public Key.
+
+Be sure to copy the JWT, after the Personal Access Token is created, as you will need it in the next step.
+
+</Step>
+
+<Step title="Populate the environment in Postman">
+
+On the left pane, you should see "Environments". If you go there, there are two Postman Environments available (one to work with `authv2` and one for `authv1`(deprecated)).
+
+Click on the one that you want to use (authv2 is recommended), and fill out the values in there (fill the **`Current Value`** column) with the values shown in the section below.
+
+When you're done, set this environment as "Active" (meaning it will be used when you try endpoints) by clicking on the checkmark icon next to the environment name, or by selecting it in the dropdown selector in the top-right corner of Postman window.
+
+**Values:**
+
+* `dfnsApiDomain` - Domain of Dfns API. `api.dfns.ninja` or `api.dfns.io`
+* `authToken` - User PAT (Personal Access Token), or Service Account token
+* `credentialPrivateKey` - Private key of the credentials registered during PAT/Service Account creation. Copy the key including all newlines into the variable
+
+</Step>
+</Steps>

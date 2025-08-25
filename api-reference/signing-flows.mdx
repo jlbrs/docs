@@ -2,16 +2,37 @@
 title: 'User Action Signing flows'
 description: 'How Dfns handles signing'
 icon: 'signature'
-tag: To do
 ---
-Dfns is designed to be used by a variety of users, from developers to end-users. Here’s a breakdown of the different user roles and how they interact with Dfns:
 
-1. **Developers**: They use Dfns to integrate wallet functionality into their applications. They interact with our APIs and SDKs to build and customize their solutions.
+import { Post } from "/snippets/post.jsx"
 
-2. **Admins**: Admins manage the Dfns account and settings. They have access to the dashboard where they can configure policies, view analytics, and manage users.
+<Steps> 
+<Step title="Request a User Action Challenge">
 
-3. **End-users**: These are the customers using applications built on Dfns. They interact with the wallet through the frontend interfaces provided by the developers.
+Use <Post>/auth/action/init</Post>. Refer to [Create User Action Challenge](/api-reference/auth/create-user-action-challenge) for endpoint details. 
 
-4. **Support**: Our support team uses Dfns to assist users with any issues they encounter. They have access to logs and analytics to help diagnose problems.
+Starts a user action signing session, returning a challenge that will be used to verify the user's intent to perform an action.
 
-Each user role has different permissions and access levels within the Dfns platform, ensuring a secure and tailored experience for everyone.
+</Step>
+<Step title="Get the user to sign the challenge">
+Depending on the type of credentials being used, the challenge can be signed in different ways:
+* passkey: the browser or the OS will handle the signing operation using WebAuthn APIs.
+* personal access token: the private key associated with the token can be used to sign the challenge.
+* service account token: the private key associated with the service account can be used to sign the challenge.
+</Step>
+<Step title="Request a User Action token">
+
+Use <Post>/auth/action</Post>. Refer to [Create User Action Signature](/api-reference/auth/create-user-action-signature) for endpoint details.
+
+Completes the user action signing process and provides a signing token that can be used to verify the user intended to perform the action.
+
+The type of credentials used to sign the action is determined by the kind field in the nested objects (`firstFactor` and `secondFactor`). Supported credential kinds are:
+* `Fido2`: User action is signed by a user's signing device using WebAuthn.
+* `Key`: User action is signed by a user's, or token's, private key.
+* `PasswordProtectedKey`: Login challenge is signed by the decrypted user's private key that was sent during Create User Action Signature Challenge step.
+
+</Step>
+<Step title="Use the User Action token">
+Add the User Action token to the `X-User-Action-Signature` header of the original API call that requires user action signing.
+</Step>
+</Steps>

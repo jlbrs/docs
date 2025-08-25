@@ -37,3 +37,4 @@ For example: `GET /wallets/` should be interpreted as:
 
 Our webhooks will always be originated from the same IP address (see table above). You can therefore use these if you want to whitelist Dfns IPs for filtering webhook delivery.
 
+Make sure you also verify that webhooks are properly signed by checking the `Dfns-Signature` header as explained in [webhooks documentation](/api-reference/webhooks/).

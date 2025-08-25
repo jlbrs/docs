@@ -1,16 +1,33 @@
 ---
-title: '👋 Welcome to Dfns'
-tag: To do
+title: 'Introduction'
+description: "How to get started with Dfns API"
 ---
 
-Welcome to the Dfns APIs! Dfns provides wallet-as-a-service infrastructure that enables crypto developers to forget about private key management so they can focus on building what matters most — their applications. We’ve hired teams of security and cryptography PhDs to build the industry’s leading _Secure Multi-Party Computation_-based _Threshold Signature Scheme_ ([MPC](https://en.wikipedia.org/wiki/Secure_multi-party_computation)/[TSS](https://en.wikipedia.org/wiki/Threshold_cryptosystem)) implementation so that you don’t have to.
+This section is where you can find our complete API reference, including request operations and responses.
 
-If you’re just getting started with Dfns APIs, head to our [**Getting Started**](getting-started/onboarding-to-dfns) section to learn about our nomenclature and API conventions.
+## Core objects
 
-If you need details on a specific API endpoint, peruse our [API Docs](api-docs/api-docs) reference section for details on headers, query parameters, body parameters, response types, etc.
+Make sure you go through our [core objects documentation](/api-reference/core-objects) to understand the key entities you'll be working with.
 
-Don’t hesitate to [contact us](mailto:docs@dfns.co) if you have any questions about the APIs. Our documentation is a humble work in progress and your constructive feedback is always appreciated. So please don't hesitate to shoot us an email.
+## Authentication
 
-Thanks!
+This is a key aspect of working with the Dfns API. You'll need to include a token in the headers of your requests to authenticate to all APIs, but also to sign change-inducing requests.
+We use passkeys to replace passwords, and you can read all about it in our [authentication documentation](/advanced-topics/authentication).
 
-Dfns Docs Team
+## API format & HTTP headers
+
+To ensure correct processing of API calls, please follow these conventions
+
+| Header         | Value                 |
+| -------------- | --------------------- |
+| _Content-type_ | `application/json`    |
+| _User-agent_   | `<must not be empty>` |
+
+
+
+## Rate Limits
+
+Today, current rate limit on our API for a Dfns organisation is:
+
+* if your organisation is on Trial:  100 req/min
+* otherwise:  1000 req/min

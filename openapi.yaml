@@ -295,7 +295,6 @@ paths:
                   - userAction
   /auth/action/init:
     post:
-      deprecated: true
       tags:
         - Auth
       summary: " Create User Action Challenge"
@@ -57258,6 +57257,7 @@ paths:
                   - encryptedKeyShares
   /wallets/{walletId}/signatures:
     post:
+      deprecated: true
       tags:
         - Wallets
       summary: " Generate Signature"

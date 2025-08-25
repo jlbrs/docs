@@ -1,31 +1,576 @@
 ---
 title: "Product Updates"
-description: "Product updates and announcements"
+description: Change log detailing product releases
 rss: true
-tag: To do
 ---
-<Update label="March 2025" description="v0.0.10">
-  Added a new Wintergreen flavor.
 
-  Released a new version of the Spearmint flavor, now with 10% more mint.
+
+The Dfns change log documents changes to our product functionality made by our releases. This includes new features, breaking changes, bug fixes to known issues, deprecations, etc. Please bookmark this page and refresh frequently for the latest updates.
+
+<Update label="August 20th, 2025" tags={["Dashboard", "Blockchain support"]}>
+
+**Dashboard Updates:**
+
+* Tags on Wallet Page
+* Hide Scam Tokens & Unverified Transactions
+* Swaps
+
+**Blockchain Support Updates:**
+
+* Hedera T1 Support
+  * Mainnet: `Hedera`
+  * Testnet: `HederaTestnet`
+* Cardano T1 Support
+  * Mainnet: `Cardano`
+  * Testnet: `CardanoPreprod`
+
 </Update>
 
-<Update label="February 2025" description="v0.0.09">
-  Released a new version of the Spearmint flavor.
+<Update label="August 14th, 2025" tags={["Dashboard", "Blockchain support"]}>
+
+**Dashboard Updates:**
+
+* Exportable Transaction History
+  * All wallets across organization
+  * Specific Wallet
+* Address Book
+  * Create human readable aliases mapped to wallet addresses
+
+**Blockchain Support Updates:**
+
+* FLARE T1 Support
+  * Mainnet:`FlareC`&#x20;
+  * Testnet: `FlareCCoston2`
+
 </Update>
 
-<Update label="March 2025" description="v0.0.10" tags={["Wintergreen", "Spearmint"]}>
-  Added a new Wintergreen flavor.
+<Update label="July 24, 2025" tags={["Blockchain support"]}>
 
-  Released a new version of the Spearmint flavor, now with 10% more mint.
+**Blockchain Support Updates:**
+
+* Cosmos T1 Support
+  * Mainnet:`CosmosHub4`
+  * Testnet: `CosmosIcsTestnet`
+* Babylon T1 Support
+  * Mainnet: `BabylonGenesis`
+  * Testnet: `BabylonTestnet5`
+* NEAR T2 Support
+  * Mainnet: `Near`
+  * Testnet: `NearTestnet`
+
 </Update>
 
-<Update label="February 2025" description="v0.0.09" tags={["Spearmint"]}>
-  Released a new version of the Spearmint flavor.
+<Update label="October 4, 2024" tags={["New Feature"]}>
+
+* Launched Dfns Connect improvements
+
 </Update>
 
-<Update label="January 2025" description="v0.0.08" tags={["Peppermint", "Spearmint"]}>
-  Deprecated the Peppermint flavor.
+<Update label="September 20, 2024" tags={["New Feature","Blockchain support"]}>
 
-  Released a new version of the Spearmint flavor.
+* Launched Wallet Transfer idempotency
+* Launched Kaspa chain as Tier 1
+
+</Update>
+
+<Update label="September 13, 2024" tags={["Blockchain support"]}>
+
+* Launched Race Chain as Tier 1
+* Upgraded MATIC to POL
+
+</Update>
+
+<Update label="August 30, 2024" tags={["Blockchain support"]}>
+
+* Deployed fix for Polygon gas fee estimation
+
+</Update>
+
+<Update label="August 16, 2024" tags={["Blockchain support"]}>
+
+* Launched Kraken CEX integration
+
+</Update>
+
+<Update label="August 9, 2024" tags={["Blockchain support"]}>
+
+* Launched ICP and OGY support as Tier 1
+
+</Update>
+
+<Update label="July 26, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched TON in SDK and Dashboard UI
+* Enabled feature flags for KU23 ECDSA signing
+
+</Update>
+
+<Update label="July 19, 2024" tags={["Blockchain support"]}>
+
+* Launched TON blockchain support
+* Fixed bug in Solana transaction management
+
+</Update>
+
+<Update label="July 12, 2024" tags={["Dashboard"]}>
+
+* Launched new filter on List Wallets to retrieve wallets by userID/username
+* Password encryption based Webauthn alternative
+
+</Update>
+
+<Update label="July 5, 2024" tags={["Dashboard", "SDK Update"]}>
+
+* Launched Flutter SDK
+* Launched Dashboard visual redesign
+
+</Update>
+
+<Update label="June 28, 2024" tags={["New Feature", "Blockchain support"]}>
+
+* Chainalysis integration for KYT/AML
+* Support for Holesky testnet
+
+</Update>
+
+<Update label="June 14, 2024" tags={["New Feature"]}>
+
+* Launched key export for EdDSA keys
+
+</Update>
+
+<Update label="June 7, 2024" tags={["Blockchain support"]}>
+
+* Launched Solana Tier 1
+
+</Update>
+
+<Update label="May 31, 2024" tags={["Blockchain support"]}>
+
+* Launched internal indexing for EVM chains
+* Launched Algorand NFT indexing
+
+</Update>
+
+<Update label="May 24, 2024" tags={["SDK Update"]}>
+
+* Launched Android Kotlin SDK
+
+</Update>
+
+<Update label="May 17, 2024" tags={["Dashboard"]}>
+
+* Launched create credential w/ code in dashboard
+
+</Update>
+
+<Update label="May 10, 2024" tags={["Blockchain support"]}>
+
+* Launched Stellar Tier 1
+
+</Update>
+
+<Update label="May 3, 2024" tags={["New Feature", "SDK Update"]}>
+
+* Launched [new endpoints](../api-docs/wallets/add-wallet-tags) for tagging wallets for Policy Engine filters
+* Launched cross platform registration with a one-time code
+* Upgraded ZeroDev SDK version
+
+</Update>
+
+<Update label="April 19, 2024" tags={["SDK Update"]}>
+
+* Launched [iOS Swift SDK](dfns-sdks)
+* Launched new endpoint to [create user & wallet simultaneously](https://docs.dfns.co/d/api-docs/authentication/registration/completeenduserregistration)
+* Upgraded Viem SDK integration to 2.X
+
+</Update>
+
+<Update label="April 12, 2024" tags={["New Feature", "Dashboard"]}>
+
+* Launched recipient whitelisting in Policy Engine
+* Executed Asset Account and Public Key to Wallet migration script
+* Retired legacy authentication service
+
+</Update>
+
+<Update label="March 29, 2024" tags={["Blockchain support"]}>
+
+* Launched Cardano Tier2 support and Polygon Amoy Tier1  (retired Mumbai)
+* Launched Solana fee estimation API
+
+</Update>
+
+<Update label="March 15, 2024" tags={["SDK Update", "Blockchain support"]}>
+
+* Launched [GoLang SDK](dfns-sdks)
+* Launched Tier2 support for PolkaDot and Kusama
+
+</Update>
+
+<Update label="March 8, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched Tier1 support for Algorand
+* Removed legacy dashboard access in production
+
+</Update>
+
+<Update label="Feb 29, 2024" tags={["New Featuere"]}>
+
+* Added `custodial` field to [ListWallets](../api-docs/wallets/list-wallets).  False implies an end user wallet
+* Removed Policy Engine v1 create endpoints from dashboard and SDK
+* Fixed a bug in which Policy Engine [List Approvals](../api-docs/policy-engine/api-reference/list-approvals-1) was filtering by default
+
+</Update>
+
+<Update label="Feb 21, 2024" tags={["New Feature", "Blockchain support"]}>
+
+* Launched new [Read Contract endpoint](https://docs.dfns.co/d/api-docs/networks/read-contract)
+* Launched Litecoin Tier1
+
+</Update>
+
+<Update label="Feb 14, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* New support for WebAuthn across subdomains
+
+</Update>
+
+<Update label="Feb 7, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* [Policy Engine v2](https://docs.dfns.co/d/api-docs/policy-engine) released
+* [Tron and Algorand T1 wallets support](https://docs.dfns.co/d/api-docs/wallets#supported-networks)
+* [Retries on webhooks](https://docs.dfns.co/d/api-docs/webhooks#webhook-event-deliveries-and-retries) live&#x20;
+
+</Update>
+
+<Update label="Jan 24, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* New [network fees](../api-docs/networks/estimate-fees) API released
+* Renamed Ripple to XrpLedger
+
+</Update>
+
+<Update label="Jan 17, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* Added send button in dashboard for tier2 chains
+* Exposed verified contracts in the API metadata for EVM chains
+* Renamed Ripple to XrpLedger for accuracy&#x20;
+
+</Update>
+
+<Update label="Jan 10, 2024" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched Bitcoin indexing for Wallets bringing the chain to Tier1 support
+* Fixed a bug preventing users from reading end user wallet metadata
+* Released AWS KMS Signer in the SDK
+
+</Update>
+
+<Update label="Dec 20, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Backend changes to cluster load balancing
+
+</Update>
+
+<Update label="Dec 12, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added `secondsValid` to PAT expiration config
+
+</Update>
+
+<Update label="Dec 6, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched Solana and Tezos Tier2 wallets support
+* Launched support for the Starkware ecosystem with KeyECDSAStark Pseudo Networks
+
+</Update>
+
+<Update label="Nov 29, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched [Wallet webhooks](../api-docs/webhooks)
+
+</Update>
+
+<Update label="Nov 22, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched Tier2 wallets support for Bitcoin and Tron
+
+</Update>
+
+<Update label="Nov 15, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched SDK support for Viem
+* Launched new .env file generation utility in the dashboard
+
+</Update>
+
+<Update label="Nov 8, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Moved all EVM chains to Tier 1 support in Wallets API.&#x20;
+* Added Base L2 support and ArbitrumSepolia testnet
+
+</Update>
+
+<Update label="Nov 1, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released new WalletConnect integration in the dashboard using WebAuthn to sign transactions&#x20;
+
+</Update>
+
+<Update label="Oct 18, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released first version of wallet export for Enterprise plan customers.
+
+</Update>
+
+<Update label="Oct 10, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released first version of wallet import for Enterprise plan customers.
+
+</Update>
+
+<Update label="Oct 1, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released CGGMP pre-signatures to accelerate signing request times
+
+</Update>
+
+<Update label="Sep 14, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Enabled CGGMP signers in production environments
+
+</Update>
+
+<Update label="Aug 29, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Enabled PaymentVelocity rules on Asset Accounts
+* Released permissions and policy engine in the dashboard
+
+</Update>
+
+<Update label="Aug 9, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released Policy Engine support for Wallet TransferAmountLimit rules
+* Released Wallets in the dashboard
+
+</Update>
+
+<Update label="Aug 1, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released Policy Engine support for Wallet AlwaysActivated rules
+* Added Generate Signature support for Pseudo Network Wallets
+
+</Update>
+
+<Update label="July 17, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Updated network names for wallet blockchains
+* Returning complete signature encoding from Get Signature calls.&#x20;
+
+</Update>
+
+<Update label="July 11, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Updated enumerated types for Wallets API network value
+
+</Update>
+
+<Update label="July 5, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Relaxed CORS policy preventing API calls from the browser&#x20;
+
+</Update>
+
+<Update label="June 29, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* [Typescript SDK](dfns-sdks) released
+* Latency optimizations for Auth service
+* Fixes for Windows Hello usage with Webauthn&#x20;
+
+</Update>
+
+<Update label="June 7, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released CMP asset in the dashboard
+
+</Update>
+
+<Update label="June 1, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released the new Wallets and NFTs API Beta
+* Fixed bugs related to trailing slashes in URL paths
+
+</Update>
+
+<Update label="May 11, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added key-based recovery support to the Dfns Dashboard
+* Fixed bug in WalletConnect deployment
+
+</Update>
+
+<Update label="April 26, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added MVP signer multi-tenancy for ninja sandbox orgs
+* Updates to blockchain indexing pipeline
+
+</Update>
+
+<Update label="April 20, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added Ethereum Sepolia testnet to blockchain indexing
+* Add Tezos & Solana support to BroadcastTransaction
+
+</Update>
+
+<Update label="April 5, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Allow users to add permissions to API keys in the dashboard
+* Optimized API response latency via server-side changes
+* Additional dashboard security enahncements
+
+</Update>
+
+<Update label="Mar 23, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Deployed new authentication service to production (non-customer impacting)
+* Removed `isImmutable` field from policy creation
+* Fixed bug where rejected transactions are not reflecting the correct state
+* Changed payment note to write to XRP destination tag
+
+</Update>
+
+<Update label="Mar 14, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added blockchain indexing for SOL and XRP
+* Added `activityId` query string param to [List policy control executions](broken-reference)
+
+</Update>
+
+<Update label="Mar 8, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added `nonce` to BroadcastTransaction API responses
+* Payment note broadcasted as memo in XRP transactions
+
+</Update>
+
+<Update label="Feb 28, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added new [ListTransactions endpoint](broken-reference)
+* Throughput enhancements to our indexing pipeline
+
+</Update>
+
+<Update label="Feb 17, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added a [new endpoint](https://dfns.gitbook.io/dfns-docs/api-docs/blockchains/call-read-function) to call `view` (aka read-only) contract methods
+* Deployed chain indexing on BTC and LTC
+* Deployed support for Constellation network (DAG) and Ambrosus network (AirDAO)
+
+</Update>
+
+<Update label="Feb 8, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added support for agEUR token on Polygon (AGEUR.MATIC `assetSymbol`)
+* Updated testnet for SKALE blockchain
+
+</Update>
+
+<Update label="Jan 30, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Added support for Solana tokens
+* Deprecated `groupSize` and `groupThreshold` body paramters for key generation
+* Polygon payments fix for "transaction underpriced" error
+
+</Update>
+
+<Update label="Jan 13, 2023" tags={["Dashboard", "Blockchain support"]}>
+
+* Released support for Elrond chain
+* Added indexing support for Polygon and Binance Smart Chain
+* Misc bug fixes
+
+</Update>
+
+<Update label="Dec 19, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Fixed a bug in [BroadcastTransaction](broken-reference) where the `value` parameter was being interpreted in ETH instead of WEI.
+* Last push of the year!
+
+</Update>
+
+<Update label="Dec 15, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched new `direction` and `status` query parameters on [ListPayments](broken-reference)
+* Fixed a bug in the `timeoutInMinutes` implementation in [PolicyControls](broken-reference)
+
+</Update>
+
+<Update label="Dec 7, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched upgraded key storage persistence layer for wallet scalability
+* Launched indexing for ERC20s including USDT, USDC, MATIC, BNB so they are exposed in incoming transactions.
+* Internal bug fixes for Binance Smart Chain.
+
+</Update>
+
+<Update label="Nov 30, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Launched our new blockchain indexing microservice for Ethereum mainnet exposed via the new `direction` field on [payments](broken-reference) and the new `PaymentReceived and PaymentConfirmed` [callback eventKinds](broken-reference).
+* Enabled [Permissions](../api-docs/permissions) on [callbacks](broken-reference) and [pubic keys](broken-reference)
+* Internal bug fixes wrt database pagination
+
+</Update>
+
+<Update label="Nov 22, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Continuing the roll out of our new authorization framework called Permissions. The rollout is intended to be silent and should have no customer facing impact. Stay tuned for further announcements on the features & functionality.
+* Deprecated `AllowedProducts` internal restriction on API endpoint usage. Now public keys created with the high level API can be used with the low level API and vice versa.
+
+</Update>
+
+<Update label="Nov 16, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Rolled out a new authorization framework called Permissions. This is the first of two deployments and should have no customer-facing impact.
+* Deployed changes to our internal gateways for routing internal API calls.
+
+</Update>
+
+<Update label="Nov 8, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Added a `maxUnitBalance` property to the response from the [GetBalance endpoint](broken-reference) representing the largest possible unit for the given asset.
+* IP Whitelisting fixes: API Gateway redirect aliases, extra NAT Gateway IPs whitelisted
+* Integrated Fantom, Optimism, and SKALE blockchains
+
+</Update>
+
+<Update label="Oct 27, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Added `PolicyActivated` and `WalletCreated` [callback subscription topics](broken-reference)
+* Integrated TRON blockchain
+
+</Update>
+
+<Update label="Oct 16, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Deployed IP whitelisting framework
+* Fixed a bug impacting payment initiation and market data collection
+
+</Update>
+
+<Update label="Sep 27, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Added [GetAddressForNetwork endpoint](broken-reference)
+* Deployed internal changes around zero trust service to service communication
+* Fixed testnet erc20 tokens with Goerli addresses
+* Bug fix adding asset symbol to chain validation
+
+</Update>
+
+<Update label="Aug 30, 2022" tags={["Dashboard", "Blockchain support"]}>
+
+* Deployed filtering [policies](broken-reference) by public keys of wallets
+* Bug fix for Policy Control Execution bad activity types
+
 </Update>
