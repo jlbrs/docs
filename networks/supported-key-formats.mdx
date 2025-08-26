@@ -1,0 +1,37 @@
+---
+title: "Private Keys Formats"
+---
+
+## Supported Key Formats
+
+| Scheme  | Elliptical Curve |
+| ------- | ---------------- |
+| ECDSA   | secp256k1        |
+| ECDSA   | stark            |
+| EdDSA   | ed25519          |
+| Schnorr | secp256k1        |
+
+## Supported Key Formats by network
+
+| Network     | (scheme, curve)                          |
+| :----------- | :---------------------------------------- |
+| Algorand    | (EdDSA,ed25519)                          |
+| Aptos       | (EdDSA,ed25519)                          |
+| Bitcoin     | (ECDSA,secp256k1) or (Schnorr,secp256k1) |
+| BitcoinCash | (ECDSA,secp256k1)                        |
+| Canton      | (EdDSA,ed25519)                          |
+| Cardano     | (EdDSA,ed25519)                          |
+| Cosmos      | (ECDSA,secp256k1)                        |
+| Evm         | (ECDSA,secp256k1)                        |
+| Icp         | (EdDSA,ed25519)                          |
+| Iota        | (EdDSA,ed25519)                          |
+| Kaspa       | (ECDSA,secp256k1)                        |
+| Polymesh    | (EdDSA,ed25519)                          |
+| Solana      | (EdDSA,ed25519)                          |
+| Stellar     | (EdDSA,ed25519)                          |
+| Substrate   | (EdDSA,ed25519)                          |
+| Sui         | (EdDSA,ed25519)                          |
+| Tezos       | (EdDSA,ed25519) or (ECDSA,secp256k1)     |
+| Ton         | (EdDSA,ed25519)                          |
+| Tron        | (ECDSA,secp256k1)                        |
+| Xrpl        | (ECDSA,secp256k1) or (EdDSA,ed25519)     |

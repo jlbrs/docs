@@ -1,0 +1,37 @@
+---
+title: Fee Sponsors
+---
+
+import { Pill } from "/snippets/pill.jsx"
+ 
+Typically submitting transactions to a blockchain requires the sender to pay a small amount of fees called gas fees. These fees compensate network participants, such as miners or validators, for the computational resources needed to execute transactions, smart contracts, and other operations. What it means in practice is that for users to transfer some stable coins such as `USDC`, they must also hold a small amount of the native tokens of the blockchains used to pay the gas fees. This creates friction because you must constantly top up all your wallets in order for them to stay functional.
+
+The Fee Sponsor enables you to sponsor gasless transactions for your custodial wallets via the [Transfers API](wallets/transfer-asset). This allows you to manage a small set of fee sponsor wallets with native tokens and use them to pay gas fees for other wallets.
+
+To sponsor a transfer,
+
+* [Designate](fee-sponsors/create-fee-sponsor) a Dfns wallet as the fee sponsor. See below for supported networks.
+* Fund the fee sponsor wallet with some native tokens.
+* Specify the `feeSponsorId` when [creating a transfer request](wallets/transfer-asset). Note that the sponsor and sponsoree wallets must be for the same network.
+
+<Note>
+The fee sponsor feature only works for custodial wallets. Delegated wallets are not supported for now.
+</Note>
+
+### Supported networks
+
+Not all networks support this feature. You can create fee sponsors for the following supported networks.
+
+| Mainnets         | Testnets                           |
+| ---------------- | ---------------------------------- |
+| `ArbitrumOne` [^1] | `ArbitrumSepolia`                  |
+| `Base` [^1]       | `BaseSepolia`                      |
+| `Berachain` [^1]  | `BerachainBepolia`                 |
+| `Bsc` [^1]        | `BscTestnet`                       |
+| `Ethereum`  [^1]    | `EthereumSepolia`, `EthereumHoodi` |
+| `Optimism`  [^1]    | `OptimismSepolia`                  |
+| `Polygon`  [^1]     | `PolygonAmoy`                      |
+| `Solana`         | `SolanaDevnet`                     |
+| `Stellar`        | `StellarTestnet`                   |
+
+[^1]: ⚠️ <Pill text="BETA"/> The EVM fee sponsor is currently in beta. The implementation leverages [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) that turns your EOA into a smart contract account. When you use this feature, the on chain account of the sponsoree wallet will become a smart contract. You can view the source code of the smart contract we use [here](https://github.com/dfns/dfns-smart-account).

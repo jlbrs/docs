@@ -1,0 +1,71 @@
+---
+title: Interoperability
+---
+
+import { Post } from '/snippets/post.jsx'
+
+Dfns secures private keys by generating them as MPC key shares in our decentralized key management network.  This happens by default when you [create a wallet](/api-reference/wallets/create-wallet). 
+
+Our goal is to eliminate all single points of failure (SPOFs) associated with blockchain private keys by never exposing those private keys to anyone.
+
+In some circumstances, however, you may need to import or export an existing wallet and its private key into the Dfns infrastructure, instead of creating a brand new wallet with Dfns and transfer funds to it. As an example, you might want to keep an existing wallet if its address is tied to a smart contract which you don't want to re-deploy.
+
+
+In such a case, Dfns exposes import and export endpoints. 
+
+
+## Import a wallet
+
+
+Use <Post>/wallets/import</Post>: [Import a Wallet](/api-reference/wallets/import-wallet)
+ in conjunction with our [import SDK](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/import-wallet).   
+ 
+Note this is intended to be used only to migrate wallets when first onboarding onto the Dfns platform.
+
+<Info>This endpoint is not enabled by default. [Contact support](https://support.dfns.co)  to have it activated.</Info>
+
+
+
+
+
+<Danger>
+**Dfns can not guarantee the security of imported wallets**
+
+We have no way to control who had access to the private key prior to import.  For this reason, this feature is restricted to Enterprise customers who have signed a contractual addendum limiting our liability for imported wallets. 
+
+Please [contact support](https://support.dfns.co) for more information.
+</Danger>
+
+## Import a key
+
+Use <Post>/keys/import</Post>: [Import a Key](/api-reference/keys/import-key)
+ in conjunction with our [import SDK](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/import-wallet).   
+ 
+Note this is intended to be used only to migrate wallets when first onboarding onto the Dfns platform.
+
+<Info>This endpoint is not enabled by default. [Contact support](https://support.dfns.co)  to have it activated.</Info>
+
+
+
+
+
+<Danger>
+**Dfns can not guarantee the security of imported keys**
+
+We have no way to control who had access to the private key prior to import.  For this reason, this feature is restricted to Enterprise customers who have signed a contractual addendum limiting our liability for imported keys. 
+
+Please [contact support](https://support.dfns.co) for more information.
+</Danger>
+
+## Export a key
+
+Use <Post>/keys/\{keyId\}/export</Post>: [Export a Key](/api-reference/keys/export-key)
+ in conjunction with our [export SDK](https://github.com/dfns/dfns-sdk-ts/tree/m/examples/sdk/export-wallet).
+
+<Danger>
+**Dfns can not guarantee the security of exported keys**
+
+We have no way to control blockchain transactions once the single point of failure has been reconstituted.  For this reason, this feature is restricted to customers who have signed a contractual addendum limiting our liability for exported keys.  Additionally, exported keys can no longer be used to sign within the Dfns platform. 
+
+Please [contact support](https://support.dfns.co) for more information.
+</Danger>

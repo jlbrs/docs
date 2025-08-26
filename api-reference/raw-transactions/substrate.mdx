@@ -1,0 +1,104 @@
+---
+title: Substrate (Polkadot)
+---
+
+Substrate based chains like Polkadot, Kusama and Polymesh support the following signature `kinds`:
+
+* `SignerPayload`, serialized [generic signer payload](https://github.com/polkadot-js/api/blob/v15.0.1/packages/types/src/extrinsic/SignerPayload.ts#L47-L51).
+
+## SignerPayload
+
+Signs a generic signer payload. Note: converting the generic signer payload to a signable extrinsic requires fetching metadata from the targeted blockchain. Therefore it's tied to a specific `network` rather than the blockchain kind.
+
+| Field     | Description                                                                                      | Type - Optional                                     |
+| --------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
+| `network` | A supported Substrate network.                                                                   | String                                              |
+| `kind`    | `SignerPayload`                                                                                  | String                                              |
+| `payload` | The unsigned signer payload formatted as JSON or a serialized hex-encoded buffer as shown below. | String or [SignerPayloadJson](#signerpayloadjson)   |
+
+### Hex String
+
+```json
+{
+  "network": "Polymesh",
+  "kind": "SignerPayload",
+  "payload": "0x0403007f87d29a4746b8e59e347c0598ad811a10c3cd8735d49cf96b75973864c8c98b0475000400386d0f0019000000e143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423eb3b9c09f232a12c50f40e023a01f0b86d679b84748cc289534d96861ef611c67"
+}
+``` 
+
+#### Typescript Example with polkadot\{.js\} <a href="#typescript-example" id="typescript-example"></a>
+
+First install the polkadot\{.js\} SDK. You can find the full documentation here: [https://polkadot.js.org/docs/](https://polkadot.js.org/docs/)
+
+Here a code sample to generate a signature via [the Dfns TypeScript SDK](https://github.com/dfns/dfns-sdk-ts):
+
+```typescript
+import { ApiPromise, HttpProvider } from '@polkadot/api'
+import { EXTRINSIC_VERSION } from '@polkadot/types/extrinsic/v4/Extrinsic'
+
+const walletId = 'wa-6lbfv-9esgj-xxxxxxxxxxxxxxxx'
+const wallet = await dfnsClient.wallets.getWallet({ walletId })
+
+const httpProvider = new HttpProvider(process.env.POLKADOT_NODE_URL!)
+const api = await ApiPromise.create({
+  provider: httpProvider,
+  signer: senderWallet,
+  noInitWarn: true,
+})
+
+const transaction = api.tx.balances.transferKeepAlive('5EwvHZHrKd9WYc3LByzMZW5cmxJt9VMsfYiKg5jCJb8UBfbC', 10000)
+const signerPayload: any = transaction.registry.createTypeUnsafe('SignerPayload', [
+  transaction,
+  { version: EXTRINSIC_VERSION },
+])
+
+const res = await dfnsClient.wallets.generateSignature({
+  walletId,
+  body: {
+    kind: 'SignerPayload',
+    message: signerPayload.toHex(),
+  },
+})
+```
+
+### SignerPayloadJson
+
+Please refer to the original Polkadot definition for more details: [SignerPayloadJson](https://github.com/polkadot-js/api/blob/v16.2.2/packages/types/src/types/extrinsic.ts#L32). Note that additional fields will be rejected.
+
+| Field                | Description                                                                              | Type - Optional      |
+| -------------------- | ---------------------------------------------------------------------------------------- | -------------------- |
+| `address`            | ss58-encoded address of the sending account.                                             | String               |
+| `blockHash`          | The hash of the checkpoint block, hex encoded.                                           | String               |
+| `blockNumber`        | The checkpoint block number, hex encoded.                                                | String               |
+| `era`                | The number of blocks after the checkpoint for which a transaction is valid, hex encoded. | String               |
+| `genesisHash`        | The genesis hash of the chain, hex encoded.                                              | String               |
+| `metadataHash`       | The metadataHash for the CheckMetadataHash SignedExtension, hex encoded.                 | String _(optional)_  |
+| `mode`               | flag indicating whether to verify the metadata hash or not.                              | Integer _(optional)_ |
+| `method`             | The encoded method with arguments, hex encoded.                                          | String               |
+| `nonce`              | The nonce for the transaction, hex encoded.                                              | String               |
+| `tip`                | The tip to increase transaction priority, hex encoded.                                   | String               |
+| `version`            | The version of the extrinsic.                                                            | Integer              |
+| `specVersion`        | The current spec version for the runtime, hex encoded.                                   | String               |
+| `transactionVersion` | The current transaction version for the runtime, hex encoded.                            | String               |
+| `signedExtensions`   | The applicable signed extensions for this runtime.                                       | Array\<String>       |
+
+```json
+{
+  "network": "Polymesh",
+  "kind": "SignerPayload",
+  "payload": {
+    "address": "5H5tTnmLUqRgvTZvTwCdBKYjKLBm2gkp7u38Q9UUdJa8m6rX",
+    "blockHash": "0x2ace05e703aa50b48c0ccccfc8b424f7aab9a1e2c424ed12e45d20b1e8ffd0d6",
+    "blockNumber": "0x00000000",
+    "era": "0x00",
+    "genesisHash": "0x2ace05e703aa50b48c0ccccfc8b424f7aab9a1e2c424ed12e45d20b1e8ffd0d6",
+    "method": "0x07141f3da32e72ac6eb6cb40d9e757594363a617b2c3964a2b6ec6895c6648f48d500000",
+    "nonce": "0x00000000",
+    "tip": "0x00000000000000000000000000000000",
+    "version": 4,
+    "specVersion": "0x006adb7a",
+    "transactionVersion": "0x00000007",
+    "signedExtensions": []
+  }
+}
+```

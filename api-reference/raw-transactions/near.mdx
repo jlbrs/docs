@@ -1,0 +1,68 @@
+---
+title: NEAR
+---
+
+NEAR supports the following signature `kinds`:
+
+* `Transaction`, unsigned transaction.
+
+## Transaction
+
+Signs an unsigned transaction.
+
+| Field            | Description                                          | Type - Optional |
+| ---------------- | ---------------------------------------------------- | --------------- |
+| `blockchainKind` | `Near`                                               | String          |
+| `kind`           | `Transaction`                                        | String          |
+| `transaction`    | The unsigned hex encoded transaction as shown below. | String          |
+
+```json
+{
+  "blockchainKind": "Near",
+  "kind": "Transaction",
+  "transaction": "0x400000006630346263396261376263363835643132636638373733316363343832306331333932303732336236613737333663663235623662633839386363646333613800f04bc9ba7bc685d12cf87731cc4820c13920723b6a7736cf25b6bc898ccdc3a805b83e62ccbb000040000000336532323130653131383462343562363463386134333463306137653762323363633034656137656237613663336333323532306430336434616663623861669ea4fc49d0e9e4d8536afa07c1d43dff89a5fc32189e27d1821b645e60dea58a01000000020b00000066745f7472616e736665725f0000007b22616d6f756e74223a2231222c2272656365697665725f6964223a2239623837663061373830323130396330333464373163643663633533653664613239313930666334336332333932366538386333383731316664643534373664227d00e057eb481b000001000000000000000000000000000000"
+}
+```
+
+### Typescript Example with NEAR JavaScript API <a href="#typescript-example" id="typescript-example"></a>
+
+First install the NEAR JavaScript API. You can find the full documentation here: [https://near.github.io/near-api-js](https://near.github.io/near-api-js/)
+
+Here a code sample to generate a signature via [the Dfns TypeScript SDK](https://github.com/dfns/dfns-sdk-ts):
+
+```typescript
+import { KeyType, PublicKey } from '@near-js/crypto'
+import { JsonRpcProvider } from '@near-js/providers'
+import { actionCreators, createTransaction } from '@near-js/transactions'
+import { baseDecode } from '@near-js/utils'
+
+const walletId = 'wa-172um-hgi5f-xxxxxxxxxxxxxxxx'
+const wallet = await dfnsClient.wallets.getWallet({ walletId })
+
+const provider = new JsonRpcProvider({url: process.env.NEAR_NODE_URL!})
+
+const publicKey = new PublicKey({
+  keyType: KeyType.ED25519,
+  data: Buffer.from(wallet.address!, 'hex'),
+})
+const accessKey = await provider.viewAccessKey(wallet.address!, publicKey)
+    
+const nonce = accessKey.nonce++
+const recentBlockHash = baseDecode(accessKey.block_hash)
+const transaction = createTransaction(
+  address,
+  publicKey,
+  'f04bc9ba7bc685d12cf87731cc4820c13920723b6a7736cf25b6bc898ccdc3a8',
+  nonce,
+  [actionCreators.transfer(1n)],
+  recentBlockHash
+)
+
+const res = await dfnsClient.wallets.generateSignature({
+  walletId,
+  body: {
+    kind: 'Transaction',
+    transaction: `0x${Buffer.from(transaction.encode()).toString('hex')}`,
+  },
+})
+```

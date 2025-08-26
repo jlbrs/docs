@@ -7449,19 +7449,24 @@ paths:
         - authenticationToken: []
           userActionSignature: []
       description: |-
-        #### Required Permissions
+        Create a new user in the caller's org. This will also send an registration email to the created User's email, with a registration code, and pointing him to complete his registration on Dfns Dashboard. The user is created without any permissions.
 
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Create | Always required. |
+        <Note>If you want the created User to not know about about Dfns, and don't want him to receive the registration email from Dfns, you should rather use the Delegated Registration endpoint.</Note>
+      x-mint:
+        content: |-
+          #### Required Permissions
 
-        #### Token Kinds Allowed
+          | Name        | Conditions   |
+          | ----------- | -------------|
+          | Auth:Users:Create | Always required. |
 
-        `Access Token`, `Service Account Access Token`
+          #### Token Kinds Allowed
 
-        #### User Kinds allowed
+          `Access Token`, `Service Account Access Token`
 
-        `User`
+          #### User Kinds allowed
+
+          `User`
       requestBody:
         content:
           application/json:

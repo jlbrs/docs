@@ -4,11 +4,13 @@
   initial-value: 1rem;
 }
 
+html {scroll-behavior: smooth;}
+
 body {
     font-size: var(--text-size);
     /* letter-spacing: 0.02rem; */
 }
-
+    
 #table-of-contents-layout:has(div) {
     border: 1px solid rgb(var(--gray-200));
     background-color: #fcfcfc;
@@ -183,6 +185,13 @@ h4#required-permissions, h4#token-kinds-allowed, h4#user-kinds-allowed {
 
 }
 
+/* Footnotes */
+.footnotes [id^=user-content-fn-] {
+    display: list-item;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(var(--gray-600));
+}
 
 /*
 .max-w-8xl {

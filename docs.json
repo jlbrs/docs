@@ -100,12 +100,30 @@
           {
             "group": "Core Concepts",
             "pages": [
+              "core-concepts/wallets-and-keys",
               "core-concepts/non-custodial-wallets",
-              "core-concepts/what-is-a-wallet-as-a-service",
+              "core-concepts/interoperability",
+              "core-concepts/policies",
+              "core-concepts/permissions",
               "core-concepts/how-mpc-wallets-work",
               "core-concepts/architecture",
               "core-concepts/dfns-security-model",
               "core-concepts/passkeys"
+            ]
+          },
+          {
+            "group": "Networks",
+            "pages": [
+              "networks/index",
+              "networks/support-tiers",
+              "networks/supported-assets",
+              "networks/supported-key-formats",
+              {
+                "group": "Networks specificities",
+                "pages": [
+                  "networks/canton-validators"
+                ]
+              }
             ]
           },
           {
@@ -128,8 +146,16 @@
               "features/index",
               "features/transactions",
               "features/staking",
-              "features/fee-sponsorship",
-              "features/exchange-integrations",
+              "features/fee-sponsors",
+              {
+                "group": "Exchanges",
+                "pages": [
+                  "/features/exchanges/index",
+                  "/features/exchanges/kraken-setup",
+                  "/features/exchanges/binance-setup",
+                  "/features/exchanges/coinbase-prime-setup"
+                ]
+              },
               "features/aml-kyt-integrations",
               "features/travel-rule-integrations",
               "features/fiat-on-offboarding"
@@ -175,6 +201,7 @@
             "icon": "code",
             "pages": [
               "developers/index",
+              "developers/webhooks",
               "developers/guides/wallet-delegation",
               "developers/guides/user-action-signature",
               {
@@ -209,6 +236,7 @@
               {
                 "group": "Advanced Topics",
                 "pages": [
+                  "/developers/advanced/key-derivation",
                   "developers/advanced/using-hsms",
                   "developers/advanced/on-premise-deployment",
                   "developers/advanced/keys-and-multichain-migration"
@@ -227,32 +255,6 @@
               "dashboard/creating-policies",
               "dashboard/approving-transactions",
               "dashboard/user-account-recovery"
-            ]
-          },
-          {
-            "group": "Networks",
-            "pages": [
-              "networks/index",
-              "networks/supported-assets",
-              "networks/multichain-wallets",
-              {
-                "group": "Chains specificities",
-                "pages": [
-                  "networks/algorand",
-                  "networks/aptos",
-                  "networks/bitcoin",
-                  "networks/canton",
-                  "networks/cardano",
-                  "networks/cosmos",
-                  "networks/evm",
-                  "networks/solana",
-                  "networks/stellar",
-                  "networks/polkadot",
-                  "networks/tezos",
-                  "networks/tron",
-                  "networks/xrp"
-                ]
-              }
             ]
           }
         ]
@@ -312,6 +314,7 @@
               {
                 "group": "Users management",
                 "pages": [
+                  "/api-reference/auth/users",
                   "get /auth/users",
                   "post /auth/users",
                   "get /auth/users/{userId}",
@@ -336,6 +339,7 @@
               {
                 "group": "Credentials",
                 "pages": [
+                  "/api-reference/auth/credentials",
                   "get /auth/credentials",
                   "post /auth/credentials/init",
                   "post /auth/credentials",
@@ -349,6 +353,7 @@
               {
                 "group": "Personal Access Tokens",
                 "pages": [
+                  "/api-reference/auth/personal-access-tokens",
                   "get /auth/pats",
                   "post /auth/pats",
                   "get /auth/pats/{tokenId}",
@@ -361,6 +366,7 @@
               {
                 "group": "Account recovery",
                 "pages": [
+                  "/api-reference/auth/account-recovery",
                   "post /auth/recover/user/code",
                   "post /auth/recover/user/init",
                   "post /auth/recover/user/delegated",
@@ -370,6 +376,7 @@
               {
                 "group": "Service Accounts",
                 "pages": [
+                  "/api-reference/auth/service-accounts",
                   "get /auth/service-accounts",
                   "post /auth/service-accounts",
                   "get /auth/service-accounts/{serviceAccountId}",
@@ -383,7 +390,89 @@
           },
           {
             "group": "Wallets & Transactions",
-            "pages": []
+            "pages": [
+              {
+                "group": "Wallets",
+                "pages": [
+                  "/api-reference/wallets",
+                  "get /wallets",
+                  "post /wallets",
+                  "get /wallets/{walletId}",
+                  "put /wallets/{walletId}",
+                  "get /wallets/{walletId}/assets",
+                  "get /wallets/{walletId}/history",
+                  "get /wallets/{walletId}/nfts",
+                  "post /wallets/import",
+                  "post /wallets/{walletId}/delegate",
+                  "post /wallets/{walletId}/export",
+                  "get /wallets/{walletId}/signatures",
+                  "get /wallets/{walletId}/signatures/{signatureId}",
+                  {
+                    "group": "Wallet  Tags",
+                    "pages": [
+                      "put /wallets/{walletId}/tags",
+                      "delete /wallets/{walletId}/tags"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Private Keys",
+                "pages": [
+                  "get /keys",
+                  "post /keys",
+                  "post /keys/{keyId}/delegate",
+                  "get /keys/{keyId}",
+                  "put /keys/{keyId}",
+                  "delete /keys/{keyId}",
+                  "post /keys/{keyId}/derive",
+                  "post /keys/{keyId}/export",
+                  "post /keys/import",
+                  "get /keys/{keyId}/signatures",
+                  "get /keys/{keyId}/signatures/{signatureId}"
+                ]
+              },
+              {
+                "group": "Transfers",
+                "pages": [
+                  "post /wallets/{walletId}/transfers",
+                  "get /wallets/{walletId}/transfers",
+                  "get /wallets/{walletId}/transfers/{transferId}"
+                ]
+              },
+              {
+                "group": "Raw Transactions",
+                "pages": [
+                  "/api-reference/raw-transactions/index",
+                  "get /wallets/{walletId}/transactions",
+                  "get /wallets/{walletId}/transactions/{transactionId}",
+                  "post /wallets/{walletId}/signatures",
+                  "post /keys/{keyId}/signatures",
+                  "post /wallets/{walletId}/transactions",
+                  {
+                    "group": "Transactions examples",
+                    "pages": [
+                      "/api-reference/raw-transactions/algorand",
+                      "/api-reference/raw-transactions/aptos",
+                      "/api-reference/raw-transactions/bitcoin",
+                      "/api-reference/raw-transactions/canton",
+                      "/api-reference/raw-transactions/cardano",
+                      "/api-reference/raw-transactions/cosmos",
+                      "/api-reference/raw-transactions/evm",
+                      "/api-reference/raw-transactions/iota",
+                      "/api-reference/raw-transactions/near",
+                      "/api-reference/raw-transactions/solana",
+                      "/api-reference/raw-transactions/stellar",
+                      "/api-reference/raw-transactions/substrate",
+                      "/api-reference/raw-transactions/sui",
+                      "/api-reference/raw-transactions/tezos",
+                      "/api-reference/raw-transactions/tron",
+                      "/api-reference/raw-transactions/xrp"
+                    ]
+                  }
+                ]
+              }
+            ]
           },
           {
             "group": "Exchanges",
@@ -409,22 +498,6 @@
               "put /fee-sponsors/{feeSponsorId}/deactivate",
               "delete /fee-sponsors/{feeSponsorId}",
               "get /fee-sponsors/{feeSponsorId}/fees"
-            ]
-          },
-          {
-            "group": "Keys",
-            "pages": [
-              "get /keys",
-              "post /keys",
-              "post /keys/{keyId}/delegate",
-              "get /keys/{keyId}",
-              "put /keys/{keyId}",
-              "delete /keys/{keyId}",
-              "post /keys/{keyId}/derive",
-              "post /keys/{keyId}/export",
-              "post /keys/import",
-              "get /keys/{keyId}/signatures",
-              "get /keys/{keyId}/signatures/{signatureId}"
             ]
           },
           {
@@ -479,48 +552,6 @@
             ]
           },
           {
-            "group": "Wallets",
-            "pages": [
-              "get /wallets",
-              "post /wallets",
-              "get /wallets/{walletId}",
-              "put /wallets/{walletId}",
-              "get /wallets/{walletId}/assets",
-              "get /wallets/{walletId}/history",
-              "get /wallets/{walletId}/nfts",
-              "post /wallets/import",
-              "post /wallets/{walletId}/delegate",
-              "post /wallets/{walletId}/export",
-              "get /wallets/{walletId}/signatures",
-              "get /wallets/{walletId}/signatures/{signatureId}",
-              {
-                "group": "Wallet  Tags",
-                "pages": [
-                  "put /wallets/{walletId}/tags",
-                  "delete /wallets/{walletId}/tags"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Transfers",
-            "pages": [
-              "post /wallets/{walletId}/transfers",
-              "get /wallets/{walletId}/transfers",
-              "get /wallets/{walletId}/transfers/{transferId}"
-            ]
-          },
-          {
-            "group": "Raw Transactions",
-            "pages": [
-              "get /wallets/{walletId}/transactions",
-              "get /wallets/{walletId}/transactions/{transactionId}",
-              "post /wallets/{walletId}/signatures",
-              "post /keys/{keyId}/signatures",
-              "post /wallets/{walletId}/transactions"
-            ]
-          },
-          {
             "group": "Webhook Configuration",
             "pages": [
               "api-reference/endpoints/webhooks/index",
@@ -530,12 +561,12 @@
               "put /webhooks/{webhookId}",
               "delete /webhooks/{webhookId}",
               "post /webhooks/{webhookId}/ping",
-          {
-            "group": "Webhook description",
-            "pages": [
-              "webhook policy.triggered"
-            ]
-          }
+              {
+                "group": "Webhook description",
+                "pages": [
+                  "webhook policy.triggered"
+                ]
+              }
             ]
           },
           {

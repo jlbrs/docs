@@ -1,34 +1,28 @@
 ---
-title: 'Error Codes'
-description: 'Example section for showcasing API endpoints'
-tag: To do
+title: 'API Errors'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+Below is the error structure returned by Dfns API.
 
-## Welcome
+| Field     | Description                                                                             | Type    |
+| --------- | --------------------------------------------------------------------------------------- | ------- |
+| `id`      | The error ID. You can share this with Dfns support to help troubleshoot your issue.     | String  |
+| `status`  | [HTTP status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status). | Integer |
+| `message` | The error message.                                                                      | String  |
+| `details` | Structured data that provides additional error context.                                 | Object  |
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+### Example
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
+{
+  "error": {
+    "id": "2038837570328299032",
+    "status": 404,
+    "message": "wallet not found",
+    "details": {
+      "walletId": "wa-1f04s-lqc9q-xxxxxxxxxxxxxxxx",
+      "orgId": "or-195qp-opddr-xxxxxxxxxxxxxxxx"
+    }
   }
-]
+}
 ```

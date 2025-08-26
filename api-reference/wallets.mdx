@@ -1,0 +1,21 @@
+---
+title: Wallets
+icon: wallet
+---
+
+import { Deprecated } from "/snippets/deprecated.jsx"
+
+The Dfns Wallets API enables you to create wallets across a wide variety of chains. APIs are exposed at a high level to view and transfer native cryptocurrencies, fungible tokens and NFTs. Additionally we've exposed low-level transaction broadcast APIs enabling integrations with all available features of the supported chains. All the Tier-1 chains listed below are fully indexed to provide accurate asset reporting and transaction history.
+
+Wallets also support [Delegated Signing](../advanced-topics/delegated-signing), enabling a non-custodial configuration and an "Apple Pay for Crypto" UX via our WebAuthn/Passkeys integrations. If you have feedback on the Wallets API, please send it to [https://support.dfns.co](https://support.dfns.co).
+
+You can use any of the follow enumerated types in the `network` field of [Create Wallet](/api-reference/wallets/create-wallet) and other Wallets API endpoints.
+
+
+
+### <Deprecated>Pseudo Networks</Deprecated>
+
+<Deprecated nopill>
+Pseudo-network based unbounded wallet creation is deprecated. For raw key signing, please use the [Keys API](keys) instead.
+</Deprecated>
+
