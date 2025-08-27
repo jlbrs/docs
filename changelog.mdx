@@ -39,7 +39,7 @@ The Dfns change log documents changes to our product functionality made by our r
 **Blockchain Support Updates:**
 
 * FLARE T1 Support
-  * Mainnet:`FlareC`&#x20;
+  * Mainnet:`FlareC`
   * Testnet: `FlareCCoston2`
 
 </Update>
@@ -172,7 +172,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="May 3, 2024" tags={["New Feature", "SDK Update"]}>
 
-* Launched [new endpoints](../api-docs/wallets/add-wallet-tags) for tagging wallets for Policy Engine filters
+* Launched [new endpoints](/api-reference/wallets/tag-wallet) for tagging wallets for Policy Engine filters
 * Launched cross platform registration with a one-time code
 * Upgraded ZeroDev SDK version
 
@@ -180,8 +180,8 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="April 19, 2024" tags={["SDK Update"]}>
 
-* Launched [iOS Swift SDK](dfns-sdks)
-* Launched new endpoint to [create user & wallet simultaneously](https://docs.dfns.co/d/api-docs/authentication/registration/completeenduserregistration)
+* Launched [iOS Swift SDK](/sdks)
+* Launched new endpoint to [create user & wallet simultaneously](/api-reference/auth/register-end-user)
 * Upgraded Viem SDK integration to 2.X
 
 </Update>
@@ -203,7 +203,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="March 15, 2024" tags={["SDK Update", "Blockchain support"]}>
 
-* Launched [GoLang SDK](dfns-sdks)
+* Launched [GoLang SDK](/sdks/go)
 * Launched Tier2 support for PolkaDot and Kusama
 
 </Update>
@@ -217,15 +217,15 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Feb 29, 2024" tags={["New Featuere"]}>
 
-* Added `custodial` field to [ListWallets](../api-docs/wallets/list-wallets).  False implies an end user wallet
+* Added `custodial` field to [ListWallets](/api-reference/wallets/list-wallets).  False implies an end user wallet
 * Removed Policy Engine v1 create endpoints from dashboard and SDK
-* Fixed a bug in which Policy Engine [List Approvals](../api-docs/policy-engine/api-reference/list-approvals-1) was filtering by default
+* Fixed a bug in which Policy Engine [List Approvals](/api-reference/policies/list-approvals) was filtering by default
 
 </Update>
 
 <Update label="Feb 21, 2024" tags={["New Feature", "Blockchain support"]}>
 
-* Launched new [Read Contract endpoint](https://docs.dfns.co/d/api-docs/networks/read-contract)
+* Launched new [Read Contract endpoint](/api-reference/networks/read-contract)
 * Launched Litecoin Tier1
 
 </Update>
@@ -238,15 +238,15 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Feb 7, 2024" tags={["Dashboard", "Blockchain support"]}>
 
-* [Policy Engine v2](https://docs.dfns.co/d/api-docs/policy-engine) released
-* [Tron and Algorand T1 wallets support](https://docs.dfns.co/d/api-docs/wallets#supported-networks)
-* [Retries on webhooks](https://docs.dfns.co/d/api-docs/webhooks#webhook-event-deliveries-and-retries) live&#x20;
+* [Policy Engine v2](/core-concepts/policies) released
+* [Tron and Algorand T1 wallets support](/networks)
+* [Retries on webhooks](/developers/webhooks#webhook-event-deliveries-%26-retries) live
 
 </Update>
 
 <Update label="Jan 24, 2024" tags={["Dashboard", "Blockchain support"]}>
 
-* New [network fees](../api-docs/networks/estimate-fees) API released
+* New [network fees](/api-reference/networks/get-fees) API released
 * Renamed Ripple to XrpLedger
 
 </Update>
@@ -255,7 +255,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 * Added send button in dashboard for tier2 chains
 * Exposed verified contracts in the API metadata for EVM chains
-* Renamed Ripple to XrpLedger for accuracy&#x20;
+* Renamed Ripple to XrpLedger for accuracy
 
 </Update>
 
@@ -288,7 +288,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Nov 29, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* Launched [Wallet webhooks](../api-docs/webhooks)
+* Launched [Wallet webhooks](/developers/webhooks)
 
 </Update>
 
@@ -307,14 +307,14 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Nov 8, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* Moved all EVM chains to Tier 1 support in Wallets API.&#x20;
+* Moved all EVM chains to Tier 1 support in Wallets API.
 * Added Base L2 support and ArbitrumSepolia testnet
 
 </Update>
 
 <Update label="Nov 1, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* Released new WalletConnect integration in the dashboard using WebAuthn to sign transactions&#x20;
+* Released new WalletConnect integration in the dashboard using WebAuthn to sign transactions
 
 </Update>
 
@@ -366,7 +366,7 @@ The Dfns change log documents changes to our product functionality made by our r
 <Update label="July 17, 2023" tags={["Dashboard", "Blockchain support"]}>
 
 * Updated network names for wallet blockchains
-* Returning complete signature encoding from Get Signature calls.&#x20;
+* Returning complete signature encoding from Get Signature calls.
 
 </Update>
 
@@ -378,15 +378,15 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="July 5, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* Relaxed CORS policy preventing API calls from the browser&#x20;
+* Relaxed CORS policy preventing API calls from the browser
 
 </Update>
 
 <Update label="June 29, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* [Typescript SDK](dfns-sdks) released
+* [Typescript SDK](/sdks/typescript) released
 * Latency optimizations for Auth service
-* Fixes for Windows Hello usage with Webauthn&#x20;
+* Fixes for Windows Hello usage with Webauthn
 
 </Update>
 
@@ -444,7 +444,7 @@ The Dfns change log documents changes to our product functionality made by our r
 <Update label="Mar 14, 2023" tags={["Dashboard", "Blockchain support"]}>
 
 * Added blockchain indexing for SOL and XRP
-* Added `activityId` query string param to [List policy control executions](broken-reference)
+* Added `activityId` query string param to [List policy control executions](/api-reference/policies/list-approvals)
 
 </Update>
 
@@ -457,7 +457,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Feb 28, 2023" tags={["Dashboard", "Blockchain support"]}>
 
-* Added new [ListTransactions endpoint](broken-reference)
+* Added new [ListTransactions endpoint](/api-reference/wallets/list-transactions)
 * Throughput enhancements to our indexing pipeline
 
 </Update>
@@ -495,15 +495,15 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Dec 19, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Fixed a bug in [BroadcastTransaction](broken-reference) where the `value` parameter was being interpreted in ETH instead of WEI.
+* Fixed a bug in [BroadcastTransaction](/api-reference/wallets/broadcast-transaction) where the `value` parameter was being interpreted in ETH instead of WEI.
 * Last push of the year!
 
 </Update>
 
 <Update label="Dec 15, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Launched new `direction` and `status` query parameters on [ListPayments](broken-reference)
-* Fixed a bug in the `timeoutInMinutes` implementation in [PolicyControls](broken-reference)
+* Launched new `direction` and `status` query parameters on [ListPayments](/api-reference/wallets/get-wallet-history)
+* Fixed a bug in the `timeoutInMinutes` implementation in [PolicyControls](/api-reference/policies/list-approvals)
 
 </Update>
 
@@ -517,8 +517,8 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Nov 30, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Launched our new blockchain indexing microservice for Ethereum mainnet exposed via the new `direction` field on [payments](broken-reference) and the new `PaymentReceived and PaymentConfirmed` [callback eventKinds](broken-reference).
-* Enabled [Permissions](../api-docs/permissions) on [callbacks](broken-reference) and [pubic keys](broken-reference)
+* Launched our new blockchain indexing microservice for Ethereum mainnet exposed via the new `direction` field on [payments](/api-reference/wallets/get-wallet-history) and the new `PaymentReceived and PaymentConfirmed` [callback eventKinds](/developers/webhooks).
+* Enabled [Permissions](/core-concepts/permissions) on [callbacks](/developers/webhooks) and [public keys](/core-concepts/passkeys)
 * Internal bug fixes wrt database pagination
 
 </Update>
@@ -539,7 +539,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Nov 8, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Added a `maxUnitBalance` property to the response from the [GetBalance endpoint](broken-reference) representing the largest possible unit for the given asset.
+* Added a `maxUnitBalance` property to the response from the [GetBalance endpoint](/api-reference/wallets/get-wallet-assets) representing the largest possible unit for the given asset.
 * IP Whitelisting fixes: API Gateway redirect aliases, extra NAT Gateway IPs whitelisted
 * Integrated Fantom, Optimism, and SKALE blockchains
 
@@ -547,7 +547,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Oct 27, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Added `PolicyActivated` and `WalletCreated` [callback subscription topics](broken-reference)
+* Added `PolicyActivated` and `WalletCreated` [callback subscription topics](/developers/webhooks)
 * Integrated TRON blockchain
 
 </Update>
@@ -561,7 +561,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Sep 27, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Added [GetAddressForNetwork endpoint](broken-reference)
+* Added [GetAddressForNetwork endpoint](/wallets/get-wallet)
 * Deployed internal changes around zero trust service to service communication
 * Fixed testnet erc20 tokens with Goerli addresses
 * Bug fix adding asset symbol to chain validation
@@ -570,7 +570,7 @@ The Dfns change log documents changes to our product functionality made by our r
 
 <Update label="Aug 30, 2022" tags={["Dashboard", "Blockchain support"]}>
 
-* Deployed filtering [policies](broken-reference) by public keys of wallets
+* Deployed filtering [policies](/api-reference/policies/list-policies) by public keys of wallets
 * Bug fix for Policy Control Execution bad activity types
 
 </Update>

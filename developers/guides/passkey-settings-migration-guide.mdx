@@ -33,7 +33,7 @@ Note: mobile apps must be “associated with” the domain `acme.com`. IOS and A
 
 #### On Dfns Applications
 
-Every request to Dfns API takes an Application ID in the `x-dfns-appid` header. [Applications](https://docs.dfns.co/d/api-docs/authentication/application-management) were originally designed to have a dual function:
+Every request to Dfns API takes an Application ID in the `x-dfns-appid` header. Applications were originally designed to have a dual function:
 
 * First function was to be an additional permission layer on top of the User’s permission. Any API request is checked against the intersection of both the Application permissions & the User permissions. That would allow custom setups when an organisation wants to setup different applications with different levels of permissions
 * Second function was to specify which domain (`rpID`) & `origin` was the Application expected to be used in, and therefore, validate that passkeys used in that application match the `rpId` specified on the Application used, and are indeed used from the specified `origin`.
@@ -82,7 +82,7 @@ When you create a new Dfns Application from our Dashboard, you won’t be able t
 
 If you still create a new Application (so without `rpId` attached), your client-side code needs to account for that (see how below).
 
-During a transition period of N months, if you keep using Applications created before this change (which still have a `rpId` attached), the API won’t introduce a breaking change, as the App `rpId` will still be included in every challenge endpoint payloads (eg [Create Delegated Registration Challenge](https://docs.dfns.co/d/api-docs/authentication/delegated-auth/delegatedregistration) or [Create User Action Challenge](https://docs.dfns.co/d/api-docs/authentication/user-action-signing/inituseractionsigning)).
+During a transition period of N months, if you keep using Applications created before this change (which still have a `rpId` attached), the API won’t introduce a breaking change, as the App `rpId` will still be included in every challenge endpoint payloads (eg [Create Delegated Registration Challenge](/api-reference/auth/create-delegated-registration-challenge) or [Create User Action Challenge](/api-reference/auth/create-user-action-challenge)).
 
 After the transition period, **a breaking change will be introduced in the API**: `rpId` + `origin` properties will be entirely removed from all Applications (even old ones). As a result,`rpID` will not be included in challenge payloads anymore. So far, your client side code may have relied on this `rpID` being returned in the challenge payload, to pass it along to the WebAuthn client during passkey creation / usage.
 

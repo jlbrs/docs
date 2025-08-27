@@ -8,15 +8,15 @@ Most requests to the Dfns API need to be authenticated, and will need to include
 
 | Header                             | Description                                                |
 |------------------------------------|------------------------------------------------------------|
-| Authorization: Bearer &#x3C;token> | An authentication token (see #get-an-authentication-token) |
+| Authorization: Bearer &#x3C;token> | An authentication token (see [Authentication Flows](/api-reference/auth/flows)) |
 
 ## User Action Signature Header
 
-Most requests that change the state within the Dfns system (non-GET requests basically) need to be signed (see [user-action-signing](../../api-docs/authentication/user-action-signing "mention")) by the user's credential, and require the following additional header:
+Most requests that change the state within the Dfns system (non-GET requests basically) need to be signed (see [user-action-signing](/developers/guides/user-action-signature)) by the user's credential, and require the following additional header:
 
 | Header                             | Description                                                |
 |------------------------------------|------------------------------------------------------------|
-| X-DFNS-USERACTION: &#x3C;user-action-signature> | A one time token you got after the [user-action-signing](../../api-docs/authentication/user-action-signing) flow |
+| X-DFNS-USERACTION: &#x3C;user-action-signature> | A one time token you got after the [signing flow](/api-reference/signing-flows) flow |
 
 ## Registration Headers
 
@@ -24,4 +24,4 @@ Similar to authenticated endpoints, the `Complete User Registration` endpoint ne
 
 | Header                             | Description                                                |
 |------------------------------------|------------------------------------------------------------|
-| Authorization: Bearer &#x3C;token> | The temporary authentication token returned from [#responses](../../../api-docs/authentication/registration/inituserregistration#responses) |
+| Authorization: Bearer &#x3C;token> | The temporary authentication token returned from [Create Registration Challenge](/api-reference/auth/create-registration-challenge) |

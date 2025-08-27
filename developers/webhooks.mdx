@@ -60,7 +60,7 @@ The list below shows which event kinds webhooks can subscribe to ⬇️ (see [We
 
 Each webhook event has a "`data`" property, which shape depends on its kind. Here's an overview of the shape of the data for each kind:
 
-* For `wallet.created`, `wallet.exported`, `wallet.delegated` see the [Get Wallet response](https://docs.dfns.co/d/api-docs/wallets/get-wallet-by-id#response):
+* For `wallet.created`, `wallet.exported`, `wallet.delegated` see the [Get Wallet response](/api-reference/wallets/get-wallet):
 
 ```json data
 { // Wallet object, as in "Create Wallet" endpoint response
@@ -72,7 +72,7 @@ Each webhook event has a "`data`" property, which shape depends on its kind. Her
 ```
 
 
-* For `wallet.transfer.requested`, `wallet.transfer.failed`, `wallet.transfer.rejected`, `wallet.transfer.broadcasted`, `wallet.transfer.confirmed` see the [Get Transfer response](https://docs.dfns.co/d/api-docs/wallets/get-wallet-transfer-request-by-id#response-example):
+* For `wallet.transfer.requested`, `wallet.transfer.failed`, `wallet.transfer.rejected`, `wallet.transfer.broadcasted`, `wallet.transfer.confirmed` see the [Get Transfer response](/api-reference/wallets/get-transfer):
 
 ```json data
 { // Wallet Transfer Request object as in "Wallet Send Transfer" endpoint
@@ -85,7 +85,7 @@ Each webhook event has a "`data`" property, which shape depends on its kind. Her
 ```
 
 
-* For `wallet.transaction.requested`, `wallet.transaction.failed`, `wallet.transaction.rejected`, `wallet.transaction.broadcasted`, `wallet.transaction.confirmed` see the [Get Transaction response](https://docs.dfns.co/d/api-docs/wallets/get-wallet-transaction-request-by-id#response) :
+* For `wallet.transaction.requested`, `wallet.transaction.failed`, `wallet.transaction.rejected`, `wallet.transaction.broadcasted`, `wallet.transaction.confirmed` see the [Get Transaction response](/api-reference/wallets/get-transaction) :
 
 ```json data
 { // Wallet Transaction Request as in "Wallet Broadcast Transaction" endpoint
@@ -98,7 +98,7 @@ Each webhook event has a "`data`" property, which shape depends on its kind. Her
 ```
 
 
-* For `wallet.signature.requested`, `wallet.signature.failed`, `wallet.signature.rejected`, `wallet.signature.signed` see the [Get Signature response](https://docs.dfns.co/d/api-docs/wallets/get-wallet-signature-request-by-id#response):
+* For `wallet.signature.requested`, `wallet.signature.failed`, `wallet.signature.rejected`, `wallet.signature.signed` see the [Get Signature response](/api-reference/wallets/generate-signature):
 
 ```json data
 { // Wallet Signature Request object as in "Wallet Generate Signature" endpoint
@@ -126,7 +126,7 @@ Each webhook event has a "`data`" property, which shape depends on its kind. Her
 | SplTransfer, Spl2022Transfer                 | Solana                             |
 | UtxoTransfer                                 | Bitcoin, Litecoin, Dogecoin, Kaspa |
 
-for example, see the [Get History response](https://docs.dfns.co/d/api-docs/wallets/get-wallet-history#response):
+for example, see the [Get History response](/api-reference/wallets/get-wallet-history):
 
 ```json data
 { // Blockchain Event object as in "Wallet Get Wallet History" endpoint
@@ -177,7 +177,7 @@ for example, see the [Get History response](https://docs.dfns.co/d/api-docs/wall
 ```
 
 
-* For `policy.approval.pending` and `policy.approval.resolved`, see the [List Approvals response](https://docs.dfns.co/d/api-docs/policy-engine/approvals/list-approvals#response-example):
+* For `policy.approval.pending` and `policy.approval.resolved`, see the [List Approvals response](/api-reference/policies/get-approval):
 
 ```json data
 { // Approval object
