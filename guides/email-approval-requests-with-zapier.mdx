@@ -1,0 +1,156 @@
+---
+title: Email approval requests with Zapier
+description: Automate sending an email using Zapier or other automation tools
+---
+
+import { Loom } from '/snippets/loom.jsx';
+
+Dfns offers webhooks to notify your systems when events occur on your wallets. One of them,  can be used for a transfer approval has been requested (amongst other types of requests) `policy.approval.pending`. We will use this event to trigger a Zapier (or other similar tools) automation that sends an email to the approver.
+
+<Info>
+### ⭐  Watch the first steps of this tutorial on video ⭐ 
+
+Scroll to the end of the page to watch the first steps on video!
+</Info>
+
+<Steps>
+<Step title="Create the base automation">
+
+On Zapier, configure the trigger: "Webhooks by Zapier: Catch Hook"
+
+<Icon icon="hand-point-right"/> Get the **webhook url** from that first block: in "Test" and copy the address. It should be an `https://`  address.
+
+<Frame>![](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FbgZIGYkhH5TnxbNttGw3%2FCapture%20d%E2%80%99e%CC%81cran%202025-08-18%20a%CC%80%2013.26.22.png?alt=media&#x26;token=59583a52-1227-4d6d-8be3-a38cab82ec4d)</Frame>
+
+
+</Step>
+
+<Step title="Create a Webhook on your Dfns organization">
+
+On the Dfns dashboard, navigate to Settings > Webhooks (direct link: [https://app.dfns.io/v3/settings/developers/webhooks](https://app.dfns.io/v3/settings/developers/webhooks)) and click <Icon icon="circle-plus"/> **New Webhook**.
+
+Copy your Zapier webhook URL into the "url" field, give a description and select "Specific Events" with only "**policy.approval.pending**", then save. You will have to 🔑 sign the creation with your passkey.
+
+<Frame>![](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FV2qPtyIUlO6THRi9K35g%2FCapture%20d%E2%80%99e%CC%81cran%202025-08-18%20a%CC%80%2013.33.36.png?alt=media&#x26;token=5147e8a3-79b3-4d57-b60c-dcbdc072b14c)</Frame>
+
+<Check>
+Congratulations, you have the basic architecture to take action when an approval is requested! Now lets configure the actions.
+</Check>
+
+
+</Step>
+
+<Step title="Create a policy to request approval">
+
+Make sure you have a policy to trigger. For example a policy that always trigger on transfer requests.
+
+You can follow the following tutorial to create it: [create-policies](../getting-started/onboarding-to-dfns/create-policies "mention")
+
+Trigger the policy (for example by requesting a transfer) so that Zapier receives the information and can help you use the data to write an email.
+
+
+</Step>
+
+<Step title="Send an email from your automation">
+
+Add an action "Email by Zapier: Send Outbound Email" connected to your Webhook trigger.
+
+<Frame>![](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FBZIUC55rBb8RokmIPBSm%2FCapture%20d%E2%80%99e%CC%81cran%202025-08-18%20a%CC%80%2013.47.45.png?alt=media&#x26;token=6070213a-64bc-445e-aaa5-136f2b57479c)</Frame>
+
+Configure the email by entering the list of recipients, a topic, and a message.
+
+Example of message:
+
+```
+Hello! 
+
+Please review and approve the following transfer request:
+[1. Kind] transfer of [1. Asset Symbol] to the wallet [1. To] on [1. Network]. 
+
+Transfer id is: [1. TransferRequest Id]
+
+Please login to https://app.dfns.io/v3/org/policies/approvals to accept or refuse. 
+```
+
+Save, Publish and trigger a transfer to test the automation!
+
+<Check>
+Congratulations! you are now sending an email when an approval has been requested.
+</Check>
+
+
+</Step>
+
+<Step title="Going further: display the amount properly">
+
+Dfns displays asset amounts with the network maximum precision, and provides a description of the number of decimals. So in order to display the amount properly, you need to divide $$amount$$  by $$10^{decimals}$$. In the example below: `1000000000` for `7` decimals so $$1000 000 00 / 10^7 = 100$$ units!
+
+In Zapier, insert a block "Formatter by Zapier: Numbers" before the email block.
+
+Configure the fields:
+
+* Transform: Perform Math Operation
+* Operation: Divide
+* Input:
+  * \[1. Amount]
+  * 10^\[1. Asset Decimals]
+
+<Frame>![](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FrgkBWMHzNyeDfwjCevbP%2FCapture%20d%E2%80%99e%CC%81cran%202025-08-18%20a%CC%80%2014.03.14.png?alt=media&#x26;token=60dcbdde-64fa-47f3-b029-a6547529da48)</Frame>
+
+You can now update the email body to display the output:
+
+```
+[1. Kind] transfer of [2. output] [1. Asset Symbol] to the wallet [1. To] on [1. Network]. 
+```
+
+Publish and trigger a policy to test again!
+
+<Check>
+Congratulations! you are now displaying non-trivial information to your email recipient!
+</Check>
+
+
+</Step>
+
+<Step title="Going even further: query additional information about the request">
+
+Dfns provides a wide-range catalog of APIs to refine your email.
+
+For instance, the webhook sends the "Initiator Id" (`us-*****-*****-********`), which represents the user who triggered the policy. Let's get his information and include those in the email!
+
+You need a token to access the API. The best way is to create a service account, follow the tutorial on the page: [non-custody-1-2-dfns-api-using-a-service-account](../getting-started/onboarding-to-dfns/non-custody-1-2-dfns-api-using-a-service-account "mention") until you get a token. For rapid testing you can also copy your current session token from the dashboard (Settings > Personal Access Tokens > Copy the JWT token) but this token expires quickly so it's only good for temporary testing. 
+
+<Icon icon="hand-point-right"/>Copy your token
+
+<Warning>
+Keep your token secret (and disable it when you don't need it anymore)!
+</Warning>
+
+In Zapier, add a "Webhooks by Zapier: GET" after the formatter block, and configure the following fields:
+
+* **URL:** `https://api.dfns.io/auth/users/[1. Requester User Id]`
+* **Headers:** add one called Authorization, with value: "`Bearer <paste your token>`"
+
+And finally, update the email body to use the new data you gathered. For example:
+
+```
+Please review and approve the following transfer request from [3. Name]:
+```
+
+Publish and trigger a policy to test again!
+
+<Check>
+Congratulations! you are now displaying non-trivial information to your email recipient!
+</Check>
+
+
+</Step>
+</Steps>
+
+You can now go as far as required to get more data about the event, refine the mail. Use our [api-docs](../api-docs "mention") to learn what you have access to!
+
+
+
+### Video tutorial
+
+<Loom videoId="b2475c3aafb24ccb9000df59dc958d47" />

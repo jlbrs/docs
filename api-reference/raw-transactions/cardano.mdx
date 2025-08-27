@@ -5,6 +5,7 @@ title: 'Cardano'
 Cardano supports the following signature `kinds`:
 
 * `Transaction`, unsigned transaction.
+* `Cip8`, arbitrary message signing using CIP-8.
 
 ## `Transaction`
 
@@ -18,7 +19,7 @@ The following payload can be used with the
 | `kind`           | `Transaction`                                        | String          |
 | `transaction`    | The unsigned hex encoded transaction as shown below. | String          |
 
-```shell
+```json
 {
   "kind": "Transaction",
   "transaction": "0x84a3008182582082544414292ededfa716ae42af007ecff823c58796cb9ba60330699fb4d55d7901018282581d60112f2721059581f2a8f9986638359b83c567a61d5486ed0e16c818621a000cf4ae82581d60112f2721059581f2a8f9986638359b83c567a61d5486ed0e16c818621b0000000253db20cd021a00028785a0f5f6"
@@ -54,3 +55,25 @@ const res = await dfnsClient.wallets.generateSignature({
   },
 })
 ```
+
+
+## CIP-8
+
+Signs an arbitrary message using [CIP-8](https://cips.cardano.org/cip/CIP-0008). Note: signing address depends on the targeted blockchain. Therefore it's tied to a specific `network` rather than the blockchain kind.
+
+| Field     | Description                      | Type - Optional |
+| --------- | -------------------------------- | --------------- |
+| `network` | A supported Cardano network.     | String          |
+| `kind`    | `Cip8`                           | String          |
+| `context` | `Signature1`                     | String          |
+| `payload` | The generic message hex encoded. | String          |
+
+```json
+{
+  "network": "Cardano",
+  "kind": "Cip8",
+  "context": "Signature1",
+  "payload": "0x49206c6f76652044666e73"
+}
+```
+

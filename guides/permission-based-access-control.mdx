@@ -1,0 +1,152 @@
+---
+title: Permission-Based Access Control
+description: Invite new users and setup your Dfns access management with user permissions.
+---
+
+import { Youtube } from "/snippets/youtube.jsx";
+
+In this tutorial you will learn how to create permissions, how to invite users and finally how to assign permissions to users.
+
+## From the Dashboard
+
+<Youtube videoId="M1Y-6FlD4pQ"/>
+
+## With APIs
+
+<Steps>
+<Step title="Create a new Permission">
+
+A [permission](../api-docs/permissions) is a whitelist of all operations a user is allowed to take. Permissions are designed to be assigned to users to help secure your organization by enforcing the principle of least privilege.
+
+<Info>
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+</Info>
+
+
+
+1. Select a name for your Permission, and the operations to whitelist. Here, only allowing assigned users read-only access to the wallets:
+
+```sh
+userActionPayload = {
+  "name": "Wallet_Read_User",
+  "operations": ["Wallets:Read"]
+}
+
+userActionHttpMethod = "POST"
+userActionHttpPath = "/permissions"
+```
+
+2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+3. Call the permission creation endpoint: `POST /permissions`
+
+```javascript
+fetch(`${baseURL}${userActionHttpPath}`, {
+  method: userActionHttpMethod,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    "X-DFNS-USERACTION": userAction,
+  },
+  body: JSON.stringify(userActionHttpMethod),
+})
+```
+
+<Info>
+In the response, keep a note of the permission `id`, you will need it to assign it to the user in the last step of this tutorial.
+</Info>
+
+<Check>
+That's it! You have created a new permission! Now, let's get it assigned to a new user.
+</Check>
+</Step>
+
+<Step title="Invite a New User">
+
+We will invite a new [User](../api-docs/authentication/user-management) as an employee from your company. Employees can also access the dashboard and use the APIs. If you want to invite your End users then look at [Delegated Registration](../api-docs/authentication/delegated-auth/delegatedregistration).
+
+<Info>
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+</Info>
+
+
+
+1. When you invite a user, he will receive a registration email with a code allowing him to register to your organization. That user will be created without any permission. Just input his email:
+
+```
+userActionPayload = {
+  "email": "jdoe@example.co",
+  "kind": "CustomerEmployee"
+}
+
+userActionHttpMethod = "POST"
+userActionHttpPath = "/auth/users"
+```
+
+2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+3. Call the user creation endpoint: `POST /auth/users`  to initiate the registration process.
+
+```javascript
+fetch(`${baseURL}${userActionHttpPath}`, {
+  method: userActionHttpMethod,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    "X-DFNS-USERACTION": userAction,
+  },
+  body: JSON.stringify(userActionHttpMethod),
+})
+```
+
+<Info>
+In the response, keep a note of the `userId`, you will need it to assign his permission in the next step.
+</Info>
+
+<Check>
+The new user has been created and has received instructions to create his own credentials. We don't need to wait for him to complete his registration, let's go ahead and assign him our permission!
+</Check>
+</Step>
+
+<Step title="Assign Permissions">
+
+Final step! Let's give our user the rights he deserves! We will the [assign permission](../api-docs/permissions/permissions/createassignment) endpoint to link it to the user we just created
+
+<Info>
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+</Info>
+
+
+
+1. Not much choice here, just input the ids gathers above: 
+
+```
+userActionPayload = {
+  "identityId": "{userId}"
+}
+userActionHttpMethod = "POST"
+userActionHttpPath = "/permissions/{permission id}/assignments"
+```
+
+2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+3. Call the permission assignment endpoint: `POST /permissions/{permission id}/assignments`  to grant the permission:
+
+```javascript
+fetch(`${baseURL}${userActionHttpPath}`, {
+  method: userActionHttpMethod,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+    "X-DFNS-USERACTION": userAction,
+  },
+  body: JSON.stringify(userActionHttpMethod),
+})
+```
+
+
+
+<Check>
+Congrats! You have built the base of a tailored identity management policy, you can now keep refining and assign to your complete user base.
+</Check>
+
+
+</Step>
+</Steps>

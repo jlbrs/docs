@@ -157,12 +157,15 @@
             "icon": "shield-check",
             "pages": [
               "security/overview",
+              "security/on-premise-deployment",
+              "security/hsm",
               "security/our-soc-2-type-ii-compliance",
               "security/configuring-institutional-grade-policies",
               "security/audit-log-deep-dive",
               "security/dfns-vs-self-hosted-solutions",
               "security/meeting-fiduciary-duties-with-dfns",
-              "security/compliance-for-micar-and-travel-rule"
+              "security/compliance-for-micar-and-travel-rule",
+              "security/delegated-signing"
             ]
           },
           {
@@ -223,13 +226,19 @@
               "developers/webhooks",
               "developers/guides/wallet-delegation",
               "developers/guides/user-action-signature",
+              "developers/guides/generate-a-key-pair",
+              "developers/guides/user-credentials",
+              "developers/guides/access-token-credentials",
+              "developers/guides/signing-requests",
+              "developers/guides/passkey-settings-migration-guide",
+              "developers/guides/keys-and-multichain-migration-guide",
+              "developers/guides/applications-deprecation",
               {
                 "group": "Core Skills",
                 "pages": [
                   "developers/core/setup-and-authentication",
                   "developers/core/creating-and-managing-wallets",
-                  "developers/core/displaying-portfolio-history",
-                  "developers/core/handling-webhook-events"
+                  "developers/core/displaying-portfolio-history"
                 ]
               },
               {
@@ -262,20 +271,32 @@
                 ]
               }
             ]
+          },{
+            "group": "Guides",
+            "icon": "browser",
+            "pages": [
+              "/guides/using-networks-testnets",
+              "/guides/permission-based-access-control",
+              "/guides/email-approval-requests-with-zapier"
+            ]
           },
           {
             "group": "Dashboard Guides",
-            "icon": "layout-dashboard",
+            "icon": "browser",
             "pages": [
               "dashboard/overview",
+              "/dashboard/registering-a-new-passkey-credential",
+              "dashboard/storing-webauthn-credentials-in-password-managers",
               "dashboard/videos",
               "dashboard/onboarding-a-new-device",
               "dashboard/managing-users-and-roles",
               "dashboard/creating-policies",
               "dashboard/approving-transactions",
               "dashboard/user-account-recovery"
+              
             ]
-          }
+          },
+          "/faq"
         ]
       },
       {
@@ -287,6 +308,7 @@
           "api-reference/environments",
           "api-reference/core-objects",
           "api-reference/error-codes",
+          "api-reference/request-headers",
           "api-reference/idempotency",
           "api-reference/rate-limits",
           "api-reference/postman-collection",
@@ -296,7 +318,8 @@
               {
                 "group": "Authentication",
                 "pages": [
-                  "api-reference/authentication-flows",
+                  "/api-reference/auth/index",
+                  "/api-reference/auth/flows",
                   "post /auth/login/code",
                   "post /auth/login/init",
                   "post /auth/login",
@@ -359,6 +382,7 @@
                 "group": "Credentials",
                 "pages": [
                   "/api-reference/auth/credentials",
+                  "/api-reference/auth/credentials-data",
                   "get /auth/credentials",
                   "post /auth/credentials/init",
                   "post /auth/credentials",

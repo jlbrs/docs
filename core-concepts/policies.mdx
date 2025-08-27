@@ -119,9 +119,9 @@ This rule can be used on a policy of any `activityKind`. It will always be trigg
 
 This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It will trigger if the wallet activity detected is transferring some value which amount is greater than a given limit.
 
-{% hint style="info" %}
+<Note>
 If the fiat amount of the wallet activity cannot be evaluated for any reason (eg. market prices are not available, or eg. the amount cannot be inferred from a wallet signature request, etc.), by default the rule will trigger the policy (this is called "failing closed" and is generally considered a security best practice).
-{% endhint %}
+</Note>
 
 ```json
 {
@@ -137,7 +137,10 @@ If the fiat amount of the wallet activity cannot be evaluated for any reason (eg
 
 **Configuration**
 
-<table><thead><tr><th width="154">Property</th><th width="154">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>limit</code><mark style="color:red;">*</mark></td><td>Positive Integer</td><td>Amount limit in <code>currency</code></td></tr><tr><td><code>currency</code><mark style="color:red;">*</mark></td><td>String</td><td>Fiat currency, currently only  <code>USD</code></td></tr></tbody></table>
+| Property  | Type             | Description                        |
+|-----------|------------------|------------------------------------|
+| limit*    | Positive Integer | Amount limit in currency           |
+| currency* | String           | Fiat currency, currently only  USD |
 
 
 
@@ -145,9 +148,9 @@ If the fiat amount of the wallet activity cannot be evaluated for any reason (eg
 
 This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It will trigger if the cumulative amount transferred from a given wallet within a given timeframe is greater than a specified limit.  The aggregate amount evaluated is based only on the wallet that triggered the policy.&#x20;
 
-{% hint style="info" %}
+<Note>
 If the fiat amount of any wallet activity in the given timeframe cannot be evaluated for any reason (eg. market prices are not available, or eg. the amount cannot be inferred from a wallet signature request, etc.), by default the rule will trigger the policy (ie. will fail closed).
-{% endhint %}
+</Note>
 
 ```json
 {
@@ -164,7 +167,11 @@ If the fiat amount of any wallet activity in the given timeframe cannot be evalu
 
 **Configuration**
 
-<table><thead><tr><th width="154">Property</th><th width="154">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>limit</code><mark style="color:red;">*</mark></td><td>Positive Integer</td><td>Amount limit in <code>currency</code></td></tr><tr><td><code>currency</code><mark style="color:red;">*</mark></td><td>String</td><td>Fiat currency, currently only <code>USD</code></td></tr><tr><td><code>timeframe</code><mark style="color:red;">*</mark></td><td>Positive Integer</td><td>Time period in minutes. Minimum 1, Maximum 43,200.</td></tr></tbody></table>
+| Property  | Type             | Description                        |
+|-----------|------------------|------------------------------------|
+| limit*    | Positive Integer | Amount limit in currency           |
+| currency* | String           | Fiat currency, currently only  USD |
+| timeframe*| Positive Integer | Time period in minutes. Minimum 1, Maximum 43,200. |
 
 
 
@@ -186,7 +193,10 @@ This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It will tr
 
 **Configuration**
 
-<table><thead><tr><th width="154">Property</th><th width="154">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>limit</code><mark style="color:red;">*</mark></td><td>Positive Integer</td><td>Amount limit in <code>currency</code></td></tr><tr><td><code>timeframe</code><mark style="color:red;">*</mark></td><td>Positive Integer</td><td>Time period in minutes. Minimum 1, Maximum 43,200.</td></tr></tbody></table>
+| Property   | Type             | Description                                        |
+|------------|------------------|----------------------------------------------------|
+| limit*     | Positive Integer | Amount limit in currency                           |
+| timeframe* | Positive Integer | Time period in minutes. Minimum 1, Maximum 43,200. |
 
 
 
@@ -194,13 +204,13 @@ This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It will tr
 
 This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It will trigger if the wallet activity transfers some value to a recipient _and the destination address is NOT whitelisted_.
 
-{% hint style="warning" %}
+<Warning>
 Address comparison is case sensitive when evaluating the rule. For EVM addresses, make sure you use the canonical all lowercase address format, not the mixed-case checksum address format, in your policy rule configuration. Otherwise, the evaluation will fail and trigger the policy.
-{% endhint %}
+</Warning>
 
-{% hint style="info" %}
+<Note>
 If the wallet activity is not a value transfer, or the transaction recipient cannot be inferred from the wallet activity (eg if you use [Generate Signature](../wallets/generate-signature)), by default the rule will trigger the policy (ie. fail closed).
-{% endhint %}
+</Note>
 
 If the specified whitelisted address list is empty, it basically means "no addresses are whitelisted", so the rule will trigger for any wallet activities.
 
@@ -217,13 +227,16 @@ If the specified whitelisted address list is empty, it basically means "no addre
 
 **Configuration**
 
-<table><thead><tr><th width="154">Property</th><th width="154">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>addresses</code><mark style="color:red;">*</mark></td><td>List of Positive Integer</td><td>Whitelisted recipient addresses</td></tr></tbody></table>
+| Property   | Type             | Description                                        |
+|------------|------------------|----------------------------------------------------|
+| addresses* | List of Strings  | Whitelisted recipient addresses                    |
+|            |                  |                                                    |
 
 ### `ChainalysisTransactionPrescreening`   policy rule
 
-{% hint style="info" %}
+<Note>
 This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings. (see more on [Chainalysis](../../integrations/aml-kyt/chainalysis) integration page)
-{% endhint %}
+</Note>
 
 This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It's a rule based on [Chainalysis](../../integrations/aml-kyt/chainalysis) KYT integration (Know-Your-Transaction). Upon transfer attempt, we will first register the transfer with Chainalysis (as a ["withdrawal attempt"](https://docs.chainalysis.com/api/kyt/#registration-register-a-withdrawal-attempt)), and fetch the screening results (alerts, exposures, addresses detected). Based on the results, and the configuration of this rule, the policy will be triggered.&#x20;
 
@@ -259,15 +272,24 @@ It's called "Pre"-screening, because the scanned transaction is not on chain yet
 
 **Configuration**
 
-<table><thead><tr><th width="229">Property</th><th width="154">Type</th><th>Description</th></tr></thead><tbody><tr><td><p><code>alerts</code></p><p> <code>.alertLevel</code><mark style="color:red;">*</mark></p></td><td><code>string</code></td><td>Minimum alert level above which the rule should trigger, if any <a href="https://docs.chainalysis.com/api/kyt/#withdrawal-attempts-get-alerts">alert is returned in Chainalysis results</a>. Can be <code>LOW</code>, <code>MEDIUM</code>, <code>HIGH</code>, or <code>SEVERE</code></td></tr><tr><td><p><code>alerts</code></p><p> <code>.categoryIds</code><mark style="color:red;">*</mark></p></td><td>list of integers</td><td>List of Chainalysis category IDs (see <a href="https://docs.chainalysis.com/api/kyt/#categories">here</a>). If you leave this list empty, alerts of any category will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list.</td></tr><tr><td><p><code>exposures</code></p><p> <code>.direct</code></p><p>  <code>.categoryIds</code><mark style="color:red;">*</mark></p></td><td>list of integers</td><td>List of Chainalysis category IDs (see <a href="https://docs.chainalysis.com/api/kyt/#categories">here</a>). If you leave this list empty, a <a href="https://docs.chainalysis.com/api/kyt/#withdrawal-attempts-get-direct-exposure">direct exposure</a> of any category detected by chainalysis will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list.</td></tr><tr><td><p><code>addresses</code></p><p> <code>.categoryIds</code><mark style="color:red;">*</mark></p></td><td>list of integers</td><td>List of Chainalysis category IDs (see <a href="https://docs.chainalysis.com/api/kyt/#categories">here</a>). If you leave this list empty, an <a href="https://docs.chainalysis.com/api/kyt/#withdrawal-attempts-get-address-identifications">address</a> of any category identified by chainalysis will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list.</td></tr><tr><td><p><code>fallbackBehaviours</code></p><p><code>.skipUnscreenableTransaction</code><mark style="color:red;">*</mark></p></td><td>boolean</td><td>Behaviour if the wallet activity is not screenable (eg. if it's a signature request of a hash). If true, a transaction which is "unscreenable" will just be skipped, and policy will not trigger</td></tr><tr><td><code>fallbackBehaviours.skipUnsupportedNetwork</code><mark style="color:red;">*</mark></td><td>boolean</td><td>Behaviour if the wallet activity is on a network not supported by chainalysis, or not yet supported in the dfns-chainalysis integration. If true, an unsupported network will just be skipped, and policy will not trigger</td></tr><tr><td><code>fallbackBehaviours.skipUnsupportedAsset</code><mark style="color:red;">*</mark></td><td>boolean</td><td>Behaviour if the wallet activity is with a asset not supported by chainalysis, or not yet supported in the dfns-chainalysis integration. If true, an unsupported asset will just be skipped, and policy will not trigger</td></tr><tr><td><code>fallbackBehaviours.skipChainalysisFailure</code><mark style="color:red;">*</mark></td><td>boolean</td><td>Behaviour if any issue with Chainalysis calls (timeout, results took too long, rate limiting errors, any error). If true, will skip if any error happens </td></tr></tbody></table>
+| Property                                        | Type             | Description                                                                                                                                                                                                                                                           |
+|-------------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| alerts .alertLevel*                             | string           | Minimum alert level above which the rule should trigger, if any alert is returned in Chainalysis results. Can be LOW, MEDIUM, HIGH, or SEVERE                                                                                                                         |
+| alerts .categoryIds*                            | list of integers | List of Chainalysis category IDs (see here). If you leave this list empty, alerts of any category will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list.                                    |
+| exposures .direct  .categoryIds*                | list of integers | List of Chainalysis category IDs (see here). If you leave this list empty, a direct exposure of any category detected by chainalysis will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list. |
+| addresses .categoryIds*                         | list of integers | List of Chainalysis category IDs (see here). If you leave this list empty, an address of any category identified by chainalysis will trigger the rule. Otherwise, if you only want the rule to trigger on specific categories, you can specify some in the list.      |
+| fallbackBehaviours.skipUnscreenableTransaction* | boolean          | Behaviour if the wallet activity is not screenable (eg. if it's a signature request of a hash). If true, a transaction which is "unscreenable" will just be skipped, and policy will not trigger                                                                      |
+| fallbackBehaviours.skipUnsupportedNetwork*      | boolean          | Behaviour if the wallet activity is on a network not supported by chainalysis, or not yet supported in the dfns-chainalysis integration. If true, an unsupported network will just be skipped, and policy will not trigger                                            |
+| fallbackBehaviours.skipUnsupportedAsset*        | boolean          | Behaviour if the wallet activity is with a asset not supported by chainalysis, or not yet supported in the dfns-chainalysis integration. If true, an unsupported asset will just be skipped, and policy will not trigger                                              |
+| fallbackBehaviours.skipChainalysisFailure*      | boolean          | Behaviour if any issue with Chainalysis calls (timeout, results took too long, rate limiting errors, any error). If true, will skip if any error happens                                                                                                              |
 
 
 
 ### `ChainalysisTransactionScreening`   policy rule
 
-{% hint style="info" %}
+<Note>
 This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings (see more on [Chainalysis](../../integrations/aml-kyt/chainalysis) integration page)
-{% endhint %}
+</Note>
 
 This rule can be used on a policy of `activityKind` = `Wallets:IncomingTransaction`, and with the action kind `NoAction`. It's a rule based on Chainalysis KYT integration (Know-Your-Transaction). Upon an incoming transaction detectedby our indexers, we will [register the transfer with Chainalysis](https://docs.chainalysis.com/api/kyt/#registration-register-a-transfer), and fetch the results of the analysis (alerts & exposures detected). Based on the results, and the configuration of this rule, the policy will be triggered.
 
@@ -304,9 +326,9 @@ See the above configuration for rule `ChainalysisTransactionPrescreening`
 
 ### `TravelRuleTransactionPrescreening` policy rule
 
-{% hint style="info" %}
+<Note>
 This rule can only be used once the Notabene integration is activated from the Dfns dashboard settings (see more on [Notabene](../../integrations/travel-rule/notabene) integration page)
-{% endhint %}
+</Note>
 
 This rule can be used on a policy of `activityKind` = `Wallets:Sign,`and with the action kind `Block`. It's a rule based on [Notabene](../../integrations/travel-rule/notabene) [TravelRule](../../integrations/travel-rule) integration. It _**ONLY**_ applies to Dfns [Transfer Asset](../wallets/transfer-asset) Api Calls. It is NOT supported for Transfers initiated via the dashboard. Upon transfer attempt with an optional [TravelRule](../wallets/transfer-asset) payload, we will call Notabene's APIs on your behalf to both confirm the validity of the travel rule message and submit it for processing. Dfns then waits for a response from the counterparty (for custodial transfers) or Notabene (for non-custodial transfers).
 
@@ -323,14 +345,15 @@ It's called "Pre"-screening, because the transaction is not on chain yet, it's s
 }
 ```
 
-\
+
 **Configuration**
 
-<table><thead><tr><th width="239.8828125">Property</th><th width="184.57421875">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>vendor</code></td><td><code>string</code></td><td>TravelRule vendor to use for the prescreening policy. At the moment we only support <strong><code>Notabene</code></strong>.</td></tr><tr><td><pre><code>autoTrigger
-TimeoutSeconds
-</code></pre></td><td><code>Positive Integer</code></td><td>If we do NOT receive any updates from Notabene regarding the status of the travel rule message we need to eventually time out and reject the transfer. This is the timeout, in seconds, we wait for a response from Notabene before rejecting the transfer.</td></tr><tr><td><p></p><pre class="language-json"><code class="lang-json">autoClearAfterDelivered
-TimeoutSeconds
-</code></pre></td><td><code>Positive Integer</code><br><code>(Optional)</code></td><td>This <code>OPTIONAL</code> setting allows you to proceed with a transfer that Notabene has delivered to a counterparty even if the recipient hasn't responded after delivery. </td></tr></tbody></table>
+| Property                                      | Type                       | Description                                                                                                                                                                                                                                                 |
+|-----------------------------------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| vendor                                        | string                     | TravelRule vendor to use for the prescreening policy. At the moment we only support Notabene.                                                                                                                                                               |
+| autoTrigger<br/>TimeoutSeconds<br/>             | Positive Integer           | If we do NOT receive any updates from Notabene regarding the status of the travel rule message we need to eventually time out and reject the transfer. This is the timeout, in seconds, we wait for a response from Notabene before rejecting the transfer. |
+| autoClearAfterDelivered<br/>TimeoutSeconds<br/> | Positive Integer(Optional) | This OPTIONAL setting allows you to proceed with a transfer that Notabene has delivered to a counterparty even if the recipient hasn't responded after delivery.                                                                                            |
+
 
 ## Policy Action
 
@@ -383,17 +406,22 @@ The example below shows a `RequestApproval` action, configured with one approval
 }
 ```
 
-{% hint style="danger" %}
-### You **cannot approve your own requests**
+<Danger>
+**You cannot approve your own requests**
 
-Please make your policies won't require a requester to approve his/her own request so you don't get blocked.&#x20;
-
-
+Please make your policies won't require a requester to approve his/her own request so you don't get blocked.
 
 _Example:_ Company has 3 users allowed to modify policies. They create a policy that requires approval from 3 out of the 3 users for any future policy modification. In this case, they get cannot modify policies anymore: whoever requests a modification cannot approve, and the policy is therefore always missing one approver. They need to invite a new user and give him the rights to update the policy, so he can lower the quorum and the 3 original users can approve the modification.
-{% endhint %}
 
-<table><thead><tr><th width="222">property</th><th width="170">Type</th><th>Description</th></tr></thead><tbody><tr><td><code>approvalGroups</code><mark style="color:red;">*</mark></td><td>List of Object</td><td>List of approval groups. If multiple groups are defined, the approval is complete only when all groups have approved</td></tr><tr><td><p><code>approvalGroups[*]</code></p><p><code>.name</code></p></td><td>(Optional) String</td><td>Optional name of this group.</td></tr><tr><td><p><code>approvalGroups[*]</code></p><p><code>.quorum</code><mark style="color:red;">*</mark></p></td><td>Positive Integer</td><td>The quorum is the number of approvals required in this group to reach group consensus. The activity is executed only if all groups reached their approval quorum.</td></tr><tr><td><p><code>approvalGroups[*]</code></p><p><code>.approvers</code><mark style="color:red;">*</mark></p></td><td>Object</td><td>Defines all users that are allowed to approve in the group.<br><br>If set to an empty object  <code>{}</code>, it means that anyone within your organisation can be an approver.<br><br>Otherwise, you can specify an exact list of allowed approvers, by adding their user IDs in this object:  <code>{ userId: { in: [...] }}</code></td></tr><tr><td><code>autoRejectTimeout</code></td><td>(Optional) Positive Integer</td><td>Number of minutes after which, if the approval has not reach global consensus (all groups reached their consensus), the activity is automatically rejected.<br><br>If not specified, the activity will never be rejected automatically (the approval process doesn't "expire" / "times out").</td></tr></tbody></table>
+</Danger>
+
+| property                     | Type                        | Description                                                                                                                                                                                                                                                                                  |
+|------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| approvalGroups*              | List of Object              | List of approval groups. If multiple groups are defined, the approval is complete only when all groups have approved                                                                                                                                                                         |
+| approvalGroups[*].name       | (Optional) String           | Optional name of this group.                                                                                                                                                                                                                                                                 |
+| approvalGroups[*].quorum*    | Positive Integer            | The quorum is the number of approvals required in this group to reach group consensus. The activity is executed only if all groups reached their approval quorum.                                                                                                                            |
+| approvalGroups[*].approvers* | Object                      | Defines all users that are allowed to approve in the group.If set to an empty object  {}, it means that anyone within your organisation can be an approver.Otherwise, you can specify an exact list of allowed approvers, by adding their user IDs in this object:  `{ userId: { in: [...] }}` |
+| autoRejectTimeout            | (Optional) Positive Integer | Number of minutes after which, if the approval has not reach global consensus (all groups reached their consensus), the activity is automatically rejected.If not specified, the activity will never be rejected automatically (the approval process doesn't "expire" / "times out").        |
 
 
 
@@ -429,7 +457,11 @@ The filters that you can specify depend on the `activityKind` of your policy (`a
 
 ### Filters for `"Wallets:Sign"` activity
 
-<table><thead><tr><th width="158">key</th><th width="111">evaluator</th><th>Value</th></tr></thead><tbody><tr><td><code>walletId</code></td><td><code>in</code></td><td>List of wallet IDs. If the activity is from a wallet within one of these IDs, the policy applies to this wallet.</td></tr><tr><td><code>walletTags</code></td><td><code>hasAny</code></td><td>List of tags. If the activity is from a wallet that <strong>has any of these tags</strong>, the policy will apply to this wallet.</td></tr><tr><td><code>walletTags</code></td><td><code>hasAll</code></td><td>List of tags. If the activity is from a wallet that <strong>has all of these tags</strong>, the policy will apply to this wallet.</td></tr></tbody></table>
+| key          | evaluator | Value                                                                                             |
+|--------------|-----------|---------------------------------------------------------------------------------------------------|
+| walletId     | in        | List of wallet IDs. If the activity is from a wallet within one of these IDs, the policy applies to this wallet. |
+| walletTags   | hasAny    | List of tags. If the activity is from a wallet that <strong>has any of these tags</strong>, the policy will apply to this wallet. |
+| walletTags   | hasAll    | List of tags. If the activity is from a wallet that <strong>has all of these tags</strong>, the policy will apply to this wallet. |
 
 Some examples:
 
@@ -506,7 +538,10 @@ Some examples:
 
 ### Filters for `"Permissions:Modify"` activity
 
-<table><thead><tr><th width="177">filter key</th><th width="111">evaluator</th><th>Value</th></tr></thead><tbody><tr><td><code>permissionId</code></td><td><code>in</code></td><td>List of permission IDs. If the permission being modified is one of these IDs, the policy applies.</td></tr></tbody></table>
+| filter key   | evaluator | Value                                                                                             |
+|--------------|-----------|---------------------------------------------------------------------------------------------------|
+| permissionId | in        | List of permission IDs. If the permission being modified is one of these IDs, the policy applies. |
+
 
 Some examples:
 
@@ -526,7 +561,9 @@ Some examples:
 
 ### Filters for `"Permissions:Assign"` activity
 
-<table><thead><tr><th width="177">filter key</th><th width="111">evaluator</th><th>Value</th></tr></thead><tbody><tr><td><code>permissionId</code></td><td><code>in</code></td><td>List of permission IDs. If the permission being assigned/revoked is one of these IDs, the policy applies.</td></tr></tbody></table>
+| filter key   | evaluator | Value                                                                                                     |
+|--------------|-----------|-----------------------------------------------------------------------------------------------------------|
+| permissionId | in        | List of permission IDs. If the permission being assigned/revoked is one of these IDs, the policy applies. |
 
 Some examples:
 
@@ -558,7 +595,7 @@ When a new Approval object is created and an approval process is required, a [we
 
 The Approval object can be queried using the `approvalId` returned from the endpoint that triggered the approval process, using the [Get Approval](api-reference/list-approvals) / [List Approvals](api-reference/list-approvals-1) endpoints.
 
-Users can then call the [Create Approval Decision](api-reference/create-approval-decision) endpoint to either approve / reject this activity.  Of course this can also be done via the Dfns dashboard.&#x20;
+Users can then call the [Create Approval Decision](api-reference/create-approval-decision) endpoint to either approve / reject this activity.  Of course this can also be done via the Dfns dashboard.
 
 A user can only give his approval / rejection if he is defined inside one of the approval groups defined on the policies that triggered.
 

@@ -1,0 +1,101 @@
+---
+title: Using Hardware Security Modules (HSMs)
+---
+
+## Overview
+
+Dfns provides robust support for integrating Hardware Security Modules (HSMs) to secure wallet keys, offering an alternative to the Multi-Party Computation (MPC) cluster.
+
+By leveraging an HSM, customers can choose an alternate key store to secure their cryptographic keys while maintaining full compatibility with existing Dfns APIs and capabilities. Once the HSM is deployed, no changes are required to the customer’s integration; all APIs, workflows, and functionalities remain identical to those used with the MPC cluster.
+
+<Frame>![](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FigRpu7ZpFHUlEheM2AaU%2FDfns%20-%20onprems.jpg?alt=media&#x26;token=05cafe31-3df2-4495-9075-ba5afd66709b)</Frame>
+
+## Detailed Architecture and Integration
+
+### Signing Server Overview
+
+The Dfns Signing Server is a specialized component designed to facilitate secure integration between Dfns APIs and HSMs. It provides deep compatibility with the PKCS#11 standard, enabling seamless interaction with a wide range of HSM models from various vendors. The Signing Server operates as a bridge, handling key generation and signing requests while ensuring state-of-the-art security and operational flexibility.The Signing Server has two primary functionalities:
+
+1. **Polling Dfns APIs**: The Signing Server continuously polls the Dfns APIs to retrieve requests for generating new keys or signing transactions using existing keys. The connection between the Signing Server and Dfns APIs is secured using mutual Transport Layer Security (mTLS) with strong authorization mechanisms, ensuring end-to-end encryption and authentication.
+2. **Interfacing with HSMs via PKCS#11**: The Signing Server translates API requests into PKCS#11 commands to interact with the HSM. This abstraction allows the Signing Server to support diverse HSM models without requiring specific hardware configurations.
+
+
+
+### Stateless HSM Usage
+
+To maximize compatibility and flexibility, Dfns employs a stateless approach to HSM usage. This design eliminates the need for persistent key storage within the HSM, simplifying integration and enhancing disaster recovery capabilities. The stateless workflow is as follows:
+
+* **Key Generation**:
+  1. The Signing Server receives a key generation request from the Dfns APIs.
+  2. It forwards the request to the HSM, which generates a new cryptographic key.
+  3. The HSM wraps (encrypts) the key using its root key, producing a wrapped key.
+  4. The Signing Server retrieves the wrapped key and stores it in a secure database for backup and future use.
+* **Transaction Signing**:
+  1. The Signing Server receives a signing request from the Dfns APIs, including the payload to be signed.
+  2. It retrieves the corresponding wrapped key from the database.
+  3. The Signing Server sends the wrapped key and the payload to the HSM.
+  4. The HSM unwraps (decrypts) the key using its root key, performs the signature operation, and returns the signed payload to the Signing Server.
+  5. The Signing Server forwards the signed payload to the Dfns APIs for processing.
+
+This stateless design ensures that the HSM does not need to maintain key state, enabling compatibility with a broad range of HSMs and simplifying key management.
+
+
+
+### Database Backup and Disaster Recovery
+
+The wrapped keys stored in the database are encrypted with the HSM’s root key, ensuring that they remain secure even if the database is compromised. The database can be backed up and replicated across multiple locations, providing robust disaster recovery capabilities. In the event of an HSM failure, a new HSM provisioned with the same root key can access the wrapped keys from the database, allowing seamless recovery without key loss.
+
+
+
+### Horizontal Scaling and Redundancy
+
+The Signing Server and HSM integration are designed for horizontal scaling to support high availability and business continuity. Customers can deploy multiple HSMs and Signing Server instances to handle increased load or ensure redundancy. The only requirements for scaling are:
+
+* All HSMs must be provisioned with the same root key to unwrap keys consistently.
+* All Signing Server instances must have access to the same database containing the wrapped keys.
+
+This architecture allows customers to distribute workload across multiple HSMs, ensuring resilience and performance under varying operational demands.
+
+
+
+### Deployments Options
+
+The Signing Server is a flexible component that can be deployed on the customer’s infrastructure, offering multiple packaging and deployment options:
+
+* **Container Image**: The Signing Server can be provided as a Docker container image, enabling easy deployment in containerized environments such as Kubernetes or Docker Swarm.
+* **Standalone Binary**: For environments without containerization, the Signing Server is available as a standalone binary, compatible with common operating systems.
+* **Co-Located Deployment**: The Signing Server can be run on the same machine as the HSM to minimize latency and enhance security by reducing network exposure.
+* **Cloud-Based HSM Support**: Customers can opt for cloud-based HSMs (e.g., AWS CloudHSM, Azure Key Vault HSM, Google Cloud HSM) if they prefer a managed HSM solution.
+
+
+
+### HSM Administration and Security
+
+Dfns does not participate in the administration or management of the customer’s HSM. All HSM-related operations, including provisioning, configuration, and root key management, are handled exclusively by the customer. This ensures that Dfns personnel have no access to the cryptographic keys, aligning with strict security and compliance requirements.
+
+Customers are free to use an existing HSM or procure a new one, provided it supports the PKCS#11 standard. The stateless design and PKCS#11 compatibility eliminate the need for specific HSM models or configurations, offering maximum flexibility.
+
+
+
+### Integration Steps
+
+To integrate an HSM with Dfns, customers must perform the following steps:
+
+1. **Obtain the Signing Server**: Contact Dfns to acquire the Signing Server component, available as a container image or standalone binary.
+2. **Generate mTLS Certificates**: Sync with Dfns to configure mTLS certificates for secure communication between the Signing Server and Dfns APIs. Ensure that the certificates are properly provisioned and validated.
+3. **Deploy the Signing Server**: Install and configure the Signing Server on the customer’s infrastructure, ensuring connectivity to the HSM and the wrapped key database.
+4. **(Optional) Provision the HSM**: If using a new HSM, configure the HSM with a root key and ensure it supports PKCS#11. If using multiple HSMs, provision them with the same root key.
+5. **Run the Signing Server**: Start the Signing Server, which will begin polling Dfns APIs and processing key generation and signing requests via the HSM.
+
+Once these steps are complete, the HSM integration is fully operational, and customers can continue using the same Dfns APIs as before, with no changes to their existing workflows.
+
+
+
+### Security Considerations
+
+* **mTLS Authentication**: The use of mTLS between the Signing Server and Dfns APIs ensures that only authorized components can communicate, preventing unauthorized access.
+* **Wrapped Key Encryption**: Keys stored in the database are encrypted with the HSM’s root key, rendering them unusable without access to the HSM.
+* **Customer-Controlled HSM**: By managing the HSM independently, customers retain full control over their cryptographic keys, ensuring compliance with internal security policies.
+* **Stateless Design:** The stateless approach minimizes the attack surface on the HSM and simplifies key recovery in case of hardware failure.
+
+For further assistance or to obtain the Signing Server component, please contact the Dfns support team at [https://support.dfns.co](https://support.dfns.co).

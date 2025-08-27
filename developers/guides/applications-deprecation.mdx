@@ -1,0 +1,51 @@
+---
+title: Applications - Deprecation
+---
+
+## TLDR;
+
+"**`Applications`**" was a first-level entity in Dfns API. It's now getting deprecated and removed entirely from the API. This change won't break your existing Dfns integration. Moving forward, you can cleanup some — now unnecessary — things from your code.
+
+
+
+## Context
+
+Historically, "`Applications`" were built to serve two main purposes:
+
+* Used as a "passkey setup" layer. Whitelisting a given passkey domain. On any given frontend application leveraging passkeys (web app / mobile app), by design, passkeys created there will be forever tied to the application domain. To use Dfns API, the right Dfns Application (with matching domain) needed to be used, otherwise a `403 Forbidden` error would be raised.
+* Used as an additional permission layer.  Which would allow segregating different Applications with different permissions, through which users would not be able to perform some operation. For example, if a user was granted the `Wallets:Create` permission, but was using Dfns API using an Application which was not granted the `Wallets:Create`  permission, a `403 Forbidden` error would be raised. This additional permission layer was only a real security feature, if used in conjunction with a given kind of Application: "Sever-side Application" (also baptised "Server-Signed Applications"). Otherwise, it was more of a way to segregate things, but was not strictly speaking a security feature, since we did not advertise the App ID as a secret.
+
+
+
+Since Applications existed in our API, the feedback we had from our partners is they have been creating more confusion and friction than anything else.
+
+A first step into solving that was to separate the configuration of whitelisted Passkey domains into its own thing (cf [Passkey Settings - Migration Guide](passkey-settings-migration-guide)).
+
+At this point, the only function left to the Application was the second point above (the addition permission layer), which as mentioned, was only a true security feature in the context of "Server-Side Applications", which no-one was really using (no-one really asked for this, and setting this up added even more friction).
+
+
+
+## Deprecating Applications
+
+In the end, the consensus within Dfns was to keep pushing in the same direction that was initiated with the [Passkey Settings Migration](passkey-settings-migration-guide) effort: deprecate Applications entirely.
+
+<Check>
+For everyone currently using Dfns API, this deprecation will not break your code in production, **you don't have any immediate action to take** 👍🏻
+</Check>
+
+### API changes
+
+* `x-dfns-appid` header is not required in Dfns API request anymore. You can still pass it, but it won't have any effect.
+* The permission check happening on every request is not the intersection `App Permission ∩ User Permission ∩ Token Permission` anymore, but it's the intersection of `User Permission ∩ Token Permission` .
+* Several headers required in API requests, only used in the context of Server Signed Apps, are deprecated as well: `x-dfns-nonce`, `x-dfns-apisignature`, `x-dfns-appsecret`
+
+### SDK changes
+
+If you use our [Typescript SDK](https://github.com/dfns/dfns-sdk-ts) (or [Go SDK](https://github.com/dfns/dfns-sdk-go)), if you upgrade to the latest version (`0.7.0` for the typescript SDK), you'll notice that `appId` parameter is not needed anymore in the `DfnsApiClient`.
+
+Instead, an optional `orgId` parameter was added. If you pass `orgId` in the `DfnsApiClient` then a client-side check will be done to verify that that `authToken` you passed, is indeed scoped to this Organisation. This can be useful in a context where you have to manage multiple orgs: at that point you can instanciate one `DfnsApiClient` instance per Organisation, to keep things tidy.
+
+
+
+Thank you all for being on our side in this journey. We always strive to make our product better, your feedback is helping us do that 🙏🏻
+

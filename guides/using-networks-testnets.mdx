@@ -1,0 +1,71 @@
+---
+title: Using Networks' Testnets
+---
+
+### What Is a Testnet?
+
+A **testnet** is a blockchain network used for testing purposes. Unlike the mainnet, transactions on testnets use **test tokens**, which have no real-world value.
+
+Examples of popular testnets:
+
+* Ethereum Goerli / Sepolia
+* Polygon Mumbai
+* Bitcoin Testnet
+* Avalanche Fuji
+
+The list of all supported testnets can be found on [#supported-networks](../../api-docs/wallets#supported-networks "mention")
+
+<Steps>
+<Step title="Create a Wallet for a Testnet">
+
+You can create a wallet for a specific blockchain and network using the Dfns dashboard:
+
+Head to Operations > Wallets and click ":heavy\_plus\_sign: Create a Wallet".&#x20;
+
+Select a testnet network from the list (e.g. StellarTestnet) and give a name (e.g. "Stellar Testnet Wallet") and click Create. Finally, :key: sign the operation with your passkey and you obtain your new wallet!
+
+
+</Step>
+
+<Step title="Get test funds">
+
+Once your wallet is created:
+
+* Go to a **faucet** (test token distributor) for your chosen testnet.&#x20;
+* Provide your Dfns wallet address, visible on the "Address" field on your wallet page
+* Receive test tokens for development.
+
+**Example Faucets are listed on** [#supported-networks](../../api-docs/wallets#supported-networks "mention")
+
+
+</Step>
+
+<Step title="Check Wallet Balance">
+
+On your wallet page, the new assets/coins balance should be updated quickly.&#x20;
+
+You can also check that balance using the API: [get-wallet-by-id](../api-docs/wallets/get-wallet-by-id "mention")
+
+
+</Step>
+
+<Step title="Send a Test Transaction">
+
+Now that your wallet has test tokens, you can initiate a transaction.
+
+You’ll need to approve the transaction via your usual Dfns approval flow (e.g., :key: passkey, custom policy, etc.).
+
+You can then monitor the status on the wallet page. Once the transaction has been confirmed then it has been validated on the blockchain and is final.
+</Step>
+</Steps>
+
+<Warning>
+**Security Considerations**
+
+* Do not reuse testnet wallets for mainnet usage.
+* Treat API keys and credentials securely, even in test environments
+* Use approval policies for transaction verification even in test mode.
+</Warning>
+
+
+
