@@ -55,6 +55,32 @@ h6 {
     font-weight: bold;
 }
 
+/* Tables styling */
+#content-area table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    overflow: hidden;
+}
+
+#content-area table th,
+#content-area table td {
+    border: 1px solid rgb(var(--gray-200));
+    padding: 0.5rem 1rem;
+}
+
+#content-area table th {
+    background-color: rgb(var(--gray-200));
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+#content-area table tr:nth-child(even) {
+    background-color: #f9f9fb;
+}
+
 /*
 #navigation-items {
     padding-left: 1rem;
