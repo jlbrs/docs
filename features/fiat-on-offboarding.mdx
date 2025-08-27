@@ -1,14 +1,36 @@
 ---
-title: 'Fiat On Offboarding'
-description: 'An overview of Fiat On Offboarding.'
-tag: To do
+title: Fiat On/Off-Ramps
+description: The Dfns APIs seamlessly interoperate with most fiat on/offboarding providers.
 ---
 
-# Fiat On Offboarding
+## Mt Pelerin
 
-This page provides a comprehensive overview of **Fiat On Offboarding**.
+For customers who are not explicitly targeting the US market, we recommend using [`Mt Pelerin`](https://www.mtpelerin.com/). You can find the full documentation for their solution [here](https://developers.mtpelerin.com/). They have highly [competitive pricing and limited KYC requirements](https://developers.mtpelerin.com/why-mt-pelerin) leading to a seamless user experience.
 
-## Key Concepts
+<Frame>
+![Mt Pelerin Widget](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FeGcPTEC3d63YzSK1rSUr%2FScreen%20Shot%202022-10-06%20at%203.10.05%20PM.png?alt=media&#x26;token=12e7a3a5-daac-4e2d-993f-a4358cd9adca)
+</Frame>
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+Mt Pelerin offers flexibility in how their widget is integrated [on the web](https://developers.mtpelerin.com/integration-guides/web-integration) and [on mobile](https://developers.mtpelerin.com/integration-guides/mobile-integration). In all cases, developers can pass a blockchain address as the default recipient account for onboarding from fiat to crypto. See the `addr` parameter description under [their options page](https://developers.mtpelerin.com/integration-guides/options). Dfns customers can populate this parameter using either [addresses for asset accounts](broken-reference) or [addresses derived from public keys](broken-reference).
+
+In order to offboard from crypto to fiat, Mt Pelerin provides end users with an address to transfer funds to that facilitates the conversion process. Customers can easily initiate payments to these addresses using the Dfns [payment APIs](broken-reference).
+
+## Ramp.Network
+
+Ramp is another popular Fiat on/offboarding provider that offers an easy to implement SDK across web and mobile devices. [Here is there documentation](https://docs.ramp.network/web/quick-start-overlay) for their RampInstantSDK Overlay for example. The resulting UI looks like this:
+
+<Frame>
+![Ramp UI Widget](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2F61sfoccS42hcJFRmooD1%2FScreen%20Shot%202022-11-30%20at%203.13.19%20PM.png?alt=media&#x26;token=418a9346-6ee4-4244-994f-99d62b5cf5fe)
+</Frame>
+
+Similar to Mt Pelerin, developers can pass a blockchain address as the default recipient account for onboarding from fiat to crypto. See the `userAddress` parameter in [their SDK reference](https://docs.ramp.network/configuration#useraddress). Dfns customers can populate this parameter using either [addresses for asset accounts](broken-reference) or [addresses derived from public keys](broken-reference).
+
+In order to offboard from crypto to fiat, Ramp provides end users with an address to transfer funds to that facilitates the conversion process as shown below. Customers can easily initiate payments to these addresses using the Dfns [payment APIs](broken-reference).
+
+<Frame>
+![Ramp offboarding](https://3953120539-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FRYonrdQbmezd3Jt9ke5d%2FScreen%20Shot%202022-11-30%20at%203.24.19%20PM.png?alt=media&#x26;token=33b8c0d6-55e3-4cc0-ad5c-6c844c5bd52e)
+</Frame>
+
+## Sardine
+
+Sardine is another popular Fiat onboarding provider that enables a seamless integration using a URL format specified [here](https://docs.sardine.ai/docs/integrate-payments/5lz28jlqvuvg4-mobile-url-web-view#3-create-url). Joint Dfns/Sardine customers can integrate the platforms by simply passing the destination Dfns wallet address obtained from either [addresses for asset accounts](broken-reference) or [addresses derived from public keys](broken-reference) into the Sardine `address` query string parameter. [Here](https://www.loom.com/share/8baba35d5eee406dbe872a6bf8965453) is an example video showing a POC integration.

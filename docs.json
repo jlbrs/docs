@@ -127,6 +127,32 @@
             ]
           },
           {
+            "group": "Guides",
+            "icon": "lightbulb",
+            "pages": [
+              {
+                "group": "Exchanges",
+                "pages": [
+                  "/integrations/exchanges/kraken-setup",
+                  "/integrations/exchanges/binance-setup",
+                  "/integrations/exchanges/coinbase-prime-setup"
+                ]
+              },
+              {
+                "group": "AML / KYT",
+                "pages": [
+                  "/integrations/aml-kyt/chainalysis"
+                ]
+              },
+              {
+                "group": "Travel Rule",
+                "pages": [
+                  "/integrations/travel-rule/notabene"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Security & Compliance",
             "icon": "shield-check",
             "pages": [
@@ -147,17 +173,10 @@
               "features/transactions",
               "features/staking",
               "features/fee-sponsors",
-              {
-                "group": "Exchanges",
-                "pages": [
-                  "/features/exchanges/index",
-                  "/features/exchanges/kraken-setup",
-                  "/features/exchanges/binance-setup",
-                  "/features/exchanges/coinbase-prime-setup"
-                ]
-              },
-              "features/aml-kyt-integrations",
-              "features/travel-rule-integrations",
+              "/features/exchanges",
+              "/features/account-abstraction-on-evms",
+              "features/aml-kyt",
+              "features/travel-rule",
               "features/fiat-on-offboarding"
             ]
           },

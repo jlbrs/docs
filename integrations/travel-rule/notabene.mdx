@@ -1,0 +1,64 @@
+---
+title: Notabene Setup
+---
+
+## Dfns Org Settings
+
+Before Notabene Travel Rule policies can be defined, you must:
+
+* Provision a new API key for Dfns to use
+* Register the Dfns webhook url in the Notabene Dashboard
+
+
+
+1. In the Dfns dashboard, navigate via the sidebar to `Settings` > `Integrations/AML`
+2. In the Settings AML view, select the `Notabene` tab.
+   1. If Notabene is not activated for your org, please reach out to your Dfns Sales Representative
+3. Check the box to `Activate Notabene Integration` . You should now see a pregenerated webhook URL
+4. Natigate to your [Notabene dashboard](https://app.notabene.id/). From your VASP dashboard, go to `Settings > Multi-Message Webhook`
+   1. Paste the webhook url from 3 into the Endpoint URL section
+   2. Check the box to subscribe to `notification.transactionUpdated` events ONLY
+   3. After you submit the form, note down the signing secret. You will need it later.
+5. In the [Notabene dashboard](https://app.notabene.id/), go to `Settings > API Credentials` and Generate API Credentials
+   1. Note down the `Client ID, Client Secret, and VASP DID`.
+6. In the Dfns Notabene Settings window, paste the `Client ID, Client Secret, Singing Secret, and VASP DID` from `4.c` and `5.a` in the respective text fields.
+
+## Policy
+
+Outgoing Transfer attempts can be screened for Notabene driven Travel Rule compliance by creating a policy with the following traits.
+
+* [activity kind `Wallets:Sign`](../../../api-docs/policy-engine/policies#wallets-sign-activity)
+* rule kind TravelRuleTransactionPrescreening
+* action kind [`Block`](../../../api-docs/policy-engine/policies#block-policy-action)
+
+When using `TravelRuleTransactionPrescreening` ,  the transfer attempt will be validated by Notabene and forwarded to the counterparty VASP (if applicable). If the validation check fails, the counterparty VASP rejects the transfer, or the request times out then the details of the TravelRule Transaction Prescreening will be published in the [Webhook Event](../../../api-docs/webhooks#webhook-events) `policy.triggered` .
+
+## Travel Rule Transfer Payload
+
+After Notabene has been configured in Dfns settings and a policy has been put in place, [transfers](../../api-docs/wallets/transfer-asset) can be sent with an additional `travelRule` JSON field.
+
+| Field              | Type   | Is Required | Description                                                                                                                                                                                                                                          |
+|--------------------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| kind               | string | true        | A literal string 'Notabene' to identify this is a Notabene Travel Rule                                                                                                                                                                               |
+| beneficiaryVASPdid | string | false       | The Decentralized Identifier (DID) of the beneficiary Virtual Asset Service Provider (VASP). This field is required for custodial transfers. For more details, refer to the Notabene API documentation.                                              |
+| beneficiaryProof   | object | false       | A proof object for non-custodial (unhosted) wallet transfers. This field is require for non-custodial transfers.This is used to verify ownership of the beneficiary's wallet. Additional information can be found in the Notabene API documentation. |
+| originator         | object | true        | An object containing Personally Identifiable Information (PII) of the originator of the transfer. This data must be encrypted using the Notabene PII SDK. See the PII Structure and Encryption section below for detailed instructions.              |
+| beneficiary        | object | true        | An object containing Personally Identifiable Information (PII) of the originator of the transfer. This data must be encrypted using the Notabene PII SDK. See the PII Structure and Encryption section below for detailed instructions.              |
+
+
+#### PII Structure and Encryption
+
+The `originator` and `beneficiary` fields must conform to the **IVMS101 (interVASP Messaging Standard 101)** format. This is a standard for exchanging required originator and beneficiary information between VASPs.
+
+It is mandatory to encrypt the PII data for the `originator` and `beneficiary` fields using the `Notabene PII SDK`. Below are the resources and an example of how to perform the encryption.
+
+**PII SDK**
+
+Documentation regarding the SDK for encrypting the PII data is available on GitLab:
+
+* **Notabene PII SDK:** [https://gitlab.com/notabene/open-source/pii-sdk](https://gitlab.com/notabene/open-source/pii-sdk)
+
+**Example**
+
+An example developer recipe can be found here: [Using the PII SDK to encrypt and send a TR message](https://devx.notabene.id/recipes/using-the-pii-sdk-to-encrypt-and-send-a-tr-message)
+
