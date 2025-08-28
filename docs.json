@@ -604,13 +604,7 @@
               "get /webhooks/{webhookId}",
               "put /webhooks/{webhookId}",
               "delete /webhooks/{webhookId}",
-              "post /webhooks/{webhookId}/ping",
-              {
-                "group": "Webhook description",
-                "pages": [
-                  "webhook policy.triggered"
-                ]
-              }
+              "post /webhooks/{webhookId}/ping"
             ]
           },
           {
