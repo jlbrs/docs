@@ -462,6 +462,7 @@
               {
                 "group": "Private Keys",
                 "pages": [
+                  "/api-reference/keys",
                   "get /keys",
                   "post /keys",
                   "post /keys/{keyId}/delegate",

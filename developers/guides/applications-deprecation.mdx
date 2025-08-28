@@ -19,7 +19,7 @@ Historically, "`Applications`" were built to serve two main purposes:
 
 Since Applications existed in our API, the feedback we had from our partners is they have been creating more confusion and friction than anything else.
 
-A first step into solving that was to separate the configuration of whitelisted Passkey domains into its own thing (cf [Passkey Settings - Migration Guide](passkey-settings-migration-guide)).
+A first step into solving that was to separate the configuration of whitelisted Passkey domains into its own thing (cf [Passkey Settings - Migration Guide](/developers/guides/passkey-settings-migration-guide)).
 
 At this point, the only function left to the Application was the second point above (the addition permission layer), which as mentioned, was only a true security feature in the context of "Server-Side Applications", which no-one was really using (no-one really asked for this, and setting this up added even more friction).
 
@@ -27,7 +27,7 @@ At this point, the only function left to the Application was the second point ab
 
 ## Deprecating Applications
 
-In the end, the consensus within Dfns was to keep pushing in the same direction that was initiated with the [Passkey Settings Migration](passkey-settings-migration-guide) effort: deprecate Applications entirely.
+In the end, the consensus within Dfns was to keep pushing in the same direction that was initiated with the [Passkey Settings Migration](/developers/guides/passkey-settings-migration-guide) effort: deprecate Applications entirely.
 
 <Check>
 For everyone currently using Dfns API, this deprecation will not break your code in production, **you don't have any immediate action to take** 👍🏻

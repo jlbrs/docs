@@ -16,9 +16,9 @@ Once that is done, the integration is done through the [Policy Engine](../../api
 
 Outgoing transfer attempts from a given wallet can be screened by Chainalysis before they make it on chain. To achieve that, you need to create a Policy with these traits:
 
-* [activity kind `Wallets:Sign`](../../../api-docs/policy-engine/policies#wallets-sign-activity)
-* [rule kind `ChainalysisTransactionPrescreening`](../../../api-docs/policy-engine/policies#chainalysistransactionprescreening-policy-rule)
-* action kind [`Block`](../../../api-docs/policy-engine/policies#block-policy-action) or [`RequestApproval`](../../../api-docs/policy-engine/policies#requestapproval-policy-action) or [`NoAction`](../../../api-docs/policy-engine/policies#noaction-policy-action)
+* [activity kind `Wallets:Sign`](/core-concepts/policies#wallets%3Asign-activity)
+* [rule kind `ChainalysisTransactionPrescreening`](/core-concepts/policies#chainalysistransactionprescreening-policy-rule)
+* action kind [`Block`](/core-concepts/policies#block-policy-action) or [`RequestApproval`](/core-concepts/policies#requestapproval-policy-action) or [`NoAction`](/core-concepts/policies#noaction-policy-action)
 
 When using policy rule `ChainalysisTransactionPrescreening`, the transfer attempt will be sent to Chainalysis for a KYT screening. If the screening result triggers the rule (based on the criterias you defined in the rule), then the details of the Chainalysis pre-screening results will be published in the   [Webhook Event](../../../api-docs/webhooks#webhook-events) `policy.triggered`, which is published for any policy which triggers.
 

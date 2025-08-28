@@ -46,7 +46,7 @@ A Policy is defined by:
 Once evaluated for a given activity, a policy is either `Skipped` if the rule did not apply or is triggered executing the associated action. If the action is `RequestApproval`, an [**Approval**](#approval) process is initiated.
 
 <Note>
-Policies do not cover delegated wallets owned by the end users. Because [delegated signing](../advanced-topics/delegated-signing) is non custodial in nature. All end user activities bypass policy engine governance.
+Policies do not cover delegated wallets owned by the end users. Because [delegated signing](/core-concepts/non-custodial-wallets) is non custodial in nature. All end user activities bypass policy engine governance.
 </Note>
 
 ## Activities
@@ -57,34 +57,34 @@ Policies do not cover delegated wallets owned by the end users. Because [delegat
 
 A "`Wallets:Sign`" activity represents any activity which involves signing with a wallet. Currently, in our API, these can be:
 
-* a Transfer Request (created using the endpoint [Transfer Asset from Wallet](../wallets/transfer-asset))
-* a Transaction Request (created using the endpoint [Broadcast Transaction from Wallet](../wallets/broadcast-transaction))
-* a Signature Request (created using the endpoint [Generate Signature from Wallet](../wallets/generate-signature))
+* a Transfer Request (created using the endpoint [Transfer Asset from Wallet](/api-reference/wallets/transfer-asset))
+* a Transaction Request (created using the endpoint [Broadcast Transaction from Wallet](/api-reference/wallets/broadcast-transaction))
+* a Signature Request (created using the endpoint [Generate Signature from Keys](/api-reference/keys/generate-signature))
 
 ### `Wallets:IncomingTransaction` activity
 
-A "`Wallets:IncomingTransaction`" activity represents when our indexers detected an incoming transaction into a wallet. This activity kind has to be used with the rule kind "`ChainalysisTransactionScreening`" (see more on [Chainalysis](../../integrations/aml-kyt/chainalysis) integration page), and the action kind "`NoAction`", meaning that no actual action will be taken as a result of the Chainalysis screening, other than notifying you through a webhook event if the policy is triggered. The reason for that, is that the incoming transaction is already on-chain, so the funds are already in the wallet, we cannot block that transfer on chain.
+A "`Wallets:IncomingTransaction`" activity represents when our indexers detected an incoming transaction into a wallet. This activity kind has to be used with the rule kind "`ChainalysisTransactionScreening`" (see more on [Chainalysis](/features/aml-kyt) integration page), and the action kind "`NoAction`", meaning that no actual action will be taken as a result of the Chainalysis screening, other than notifying you through a webhook event if the policy is triggered. The reason for that, is that the incoming transaction is already on-chain, so the funds are already in the wallet, we cannot block that transfer on chain.
 
 ### `Permissions:Modify` activity
 
 A "`Permissions:Modify`" activity represents any activity which involves updating or archiving a permission. These activities are Permission change requests, created as a result of calling either:
 
-* the endpoint [Update Permission](../permissions/permissions/updatepermission)
-* the endpoint [Archive Permission](../permissions/permissions/archivepermission)
+* the endpoint [Update Permission](/api-reference/permissions/update-permission)
+* the endpoint [Archive Permission](/api-reference/permissions/archive-permission)
 
 ### `Permissions:Assign` activity
 
 A "`Permissions:Assign`" activity represents any activity which involves assigning a permission (or revoking it, aka "deleting a permission assignment"). These activities are Assignment change requests, created as a result of calling either:
 
-* the endpoint [Assign Permission](../permissions/permissions/createassignment)
-* the endpoint [Revoke Permission](../permissions/permissions/revokeassignment)
+* the endpoint [Assign Permission](/api-reference/permissions/create-assignment)
+* the endpoint [Revoke Permission](/api-reference/permissions/delete-assignment)
 
 ### `Policies:Modify` activity
 
 A "`Policies:Modify`" activity represents any activity which involves updating or archiving a policy. These activities are Policy change requests, created as a result of calling either:
 
-* the endpoint [Update Policy](api-reference/update-policy)
-* the endpoint [Archive Policy](api-reference/archive-policy)
+* the endpoint [Update Policy](/api-reference/policies/update-policy)
+* the endpoint [Archive Policy](/api-reference/policies/archive-policy)
 
 Every policy requires a rule to be specified. Upon policy evaluation, the configuration specified in the rule will be used to determine whether the policy should trigger or not for a given activity. &#x20;
 
@@ -209,7 +209,7 @@ Address comparison is case sensitive when evaluating the rule. For EVM addresses
 </Warning>
 
 <Note>
-If the wallet activity is not a value transfer, or the transaction recipient cannot be inferred from the wallet activity (eg if you use [Generate Signature](../wallets/generate-signature)), by default the rule will trigger the policy (ie. fail closed).
+If the wallet activity is not a value transfer, or the transaction recipient cannot be inferred from the wallet activity (eg if you use [Generate Signature](/api-reference/keys/generate-signature)), by default the rule will trigger the policy (ie. fail closed).
 </Note>
 
 If the specified whitelisted address list is empty, it basically means "no addresses are whitelisted", so the rule will trigger for any wallet activities.
@@ -235,10 +235,10 @@ If the specified whitelisted address list is empty, it basically means "no addre
 ### `ChainalysisTransactionPrescreening`   policy rule
 
 <Note>
-This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings. (see more on [Chainalysis](../../integrations/aml-kyt/chainalysis) integration page)
+This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings. (see more on [Chainalysis](/features/aml-kyt) integration page)
 </Note>
 
-This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It's a rule based on [Chainalysis](../../integrations/aml-kyt/chainalysis) KYT integration (Know-Your-Transaction). Upon transfer attempt, we will first register the transfer with Chainalysis (as a ["withdrawal attempt"](https://docs.chainalysis.com/api/kyt/#registration-register-a-withdrawal-attempt)), and fetch the screening results (alerts, exposures, addresses detected). Based on the results, and the configuration of this rule, the policy will be triggered.&#x20;
+This rule can be used on a policy of `activityKind` = `Wallets:Sign`. It's a rule based on [Chainalysis](/features/aml-kyt) KYT integration (Know-Your-Transaction). Upon transfer attempt, we will first register the transfer with Chainalysis (as a ["withdrawal attempt"](https://docs.chainalysis.com/api/kyt/#registration-register-a-withdrawal-attempt)), and fetch the screening results (alerts, exposures, addresses detected). Based on the results, and the configuration of this rule, the policy will be triggered.&#x20;
 
 It's called "Pre"-screening, because the scanned transaction is not on chain yet, it's still a transaction attempt (before the transaction actually make it on chain).
 
@@ -288,7 +288,7 @@ It's called "Pre"-screening, because the scanned transaction is not on chain yet
 ### `ChainalysisTransactionScreening`   policy rule
 
 <Note>
-This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings (see more on [Chainalysis](../../integrations/aml-kyt/chainalysis) integration page)
+This rule can only be used once the Chainalysis integration is activated from the Dfns dashboard settings (see more on [Chainalysis](/features/aml-kyt) integration page)
 </Note>
 
 This rule can be used on a policy of `activityKind` = `Wallets:IncomingTransaction`, and with the action kind `NoAction`. It's a rule based on Chainalysis KYT integration (Know-Your-Transaction). Upon an incoming transaction detectedby our indexers, we will [register the transfer with Chainalysis](https://docs.chainalysis.com/api/kyt/#registration-register-a-transfer), and fetch the results of the analysis (alerts & exposures detected). Based on the results, and the configuration of this rule, the policy will be triggered.
@@ -327,10 +327,10 @@ See the above configuration for rule `ChainalysisTransactionPrescreening`
 ### `TravelRuleTransactionPrescreening` policy rule
 
 <Note>
-This rule can only be used once the Notabene integration is activated from the Dfns dashboard settings (see more on [Notabene](../../integrations/travel-rule/notabene) integration page)
+This rule can only be used once the Notabene integration is activated from the Dfns dashboard settings (see more on [Notabene](/features/travel-rule) integration page)
 </Note>
 
-This rule can be used on a policy of `activityKind` = `Wallets:Sign,`and with the action kind `Block`. It's a rule based on [Notabene](../../integrations/travel-rule/notabene) [TravelRule](../../integrations/travel-rule) integration. It _**ONLY**_ applies to Dfns [Transfer Asset](../wallets/transfer-asset) Api Calls. It is NOT supported for Transfers initiated via the dashboard. Upon transfer attempt with an optional [TravelRule](../wallets/transfer-asset) payload, we will call Notabene's APIs on your behalf to both confirm the validity of the travel rule message and submit it for processing. Dfns then waits for a response from the counterparty (for custodial transfers) or Notabene (for non-custodial transfers).
+This rule can be used on a policy of `activityKind` = `Wallets:Sign,`and with the action kind `Block`. It's a rule based on Notabene [TravelRule](/features/travel-rule) integration. It _**ONLY**_ applies to Dfns [Transfer Asset](/api-reference/wallets/transfer-asset) Api Calls. It is NOT supported for Transfers initiated via the dashboard. Upon transfer attempt with an optional [TravelRule](/api-reference/wallets/transfer-asset) payload, we will call Notabene's APIs on your behalf to both confirm the validity of the travel rule message and submit it for processing. Dfns then waits for a response from the counterparty (for custodial transfers) or Notabene (for non-custodial transfers).
 
 It's called "Pre"-screening, because the transaction is not on chain yet, it's still a transaction attempt (before the transaction actually make it on chain).
 
@@ -427,7 +427,7 @@ _Example:_ Company has 3 users allowed to modify policies. They create a policy 
 
 ### `NoAction` policy action
 
-This action kind means that nothing will happen after policy rule evaluation. It's meant to be used with policy rules "`ChainalysisTransactionPrescreening`" or "`ChainalysisTransactionScreening`". This action is for when you just want the KYT analysis rule to be run, and then if triggered, those result returned in a `policy.triggered` [Webhook Event](../../webhooks#webhook-events).
+This action kind means that nothing will happen after policy rule evaluation. It's meant to be used with policy rules "`ChainalysisTransactionPrescreening`" or "`ChainalysisTransactionScreening`". This action is for when you just want the KYT analysis rule to be run, and then if triggered, those result returned in a `policy.triggered` [Webhook Event](/developers/webhooks#webhook-events).
 
 ```json
 {
@@ -591,11 +591,11 @@ When a policy is triggered and the action defined is `RequestApproval`, an Appro
 * details on the different policy evaluations that happened for that activity and their result
 * details about the decisions given by each approvers
 
-When a new Approval object is created and an approval process is required, a [webhook event](../../webhooks#webhook-events) is emitted (event kind "`policy.approval.pending`"). You can subscribe to it to react to this event, eg. send notifications to the users that need to give their approval.
+When a new Approval object is created and an approval process is required, a [webhook event](/developers/webhooks#webhook-events) is emitted (event kind "`policy.approval.pending`"). You can subscribe to it to react to this event, eg. send notifications to the users that need to give their approval.
 
-The Approval object can be queried using the `approvalId` returned from the endpoint that triggered the approval process, using the [Get Approval](api-reference/list-approvals) / [List Approvals](api-reference/list-approvals-1) endpoints.
+The Approval object can be queried using the `approvalId` returned from the endpoint that triggered the approval process, using the [Get Approval](/api-reference/policies/get-approval) / [List Approvals](/api-reference/policies/list-approvals) endpoints.
 
-Users can then call the [Create Approval Decision](api-reference/create-approval-decision) endpoint to either approve / reject this activity.  Of course this can also be done via the Dfns dashboard.
+Users can then call the [Create Approval Decision](/api-reference/policies/create-approval-decision) endpoint to either approve / reject this activity.  Of course this can also be done via the Dfns dashboard.
 
 A user can only give his approval / rejection if he is defined inside one of the approval groups defined on the policies that triggered.
 

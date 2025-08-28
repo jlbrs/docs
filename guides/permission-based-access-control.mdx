@@ -16,10 +16,10 @@ In this tutorial you will learn how to create permissions, how to invite users a
 <Steps>
 <Step title="Create a new Permission">
 
-A [permission](../api-docs/permissions) is a whitelist of all operations a user is allowed to take. Permissions are designed to be assigned to users to help secure your organization by enforcing the principle of least privilege.
+A [permission](/core-concepts/permissions) is a whitelist of all operations a user is allowed to take. Permissions are designed to be assigned to users to help secure your organization by enforcing the principle of least privilege.
 
 <Info>
-As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](/api-reference/signing-flows). That's what we will point your to bellow.
 </Info>
 
 
@@ -36,7 +36,7 @@ userActionHttpMethod = "POST"
 userActionHttpPath = "/permissions"
 ```
 
-2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+2. Follow the process [here](/api-reference/signing-flows) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
 3. Call the permission creation endpoint: `POST /permissions`
 
 ```javascript
@@ -62,10 +62,10 @@ That's it! You have created a new permission! Now, let's get it assigned to a ne
 
 <Step title="Invite a New User">
 
-We will invite a new [User](../api-docs/authentication/user-management) as an employee from your company. Employees can also access the dashboard and use the APIs. If you want to invite your End users then look at [Delegated Registration](../api-docs/authentication/delegated-auth/delegatedregistration).
+We will invite a new [User](../api-docs/authentication/user-management) as an employee from your company. Employees can also access the dashboard and use the APIs. If you want to invite your End users then look at [Delegated Registration](/api-reference/registration-flows#delegated-users-registration-flow).
 
 <Info>
-As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](/api-reference/signing-flows). That's what we will point your to bellow.
 </Info>
 
 
@@ -82,7 +82,7 @@ userActionHttpMethod = "POST"
 userActionHttpPath = "/auth/users"
 ```
 
-2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+2. Follow the process [here](/api-reference/signing-flows) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
 3. Call the user creation endpoint: `POST /auth/users`  to initiate the registration process.
 
 ```javascript
@@ -111,7 +111,7 @@ The new user has been created and has received instructions to create his own cr
 Final step! Let's give our user the rights he deserves! We will the [assign permission](../api-docs/permissions/permissions/createassignment) endpoint to link it to the user we just created
 
 <Info>
-As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](../api-docs/authentication/user-action-signing). That's what we will point your to bellow.
+As any other modification you make on your organization, this action needs to be signed as described in [User Action Signing](/api-reference/signing-flows). That's what we will point your to bellow.
 </Info>
 
 
@@ -126,7 +126,7 @@ userActionHttpMethod = "POST"
 userActionHttpPath = "/permissions/{permission id}/assignments"
 ```
 
-2. Follow the process [here](../api-docs/authentication/user-action-signing) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
+2. Follow the process [here](/api-reference/signing-flows) to authorize the action request a get a `userAction` token that you can include in your request as the `X-DFNS-USERACTION` header.
 3. Call the permission assignment endpoint: `POST /permissions/{permission id}/assignments`  to grant the permission:
 
 ```javascript

@@ -4,7 +4,7 @@ description: "Building your own app? Learn how to consume the Dfns APIs using yo
 icon: "5"
 ---
 
-There are many ways to authenticate to the Dfns API, you can find all the details on [authentication](../../advanced-topics/authentication). In this example we will simply follow the normal [login](../../api-docs/authentication/login) flow.
+There are many ways to authenticate to the Dfns API, you can find all the details on [authentication](/api-reference/auth). In this example we will simply follow the normal [login](/api-reference/auth/flows#regular-user-login-flow) flow.
 
 This flow requires using your credentials to sign challenges. For convenience we will use a web front-end to do this.
 
@@ -130,7 +130,7 @@ const handleRegister = () => {
     //  .catch(setRegistrationState)
 };
 ```
-    As explained in [#create-credential-with-code-flow](../../../advanced-topics/authentication/credentials#create-credential-with-code-flow), in order to register the credentials we need to
+    As explained in [Create Credential With Code Flow](/api-reference/auth/credentials#create-credential-with-code-flow), in order to register the credentials we need to
     1. Get a challenge code using `POST /auth/credentials/code/init`
     ```javascript
 fetch(`${baseURL}/auth/credentials/code/init`, {
@@ -189,7 +189,7 @@ fetch(`${baseURL}/auth/credentials/code/init`, {
   </Step>
 
   <Step title="Login using your 🔑 Passkey">
-    In a very similar way, as explained in [login](../../api-docs/authentication/login), you need to request a Bearer token for authenticating all your API requests.
+    In a very similar way, as explained in [login](/api-reference/auth), you need to request a Bearer token for authenticating all your API requests.
     The placeholder is there for you already:
     ```javascript
 const handleLogin = () => {
@@ -289,7 +289,7 @@ curl -H "Authorization: Bearer <token>" -H "Content-Type: application/json" http
     
     For any action that's modifying things in your account (e.g.: creating a wallet), Dfns asks for a signature, which is done by using your 🔑 passkey as earlier with the login. As before this process requires multiple steps:
    
-    1. Get a "User Action Signature Challenge" from `POST /auth/action/init`. See details on [inituseractionsigning](../../api-docs/authentication/user-action-signing/inituseractionsigning).
+    1. Get a "User Action Signature Challenge" from `POST /auth/action/init`. See details on [inituseractionsigning](/api-reference/auth/create-user-action-challenge).
     
     ```javascript
 const userActionPayload = { network: "Ethereum" };

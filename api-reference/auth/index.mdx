@@ -9,7 +9,7 @@ To use Dfns API endpoints, you will generally need to:
 2. Sign a User Action Challenge using a cryptographic key that you own (referred to "Credential Key" or just "Credentials"). This is only required for actions which mutate state (non-readonly api calls).
 
 <Note>
-Check [request-headers](request-headers "mention") for more details about which headers are required
+Check [request-headers](/api-reference/request-headers) for more details about which headers are required
 </Note>
 
 ## Get an authentication token
@@ -21,10 +21,10 @@ There are several ways to get an authentication token, depending on what kind of
 
 As a User, there are two ways to get an authentication token:
 
-* Follow the [Login](../../api-docs/authentication/login) flow. You'll get a authentication token at the end of this flow, which expires after a relatively short period of time.
-* Or create a [Personal Access Token](../../api-docs/authentication/personal-access-token-management) (PAT), which basically is a long-lived authentication token which is tied to the User and represents them. This PAT will never have more permissions than the User itself. Once you have created a PAT, you can use it as an authentication token directly.
+* Follow the [Login](/api-reference/auth/flows) flow. You'll get a authentication token at the end of this flow, which expires after a relatively short period of time.
+* Or create a [Personal Access Token](/api-reference/auth/personal-access-tokens) (PAT), which basically is a long-lived authentication token which is tied to the User and represents them. This PAT will never have more permissions than the User itself. Once you have created a PAT, you can use it as an authentication token directly.
 
-A [Service Account Token](../../api-docs/authentication/service-account-management) (or "Service Account") is not tied to one User, it's existence is visible across all your organisation. It is a long-lived token, and any permission can be granted to it, beyond the scope of one particular user. Once created, this Service Account can be used as an authentication token directly.
+A [Service Account Token](/api-reference/auth/service-accounts) (or "Service Account") is not tied to one User, it's existence is visible across all your organisation. It is a long-lived token, and any permission can be granted to it, beyond the scope of one particular user. Once created, this Service Account can be used as an authentication token directly.
 
 <Note>
 Once generated, Dfns system do not keep a trace of your long-lived authentication tokens (Personal Access Token, or Service Account Token), only you will hold on to those. If you lose them, you'll just need to create a new one.
@@ -36,7 +36,7 @@ Once you have an authentication token, you can add it in the headers of your API
 
 Most endpoints which induce some state change in Dfns (everything that is not a GET essentially), will require you to sign the actual request, before being able to execute it. We call that "User Action Signing".
 
-We provide a couple of [User Action Signing](../../api-docs/authentication/user-action-signing) endpoints which handle this flow:
+We provide a couple of [User Action Signing](/api-reference/signing-flows) endpoints which handle this flow:
 
 * You tell Dfns "I want to perform this exact request"
 * Dfns sends you back a challenge to be signed with your Credential .
@@ -47,7 +47,7 @@ The credential -- essentially being a cryptographic key -- you'll need to use to
 
 ## Credentials
 
-In order to complete the [login](../../api-docs/authentication/login "mention") flow, or sign User Action Challenges, users need to sign "challenges" using their Credential.
+In order to complete the [login](/api-reference/auth) flow, or sign User Action Challenges, users need to sign "challenges" using their Credential.
 
 A Credential is essentially a public/private cryptographic keypair. The private key is held by the user, while the public key is provided to Dfns to register the credential for the user.
 
@@ -56,7 +56,7 @@ The first time you registered on Dfns dashboard, you created a Passkey credentia
 Different kind of Credentials can be created, depending on your use case, and how you prefer to manage them:
 
 * Fido2 Credentials (aka "Passkeys" / "WebAuthn") -> Uses WebAuthn standard to create/manage passkeys on your device (see more about that below). You can use passkeys if you need a client-side User signature (eg. in a web app / native app).
-* Key Credentials -> "manually" generate keypairs yourself, and store them however you see fit (see [How to generate a keypair](credentials/generate-a-key-pair)). You can use Key Credential if you need a Service Account sitting in your server to also be the signer for example.
+* Key Credentials -> "manually" generate keypairs yourself, and store them however you see fit (see [How to generate a keypair](/developers/guides/generate-a-key-pair)). You can use Key Credential if you need a Service Account sitting in your server to also be the signer for example.
 
 Depending on the Identity you are using, the Credentials supported are such:
 

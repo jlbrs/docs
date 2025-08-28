@@ -25,7 +25,7 @@ This is the easiest way to start quickly broadcasting transactions with Canton w
 
 Create a new validator, name it and select kind "shared" when requested and you are done.
 
-**Via API:** see details [here](create-validator#sample-request) for the related endpoint to call. 
+**Via API:** see details [here](/api-reference/networks/create-canton-validator) for the related endpoint to call. 
 
 **Via the Dashboard:** head to the dashboard: Settings > Developers > Canton Validators ([direct link](https://app.dfns.io/v3/settings/developers/canton-validators)) and click ➕ New Validator to access the creation form. Once you are done you will be requested to 🔑 sign the creation with your passkey. Then you are done!
 
@@ -45,7 +45,7 @@ Check out the video tutorial on our Youtube Channel:
 
 <Accordion title="Option 2: Connect your own validator (BYOV)">
 
-If you are running your own validator, then you can connect it to Dfns over API (see details [here](create-validator#sample-request-1)) or via the Dashboard. Once connected, you can create secure wallets linked to your validator. There is no extra setup needed on your validator side.
+If you are running your own validator, then you can connect it to Dfns over API (see details [here](/api-reference/networks/create-canton-validator)) or via the Dashboard. Once connected, you can create secure wallets linked to your validator. There is no extra setup needed on your validator side.
 
 <Note>
 You will always earn the rewards associated with the validator in the native wallet on that validator.
@@ -55,9 +55,9 @@ We recommend configuring a automated sweep into a separate Dfns-secured Canton w
 
 We need several information to be able to connect to your validator:
 
-* **The validator URL:** we expect to be able to call the validator External Signing API, for instance `$URL/api/validator/v0/admin/external-party/topology/generate`. See the underlying calls details [here](https://docs.dev.sync.global/app_dev/validator_api/index.html#validator-api-external-signing). The calls will be originating from our IP addresses (see [dfns-environments](../../getting-started/dfns-environments "mention"))
+* **The validator URL:** we expect to be able to call the validator External Signing API, for instance `$URL/api/validator/v0/admin/external-party/topology/generate`. See the underlying calls details [here](https://docs.dev.sync.global/app_dev/validator_api/index.html#validator-api-external-signing). The calls will be originating from our IP addresses (see [dfns-environments](/api-reference/environments))
 
-- **The OAuth2 authentication parameters:** this is how we will authenticate into your validator. You should have setup authentication already (see details [here](https://docs.dev.sync.global/validator_operator/validator_helm.html#helm-validator-auth)), you can reuse the same Application details. For convenience you can find some examples with some common providers on [#sample-request-1](create-validator#sample-request-1 "mention")
+- **The OAuth2 authentication parameters:** this is how we will authenticate into your validator. You should have setup authentication already (see details [here](https://docs.dev.sync.global/validator_operator/validator_helm.html#helm-validator-auth)), you can reuse the same Application details. For convenience you can find some examples with some common providers on [the API page](/api-reference/networks/create-canton-validator)
   * **Domain:** your OAuth2 tenant domain. Provided by your auth provider.
   * **Token Path:** token endpoint from your authorization provider. We will call this endpoint on your tenant domain (i.e.: `<domain>/<token path>`)
   * **Audience:** the audience your configured on your auth provider. It is suggested to start with  `https://canton.network.global`.
@@ -66,7 +66,7 @@ We need several information to be able to connect to your validator:
 
 Once you have gathered these information, you can start setting up the custom validator on Dfns.
 
-**Via API:** see details [here](create-validator#sample-request-1) for the related endpoint to call. 
+**Via API:** see details [here](/api-reference/networks/create-canton-validator) for the related endpoint to call. 
 
 **Via the Dashboard:** head to the dashboard: Settings > Developers > Canton Validators ([direct link](https://app.dfns.io/v3/settings/developers/canton-validators)) and click ➕ New Validator to access the creation form. Once you are done you will be requested to 🔑 sign the creation with your passkey, then you are done!
 
@@ -89,7 +89,7 @@ Canton Validators support a limited number of wallets. You can connect several v
 
 Once setup using the shared or your own validator, you can create wallets via the dashboard Wallets page or via the Wallets API. You will be requested to select the validator you want to leverage.
 
-Should you need help to create a wallet, you can watch the video above, or follow the tutorial: [using-the-dashboard-create-your-first-wallet](../../getting-started/onboarding-to-dfns/using-the-dashboard-create-your-first-wallet "mention") or use our deditated API doc: [create-wallet](../wallets/create-wallet "mention")
+Should you need help to create a wallet, you can watch the video above, or follow the tutorial: [using-the-dashboard-create-your-first-wallet](/introduction/quickstart/4-using-the-dashboard-create-your-first-wallet) or use our dedicated API doc: [create-wallet](/api-reference/wallets/create-wallet)
 
 
 </Step>

@@ -10,7 +10,7 @@ A Dfns managed key can now be used across different blockchains, as long as the 
 
 ### Keys API
 
-Existing wallets are not impacted. The [Wallets API](../api-docs/wallets) will remain mostly the same except the following endpoints, [delegate](../api-docs/keys/delegate-key), [import](../api-docs/keys/advanced-keys-apis/import-key), [export](../api-docs/keys/advanced-keys-apis/export-key) and [generate signature](../api-docs/keys/generate-signature), are deprecated and migrated to equivalent endpoints in the new [Keys API](../api-docs/keys).
+Existing wallets are not impacted. The [Wallets API](/api-reference/wallets) will remain mostly the same except the following endpoints, [delegate](/api-reference/keys/delegate-key), [import](/api-reference/keys/import-key), [export](/api-reference/keys/export-key) and [generate signature](/api-reference/keys/generate-signature), are deprecated and migrated to equivalent endpoints in the new [Keys API](/api-reference/keys).
 
 Creating a new wallet automatically creates a signing key in the Dfns MPC cluster. This has always been the behavior except previously the details were hidden. Now the signing key linked to wallets are exposed as `signingKey.id`.
 
@@ -63,7 +63,7 @@ When you bridge assets between the two blockchains and the balances will update 
 
 ### Deprecated Pseudo Networks
 
-The [concept of pseudo networks](/developers/guides/keys-and-multichain-migration-guide#deprecated-pseudo-networks), `KeyECDSA` and `KeyEdDSA` networks, was introduced as a way to use a raw signing key with the Wallets API. Now that Keys API is first class, this old workaround is no longer necessary. You should phase out the usage and migrate to [key's generate signature](../api-docs/keys/generate-signature).
+The [concept of pseudo networks](/developers/guides/keys-and-multichain-migration-guide#deprecated-pseudo-networks), `KeyECDSA` and `KeyEdDSA` networks, was introduced as a way to use a raw signing key with the Wallets API. Now that Keys API is first class, this old workaround is no longer necessary. You should phase out the usage and migrate to [key's generate signature](/api-reference/keys/generate-signature).
 
 ### Enhanced Generate Signature
 

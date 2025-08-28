@@ -27,15 +27,15 @@ Before Notabene Travel Rule policies can be defined, you must:
 
 Outgoing Transfer attempts can be screened for Notabene driven Travel Rule compliance by creating a policy with the following traits.
 
-* [activity kind `Wallets:Sign`](../../../api-docs/policy-engine/policies#wallets-sign-activity)
+* [activity kind `Wallets:Sign`](/core-concepts/policies#wallets%3Asign-activity)
 * rule kind TravelRuleTransactionPrescreening
-* action kind [`Block`](../../../api-docs/policy-engine/policies#block-policy-action)
+* action kind [`Block`](/core-concepts/policies#block-policy-action)
 
-When using `TravelRuleTransactionPrescreening` ,  the transfer attempt will be validated by Notabene and forwarded to the counterparty VASP (if applicable). If the validation check fails, the counterparty VASP rejects the transfer, or the request times out then the details of the TravelRule Transaction Prescreening will be published in the [Webhook Event](../../../api-docs/webhooks#webhook-events) `policy.triggered` .
+When using `TravelRuleTransactionPrescreening` ,  the transfer attempt will be validated by Notabene and forwarded to the counterparty VASP (if applicable). If the validation check fails, the counterparty VASP rejects the transfer, or the request times out then the details of the TravelRule Transaction Prescreening will be published in the [Webhook Event](/developers/webhooks#webhook-events) `policy.triggered` .
 
 ## Travel Rule Transfer Payload
 
-After Notabene has been configured in Dfns settings and a policy has been put in place, [transfers](../../api-docs/wallets/transfer-asset) can be sent with an additional `travelRule` JSON field.
+After Notabene has been configured in Dfns settings and a policy has been put in place, [transfers](/api-reference/wallets/transfer-asset) can be sent with an additional `travelRule` JSON field.
 
 | Field              | Type   | Is Required | Description                                                                                                                                                                                                                                          |
 |--------------------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

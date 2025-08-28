@@ -4,12 +4,12 @@ title: Permissions
 
 Permissions enable you to control access to the API on a granular basis (following the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)). As an example, if you have an employee who needs to initiate payments, but shouldn't be able to manipulate policies, you can do that.
 
-Start by [Creating a Permission](permissions/createpermission) with some allowed operations in it, and [Assign it](permissions/createassignment) to a User.
+Start by [Creating a Permission](/api-reference/permissions/create-permission) with some allowed operations in it, and [Assign it](/api-reference/permissions/create-assignment) to a User.
 
 ## Terminology
 
 * **Permission -** a Permission contains a set of Operations, and can be assigned to users (or Service-Accounts). When assigned to a user, a Permission allows him to perform these operations in our API. Each created Permission has a unique name, and unique ID. A Permission can be assigned to one user, or to multiple users, depending on what you need.
-* **Operation -** an operation can be added to a Permission, and grants access to one action in the API. There is a fixed list of operations ([see below](#available-operations)) that you can include in Permissions. Every API endpoint requires one (or several) operations to use it. Eg. the endpoint [Create Wallet](../../wallets/create-wallet#required-permissions) is the operation `Wallets:Create`.
+* **Operation -** an operation can be added to a Permission, and grants access to one action in the API. There is a fixed list of operations ([see below](#available-operations)) that you can include in Permissions. Every API endpoint requires one (or several) operations to use it. Eg. the endpoint [Create Wallet](/api-reference/wallets/create-wallet#required-permissions) is the operation `Wallets:Create`.
 * **Assignment** - or "Permission Assignment", is the assignment of a given Permission to a given User (or Service Account). A permission can be assigned to a User (aka "granted"), or un-assigned from him (aka "revoked").
 
 ## Dfns-managed Permissions
