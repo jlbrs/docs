@@ -81,6 +81,9 @@
             "pages": [
               "index",
               "platform-overview",
+              "core-concepts/how-mpc-wallets-work",
+              "core-concepts/architecture",
+              "core-concepts/dfns-security-model",
               {
                 "group": "Quickstart Guide",
                 "icon": "rocket",
@@ -102,12 +105,8 @@
             "pages": [
               "core-concepts/wallets-and-keys",
               "core-concepts/non-custodial-wallets",
-              "core-concepts/interoperability",
-              "core-concepts/policies",
               "core-concepts/permissions",
-              "core-concepts/how-mpc-wallets-work",
-              "core-concepts/architecture",
-              "core-concepts/dfns-security-model",
+              "core-concepts/policies",
               "core-concepts/passkeys"
             ]
           },
@@ -153,19 +152,26 @@
             ]
           },
           {
+            "group": "Advanced",
+            "pages": [
+              "/advanced/delegated-signing",
+              "/advanced/interoperability",
+              "/advanced/on-premise-deployment",
+              "/advanced/hsm",
+              "/advanced/paying-dfns-with-canton-coin"
+            ]
+          },
+          {
             "group": "Security & Compliance",
             "icon": "shield-check",
             "pages": [
               "security/overview",
-              "security/on-premise-deployment",
-              "security/hsm",
               "security/our-soc-2-type-ii-compliance",
               "security/configuring-institutional-grade-policies",
               "security/audit-log-deep-dive",
               "security/dfns-vs-self-hosted-solutions",
               "security/meeting-fiduciary-duties-with-dfns",
-              "security/compliance-for-micar-and-travel-rule",
-              "security/delegated-signing"
+              "security/compliance-for-micar-and-travel-rule"
             ]
           },
           {
