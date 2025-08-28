@@ -6,7 +6,7 @@ title: Chainalysis
 
 To activate the integration, you need to go to [Dfns Dashboard](https://app.dfns.io), and activate the integration from the settings, by adding your Chainalaysis API key.
 
-Once that is done, the integration is done through the [Policy Engine](../../api-docs/policy-engine):
+Once that is done, the integration is done through the [Policy Engine](/core-concepts/policies):
 
 
 
@@ -20,7 +20,7 @@ Outgoing transfer attempts from a given wallet can be screened by Chainalysis be
 * [rule kind `ChainalysisTransactionPrescreening`](/core-concepts/policies#chainalysistransactionprescreening-policy-rule)
 * action kind [`Block`](/core-concepts/policies#block-policy-action) or [`RequestApproval`](/core-concepts/policies#requestapproval-policy-action) or [`NoAction`](/core-concepts/policies#noaction-policy-action)
 
-When using policy rule `ChainalysisTransactionPrescreening`, the transfer attempt will be sent to Chainalysis for a KYT screening. If the screening result triggers the rule (based on the criterias you defined in the rule), then the details of the Chainalysis pre-screening results will be published in the   [Webhook Event](../../../api-docs/webhooks#webhook-events) `policy.triggered`, which is published for any policy which triggers.
+When using policy rule `ChainalysisTransactionPrescreening`, the transfer attempt will be sent to Chainalysis for a KYT screening. If the screening result triggers the rule (based on the criterias you defined in the rule), then the details of the Chainalysis pre-screening results will be published in the   [Webhook Event](/developers/webhooks#webhook-events) `policy.triggered`, which is published for any policy which triggers.
 
 
 
@@ -28,11 +28,11 @@ When using policy rule `ChainalysisTransactionPrescreening`, the transfer attemp
 
 When an incoming transfers in a wallet is picked ou by our indexer, it can be screened by Chainalysis, and reported to you if something is detected as a result. To achieve that, you need to create a Policy with these traits:
 
-* [activity kind `Wallets:IncomingTransaction`](../../../api-docs/policy-engine/policies#wallets-incomingtransaction-activity)
-* [rule kind `ChainalysisTransactionScreening`](../../../api-docs/policy-engine/policies#chainalysistransactionscreening-policy-rule)
-* action kind [`NoAction`](../../../api-docs/policy-engine/policies#noaction-policy-action)
+* [activity kind `Wallets:IncomingTransaction`](/core-concepts/policies#wallets-incomingtransaction-activity)
+* [rule kind `ChainalysisTransactionScreening`](/core-concepts/policies#chainalysistransactionscreening-policy-rule)
+* action kind [`NoAction`](/core-concepts/policies#noaction-policy-action)
 
-When using policy rule `ChainalysisTransactionScreening`, the transfer attempt will be sent to Chainalysis for a KYT screening. If the screening result triggers the rule (based on the criterias you defined inthe rule), then the details of the Chainalysis screening results will be published in the   [Webhook Event](../../../api-docs/webhooks#webhook-events) `policy.triggered`, which is published for any policy which triggers.
+When using policy rule `ChainalysisTransactionScreening`, the transfer attempt will be sent to Chainalysis for a KYT screening. If the screening result triggers the rule (based on the criterias you defined inthe rule), then the details of the Chainalysis screening results will be published in the   [Webhook Event](/developers/webhooks#webhook-events) `policy.triggered`, which is published for any policy which triggers.
 
 
 
