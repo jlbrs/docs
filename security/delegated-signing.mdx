@@ -16,7 +16,7 @@ This page describes the architecture behind our Delegated Signing solution, how 
 
 The following diagram illustrates the Delegated Signing architecture:
 
-<Frame>![](/images/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2Fm5wdfD80IiriWaitkjLj%2FDelegatedSigningDiagram.png)</Frame>
+<Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2Fm5wdfD80IiriWaitkjLj_2FDelegatedSigningDiagram.png)</Frame>
 
 The key shares (labeled 1 through 5 above on the right side) are encrypted and stored in our decentralized signer network. Our signers implement leading peer-reviewed cryptographic protocols for distributed key generation and threshold signatures. They are spread across Tier 3+ data centers and different geographical regions to ensure high levels of service availability, fault-tolerance, and business continuity.
 
@@ -44,7 +44,7 @@ Most self-custodial wallets like Metamask or Ledger require users to indefinitel
 
 By leveraging an API signing secret as a proxy for the blockchain private key, the risks described above are substantially mitigated. Unlike a blockchain private key, the signing secret is not immutable. If it is stolen, it can be revoked. If it is lost, it can be re-established. See below a table comparing the properties between a blockchain-bound Private Key and an API Key.
 
-<Frame>![](/images/spaces%2FtnSPOZGQ2hBmgoVWX5H6%2Fuploads%2FIhDvNZgu4ZThYoG014JM%2FScreenshot%202023-07-05%20at%203.17.57%20PM.png)</Frame>
+<Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2FIhDvNZgu4ZThYoG014JM_2FScreenshot_202023-07-05_20at_203.17.57_20PM.png)</Frame>
 
 Of course, there are trade-offs. This architecture creates new potential attack vectors for bad actors. For instance, a hacker may impersonate a legitimate user in order to gain access to their wallet via the recovery process. In order to mitigate this risk, Dfns provides guidance on recovery mechanisms which our clients can implement.
 

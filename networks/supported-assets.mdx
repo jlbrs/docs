@@ -5,7 +5,7 @@ description: Dfns offers a wide array of chain-specific crypto asset support.
 
 Before reviewing our support matrix, it's important to understand how Dfns exposes APIs for facilitating blockchain interactions:
 
-1. **High-level APIs:** [Transfer Asset](/api-reference/wallets/transfer-asset) simplifies complex asset transfer operations. It abstracts away the details of blockchain interactions, allowing for easier integration. Dfns asset integrations are implemented in the context of this high-level API and are detailed below.
+1. **High-level APIs:** [Transfer Asset]("/api-reference/wallets/transfer-asset") simplifies complex asset transfer operations. It abstracts away the details of blockchain interactions, allowing for easier integration. Dfns asset integrations are implemented in the context of this high-level API and are detailed below.
 2. **Mid-level APIs:** [Sign and Broadcast](/api-reference/wallets/broadcast-transaction) Enables interaction with any arbitrary smart contract but requires developers to integrate with native chain SDKs to format transactions as inputs. It requires more development but provides greater control over the transaction.
 3. **Low-level APIs:** [Generate Signature](/api-reference/keys/generate-signature) offer granular control by exposing our MPC signing directly to the developer.  This also requires more engineering effort, but makes it possible to execute any interaction with any chain that supports our underlying cryptographic schemes: ECDSA, EdDSA, and Schnorr.
 
