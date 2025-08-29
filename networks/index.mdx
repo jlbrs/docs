@@ -5,8 +5,10 @@ mode: "wide"
 ---
 
 Please find below a summary of the blockchains currently supported by the Dfns API. 
+We plan to add support for more blockchain networks over time. The supported features will vary depending on popularity and market demand.
 
-| Mainnet                | Testnet            | <Tooltip tip="Refer to the Support Tiers page for more details">Tier</Tooltip> | Standards                      | <Tooltip tip="Confirmation Delay refers to the number of blocks that must be validated or mined after a transaction has been included in a block for that transaction to be indexed by Dfns. Tier-2 chains are not indexed so finality doesn't apply.">Confirmation Delay</Tooltip> | Testnet faucet example                                            |
+
+| Mainnet                | Testnet            | <Tooltip tip="See below for more details">Tier</Tooltip> | Standards                      | <Tooltip tip="Confirmation Delay refers to the number of blocks that must be validated or mined after a transaction has been included in a block for that transaction to be indexed by Dfns. Tier-2 chains are not indexed so finality doesn't apply.">Confirmation Delay</Tooltip> | Testnet faucet example                                            |
 | :--------------------- | :----------------- | :----------------------------------------------------------------------------: | :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------- |
 | Algorand               | AlgorandTestnet    |                                       1                                        | ASA                            |                                                                                                                                          7                                                                                                                                          | https://bank.testnet.algorand.network/                            |
 | Aptos                  | AptosTestnet       |                                       1                                        | AIP-21                         |                                                                                                                                         30                                                                                                                                          | https://www.aptosfaucet.com/                                      |
@@ -51,13 +53,19 @@ Please find below a summary of the blockchains currently supported by the Dfns A
 | Tron                   | TronNile           |                                       1                                        | TRC-10, TRC-20, TRC-721        |                                                                                                                                         19                                                                                                                                          | https://faucet.triangleplatform.com/tron/nile                     |
 | XrpLedger (aka Ripple) | XrpLedgerTestnet   |                                       2                                        | N/A                            |                                                                                                                                         N/A                                                                                                                                         | https://xrpl.org/resources/dev-tools/xrp-faucets                  |
 
-[^1]: These are **Specialty Networks** that are not available by default. Please [contact support](https://support.dfns.co) for additional information.
-[^2]: Do not support `feeCurrency`.
+## Support Tiers
 
-## Tier-1 blockchain networks
+
+### Tier-1 blockchain networks
 
 Tier-1 blockchain networks support all wallet features, including automatic detection of wallet [asset](/api-reference/wallets/get-wallet-assets) and [NFT](/api-reference/wallets/get-wallet-nfts) balances if applicable, and on-chain asset transfer [history](/api-reference/wallets/get-wallet-history). Tier-1 support also include [transfer asset](/api-reference/wallets/transfer-asset), [broadcast transaction](/api-reference/wallets/broadcast-transaction) and [generate signature](/api-reference/keys/generate-signature). Tier-1 chains also support [Webhooks](/developers/webhooks) driven by chain indexing.
 
-## Tier-2 blockchain networks
+### Tier-2 blockchain networks
 
 Tier-2 blockchain networks do not track tokens or on-chain history. Only the [balance](/api-reference/wallets/get-wallet-assets) of the native token, which is used to pay transaction fees, is returned. Tier-2 support includes [Broadcast Transaction](/api-reference/wallets/broadcast-transaction), [Generate Signature](/api-reference/keys/generate-signature), and Transfer Asset for native chain cryptocurrency only. Webhooks are not available for Tier-2 chains.
+
+## Footnotes
+
+[^1]: These are **Specialty Networks** that are not available by default. Please [contact support](https://support.dfns.co) for additional information.
+[^2]: Do not support `feeCurrency`.
+

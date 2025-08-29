@@ -114,7 +114,6 @@
             "group": "Networks",
             "pages": [
               "networks/index",
-              "networks/support-tiers",
               "networks/supported-assets",
               "networks/supported-key-formats",
               {
@@ -126,9 +125,27 @@
             ]
           },
           {
+            "group": "Platform Features",
+            "icon": "square-terminal",
+            "pages": [
+              "features/index",
+              "features/transactions",
+              "features/staking",
+              "features/fee-sponsors",
+              "/features/exchanges",
+              "/features/account-abstraction-on-evms",
+              "features/aml-kyt",
+              "features/travel-rule",
+              "features/fiat-on-offboarding"
+            ]
+          },
+          {
             "group": "Guides",
             "icon": "lightbulb",
             "pages": [
+              "/guides/using-networks-testnets",
+              "/guides/permission-based-access-control",
+              "/guides/email-approval-requests-with-zapier",
               {
                 "group": "Exchanges",
                 "pages": [
@@ -147,6 +164,75 @@
                 "group": "Travel Rule",
                 "pages": [
                   "/integrations/travel-rule/notabene"
+                ]
+              },
+              {
+                "group": "Developer Guides",
+                "icon": "code",
+                "pages": [
+                  "developers/index",
+                  "developers/webhooks",
+                  "developers/guides/wallet-delegation",
+                  "developers/guides/user-action-signature",
+                  "developers/guides/generate-a-key-pair",
+                  "developers/guides/user-credentials",
+                  "developers/guides/access-token-credentials",
+                  "developers/guides/signing-requests",
+                  "developers/guides/passkey-settings-migration-guide",
+                  "developers/guides/keys-and-multichain-migration-guide",
+                  "developers/guides/applications-deprecation",
+                  {
+                    "group": "Core Skills",
+                    "pages": [
+                      "developers/core/setup-and-authentication",
+                      "developers/core/creating-and-managing-wallets",
+                      "developers/core/displaying-portfolio-history"
+                    ]
+                  },
+                  {
+                    "group": "Building Blocks",
+                    "pages": [
+                      "developers/building/wallets-and-transactions",
+                      "developers/building/policies-and-permissions",
+                      "developers/building/staking",
+                      "developers/building/exchange-integrations",
+                      "developers/building/aml-and-travel-rule"
+                    ]
+                  },
+                  {
+                    "group": "Architectural Patterns",
+                    "pages": [
+                      "developers/architecture/designing-an-exchange-hot-wallet",
+                      "developers/architecture/managing-wallets-for-millions-of-users",
+                      "developers/architecture/designing-for-high-availability",
+                      "developers/architecture/event-driven-architecture",
+                      "developers/architecture/scalability-and-performance"
+                    ]
+                  },
+                  {
+                    "group": "Advanced Topics",
+                    "pages": [
+                      "/developers/advanced/key-derivation",
+                      "developers/advanced/using-hsms",
+                      "developers/advanced/on-premise-deployment",
+                      "developers/advanced/keys-and-multichain-migration"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Dashboard Guides",
+                "icon": "browser",
+                "pages": [
+                  "dashboard/overview",
+                  "/dashboard/registering-a-new-passkey-credential",
+                  "dashboard/storing-webauthn-credentials-in-password-managers",
+                  "dashboard/videos",
+                  "dashboard/onboarding-a-new-device",
+                  "dashboard/managing-users-and-roles",
+                  "dashboard/creating-policies",
+                  "dashboard/approving-transactions",
+                  "dashboard/user-account-recovery"
                 ]
               }
             ]
@@ -172,21 +258,6 @@
               "security/dfns-vs-self-hosted-solutions",
               "security/meeting-fiduciary-duties-with-dfns",
               "security/compliance-for-micar-and-travel-rule"
-            ]
-          },
-          {
-            "group": "Platform Features",
-            "icon": "square-terminal",
-            "pages": [
-              "features/index",
-              "features/transactions",
-              "features/staking",
-              "features/fee-sponsors",
-              "/features/exchanges",
-              "/features/account-abstraction-on-evms",
-              "features/aml-kyt",
-              "features/travel-rule",
-              "features/fiat-on-offboarding"
             ]
           },
           {
@@ -222,84 +293,6 @@
                   "solutions/playbooks/secure-user-and-device-lifecycle"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Developer Guides",
-            "icon": "code",
-            "pages": [
-              "developers/index",
-              "developers/webhooks",
-              "developers/guides/wallet-delegation",
-              "developers/guides/user-action-signature",
-              "developers/guides/generate-a-key-pair",
-              "developers/guides/user-credentials",
-              "developers/guides/access-token-credentials",
-              "developers/guides/signing-requests",
-              "developers/guides/passkey-settings-migration-guide",
-              "developers/guides/keys-and-multichain-migration-guide",
-              "developers/guides/applications-deprecation",
-              {
-                "group": "Core Skills",
-                "pages": [
-                  "developers/core/setup-and-authentication",
-                  "developers/core/creating-and-managing-wallets",
-                  "developers/core/displaying-portfolio-history"
-                ]
-              },
-              {
-                "group": "Building Blocks",
-                "pages": [
-                  "developers/building/wallets-and-transactions",
-                  "developers/building/policies-and-permissions",
-                  "developers/building/staking",
-                  "developers/building/exchange-integrations",
-                  "developers/building/aml-and-travel-rule"
-                ]
-              },
-              {
-                "group": "Architectural Patterns",
-                "pages": [
-                  "developers/architecture/designing-an-exchange-hot-wallet",
-                  "developers/architecture/managing-wallets-for-millions-of-users",
-                  "developers/architecture/designing-for-high-availability",
-                  "developers/architecture/event-driven-architecture",
-                  "developers/architecture/scalability-and-performance"
-                ]
-              },
-              {
-                "group": "Advanced Topics",
-                "pages": [
-                  "/developers/advanced/key-derivation",
-                  "developers/advanced/using-hsms",
-                  "developers/advanced/on-premise-deployment",
-                  "developers/advanced/keys-and-multichain-migration"
-                ]
-              }
-            ]
-          },{
-            "group": "Guides",
-            "icon": "browser",
-            "pages": [
-              "/guides/using-networks-testnets",
-              "/guides/permission-based-access-control",
-              "/guides/email-approval-requests-with-zapier"
-            ]
-          },
-          {
-            "group": "Dashboard Guides",
-            "icon": "browser",
-            "pages": [
-              "dashboard/overview",
-              "/dashboard/registering-a-new-passkey-credential",
-              "dashboard/storing-webauthn-credentials-in-password-managers",
-              "dashboard/videos",
-              "dashboard/onboarding-a-new-device",
-              "dashboard/managing-users-and-roles",
-              "dashboard/creating-policies",
-              "dashboard/approving-transactions",
-              "dashboard/user-account-recovery"
-              
             ]
           },
           "/faq"
