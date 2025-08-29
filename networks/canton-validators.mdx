@@ -55,14 +55,15 @@ We recommend configuring a automated sweep into a separate Dfns-secured Canton w
 
 We need several information to be able to connect to your validator:
 
-* **The validator URL:** we expect to be able to call the validator External Signing API, for instance `$URL/api/validator/v0/admin/external-party/topology/generate`. See the underlying calls details [here](https://docs.dev.sync.global/app_dev/validator_api/index.html#validator-api-external-signing). The calls will be originating from our IP addresses (see [dfns-environments](/api-reference/environments))
-
+- **The validator URL:** we expect to be able to call the validator External Signing API, for instance `$URL/api/validator/v0/admin/external-party/topology/generate`. See the underlying calls details [here](https://docs.dev.sync.global/app_dev/validator_api/index.html#validator-api-external-signing). The calls will be originating from our IP addresses (see [dfns-environments](/api-reference/environments))
 - **The OAuth2 authentication parameters:** this is how we will authenticate into your validator. You should have setup authentication already (see details [here](https://docs.dev.sync.global/validator_operator/validator_helm.html#helm-validator-auth)), you can reuse the same Application details. For convenience you can find some examples with some common providers on [the API page](/api-reference/networks/create-canton-validator)
   * **Domain:** your OAuth2 tenant domain. Provided by your auth provider.
   * **Token Path:** token endpoint from your authorization provider. We will call this endpoint on your tenant domain (i.e.: `<domain>/<token path>`)
   * **Audience:** the audience your configured on your auth provider. It is suggested to start with  `https://canton.network.global`.
   * **Client ID:** The client id from your auth provider for this application.
   * **Client Secret:** The client secret from your auth provider for this application.
+- **The Ledger API URL:** URL to access the Ledger JSON API and call endpoints such as `/v2/state/ledger-end`, `/v2/state/active-contracts`, `/v2/parties/participant-id`, `/v2/interactive-submission/prepare`, `/v2/interactive-submission/execute`, `/v2/commands/completions`. See the underlying details [here](https://docs.dev.sync.global/app_dev/ledger_api/index.html). The calls will be originating from our IP addresses (see [dfns-environments](../../getting-started/dfns-environments "mention"))
+- **The Ledger OAuth2 authentication parameters:** this is how we will authenticate to your ledger API. This will usually use the same parameters as for the validator.&#x20;
 
 Once you have gathered these information, you can start setting up the custom validator on Dfns.
 
