@@ -8,7 +8,7 @@ html {scroll-behavior: smooth;}
 
 body {
     font-size: var(--text-size);
-    /* letter-spacing: 0.02rem; */
+    letter-spacing: -0.02rem;
 }
     
 #table-of-contents-layout:has(div) {

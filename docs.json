@@ -27,18 +27,6 @@
   "icons": {
     "library": "fontawesome"
   },
-  "fonts": {
-    "heading": {
-      "family": "PP Neue Montreal",
-      "source": "https://fonts.cdnfonts.com/s/100431/ppneuemontreal-medium.woff",
-      "format": "woff"
-    },
-    "body": {
-      "family": "PP Neue Montreal",
-      "source": "https://fonts.cdnfonts.com/s/100431/ppneuemontreal-book.woff",
-      "format": "woff"
-    }
-  },
   "appearance": {
     "default": "light",
     "strict": true
