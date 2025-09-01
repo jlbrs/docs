@@ -119,6 +119,7 @@
               "features/index",
               "features/transactions",
               "features/staking",
+              "/features/swaps",
               "features/fee-sponsors",
               "/features/exchanges",
               "/features/account-abstraction-on-evms",
