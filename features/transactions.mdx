@@ -4,6 +4,12 @@ description: 'Dfns offers three primary ways to create a transaction, each offer
 ---
 
 
+| API	| Supported Transaction Types	| When to Use It |
+| :--- | :--- | :--- |
+| Transfer API	| Native Coins, Fungible Tokens (ERC-20), NFTs (ERC-721/1155).	| For simple, standardized "send" operations where convenience is key. |
+| Sign / Sign & Broadcast API	| Any valid transaction, including all simple transfers plus complex smart contract calls, minting, staking, etc.	| For interacting with DeFi, DAOs, or any custom smart contract where you need full control over the transaction data. |
+
+
 ## Transfer API
 This is the simplest, most all-in-one method. You simply specify the high-level details of your transfer—like the recipient, amount, and asset—and the API handles the rest. It automatically builds the blockchain-specific transaction, signs it securely, and broadcasts it to the network.
 

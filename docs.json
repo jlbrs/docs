@@ -66,6 +66,7 @@
         "pages": [
           {
             "group": "Introduction",
+            "icon": "wand-magic-sparkles",
             "pages": [
               "index",
               "platform-overview",
@@ -90,7 +91,7 @@
           },
           {
             "group": "Platform Features",
-            "icon": "square-terminal",
+            "icon": "cubes",
             "pages": [
               "features/index",
               "features/transactions",
@@ -106,6 +107,7 @@
           },
           {
             "group": "Core Concepts",
+            "icon": "layer-group",
             "pages": [
               "core-concepts/wallets-and-keys",
               "core-concepts/non-custodial-wallets",
@@ -116,6 +118,7 @@
           },
           {
             "group": "Networks",
+            "icon": "network-wired",
             "pages": [
               "networks/index",
               "networks/supported-assets",
@@ -130,7 +133,7 @@
           },
           {
             "group": "Guides",
-            "icon": "lightbulb",
+            "icon": "compass",
             "pages": [
               "/guides/using-networks-testnets",
               "/guides/permission-based-access-control",
@@ -228,6 +231,7 @@
           },
           {
             "group": "Advanced",
+            "icon": "flask-vial",
             "pages": [
               "/advanced/delegated-signing",
               "/advanced/interoperability",
