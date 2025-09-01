@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 1.521.2
+  version: 1.522.0
   title: Dfns
   description: Dfns API
 servers:
@@ -29,23 +29,22 @@ components:
 paths:
   /auth/action:
     post:
+      summary: Create User Action Signature
       tags:
         - Auth
-      summary: " Create User Action Signature"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -294,23 +293,22 @@ paths:
                   - userAction
   /auth/action/init:
     post:
+      summary: Create User Action Challenge
       tags:
         - Auth
-      summary: " Create User Action Challenge"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -459,23 +457,23 @@ paths:
                   - externalAuthenticationUrl
   /auth/apps:
     get:
+      summary: List Applications
       tags:
         - Auth
-      summary: " List Applications"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
+      deprecated: true
       responses:
         "200":
           description: Success
@@ -603,23 +601,23 @@ paths:
                   - items
   /auth/apps/{appId}:
     get:
+      summary: Get Application
       tags:
         - Auth
-      summary: " Get Application"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
+      deprecated: true
       parameters:
         - schema:
             type: string
@@ -747,24 +745,23 @@ paths:
                   - accessTokens
   /auth/credentials:
     post:
+      summary: Create Credential
       tags:
         - Auth
-      summary: " Create Credential"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -1015,23 +1012,22 @@ paths:
                   - relyingPartyId
                   - origin
     get:
+      summary: List Credentials
       tags:
         - Auth
-      summary: " List Credentials"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       responses:
         "200":
           description: Success
@@ -1084,23 +1080,22 @@ paths:
                   - items
   /auth/credentials/init:
     post:
+      summary: Create Credential Challenge
       tags:
         - Auth
-      summary: " Create Credential Challenge"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -1511,24 +1506,23 @@ paths:
                       - temporaryAuthenticationToken
   /auth/credentials/activate:
     put:
+      summary: Activate Credential
       tags:
         - Auth
-      summary: " Activate Credential"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -1555,24 +1549,23 @@ paths:
                   - message
   /auth/credentials/deactivate:
     put:
+      summary: Deactivate Credential
       tags:
         - Auth
-      summary: " Deactivate Credential"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -1599,24 +1592,23 @@ paths:
                   - message
   /auth/credentials/code:
     post:
+      summary: Create Credential Code
       tags:
         - Auth
-      summary: " Create Credential Code"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -1651,12 +1643,13 @@ paths:
                   - expiration
   /auth/credentials/code/init:
     post:
+      summary: Create Credential Challenge With Code
       tags:
         - Auth
-      summary: " Create Credential Challenge With Code"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2071,12 +2064,13 @@ paths:
                       - temporaryAuthenticationToken
   /auth/credentials/code/verify:
     post:
+      summary: Create Credential With Code
       tags:
         - Auth
-      summary: " Create Credential With Code"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2328,12 +2322,13 @@ paths:
                   - origin
   /auth/login/code:
     post:
+      summary: Send Login Code
       tags:
         - Auth
-      summary: " Send Login Code"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2363,12 +2358,13 @@ paths:
                   - message
   /auth/login/init:
     post:
+      summary: Create Login Challenge
       tags:
         - Auth
-      summary: " Create Login Challenge"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2508,12 +2504,13 @@ paths:
                   - externalAuthenticationUrl
   /auth/login:
     post:
+      summary: Login
       tags:
         - Auth
-      summary: " Login"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2762,26 +2759,23 @@ paths:
                   - token
   /auth/login/delegated:
     post:
+      summary: Delegated Login
       tags:
         - Auth
-      summary: " Delegated Login"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Login:Delegated`: Always required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Login:Delegated | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -2807,12 +2801,13 @@ paths:
                   - token
   /auth/login/social:
     post:
+      summary: Social Login
       tags:
         - Auth
-      summary: " Social Login"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -2845,23 +2840,22 @@ paths:
                   - token
   /auth/logout:
     put:
+      summary: Logout
       tags:
         - Auth
-      summary: " Logout"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -2884,23 +2878,22 @@ paths:
                   - message
   /auth/pats:
     get:
+      summary: List Personal Access Tokens
       tags:
         - Auth
-      summary: " List Personal Access Tokens"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       responses:
         "200":
           description: Success
@@ -2978,26 +2971,23 @@ paths:
                 required:
                   - items
     post:
+      summary: Create Personal Access Token
       tags:
         - Auth
-      summary: " Create Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Pats:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Pats:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -3099,23 +3089,22 @@ paths:
                   - permissionAssignments
   /auth/pats/{tokenId}:
     get:
+      summary: Get Personal Access Token
       tags:
         - Auth
-      summary: " Get Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -3193,24 +3182,23 @@ paths:
                   - publicKey
                   - tokenId
     put:
+      summary: Update Personal Access Token
       tags:
         - Auth
-      summary: " Update Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -3299,24 +3287,23 @@ paths:
                   - publicKey
                   - tokenId
     delete:
+      summary: Archive Personal Access Token
       tags:
         - Auth
-      summary: " Archive Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -3395,24 +3382,23 @@ paths:
                   - tokenId
   /auth/pats/{tokenId}/activate:
     put:
+      summary: Activate Personal Access Token
       tags:
         - Auth
-      summary: " Activate Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -3491,24 +3477,23 @@ paths:
                   - tokenId
   /auth/pats/{tokenId}/deactivate:
     put:
+      summary: Deactivate Personal Access Token
       tags:
         - Auth
-      summary: " Deactivate Personal Access Token"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -3587,26 +3572,23 @@ paths:
                   - tokenId
   /auth/recover/user/delegated:
     post:
+      summary: Create Delegated Recovery Challenge
       tags:
         - Auth
-      summary: " Create Delegated Recovery Challenge"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Recover:Delegated`: Always required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Recover:Delegated | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -3776,23 +3758,23 @@ paths:
                 additionalProperties: false
   /auth/recover/user:
     post:
+      summary: Recover
       tags:
         - Auth
-      summary: " Recover"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          ✅ Recovery Code   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Recovery Code`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -4156,12 +4138,13 @@ paths:
                   - user
   /auth/recover/user/init:
     post:
+      summary: Create Recovery Challenge
       tags:
         - Auth
-      summary: " Create Recovery Challenge"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -4339,12 +4322,13 @@ paths:
                 additionalProperties: false
   /auth/recover/user/code:
     post:
+      summary: Send Recovery Code
       tags:
         - Auth
-      summary: " Send Recovery Code"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -4375,26 +4359,23 @@ paths:
                   - message
   /auth/registration/delegated:
     post:
+      summary: Create Delegated Registration Challenge
       tags:
         - Auth
-      summary: " Create Delegated Registration Challenge"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Register:Delegated`: Always required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Register:Delegated | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -4553,12 +4534,13 @@ paths:
                   - otpUrl
   /auth/registration/social:
     post:
+      summary: Create Social Registration Challenge
       tags:
         - Auth
-      summary: " Create Social Registration Challenge"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -4715,12 +4697,13 @@ paths:
                   - otpUrl
   /auth/registration/init:
     post:
+      summary: Create Registration Challenge
       tags:
         - Auth
-      summary: " Create Registration Challenge"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -4879,23 +4862,23 @@ paths:
                   - otpUrl
   /auth/registration:
     post:
+      summary: Register
       tags:
         - Auth
-      summary: " Register"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          ✅ Registration Code   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Registration Code`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -5221,23 +5204,23 @@ paths:
                   - user
   /auth/registration/enduser:
     post:
+      summary: Register End User
       tags:
         - Auth
-      summary: " Register End User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ❌ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          ✅ Registration Code   
+          #### User Kinds allowed   
+          ❌ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Registration Code`
-
-        #### User Kinds allowed
-
-        `Delegated User`
       requestBody:
         content:
           application/json:
@@ -5860,12 +5843,13 @@ paths:
                   - wallets
   /auth/registration/code:
     put:
+      summary: Resend Registration Code
       tags:
         - Auth
-      summary: " Resend Registration Code"
+      x-mint:
+        content: ""
       security:
         - {}
-      description: ""
       requestBody:
         content:
           application/json:
@@ -5896,25 +5880,22 @@ paths:
                   - message
   /auth/service-accounts:
     get:
+      summary: List Service Accounts
       tags:
         - Auth
-      summary: " List Service Accounts"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       responses:
         "200":
           description: Success
@@ -6059,26 +6040,23 @@ paths:
                 required:
                   - items
     post:
+      summary: Create Service Account
       tags:
         - Auth
-      summary: " Create Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -6242,25 +6220,22 @@ paths:
                   - accessTokens
   /auth/service-accounts/{serviceAccountId}:
     get:
+      summary: Get Service Account
       tags:
         - Auth
-      summary: " Get Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -6405,26 +6380,23 @@ paths:
                   - userInfo
                   - accessTokens
     put:
+      summary: Update Service Account
       tags:
         - Auth
-      summary: " Update Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -6580,26 +6552,23 @@ paths:
                   - userInfo
                   - accessTokens
     delete:
+      summary: Archive Service Account
       tags:
         - Auth
-      summary: " Archive Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -6745,26 +6714,23 @@ paths:
                   - accessTokens
   /auth/service-accounts/{serviceAccountId}/activate:
     put:
+      summary: Activate Service Account
       tags:
         - Auth
-      summary: " Activate Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Activate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Activate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -6910,26 +6876,23 @@ paths:
                   - accessTokens
   /auth/service-accounts/{serviceAccountId}/deactivate:
     put:
+      summary: Deactivate Service Account
       tags:
         - Auth
-      summary: " Deactivate Service Account"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:ServiceAccounts:Deactivate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:ServiceAccounts:Deactivate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7075,26 +7038,23 @@ paths:
                   - accessTokens
   /auth/users/{userId}/activate:
     put:
+      summary: Activate User
       tags:
         - Auth
-      summary: " Activate User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Activate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Activate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7168,26 +7128,23 @@ paths:
                   - permissionAssignments
   /auth/users/{userId}/deactivate:
     put:
+      summary: Deactivate User
       tags:
         - Auth
-      summary: " Deactivate User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Deactivate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Deactivate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7261,26 +7218,23 @@ paths:
                   - permissionAssignments
   /auth/users/{userId}:
     delete:
+      summary: Archive User
       tags:
         - Auth
-      summary: " Archive User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7353,25 +7307,22 @@ paths:
                   - isRegistered
                   - permissionAssignments
     get:
+      summary: Get User
       tags:
         - Auth
-      summary: " Get User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7445,26 +7396,43 @@ paths:
                   - permissionAssignments
   /auth/users:
     post:
+      summary: Create User
       tags:
         - Auth
-      summary: " Create User"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ❌ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
+      description: "Create a new user in the caller's org. This will also send an
+        registration\ 
 
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Create | Always required. |
+        \  email to the created User's email, with a registration code, and
+        pointing him to complete\ 
 
-        #### Token Kinds Allowed
+        \  his registration on Dfns Dashboard. The user is created without any
+        permissions.
 
-        `Access Token`, `Service Account Access Token`
+        \ \ 
 
-        #### User Kinds allowed
+        \  <Note>If you want the created User to not know about about Dfns, and
+        don't want him to\ 
 
-        `User`
+        \  receive the registration email from Dfns, you should rather use the
+        Delegated Registration\ 
+
+        \  endpoint.</Note>
+
+        \  "
       requestBody:
         content:
           application/json:
@@ -7552,25 +7520,22 @@ paths:
                   - isRegistered
                   - permissionAssignments
     get:
+      summary: List Users
       tags:
         - Auth
-      summary: " List Users"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Auth:Users:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Auth:Users:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: integer
@@ -7669,25 +7634,22 @@ paths:
                   - items
   /exchanges/{exchangeId}:
     get:
+      summary: Get Exchange
       tags:
         - Exchanges
-      summary: " Get Exchange"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7721,26 +7683,23 @@ paths:
                   - kind
                   - dateCreated
     delete:
+      summary: Delete Exchange
       tags:
         - Exchanges
-      summary: " Delete Exchange"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -7764,26 +7723,23 @@ paths:
                   - deleted
   /exchanges:
     post:
+      summary: Create Exchange
       tags:
         - Exchanges
-      summary: " Create Exchange"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -7860,25 +7816,22 @@ paths:
                   - dateCreated
                 additionalProperties: false
     get:
+      summary: List Exchanges
       tags:
         - Exchanges
-      summary: " List Exchanges"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: integer
@@ -7930,25 +7883,22 @@ paths:
                   - items
   /exchanges/{exchangeId}/accounts:
     get:
+      summary: List Accounts
       tags:
         - Exchanges
-      summary: " List Accounts"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -8000,25 +7950,22 @@ paths:
                   - items
   /exchanges/{exchangeId}/accounts/{accountId}/assets:
     get:
+      summary: List Account Assets
       tags:
         - Exchanges
-      summary: " List Account Assets"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -8072,25 +8019,22 @@ paths:
                   - items
   /exchanges/{exchangeId}/accounts/{accountId}/assets/{asset}/withdrawal-networks:
     get:
+      summary: List Asset Withdrawal Networks
       tags:
         - Exchanges
-      summary: " List Asset Withdrawal Networks"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -8352,27 +8296,24 @@ paths:
                         - decimals
   /exchanges/{exchangeId}/accounts/{accountId}/deposits:
     post:
+      summary: Create Deposit
       tags:
         - Exchanges
-      summary: " Create Deposit"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Deposits:Create`: Always required.   
+          `Wallets:Transfers:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Deposits:Create | Always required. |
-        | Wallets:Transfers:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -8408,6 +8349,14 @@ paths:
                         - Fast
                     createDestinationAccount:
                       type: boolean
+                    offer:
+                      type: boolean
+                      description: Optional field for Canton, if true it will create a transfer offer
+                    expiresAt:
+                      type: string
+                      format: date-time
+                      description: Optional field for Canton, especially useful in the context of
+                        offers
                     externalId:
                       type: string
                       minLength: 1
@@ -8948,6 +8897,14 @@ paths:
                               - Fast
                           createDestinationAccount:
                             type: boolean
+                          offer:
+                            type: boolean
+                            description: Optional field for Canton, if true it will create a transfer offer
+                          expiresAt:
+                            type: string
+                            format: date-time
+                            description: Optional field for Canton, especially useful in the context of
+                              offers
                           externalId:
                             type: string
                             minLength: 1
@@ -9446,26 +9403,23 @@ paths:
                   - dateCreated
   /exchanges/{exchangeId}/accounts/{accountId}/withdrawals:
     post:
+      summary: Create Withdrawal
       tags:
         - Exchanges
-      summary: " Create Withdrawal"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Exchanges:Withdrawals:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Exchanges:Withdrawals:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -9501,6 +9455,14 @@ paths:
                         - Fast
                     createDestinationAccount:
                       type: boolean
+                    offer:
+                      type: boolean
+                      description: Optional field for Canton, if true it will create a transfer offer
+                    expiresAt:
+                      type: string
+                      format: date-time
+                      description: Optional field for Canton, especially useful in the context of
+                        offers
                     externalId:
                       type: string
                       minLength: 1
@@ -10037,6 +9999,14 @@ paths:
                               - Fast
                           createDestinationAccount:
                             type: boolean
+                          offer:
+                            type: boolean
+                            description: Optional field for Canton, if true it will create a transfer offer
+                          expiresAt:
+                            type: string
+                            format: date-time
+                            description: Optional field for Canton, especially useful in the context of
+                              offers
                           externalId:
                             type: string
                             minLength: 1
@@ -10535,26 +10505,23 @@ paths:
                   - dateCreated
   /fee-sponsors:
     post:
+      summary: Create Fee Sponsor
       tags:
         - Fee Sponsors
-      summary: " Create Fee Sponsor"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -10700,25 +10667,22 @@ paths:
                   - dateCreated
                 additionalProperties: false
     get:
+      summary: List Fee Sponsors
       tags:
         - Fee Sponsors
-      summary: " List Fee Sponsors"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -10870,25 +10834,22 @@ paths:
                   - items
   /fee-sponsors/{feeSponsorId}:
     get:
+      summary: Get Fee Sponsor
       tags:
         - Fee Sponsors
-      summary: " Get Fee Sponsor"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11024,26 +10985,23 @@ paths:
                   - status
                   - dateCreated
     delete:
+      summary: Delete Fee Sponsor
       tags:
         - Fee Sponsors
-      summary: " Delete Fee Sponsor"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11180,26 +11138,23 @@ paths:
                   - dateCreated
   /fee-sponsors/{feeSponsorId}/deactivate:
     put:
+      summary: Deactivate Fee Sponsor
       tags:
         - Fee Sponsors
-      summary: " Deactivate Fee Sponsor"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11336,26 +11291,23 @@ paths:
                   - dateCreated
   /fee-sponsors/{feeSponsorId}/activate:
     put:
+      summary: Activate Fee Sponsor
       tags:
         - Fee Sponsors
-      summary: " Activate Fee Sponsor"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11492,25 +11444,22 @@ paths:
                   - dateCreated
   /fee-sponsors/{feeSponsorId}/fees:
     get:
+      summary: List Sponsored Fees
       tags:
         - Fee Sponsors
-      summary: " List Sponsored Fees"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `FeeSponsors:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | FeeSponsors:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11572,27 +11521,24 @@ paths:
                   - items
   /keys:
     post:
+      summary: Create Key
       tags:
         - Keys
-      summary: " Create Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Create`: Always required   
+          `Keys:Delegate`: Required if `delegateTo` is specified.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Create | Always required |
-        | Keys:Delegate | Required if `delegateTo` is specified. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -11688,25 +11634,22 @@ paths:
                   - dateCreated
                 additionalProperties: false
     get:
+      summary: List Keys
       tags:
         - Keys
-      summary: " List Keys"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -11787,26 +11730,23 @@ paths:
                   - items
   /keys/{keyId}/delegate:
     post:
+      summary: Delegate Key
       tags:
         - Keys
-      summary: " Delegate Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Delegate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Delegate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11845,26 +11785,23 @@ paths:
                   - status
   /keys/{keyId}:
     delete:
+      summary: Delete Key
       tags:
         - Keys
-      summary: " Delete Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -11924,25 +11861,22 @@ paths:
                   - dateCreated
                 additionalProperties: false
     get:
+      summary: Get Key
       tags:
         - Keys
-      summary: " Get Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -12131,26 +12065,23 @@ paths:
                   - wallets
                   - store
     put:
+      summary: Update Key
       tags:
         - Keys
-      summary: " Update Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -12224,26 +12155,23 @@ paths:
                 additionalProperties: false
   /keys/{keyId}/derive:
     post:
+      summary: Derive Key
       tags:
         - Keys
-      summary: " Derive Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Derive`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Derive | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -12281,26 +12209,23 @@ paths:
                   - output
   /keys/{keyId}/export:
     post:
+      summary: Export Key
       tags:
         - Keys
-      summary: " Export Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Export`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Export | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -12396,26 +12321,23 @@ paths:
                   - encryptedKeyShares
   /keys/{keyId}/signatures:
     post:
+      summary: Generate Signature
       tags:
         - Keys
-      summary: " Generate Signature"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -13908,7 +13830,7 @@ paths:
                   message: "0x49206c6f76652044666e73"
               Cip8:
                 value:
-                  network: CardanoPreview
+                  network: CardanoPreprod
                   kind: Cip8
                   payload: "0x49206c6f76652044666e73"
                   externalAad: "0x616464697469706e616c5f64617461"
@@ -15667,25 +15589,22 @@ paths:
                   - status
                   - dateRequested
     get:
+      summary: List Signatures
       tags:
         - Keys
-      summary: " List Signatures"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -17379,25 +17298,22 @@ paths:
                   - items
   /keys/{keyId}/signatures/{signatureId}:
     get:
+      summary: Get Signature
       tags:
         - Keys
-      summary: " Get Signature"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -19073,26 +18989,23 @@ paths:
                   - dateRequested
   /keys/import:
     post:
+      summary: Import Key
       tags:
         - Keys
-      summary: " Import Key"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Import`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Import | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -19193,23 +19106,22 @@ paths:
                   - dateCreated
   /networks/fees:
     get:
+      summary: Get Fees
       tags:
         - Networks
-      summary: " Get Fees"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -19420,23 +19332,22 @@ paths:
                       - baseFeePerGas
   /networks/read-contract:
     post:
+      summary: Read Contract
       tags:
         - Networks
-      summary: " Read Contract"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          No permissions required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        none
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -19482,26 +19393,23 @@ paths:
                   - data
   /networks/{network}/validators:
     post:
+      summary: Create Canton Validator
       tags:
         - Networks
-      summary: " Create Canton Validator"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Networks:CantonValidators:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Networks:CantonValidators:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -19611,14 +19519,14 @@ paths:
                   validator:
                     url: https://validator.testnet.mydomain.com/
                     oauth2:
-                      domain: https://<xxxxxx>.us.auth0.com
+                      domain: https://xxxxxx.us.auth0.com
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://canton.network.global
                   ledger:
                     url: https://ledger.testnet.mydomain.com/
                     oauth2:
-                      domain: https://<xxxxxx>.us.auth0.com
+                      domain: https://xxxxxx.us.auth0.com
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://canton.network.global
@@ -19629,16 +19537,16 @@ paths:
                   validator:
                     url: https://validator.testnet.mydomain.com/
                     oauth2:
-                      domain: https://<xxxxxx>.okta.com
-                      tokenPath: oauth2/<xxxxxx>/v1/token
+                      domain: https://xxxxxx.okta.com
+                      tokenPath: oauth2/xxxxxx/v1/token
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://validator.testnet.mydomain.com/
                   ledger:
                     url: https://ledger.testnet.mydomain.com/
                     oauth2:
-                      domain: https://<xxxxxx>.okta.com
-                      tokenPath: oauth2/<xxxxxx>/v1/token
+                      domain: https://xxxxxx.okta.com
+                      tokenPath: oauth2/xxxxxx/v1/token
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://ledger.testnet.mydomain.com/
@@ -19650,7 +19558,7 @@ paths:
                     url: https://validator.testnet.mydomain.com/
                     oauth2:
                       domain: https://my-own-server.running-keycloak.com
-                      tokenPath: /auth/realms/<xxxxx>/protocol/openid-connect/token
+                      tokenPath: /auth/realms/xxxxx/protocol/openid-connect/token
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://validator.testnet.mydomain.com/
@@ -19658,7 +19566,7 @@ paths:
                     url: https://ledger.testnet.mydomain.com/
                     oauth2:
                       domain: https://my-own-server.running-keycloak.com
-                      tokenPath: /auth/realms/<xxxxx>/protocol/openid-connect/token
+                      tokenPath: /auth/realms/xxxxx/protocol/openid-connect/token
                       clientId: xxxxxx
                       clientSecret: xxxxxxx
                       audience: https://ledger.testnet.mydomain.com/
@@ -19696,25 +19604,22 @@ paths:
                   - dateCreated
                   - partyHint
     get:
+      summary: List Canton Validators
       tags:
         - Networks
-      summary: " List Canton Validators"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Networks:CantonValidators:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Networks:CantonValidators:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -19780,26 +19685,23 @@ paths:
                   - items
   /networks/{network}/validators/{validatorId}:
     put:
+      summary: Update Canton Validator
       tags:
         - Networks
-      summary: " Update Canton Validator"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Networks:CantonValidators:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Networks:CantonValidators:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -19912,26 +19814,23 @@ paths:
                   - dateCreated
                   - partyHint
     delete:
+      summary: Delete Canton Validator
       tags:
         - Networks
-      summary: " Delete Canton Validator"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Networks:CantonValidators:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Networks:CantonValidators:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -19979,26 +19878,23 @@ paths:
                   - partyHint
   /permissions/{permissionId}/assignments:
     post:
+      summary: Create Assignment
       tags:
         - Permissions
-      summary: " Create Assignment"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Assign`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Assign | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20047,25 +19943,22 @@ paths:
                   - dateUpdated
                 additionalProperties: false
     get:
+      summary: List Assignments
       tags:
         - Permissions
-      summary: " List Assignments"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Assignments:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Assignments:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20185,26 +20078,23 @@ paths:
                   - items
   /permissions/{permissionId}/assignments/{assignmentId}:
     delete:
+      summary: Delete Assignment
       tags:
         - Permissions
-      summary: " Delete Assignment"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Revoke`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Revoke | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20229,26 +20119,23 @@ paths:
           description: Success
   /permissions/{permissionId}/archive:
     put:
+      summary: Archive Permission
       tags:
         - Permissions
-      summary: " Archive Permission"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Archive`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Archive | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20307,26 +20194,23 @@ paths:
                 additionalProperties: false
   /permissions:
     post:
+      summary: Create Permission
       tags:
         - Permissions
-      summary: " Create Permission"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -20419,6 +20303,8 @@ paths:
                           - Wallets:Transactions:Read
                           - Wallets:Transfers:Create
                           - Wallets:Transfers:Read
+                          - Wallets:Offers:Read
+                          - Wallets:Offers:Settle
                           - Webhooks:Create
                           - Webhooks:Read
                           - Webhooks:Update
@@ -20495,25 +20381,22 @@ paths:
                   - dateUpdated
                 additionalProperties: false
     get:
+      summary: List Permissions
       tags:
         - Permissions
-      summary: " List Permissions"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20658,25 +20541,22 @@ paths:
                   - items
   /permissions/{permissionId}:
     get:
+      summary: Get Permission
       tags:
         - Permissions
-      summary: " Get Permission"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -20804,26 +20684,23 @@ paths:
                           - body
                         additionalProperties: false
     put:
+      summary: Update Permission
       tags:
         - Permissions
-      summary: " Update Permission"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Permissions:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Permissions:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        User, Delegated User
       parameters:
         - schema:
             type: string
@@ -20923,6 +20800,8 @@ paths:
                           - Wallets:Transactions:Read
                           - Wallets:Transfers:Create
                           - Wallets:Transfers:Read
+                          - Wallets:Offers:Read
+                          - Wallets:Offers:Settle
                           - Webhooks:Create
                           - Webhooks:Read
                           - Webhooks:Update
@@ -20997,26 +20876,23 @@ paths:
                 additionalProperties: false
   /v2/policies/{policyId}:
     delete:
+      summary: Archive Policy
       tags:
         - Policies
-      summary: " Archive Policy"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Archive`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Archive | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -21964,25 +21840,22 @@ paths:
                       - action
                     additionalProperties: false
     get:
+      summary: Get Policy
       tags:
         - Policies
-      summary: " Get Policy"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -23915,26 +23788,23 @@ paths:
                           - body
                         additionalProperties: false
     put:
+      summary: Update Policy
       tags:
         - Policies
-      summary: " Update Policy"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -25738,26 +25608,23 @@ paths:
                     additionalProperties: false
   /v2/policy-approvals/{approvalId}/decisions:
     post:
+      summary: Create Approval Decision
       tags:
         - Policies
-      summary: " Create Approval Decision"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Approvals:Approve`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ❌ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Approvals:Approve | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -25939,6 +25806,14 @@ paths:
                                           - Fast
                                       createDestinationAccount:
                                         type: boolean
+                                      offer:
+                                        type: boolean
+                                        description: Optional field for Canton, if true it will create a transfer offer
+                                      expiresAt:
+                                        type: string
+                                        format: date-time
+                                        description: Optional field for Canton, especially useful in the context of
+                                          offers
                                       externalId:
                                         type: string
                                         minLength: 1
@@ -27193,6 +27068,28 @@ paths:
                                       - kind
                                       - userOperations
                                       - feeSponsorId
+                                    additionalProperties: false
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - SettleOffer
+                                      txHash:
+                                        type: string
+                                      decision:
+                                        type: string
+                                        enum:
+                                          - Accept
+                                          - Reject
+                                      externalId:
+                                        type: string
+                                        minLength: 1
+                                        maxLength: 50
+                                    required:
+                                      - kind
+                                      - txHash
+                                      - decision
                                     additionalProperties: false
                               status:
                                 type: string
@@ -33992,26 +33889,23 @@ paths:
                 additionalProperties: false
   /v2/policies:
     post:
+      summary: Create Policy
       tags:
         - Policies
-      summary: " Create Policy"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -35836,25 +35730,22 @@ paths:
                       - action
                     additionalProperties: false
     get:
+      summary: List Policies
       tags:
         - Policies
-      summary: " List Policies"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -37810,25 +37701,22 @@ paths:
                   - items
   /v2/policy-approvals/{approvalId}:
     get:
+      summary: Get Approval
       tags:
         - Policies
-      summary: " Get Approval"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Approvals:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Approvals:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -37993,6 +37881,14 @@ paths:
                                           - Fast
                                       createDestinationAccount:
                                         type: boolean
+                                      offer:
+                                        type: boolean
+                                        description: Optional field for Canton, if true it will create a transfer offer
+                                      expiresAt:
+                                        type: string
+                                        format: date-time
+                                        description: Optional field for Canton, especially useful in the context of
+                                          offers
                                       externalId:
                                         type: string
                                         minLength: 1
@@ -39247,6 +39143,28 @@ paths:
                                       - kind
                                       - userOperations
                                       - feeSponsorId
+                                    additionalProperties: false
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        type: string
+                                        enum:
+                                          - SettleOffer
+                                      txHash:
+                                        type: string
+                                      decision:
+                                        type: string
+                                        enum:
+                                          - Accept
+                                          - Reject
+                                      externalId:
+                                        type: string
+                                        minLength: 1
+                                        maxLength: 50
+                                    required:
+                                      - kind
+                                      - txHash
+                                      - decision
                                     additionalProperties: false
                               status:
                                 type: string
@@ -46044,25 +45962,22 @@ paths:
                 additionalProperties: false
   /v2/policy-approvals:
     get:
+      summary: List Approvals
       tags:
         - Policies
-      summary: " List Approvals"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Policies:Approvals:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Policies:Approvals:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -46259,6 +46174,14 @@ paths:
                                                 - Fast
                                             createDestinationAccount:
                                               type: boolean
+                                            offer:
+                                              type: boolean
+                                              description: Optional field for Canton, if true it will create a transfer offer
+                                            expiresAt:
+                                              type: string
+                                              format: date-time
+                                              description: Optional field for Canton, especially useful in the context of
+                                                offers
                                             externalId:
                                               type: string
                                               minLength: 1
@@ -47513,6 +47436,28 @@ paths:
                                             - kind
                                             - userOperations
                                             - feeSponsorId
+                                          additionalProperties: false
+                                        - type: object
+                                          properties:
+                                            kind:
+                                              type: string
+                                              enum:
+                                                - SettleOffer
+                                            txHash:
+                                              type: string
+                                            decision:
+                                              type: string
+                                              enum:
+                                                - Accept
+                                                - Reject
+                                            externalId:
+                                              type: string
+                                              minLength: 1
+                                              maxLength: 50
+                                          required:
+                                            - kind
+                                            - txHash
+                                            - decision
                                           additionalProperties: false
                                     status:
                                       type: string
@@ -54314,25 +54259,22 @@ paths:
                   - items
   /signers:
     get:
+      summary: List Signers
       tags:
         - Signers
-      summary: " List Signers"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Signers:ListSigners`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Signers:ListSigners | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       responses:
         "200":
           description: Success
@@ -54367,26 +54309,23 @@ paths:
                   - clusters
   /staking/stakes:
     post:
+      summary: Create Stake
       tags:
         - Staking
-      summary: " Create Stake"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -55075,25 +55014,22 @@ paths:
                     required:
                       - actions
     get:
+      summary: List Stakes
       tags:
         - Staking
-      summary: " List Stakes"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: integer
@@ -55534,26 +55470,23 @@ paths:
                   - items
   /staking/stakes/{stakeId}/actions:
     post:
+      summary: Create Stake Action
       tags:
         - Staking
-      summary: " Create Stake Action"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -56253,25 +56186,22 @@ paths:
                     required:
                       - actions
     get:
+      summary: List Stake Actions
       tags:
         - Staking
-      summary: " List Stake Actions"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -56495,25 +56425,22 @@ paths:
                   - items
   /staking/stakes/{stakeId}:
     get:
+      summary: Get Stakes
       tags:
         - Staking
-      summary: " Get Stakes"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -57144,25 +57071,22 @@ paths:
                       - actions
   /staking/stakes/{stakeId}/rewards:
     get:
+      summary: Get Stake Rewards
       tags:
         - Staking
-      summary: " Get Stake Rewards"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Stakes:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Stakes:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -57187,26 +57111,23 @@ paths:
                   - balance
   /wallets/{walletId}/transactions:
     post:
+      summary: Broadcast Transaction
       tags:
         - Wallets
-      summary: " Broadcast Transaction"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transactions:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transactions:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -57415,6 +57336,28 @@ paths:
                     - userOperations
                     - feeSponsorId
                   additionalProperties: false
+                - type: object
+                  properties:
+                    kind:
+                      type: string
+                      enum:
+                        - SettleOffer
+                    txHash:
+                      type: string
+                    decision:
+                      type: string
+                      enum:
+                        - Accept
+                        - Reject
+                    externalId:
+                      type: string
+                      minLength: 1
+                      maxLength: 50
+                  required:
+                    - kind
+                    - txHash
+                    - decision
+                  additionalProperties: false
             examples:
               Eip1559:
                 value:
@@ -57446,7 +57389,7 @@ paths:
               SignDoc:
                 value:
                   kind: SignDocDirect
-                  signDoc: 0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef...
+                  signDoc: "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
               User Operations:
                 value:
                   kind: UserOperations
@@ -57456,6 +57399,11 @@ paths:
                     - to: "0x1c7d4b196cb0c7b01d743fbc6116a902379c7238"
                       data: a9059cbb000000000000000000000000e5a2ebc128e262ab1e3bd02bffbe16911adfbffb0000000000000000000000000000000000000000000000000000000000000001
                   feeSponsorId: fs-5ercu-e9r9u-8fpqi8bvu2eah0e2
+              Settle Offer:
+                value:
+                  kind: SettleOffer
+                  decision: Accept
+                  txHash: 1220314ced784ce9da574c84eef4cf29aa86e4318c615e1fe7c7663a72c783d1913e
       responses:
         "200":
           description: Success
@@ -57774,6 +57722,28 @@ paths:
                           - userOperations
                           - feeSponsorId
                         additionalProperties: false
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
+                            enum:
+                              - SettleOffer
+                          txHash:
+                            type: string
+                          decision:
+                            type: string
+                            enum:
+                              - Accept
+                              - Reject
+                          externalId:
+                            type: string
+                            minLength: 1
+                            maxLength: 50
+                        required:
+                          - kind
+                          - txHash
+                          - decision
+                        additionalProperties: false
                   status:
                     type: string
                     enum:
@@ -57810,25 +57780,22 @@ paths:
                   - status
                   - dateRequested
     get:
+      summary: List Transactions
       tags:
         - Wallets
-      summary: " List Transactions"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transactions:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transactions:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -58173,6 +58140,28 @@ paths:
                                 - userOperations
                                 - feeSponsorId
                               additionalProperties: false
+                            - type: object
+                              properties:
+                                kind:
+                                  type: string
+                                  enum:
+                                    - SettleOffer
+                                txHash:
+                                  type: string
+                                decision:
+                                  type: string
+                                  enum:
+                                    - Accept
+                                    - Reject
+                                externalId:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 50
+                              required:
+                                - kind
+                                - txHash
+                                - decision
+                              additionalProperties: false
                         status:
                           type: string
                           enum:
@@ -58215,43 +58204,41 @@ paths:
                   - items
   /wallets:
     post:
+      summary: Create Wallet
       tags:
         - Wallets
-      summary: " Create Wallet"
+      x-mint:
+        content: >-
+          #### Required Permissions   
+
+          `Wallets:Create`: Always required   
+
+          `Keys:Create`: Required if wallet creation also creates a new [Key
+          entity](../keys/create-key). This is the default behavior.   
+
+          `Keys:Reuse`: Required if `signingKey.id` is specified. Wallet will
+          reuse an existing key instead of creating a new one.   
+
+          `Keys:Delegate`: Required if `delegateTo` is specified.   
+
+          `Wallets:Tags:Add`: Required if `tags` are specified.   
+
+          #### Token Kinds Allowed   
+
+          ✅ Access Token   
+
+          ✅ Personal Access Token   
+
+          ✅ Service Account Access Token   
+
+          #### User Kinds allowed   
+
+          ✅ User   
+
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: >-
-        #### Required Permissions
-
-
-        | Name        | Conditions   |
-
-        | ----------- | -------------|
-
-        | Wallets:Create | Always required |
-
-        | Keys:Create | Required if wallet creation also creates a new [Key
-        entity](../keys/create-key). This is the default behavior. |
-
-        | Keys:Reuse | Required if `signingKey.id` is specified. Wallet will
-        reuse an existing key instead of creating a new one. |
-
-        | Keys:Delegate | Required if `delegateTo` is specified. |
-
-        | Wallets:Tags:Add | Required if `tags` are specified. |
-
-
-        #### Token Kinds Allowed
-
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-
-        #### User Kinds allowed
-
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -58593,25 +58580,22 @@ paths:
                   - tags
                 additionalProperties: false
     get:
+      summary: List Wallets
       tags:
         - Wallets
-      summary: " List Wallets"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -58831,26 +58815,24 @@ paths:
                   - items
   /wallets/{walletId}/delegate:
     post:
+      summary: Delegate Wallet
       tags:
         - Wallets
-      summary: " Delegate Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Delegate`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Delegate | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
+      deprecated: true
       parameters:
         - schema:
             type: string
@@ -58889,26 +58871,24 @@ paths:
                   - status
   /wallets/{walletId}/export:
     post:
+      summary: Export Wallet
       tags:
         - Wallets
-      summary: " Export Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Export`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Export | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
+      deprecated: true
       parameters:
         - schema:
             type: string
@@ -59004,26 +58984,24 @@ paths:
                   - encryptedKeyShares
   /wallets/{walletId}/signatures:
     post:
+      summary: Generate Signature
       tags:
         - Wallets
-      summary: " Generate Signature"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
+      deprecated: true
       parameters:
         - schema:
             type: string
@@ -62278,25 +62256,22 @@ paths:
                   - dateRequested
                   - walletId
     get:
+      summary: List Signatures
       tags:
         - Wallets
-      summary: " List Signatures"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -63990,25 +63965,22 @@ paths:
                   - items
   /wallets/{walletId}/signatures/{signatureId}:
     get:
+      summary: Get Signature
       tags:
         - Wallets
-      summary: " Get Signature"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Signatures:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Signatures:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -65684,25 +65656,22 @@ paths:
                   - dateRequested
   /wallets/{walletId}/transactions/{transactionId}:
     get:
+      summary: Get Transaction
       tags:
         - Wallets
-      summary: " Get Transaction"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transactions:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transactions:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -66034,6 +66003,28 @@ paths:
                           - userOperations
                           - feeSponsorId
                         additionalProperties: false
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
+                            enum:
+                              - SettleOffer
+                          txHash:
+                            type: string
+                          decision:
+                            type: string
+                            enum:
+                              - Accept
+                              - Reject
+                          externalId:
+                            type: string
+                            minLength: 1
+                            maxLength: 50
+                        required:
+                          - kind
+                          - txHash
+                          - decision
+                        additionalProperties: false
                   status:
                     type: string
                     enum:
@@ -66071,25 +66062,22 @@ paths:
                   - dateRequested
   /wallets/{walletId}/transfers/{transferId}:
     get:
+      summary: Get Transfer
       tags:
         - Wallets
-      summary: " Get Transfer"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transfers:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transfers:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -66246,6 +66234,14 @@ paths:
                               - Fast
                           createDestinationAccount:
                             type: boolean
+                          offer:
+                            type: boolean
+                            description: Optional field for Canton, if true it will create a transfer offer
+                          expiresAt:
+                            type: string
+                            format: date-time
+                            description: Optional field for Canton, especially useful in the context of
+                              offers
                           externalId:
                             type: string
                             minLength: 1
@@ -67175,25 +67171,22 @@ paths:
                   - dateRequested
   /wallets/{walletId}:
     get:
+      summary: Get Wallet
       tags:
         - Wallets
-      summary: " Get Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -67375,26 +67368,23 @@ paths:
                   - custodial
                   - tags
     put:
+      summary: Update Wallet
       tags:
         - Wallets
-      summary: " Update Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -67593,25 +67583,22 @@ paths:
                 additionalProperties: false
   /wallets/{walletId}/assets:
     get:
+      summary: Get Wallet Assets
       tags:
         - Wallets
-      summary: " Get Wallet Assets"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -67887,25 +67874,22 @@ paths:
                   - assets
   /wallets/{walletId}/history:
     get:
+      summary: Get Wallet History
       tags:
         - Wallets
-      summary: " Get Wallet History"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -71153,25 +71137,22 @@ paths:
                   - type: string
   /wallets/{walletId}/nfts:
     get:
+      summary: Get Wallet Nfts
       tags:
         - Wallets
-      summary: " Get Wallet Nfts"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -71365,27 +71346,24 @@ paths:
                   - nfts
   /wallets/import:
     post:
+      summary: Import Wallet
       tags:
         - Wallets
-      summary: " Import Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Keys:Import`: Always required.   
+          `Wallets:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Keys:Import | Always required. |
-        | Wallets:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       requestBody:
         content:
           application/json:
@@ -71720,25 +71698,22 @@ paths:
                   - tags
   /wallets/{walletId}/transfers:
     get:
+      summary: List Transfers
       tags:
         - Wallets
-      summary: " List Transfers"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transfers:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transfers:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -71908,6 +71883,14 @@ paths:
                                     - Fast
                                 createDestinationAccount:
                                   type: boolean
+                                offer:
+                                  type: boolean
+                                  description: Optional field for Canton, if true it will create a transfer offer
+                                expiresAt:
+                                  type: string
+                                  format: date-time
+                                  description: Optional field for Canton, especially useful in the context of
+                                    offers
                                 externalId:
                                   type: string
                                   minLength: 1
@@ -72856,26 +72839,23 @@ paths:
                   - walletId
                   - items
     post:
+      summary: Transfer Asset
       tags:
         - Wallets
-      summary: " Transfer Asset"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Transfers:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Transfers:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`, `Delegated User`
       parameters:
         - schema:
             type: string
@@ -72909,6 +72889,14 @@ paths:
                         - Fast
                     createDestinationAccount:
                       type: boolean
+                    offer:
+                      type: boolean
+                      description: Optional field for Canton, if true it will create a transfer offer
+                    expiresAt:
+                      type: string
+                      format: date-time
+                      description: Optional field for Canton, especially useful in the context of
+                        offers
                     externalId:
                       type: string
                       minLength: 1
@@ -73784,6 +73772,14 @@ paths:
                   kind: Native
                   to: "0xe5a2ebc128e262ab1e3bd02bffbe16911adfbffb"
                   amount: "1"
+              Native Offer:
+                description: Set `offer` field to `true` to create a transfer offer. Currently
+                  only supported on Canton.
+                value:
+                  kind: Native
+                  to: dfns1::122035ead564c650e3051c6bad8e01f319b9db0acbfd2e0acf1c05baebcef16cb468
+                  amount: "100000000000"
+                  offer: true
               Native Fee Sponsor:
                 value:
                   kind: Native
@@ -74003,6 +73999,14 @@ paths:
                               - Fast
                           createDestinationAccount:
                             type: boolean
+                          offer:
+                            type: boolean
+                            description: Optional field for Canton, if true it will create a transfer offer
+                          expiresAt:
+                            type: string
+                            format: date-time
+                            description: Optional field for Canton, especially useful in the context of
+                              offers
                           externalId:
                             type: string
                             minLength: 1
@@ -74932,26 +74936,23 @@ paths:
                   - dateRequested
   /wallets/{walletId}/tags:
     put:
+      summary: Tag Wallet
       tags:
         - Wallets
-      summary: " Tag Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Tags:Add`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Tags:Add | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -74984,26 +74985,23 @@ paths:
                 type: object
                 properties: {}
     delete:
+      summary: Untag Wallet
       tags:
         - Wallets
-      summary: " Untag Wallet"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Tags:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Tags:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75033,27 +75031,927 @@ paths:
               schema:
                 type: object
                 properties: {}
-  /wallets/all/history:
+  /wallets/{walletId}/offers/{offerId}:
     get:
+      summary: Get Offer
       tags:
         - Wallets
-      summary: " List Org Wallet History"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Offers:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Wallets:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
+      parameters:
+        - schema:
+            type: string
+            pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: walletId
+          in: path
+        - schema:
+            type: string
+            pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: offerId
+          in: path
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  orgId:
+                    type: string
+                    pattern: or-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  walletId:
+                    type: string
+                    pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  network:
+                    type: string
+                    enum:
+                      - Algorand
+                      - AlgorandTestnet
+                      - Aptos
+                      - AptosTestnet
+                      - ArbitrumOne
+                      - ArbitrumGoerli
+                      - ArbitrumSepolia
+                      - AvalancheC
+                      - AvalancheCFuji
+                      - Adi
+                      - AdiTestnet
+                      - BabylonGenesis
+                      - BabylonTestnet5
+                      - Base
+                      - BaseGoerli
+                      - BaseSepolia
+                      - Berachain
+                      - BerachainBArtio
+                      - BerachainBepolia
+                      - Bitcoin
+                      - BitcoinSignet
+                      - BitcoinTestnet3
+                      - BitcoinCash
+                      - BitcoinCashTestnet
+                      - Bob
+                      - BobSepolia
+                      - Bsc
+                      - BscTestnet
+                      - Canton
+                      - CantonDevnet
+                      - CantonTestnet
+                      - Cardano
+                      - CardanoPreprod
+                      - Celo
+                      - CeloAlfajores
+                      - Codex
+                      - CodexSepolia
+                      - CosmosHub4
+                      - CosmosIcsTestnet
+                      - Dogecoin
+                      - DogecoinTestnet
+                      - Ethereum
+                      - EthereumGoerli
+                      - EthereumSepolia
+                      - EthereumHolesky
+                      - EthereumHoodi
+                      - FantomOpera
+                      - FantomTestnet
+                      - FlareC
+                      - FlareCCoston2
+                      - Hedera
+                      - HederaTestnet
+                      - InternetComputer
+                      - Ion
+                      - IonTestnet
+                      - Iota
+                      - IotaTestnet
+                      - IotaZodianet
+                      - Kaspa
+                      - KaspaTestnet11
+                      - Kusama
+                      - Litecoin
+                      - LitecoinTestnet
+                      - Near
+                      - NearTestnet
+                      - Optimism
+                      - OptimismGoerli
+                      - OptimismSepolia
+                      - Origyn
+                      - Plume
+                      - PlumeSepolia
+                      - Polkadot
+                      - Polygon
+                      - PolygonAmoy
+                      - PolygonMumbai
+                      - Polymesh
+                      - PolymeshTestnet
+                      - Race
+                      - RaceSepolia
+                      - SeiAtlantic2
+                      - SeiPacific1
+                      - Solana
+                      - SolanaDevnet
+                      - Stellar
+                      - StellarTestnet
+                      - Sui
+                      - SuiTestnet
+                      - Tezos
+                      - TezosGhostnet
+                      - Ton
+                      - TonTestnet
+                      - Tron
+                      - TronNile
+                      - Westend
+                      - XrpLedger
+                      - XrpLedgerTestnet
+                  kind:
+                    type: string
+                    enum:
+                      - Native
+                      - Aip21
+                      - Asa
+                      - Coin
+                      - Erc20
+                      - Erc721
+                      - Asset
+                      - Hip17
+                      - Hts
+                      - Sep41
+                      - Spl
+                      - Spl2022
+                      - Tep74
+                      - Trc10
+                      - Trc20
+                      - Trc721
+                  metadata:
+                    type: object
+                    properties:
+                      asset:
+                        type: object
+                        properties:
+                          symbol:
+                            type: string
+                          decimals:
+                            type: integer
+                          verified:
+                            type: boolean
+                          quotes:
+                            type: object
+                            properties:
+                              EUR: &a157
+                                type: number
+                              USD: *a157
+                    required:
+                      - asset
+                  txHash:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - Pending
+                      - Accepted
+                      - Rejected
+                      - Expired
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  value:
+                    type: string
+                    pattern: ^\d+(\.\d+)?$
+                  timestamp:
+                    type: string
+                    format: date-time
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                  - id
+                  - orgId
+                  - walletId
+                  - network
+                  - kind
+                  - metadata
+                  - txHash
+                  - status
+                  - from
+                  - to
+                  - value
+                  - timestamp
+  /wallets/{walletId}/offers:
+    get:
+      summary: List Offers
+      tags:
+        - Wallets
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Offers:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
+      security:
+        - authenticationToken: []
+      parameters:
+        - schema:
+            type: string
+            pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: walletId
+          in: path
+        - schema:
+            type: integer
+            minimum: 1
+            exclusiveMinimum: true
+            maximum: 200
+          required: false
+          name: limit
+          in: query
+        - schema:
+            type: string
+            minLength: 1
+          required: false
+          name: paginationToken
+          in: query
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                        orgId:
+                          type: string
+                          pattern: or-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                        walletId:
+                          type: string
+                          pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                        network:
+                          type: string
+                          enum:
+                            - Algorand
+                            - AlgorandTestnet
+                            - Aptos
+                            - AptosTestnet
+                            - ArbitrumOne
+                            - ArbitrumGoerli
+                            - ArbitrumSepolia
+                            - AvalancheC
+                            - AvalancheCFuji
+                            - Adi
+                            - AdiTestnet
+                            - BabylonGenesis
+                            - BabylonTestnet5
+                            - Base
+                            - BaseGoerli
+                            - BaseSepolia
+                            - Berachain
+                            - BerachainBArtio
+                            - BerachainBepolia
+                            - Bitcoin
+                            - BitcoinSignet
+                            - BitcoinTestnet3
+                            - BitcoinCash
+                            - BitcoinCashTestnet
+                            - Bob
+                            - BobSepolia
+                            - Bsc
+                            - BscTestnet
+                            - Canton
+                            - CantonDevnet
+                            - CantonTestnet
+                            - Cardano
+                            - CardanoPreprod
+                            - Celo
+                            - CeloAlfajores
+                            - Codex
+                            - CodexSepolia
+                            - CosmosHub4
+                            - CosmosIcsTestnet
+                            - Dogecoin
+                            - DogecoinTestnet
+                            - Ethereum
+                            - EthereumGoerli
+                            - EthereumSepolia
+                            - EthereumHolesky
+                            - EthereumHoodi
+                            - FantomOpera
+                            - FantomTestnet
+                            - FlareC
+                            - FlareCCoston2
+                            - Hedera
+                            - HederaTestnet
+                            - InternetComputer
+                            - Ion
+                            - IonTestnet
+                            - Iota
+                            - IotaTestnet
+                            - IotaZodianet
+                            - Kaspa
+                            - KaspaTestnet11
+                            - Kusama
+                            - Litecoin
+                            - LitecoinTestnet
+                            - Near
+                            - NearTestnet
+                            - Optimism
+                            - OptimismGoerli
+                            - OptimismSepolia
+                            - Origyn
+                            - Plume
+                            - PlumeSepolia
+                            - Polkadot
+                            - Polygon
+                            - PolygonAmoy
+                            - PolygonMumbai
+                            - Polymesh
+                            - PolymeshTestnet
+                            - Race
+                            - RaceSepolia
+                            - SeiAtlantic2
+                            - SeiPacific1
+                            - Solana
+                            - SolanaDevnet
+                            - Stellar
+                            - StellarTestnet
+                            - Sui
+                            - SuiTestnet
+                            - Tezos
+                            - TezosGhostnet
+                            - Ton
+                            - TonTestnet
+                            - Tron
+                            - TronNile
+                            - Westend
+                            - XrpLedger
+                            - XrpLedgerTestnet
+                        kind:
+                          type: string
+                          enum:
+                            - Native
+                            - Aip21
+                            - Asa
+                            - Coin
+                            - Erc20
+                            - Erc721
+                            - Asset
+                            - Hip17
+                            - Hts
+                            - Sep41
+                            - Spl
+                            - Spl2022
+                            - Tep74
+                            - Trc10
+                            - Trc20
+                            - Trc721
+                        metadata:
+                          type: object
+                          properties:
+                            asset:
+                              type: object
+                              properties:
+                                symbol:
+                                  type: string
+                                decimals:
+                                  type: integer
+                                verified:
+                                  type: boolean
+                                quotes:
+                                  type: object
+                                  properties:
+                                    EUR: &a158
+                                      type: number
+                                    USD: *a158
+                          required:
+                            - asset
+                        txHash:
+                          type: string
+                        status:
+                          type: string
+                          enum:
+                            - Pending
+                            - Accepted
+                            - Rejected
+                            - Expired
+                        from:
+                          type: string
+                        to:
+                          type: string
+                        value:
+                          type: string
+                          pattern: ^\d+(\.\d+)?$
+                        timestamp:
+                          type: string
+                          format: date-time
+                        expiresAt:
+                          type: string
+                          format: date-time
+                      required:
+                        - id
+                        - orgId
+                        - walletId
+                        - network
+                        - kind
+                        - metadata
+                        - txHash
+                        - status
+                        - from
+                        - to
+                        - value
+                        - timestamp
+                  nextPageToken:
+                    type: string
+                required:
+                  - items
+  /wallets/{walletId}/offers/{offerId}/accept:
+    put:
+      summary: Accept Offer
+      tags:
+        - Wallets
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Offers:Settle`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      parameters:
+        - schema:
+            type: string
+            pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: walletId
+          in: path
+        - schema:
+            type: string
+            pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: offerId
+          in: path
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  orgId:
+                    type: string
+                    pattern: or-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  walletId:
+                    type: string
+                    pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  network:
+                    type: string
+                    enum:
+                      - Algorand
+                      - AlgorandTestnet
+                      - Aptos
+                      - AptosTestnet
+                      - ArbitrumOne
+                      - ArbitrumGoerli
+                      - ArbitrumSepolia
+                      - AvalancheC
+                      - AvalancheCFuji
+                      - Adi
+                      - AdiTestnet
+                      - BabylonGenesis
+                      - BabylonTestnet5
+                      - Base
+                      - BaseGoerli
+                      - BaseSepolia
+                      - Berachain
+                      - BerachainBArtio
+                      - BerachainBepolia
+                      - Bitcoin
+                      - BitcoinSignet
+                      - BitcoinTestnet3
+                      - BitcoinCash
+                      - BitcoinCashTestnet
+                      - Bob
+                      - BobSepolia
+                      - Bsc
+                      - BscTestnet
+                      - Canton
+                      - CantonDevnet
+                      - CantonTestnet
+                      - Cardano
+                      - CardanoPreprod
+                      - Celo
+                      - CeloAlfajores
+                      - Codex
+                      - CodexSepolia
+                      - CosmosHub4
+                      - CosmosIcsTestnet
+                      - Dogecoin
+                      - DogecoinTestnet
+                      - Ethereum
+                      - EthereumGoerli
+                      - EthereumSepolia
+                      - EthereumHolesky
+                      - EthereumHoodi
+                      - FantomOpera
+                      - FantomTestnet
+                      - FlareC
+                      - FlareCCoston2
+                      - Hedera
+                      - HederaTestnet
+                      - InternetComputer
+                      - Ion
+                      - IonTestnet
+                      - Iota
+                      - IotaTestnet
+                      - IotaZodianet
+                      - Kaspa
+                      - KaspaTestnet11
+                      - Kusama
+                      - Litecoin
+                      - LitecoinTestnet
+                      - Near
+                      - NearTestnet
+                      - Optimism
+                      - OptimismGoerli
+                      - OptimismSepolia
+                      - Origyn
+                      - Plume
+                      - PlumeSepolia
+                      - Polkadot
+                      - Polygon
+                      - PolygonAmoy
+                      - PolygonMumbai
+                      - Polymesh
+                      - PolymeshTestnet
+                      - Race
+                      - RaceSepolia
+                      - SeiAtlantic2
+                      - SeiPacific1
+                      - Solana
+                      - SolanaDevnet
+                      - Stellar
+                      - StellarTestnet
+                      - Sui
+                      - SuiTestnet
+                      - Tezos
+                      - TezosGhostnet
+                      - Ton
+                      - TonTestnet
+                      - Tron
+                      - TronNile
+                      - Westend
+                      - XrpLedger
+                      - XrpLedgerTestnet
+                  kind:
+                    type: string
+                    enum:
+                      - Native
+                      - Aip21
+                      - Asa
+                      - Coin
+                      - Erc20
+                      - Erc721
+                      - Asset
+                      - Hip17
+                      - Hts
+                      - Sep41
+                      - Spl
+                      - Spl2022
+                      - Tep74
+                      - Trc10
+                      - Trc20
+                      - Trc721
+                  metadata:
+                    type: object
+                    properties:
+                      asset:
+                        type: object
+                        properties:
+                          symbol:
+                            type: string
+                          decimals:
+                            type: integer
+                          verified:
+                            type: boolean
+                          quotes:
+                            type: object
+                            properties:
+                              EUR: &a159
+                                type: number
+                              USD: *a159
+                    required:
+                      - asset
+                  txHash:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - Pending
+                      - Accepted
+                      - Rejected
+                      - Expired
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  value:
+                    type: string
+                    pattern: ^\d+(\.\d+)?$
+                  timestamp:
+                    type: string
+                    format: date-time
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                  - id
+                  - orgId
+                  - walletId
+                  - network
+                  - kind
+                  - metadata
+                  - txHash
+                  - status
+                  - from
+                  - to
+                  - value
+                  - timestamp
+  /wallets/{walletId}/offers/{offerId}/reject:
+    put:
+      summary: Reject Offer
+      tags:
+        - Wallets
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Offers:Settle`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ✅ Delegated User
+      security:
+        - authenticationToken: []
+          userActionSignature: []
+      parameters:
+        - schema:
+            type: string
+            pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: walletId
+          in: path
+        - schema:
+            type: string
+            pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+          required: true
+          name: offerId
+          in: path
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    pattern: offer-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  orgId:
+                    type: string
+                    pattern: or-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  walletId:
+                    type: string
+                    pattern: wa-[a-z0-9]{5}-[a-z0-9]{5}-[a-z0-9]{14,16}
+                  network:
+                    type: string
+                    enum:
+                      - Algorand
+                      - AlgorandTestnet
+                      - Aptos
+                      - AptosTestnet
+                      - ArbitrumOne
+                      - ArbitrumGoerli
+                      - ArbitrumSepolia
+                      - AvalancheC
+                      - AvalancheCFuji
+                      - Adi
+                      - AdiTestnet
+                      - BabylonGenesis
+                      - BabylonTestnet5
+                      - Base
+                      - BaseGoerli
+                      - BaseSepolia
+                      - Berachain
+                      - BerachainBArtio
+                      - BerachainBepolia
+                      - Bitcoin
+                      - BitcoinSignet
+                      - BitcoinTestnet3
+                      - BitcoinCash
+                      - BitcoinCashTestnet
+                      - Bob
+                      - BobSepolia
+                      - Bsc
+                      - BscTestnet
+                      - Canton
+                      - CantonDevnet
+                      - CantonTestnet
+                      - Cardano
+                      - CardanoPreprod
+                      - Celo
+                      - CeloAlfajores
+                      - Codex
+                      - CodexSepolia
+                      - CosmosHub4
+                      - CosmosIcsTestnet
+                      - Dogecoin
+                      - DogecoinTestnet
+                      - Ethereum
+                      - EthereumGoerli
+                      - EthereumSepolia
+                      - EthereumHolesky
+                      - EthereumHoodi
+                      - FantomOpera
+                      - FantomTestnet
+                      - FlareC
+                      - FlareCCoston2
+                      - Hedera
+                      - HederaTestnet
+                      - InternetComputer
+                      - Ion
+                      - IonTestnet
+                      - Iota
+                      - IotaTestnet
+                      - IotaZodianet
+                      - Kaspa
+                      - KaspaTestnet11
+                      - Kusama
+                      - Litecoin
+                      - LitecoinTestnet
+                      - Near
+                      - NearTestnet
+                      - Optimism
+                      - OptimismGoerli
+                      - OptimismSepolia
+                      - Origyn
+                      - Plume
+                      - PlumeSepolia
+                      - Polkadot
+                      - Polygon
+                      - PolygonAmoy
+                      - PolygonMumbai
+                      - Polymesh
+                      - PolymeshTestnet
+                      - Race
+                      - RaceSepolia
+                      - SeiAtlantic2
+                      - SeiPacific1
+                      - Solana
+                      - SolanaDevnet
+                      - Stellar
+                      - StellarTestnet
+                      - Sui
+                      - SuiTestnet
+                      - Tezos
+                      - TezosGhostnet
+                      - Ton
+                      - TonTestnet
+                      - Tron
+                      - TronNile
+                      - Westend
+                      - XrpLedger
+                      - XrpLedgerTestnet
+                  kind:
+                    type: string
+                    enum:
+                      - Native
+                      - Aip21
+                      - Asa
+                      - Coin
+                      - Erc20
+                      - Erc721
+                      - Asset
+                      - Hip17
+                      - Hts
+                      - Sep41
+                      - Spl
+                      - Spl2022
+                      - Tep74
+                      - Trc10
+                      - Trc20
+                      - Trc721
+                  metadata:
+                    type: object
+                    properties:
+                      asset:
+                        type: object
+                        properties:
+                          symbol:
+                            type: string
+                          decimals:
+                            type: integer
+                          verified:
+                            type: boolean
+                          quotes:
+                            type: object
+                            properties:
+                              EUR: &a160
+                                type: number
+                              USD: *a160
+                    required:
+                      - asset
+                  txHash:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - Pending
+                      - Accepted
+                      - Rejected
+                      - Expired
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  value:
+                    type: string
+                    pattern: ^\d+(\.\d+)?$
+                  timestamp:
+                    type: string
+                    format: date-time
+                  expiresAt:
+                    type: string
+                    format: date-time
+                required:
+                  - id
+                  - orgId
+                  - walletId
+                  - network
+                  - kind
+                  - metadata
+                  - txHash
+                  - status
+                  - from
+                  - to
+                  - value
+                  - timestamp
+  /wallets/all/history:
+    get:
+      summary: List Org Wallet History
+      tags:
+        - Wallets
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Wallets:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
+      security:
+        - authenticationToken: []
       parameters:
         - schema:
             type: string
@@ -75136,26 +76034,23 @@ paths:
                   - type: string
   /webhooks:
     post:
+      summary: Create Webhook
       tags:
         - Webhooks
-      summary: " Create Webhook"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Create`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Create | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       requestBody:
         content:
           application/json:
@@ -75179,7 +76074,7 @@ paths:
                   items:
                     anyOf:
                       - type: string
-                        enum: &a157
+                        enum: &a161
                           - policy.triggered
                           - policy.approval.pending
                           - policy.approval.resolved
@@ -75236,7 +76131,7 @@ paths:
                     items:
                       anyOf:
                         - type: string
-                          enum: *a157
+                          enum: *a161
                           description: WebhookEventKind
                         - type: string
                           enum:
@@ -75272,25 +76167,22 @@ paths:
                   - secret
                 description: Webhook
     get:
+      summary: List Webhooks
       tags:
         - Webhooks
-      summary: " List Webhooks"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: integer
@@ -75330,7 +76222,7 @@ paths:
                           items:
                             anyOf:
                               - type: string
-                                enum: *a157
+                                enum: *a161
                                 description: WebhookEventKind
                               - type: string
                                 enum:
@@ -75367,26 +76259,23 @@ paths:
                 additionalProperties: false
   /webhooks/{webhookId}:
     delete:
+      summary: Delete Webhook
       tags:
         - Webhooks
-      summary: " Delete Webhook"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Delete`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Delete | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75409,25 +76298,22 @@ paths:
                 required:
                   - deleted
     get:
+      summary: Get Webhook
       tags:
         - Webhooks
-      summary: " Get Webhook"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75454,7 +76340,7 @@ paths:
                     items:
                       anyOf:
                         - type: string
-                          enum: *a157
+                          enum: *a161
                           description: WebhookEventKind
                         - type: string
                           enum:
@@ -75485,26 +76371,23 @@ paths:
                   - dateUpdated
                 description: Webhook
     put:
+      summary: Update Webhook
       tags:
         - Webhooks
-      summary: " Update Webhook"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Update`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Update | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75529,7 +76412,7 @@ paths:
                   items:
                     anyOf:
                       - type: string
-                        enum: *a157
+                        enum: *a161
                         description: WebhookEventKind
                       - type: string
                         enum:
@@ -75563,7 +76446,7 @@ paths:
                     items:
                       anyOf:
                         - type: string
-                          enum: *a157
+                          enum: *a161
                           description: WebhookEventKind
                         - type: string
                           enum:
@@ -75595,26 +76478,23 @@ paths:
                 description: Webhook
   /webhooks/{webhookId}/ping:
     post:
+      summary: Ping Webhook
       tags:
         - Webhooks
-      summary: " Ping Webhook"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Ping`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
           userActionSignature: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Ping | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75639,25 +76519,22 @@ paths:
                 additionalProperties: false
   /webhooks/{webhookId}/events/{webhookEventId}:
     get:
+      summary: Get Webhook Event
       tags:
         - Webhooks
-      summary: " Get Webhook Event"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Events:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Events:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75687,7 +76564,7 @@ paths:
                     description: ISO date string when event was raised
                   kind:
                     type: string
-                    enum: *a157
+                    enum: *a161
                     description: Webhook event
                   data:
                     type: object
@@ -75715,25 +76592,22 @@ paths:
                 description: WebhookEvent
   /webhooks/{webhookId}/events:
     get:
+      summary: List Webhook Events
       tags:
         - Webhooks
-      summary: " List Webhook Events"
+      x-mint:
+        content: |-
+          #### Required Permissions   
+          `Webhooks:Events:Read`: Always required.   
+          #### Token Kinds Allowed   
+          ✅ Access Token   
+          ✅ Personal Access Token   
+          ✅ Service Account Access Token   
+          #### User Kinds allowed   
+          ✅ User   
+          ❌ Delegated User
       security:
         - authenticationToken: []
-      description: |-
-        #### Required Permissions
-
-        | Name        | Conditions   |
-        | ----------- | -------------|
-        | Webhooks:Events:Read | Always required. |
-
-        #### Token Kinds Allowed
-
-        `Access Token`, `Personal Access Token`, `Service Account Access Token`
-
-        #### User Kinds allowed
-
-        `User`
       parameters:
         - schema:
             type: string
@@ -75743,7 +76617,7 @@ paths:
           in: path
         - schema:
             type: string
-            enum: *a157
+            enum: *a161
           required: false
           name: kind
           in: query
@@ -75790,7 +76664,7 @@ paths:
                           description: ISO date string when event was raised
                         kind:
                           type: string
-                          enum: *a157
+                          enum: *a161
                           description: Webhook event
                         data:
                           type: object
