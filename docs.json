@@ -89,6 +89,22 @@
             ]
           },
           {
+            "group": "Platform Features",
+            "icon": "square-terminal",
+            "pages": [
+              "features/index",
+              "features/transactions",
+              "features/staking",
+              "/features/swaps",
+              "features/fee-sponsors",
+              "/features/exchanges",
+              "/features/account-abstraction-on-evms",
+              "features/aml-kyt",
+              "features/travel-rule",
+              "features/fiat-on-offboarding"
+            ]
+          },
+          {
             "group": "Core Concepts",
             "pages": [
               "core-concepts/wallets-and-keys",
@@ -110,22 +126,6 @@
                   "networks/canton-validators"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Platform Features",
-            "icon": "square-terminal",
-            "pages": [
-              "features/index",
-              "features/transactions",
-              "features/staking",
-              "/features/swaps",
-              "features/fee-sponsors",
-              "/features/exchanges",
-              "/features/account-abstraction-on-evms",
-              "features/aml-kyt",
-              "features/travel-rule",
-              "features/fiat-on-offboarding"
             ]
           },
           {
