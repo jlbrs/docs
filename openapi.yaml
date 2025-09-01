@@ -297,14 +297,20 @@ paths:
       tags:
         - Auth
       x-mint:
+        href: /api-reference/auth/user-action/create-user-action-challenge
         content: |-
-          #### Required Permissions   
+          #### Required Permissions
+
           No permissions required.   
-          #### Token Kinds Allowed   
+
+          #### Token Kinds Allowed
+
           ✅ Access Token   
           ✅ Personal Access Token   
           ✅ Service Account Access Token   
-          #### User Kinds allowed   
+
+          #### User Kinds allowed
+
           ✅ User   
           ✅ Delegated User
       security:

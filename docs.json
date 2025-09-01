@@ -96,10 +96,10 @@
               "features/index",
               "features/transactions",
               "features/staking",
-              "/features/swaps",
+              "features/swaps",
               "features/fee-sponsors",
-              "/features/exchanges",
-              "/features/account-abstraction-on-evms",
+              "features/exchanges",
+              "features/account-abstraction-on-evms",
               "features/aml-kyt",
               "features/travel-rule",
               "features/fiat-on-offboarding"
@@ -135,27 +135,27 @@
             "group": "Guides",
             "icon": "compass",
             "pages": [
-              "/guides/using-networks-testnets",
-              "/guides/permission-based-access-control",
-              "/guides/email-approval-requests-with-zapier",
+              "guides/using-networks-testnets",
+              "guides/permission-based-access-control",
+              "guides/email-approval-requests-with-zapier",
               {
                 "group": "Exchanges",
                 "pages": [
-                  "/integrations/exchanges/kraken-setup",
-                  "/integrations/exchanges/binance-setup",
-                  "/integrations/exchanges/coinbase-prime-setup"
+                  "integrations/exchanges/kraken-setup",
+                  "integrations/exchanges/binance-setup",
+                  "integrations/exchanges/coinbase-prime-setup"
                 ]
               },
               {
                 "group": "AML / KYT",
                 "pages": [
-                  "/integrations/aml-kyt/chainalysis"
+                  "integrations/aml-kyt/chainalysis"
                 ]
               },
               {
                 "group": "Travel Rule",
                 "pages": [
-                  "/integrations/travel-rule/notabene"
+                  "integrations/travel-rule/notabene"
                 ]
               },
               {
@@ -204,7 +204,7 @@
                   {
                     "group": "Advanced Topics",
                     "pages": [
-                      "/developers/advanced/key-derivation",
+                      "developers/advanced/key-derivation",
                       "developers/advanced/using-hsms",
                       "developers/advanced/on-premise-deployment",
                       "developers/advanced/keys-and-multichain-migration"
@@ -217,7 +217,7 @@
                 "icon": "browser",
                 "pages": [
                   "dashboard/overview",
-                  "/dashboard/registering-a-new-passkey-credential",
+                  "dashboard/registering-a-new-passkey-credential",
                   "dashboard/storing-webauthn-credentials-in-password-managers",
                   "dashboard/videos",
                   "dashboard/onboarding-a-new-device",
@@ -233,11 +233,11 @@
             "group": "Advanced",
             "icon": "flask-vial",
             "pages": [
-              "/advanced/delegated-signing",
-              "/advanced/interoperability",
-              "/advanced/on-premise-deployment",
-              "/advanced/hsm",
-              "/advanced/paying-dfns-with-canton-coin"
+              "advanced/delegated-signing",
+              "advanced/interoperability",
+              "advanced/on-premise-deployment",
+              "advanced/hsm",
+              "advanced/paying-dfns-with-canton-coin"
             ]
           },
           {
@@ -288,12 +288,11 @@
               }
             ]
           },
-          "/faq"
+          "faq"
         ]
       },
       {
         "tab": "API reference",
-        "openapi": "openapi.yaml",
         "icon": "code",
         "pages": [
           "api-reference/index",
@@ -310,8 +309,8 @@
               {
                 "group": "Authentication",
                 "pages": [
-                  "/api-reference/auth/index",
-                  "/api-reference/auth/flows",
+                  "api-reference/auth/index",
+                  "api-reference/auth/flows",
                   "post /auth/login/code",
                   "post /auth/login/init",
                   "post /auth/login",
@@ -348,7 +347,7 @@
               {
                 "group": "Users management",
                 "pages": [
-                  "/api-reference/auth/users",
+                  "api-reference/auth/users",
                   "get /auth/users",
                   "post /auth/users",
                   "get /auth/users/{userId}",
@@ -373,8 +372,8 @@
               {
                 "group": "Credentials",
                 "pages": [
-                  "/api-reference/auth/credentials",
-                  "/api-reference/auth/credentials-data",
+                  "api-reference/auth/credentials",
+                  "api-reference/auth/credentials-data",
                   "get /auth/credentials",
                   "post /auth/credentials/init",
                   "post /auth/credentials",
@@ -388,7 +387,7 @@
               {
                 "group": "Personal Access Tokens",
                 "pages": [
-                  "/api-reference/auth/personal-access-tokens",
+                  "api-reference/auth/personal-access-tokens",
                   "get /auth/pats",
                   "post /auth/pats",
                   "get /auth/pats/{tokenId}",
@@ -401,7 +400,7 @@
               {
                 "group": "Account recovery",
                 "pages": [
-                  "/api-reference/auth/account-recovery",
+                  "api-reference/auth/account-recovery",
                   "post /auth/recover/user/code",
                   "post /auth/recover/user/init",
                   "post /auth/recover/user/delegated",
@@ -411,7 +410,7 @@
               {
                 "group": "Service Accounts",
                 "pages": [
-                  "/api-reference/auth/service-accounts",
+                  "api-reference/auth/service-accounts",
                   "get /auth/service-accounts",
                   "post /auth/service-accounts",
                   "get /auth/service-accounts/{serviceAccountId}",
@@ -429,7 +428,7 @@
               {
                 "group": "Wallets",
                 "pages": [
-                  "/api-reference/wallets",
+                  "api-reference/wallets",
                   "get /wallets",
                   "post /wallets",
                   "get /wallets/{walletId}",
@@ -437,6 +436,7 @@
                   "get /wallets/{walletId}/assets",
                   "get /wallets/{walletId}/history",
                   "get /wallets/{walletId}/nfts",
+                  "get /wallets/all/history",
                   "post /wallets/import",
                   "post /wallets/{walletId}/delegate",
                   "post /wallets/{walletId}/export",
@@ -448,13 +448,22 @@
                       "put /wallets/{walletId}/tags",
                       "delete /wallets/{walletId}/tags"
                     ]
+                  },
+                  {
+                    "group": "Canton Wallets",
+                    "pages": [
+                      "get /wallets/{walletId}/offers",
+                      "get /wallets/{walletId}/offers/{offerId}",
+                      "put /wallets/{walletId}/offers/{offerId}/accept",
+                      "put /wallets/{walletId}/offers/{offerId}/reject"
+                    ]
                   }
                 ]
               },
               {
-                "group": "Private Keys",
+                "group": "Keys",
                 "pages": [
-                  "/api-reference/keys",
+                  "api-reference/keys",
                   "get /keys",
                   "post /keys",
                   "post /keys/{keyId}/delegate",
@@ -479,7 +488,7 @@
               {
                 "group": "Raw Transactions",
                 "pages": [
-                  "/api-reference/raw-transactions/index",
+                  "api-reference/raw-transactions/index",
                   "get /wallets/{walletId}/transactions",
                   "get /wallets/{walletId}/transactions/{transactionId}",
                   "post /wallets/{walletId}/signatures",
@@ -488,22 +497,22 @@
                   {
                     "group": "Transactions examples",
                     "pages": [
-                      "/api-reference/raw-transactions/algorand",
-                      "/api-reference/raw-transactions/aptos",
-                      "/api-reference/raw-transactions/bitcoin",
-                      "/api-reference/raw-transactions/canton",
-                      "/api-reference/raw-transactions/cardano",
-                      "/api-reference/raw-transactions/cosmos",
-                      "/api-reference/raw-transactions/evm",
-                      "/api-reference/raw-transactions/iota",
-                      "/api-reference/raw-transactions/near",
-                      "/api-reference/raw-transactions/solana",
-                      "/api-reference/raw-transactions/stellar",
-                      "/api-reference/raw-transactions/substrate",
-                      "/api-reference/raw-transactions/sui",
-                      "/api-reference/raw-transactions/tezos",
-                      "/api-reference/raw-transactions/tron",
-                      "/api-reference/raw-transactions/xrp"
+                      "api-reference/raw-transactions/algorand",
+                      "api-reference/raw-transactions/aptos",
+                      "api-reference/raw-transactions/bitcoin",
+                      "api-reference/raw-transactions/canton",
+                      "api-reference/raw-transactions/cardano",
+                      "api-reference/raw-transactions/cosmos",
+                      "api-reference/raw-transactions/evm",
+                      "api-reference/raw-transactions/iota",
+                      "api-reference/raw-transactions/near",
+                      "api-reference/raw-transactions/solana",
+                      "api-reference/raw-transactions/stellar",
+                      "api-reference/raw-transactions/substrate",
+                      "api-reference/raw-transactions/sui",
+                      "api-reference/raw-transactions/tezos",
+                      "api-reference/raw-transactions/tron",
+                      "api-reference/raw-transactions/xrp"
                     ]
                   }
                 ]
@@ -614,7 +623,8 @@
               "get /auth/apps/{appId}"
             ]
           }
-        ]
+        ],
+        "openapi": "openapi.yaml"
       },
       {
         "tab": "SDK reference",
