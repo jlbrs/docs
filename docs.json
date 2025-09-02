@@ -428,7 +428,7 @@
               {
                 "group": "Wallets",
                 "pages": [
-                  "api-reference/wallets",
+                  "api-reference/wallets/index",
                   "get /wallets",
                   "post /wallets",
                   "get /wallets/{walletId}",
@@ -443,8 +443,9 @@
                   "get /wallets/{walletId}/signatures",
                   "get /wallets/{walletId}/signatures/{signatureId}",
                   {
-                    "group": "Wallet  Tags",
+                    "group": "Wallet Tags",
                     "pages": [
+                      "api-reference/wallets/tags",
                       "put /wallets/{walletId}/tags",
                       "delete /wallets/{walletId}/tags"
                     ]
@@ -455,17 +456,7 @@
                       "get /wallets/{walletId}/offers",
                       "get /wallets/{walletId}/offers/{offerId}",
                       "put /wallets/{walletId}/offers/{offerId}/accept",
-                      "put /wallets/{walletId}/offers/{offerId}/reject",
-                      "/networks/offer",
-                  
-                  {
-                    "group": "Webhooks",
-                    "pages": [
-                      "webhook wallet.offer.received",
-                      "webhook wallet.offer.accepted",
-                      "webhook wallet.offer.rejected"
-                    ]
-                  }
+                      "put /wallets/{walletId}/offers/{offerId}/reject"
                     ]
                   }
                 ]
@@ -587,12 +578,6 @@
               "post /v2/policy-approvals/{approvalId}/decisions",
               "get /v2/policy-approvals/{approvalId}",
               "get /v2/policy-approvals"
-            ]
-          },
-          {
-            "group": "Signers",
-            "pages": [
-              "get /signers"
             ]
           },
           {

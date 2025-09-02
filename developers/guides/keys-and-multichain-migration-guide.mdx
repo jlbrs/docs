@@ -10,7 +10,7 @@ A Dfns managed key can now be used across different blockchains, as long as the 
 
 ### Keys API
 
-Existing wallets are not impacted. The [Wallets API](/api-reference/wallets) will remain mostly the same except the following endpoints, [delegate](/api-reference/keys/delegate-key), [import](/api-reference/keys/import-key), [export](/api-reference/keys/export-key) and [generate signature](/api-reference/keys/generate-signature), are deprecated and migrated to equivalent endpoints in the new [Keys API](/api-reference/keys).
+Existing wallets are not impacted. The [Wallets API](/api-reference/wallets/index) will remain mostly the same except the following endpoints, [delegate](/api-reference/keys/delegate-key), [import](/api-reference/keys/import-key), [export](/api-reference/keys/export-key) and [generate signature](/api-reference/keys/generate-signature), are deprecated and migrated to equivalent endpoints in the new [Keys API](/api-reference/keys).
 
 Creating a new wallet automatically creates a signing key in the Dfns MPC cluster. This has always been the behavior except previously the details were hidden. Now the signing key linked to wallets are exposed as `signingKey.id`.
 
