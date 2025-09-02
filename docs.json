@@ -4,7 +4,7 @@
   "name": "Dfns documentation",
   "colors": {
     "primary": "#713DFF",
-    "light": "#E1FF0B",
+    "light": "#C6B1FF",
     "dark": "#713DFF"
   },
   "description": "Dfns documentation",
@@ -21,15 +21,10 @@
     "background": "#ffffff"
   },
   "styling": {
-    "eyebrows": "breadcrumbs",
-    "codeblocks": "system"
+    "eyebrows": "breadcrumbs"
   },
   "icons": {
     "library": "fontawesome"
-  },
-  "appearance": {
-    "default": "light",
-    "strict": true
   },
   "navbar": {
     "links": [
