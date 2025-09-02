@@ -455,15 +455,15 @@
                       "get /wallets/{walletId}/offers",
                       "get /wallets/{walletId}/offers/{offerId}",
                       "put /wallets/{walletId}/offers/{offerId}/accept",
-                      "put /wallets/{walletId}/offers/{offerId}/reject"
-                    ]
-                  },
+                      "put /wallets/{walletId}/offers/{offerId}/reject",
                   {
                     "group": "Webhooks",
                     "pages": [
                       "webhook wallet.offer.received",
                       "webhook wallet.offer.accepted",
                       "webhook wallet.offer.rejected"
+                    ]
+                  }
                     ]
                   }
                 ]
