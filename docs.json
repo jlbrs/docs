@@ -456,6 +456,8 @@
                       "get /wallets/{walletId}/offers/{offerId}",
                       "put /wallets/{walletId}/offers/{offerId}/accept",
                       "put /wallets/{walletId}/offers/{offerId}/reject",
+                      "/networks/offer",
+                  
                   {
                     "group": "Webhooks",
                     "pages": [
