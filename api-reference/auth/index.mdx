@@ -1,85 +1,50 @@
 ---
-title: Introduction
-icon: 'key'
+title: Required headers
 ---
 
 To use Dfns API endpoints, you will generally need to:
 
-1. Get an authentication token (referred to as "authentication token" or "token").
-2. Sign a User Action Challenge using a cryptographic key that you own (referred to "Credential Key" or just "Credentials"). This is only required for actions which mutate state (non-readonly api calls).
+## 1. Get an authentication token
 
-<Note>
-Check [request-headers](/api-reference/request-headers) for more details about which headers are required
-</Note>
+Login and obtain an Authentication tokens (also referred to as token) to present when calling our API.
 
-## Get an authentication token
+| Header                         | Description                                                         |
+| ------------------------------ | ------------------------------------------------------------------- |
+| `Authorization: Bearer <token>` | Authentication token <br/> (see [Authentication flows](/api-reference/auth/login-flows)) |
 
-There are several ways to get an authentication token, depending on what kind of "identity" you'll be using. You can authenticate as:
+To get a token, you can either:
+* as a User (human 👨)
+    * Follow the [Login](/api-reference/auth/login-flows) flow. You'll get a authentication token at the end of this flow, which expires after a relatively short period of time.
+    * Create a [Personal Access Token](/api-reference/auth/personal-access-tokens) (PAT) [⚠️](#user-content-fn-1)[^1], which is a long-lived authentication token for the User, and that you can use as an authentication token directly. 
+* as a Service Account (machine 🤖)
+    * Create a [Service Account Token](/api-reference/auth/service-accounts) [⚠️](#user-content-fn-1)[^1], which is a long-lived authentication token for the Service Account, and that you can use as an authentication token directly.
 
-* A User (human :man:)
-* A Service Account (machine :robot:)
-
-As a User, there are two ways to get an authentication token:
-
-* Follow the [Login](/api-reference/auth/flows) flow. You'll get a authentication token at the end of this flow, which expires after a relatively short period of time.
-* Or create a [Personal Access Token](/api-reference/auth/personal-access-tokens) (PAT), which basically is a long-lived authentication token which is tied to the User and represents them. This PAT will never have more permissions than the User itself. Once you have created a PAT, you can use it as an authentication token directly.
-
-A [Service Account Token](/api-reference/auth/service-accounts) (or "Service Account") is not tied to one User, it's existence is visible across all your organisation. It is a long-lived token, and any permission can be granted to it, beyond the scope of one particular user. Once created, this Service Account can be used as an authentication token directly.
-
-<Note>
-Once generated, Dfns system do not keep a trace of your long-lived authentication tokens (Personal Access Token, or Service Account Token), only you will hold on to those. If you lose them, you'll just need to create a new one.
-</Note>
-
-Once you have an authentication token, you can add it in the headers of your API requests as an Bearer token: `Authorization: Bearer {auth_token}`.
-
-## Sign API requests (User Action Signing)
-
-Most endpoints which induce some state change in Dfns (everything that is not a GET essentially), will require you to sign the actual request, before being able to execute it. We call that "User Action Signing".
-
-We provide a couple of [User Action Signing](/api-reference/signing-flows) endpoints which handle this flow:
-
-* You tell Dfns "I want to perform this exact request"
-* Dfns sends you back a challenge to be signed with your Credential .
-* You sign the challenge with your Credentials (essentially a cryptographic key you registered), and send it to Dfns.
-* Dfns gives you back a "user action signature", which you'll need include in the headers when you perform the actual request (`X-DFNS-USERACTION` header)
-
-The credential -- essentially being a cryptographic key -- you'll need to use to sign the challenge will depend on who is calling the api (User / Service Account), see more about that below.
-
-## Credentials
-
-In order to complete the [login](/api-reference/auth) flow, or sign User Action Challenges, users need to sign "challenges" using their Credential.
-
-A Credential is essentially a public/private cryptographic keypair. The private key is held by the user, while the public key is provided to Dfns to register the credential for the user.
-
-The first time you registered on Dfns dashboard, you created a Passkey credential. You can also register additional credentials later on using our API.
-
-Different kind of Credentials can be created, depending on your use case, and how you prefer to manage them:
-
-* Fido2 Credentials (aka "Passkeys" / "WebAuthn") -> Uses WebAuthn standard to create/manage passkeys on your device (see more about that below). You can use passkeys if you need a client-side User signature (eg. in a web app / native app).
-* Key Credentials -> "manually" generate keypairs yourself, and store them however you see fit (see [How to generate a keypair](/developers/guides/generate-a-key-pair)). You can use Key Credential if you need a Service Account sitting in your server to also be the signer for example.
-
-Depending on the Identity you are using, the Credentials supported are such:
-
-| Identity                    | WebAuthn Credentials | Key Credentials |
-|-----------------------------|----------------------|-----------------|
-| User                        | ✅                    | ✅               |
-| PAT (Personal Access Token) | 🛑                   | ✅               |
-| Service Account             | 🛑                   | ✅               |
+Note: while registering a new user (see [Registration flows](/api-reference/auth/registration-flows)), the initial step will get you a temporary registration token ([example](/api-reference/auth/create-registration-challenge)) that you should use as a Bearer token in the `Authorization` header for the next step of the registration ([example](/api-reference/auth/complete-user-registration)).
 
 
-#### Passkeys
 
-Passkeys is the common term used to describe the Fido2 standard called "WebAuthn". It is a web authentication standard supported by most modern browsers, phones and devices, which leverages your devices key-management features (like touch ID on a mac, a phone authenticator, a yubikey, some password managers support creating and storing passkeys, etc).
+[^1]: ⚠️ Once generated, Dfns system do not keep a trace of your Service Account Token or your Personal Access Token, only
+  you will hold on to those. If you lose them, you'll just need to create a new
+  one.
 
-Those passkeys can then be used by the user to sign payloads when needed. Here's some screenshots with some examples of WebAuthn prompts shown in your browser during Credential creation, or during Signing using those Credentials.
 
-![](/images/spaces_tnSPOZGQ2hBmgoVWX5H6_uploads_git-blob-54add556211f11befd5047b874bbd9c5cb3d2ece_image.webp)
+## 2. Sign API requests (User Action Signing)
 
-Below is an example of the promps a user can see on a web app, when a challenge needs to be signed with the passkey: it's asking the user for his biometrics (fingerprint) before using the passkey to sign.
+Sign a User Action Challenge using a cryptographic key that you own (referred to Credential Key or just Credentials). This is only required for actions which mutate state (non-readonly API calls). We call that process: "User Action Signing".
 
-![](/images/spaces_tnSPOZGQ2hBmgoVWX5H6_uploads_git-blob-580cad85aaff8b8fb161334ae93d3f01d240dc35_image.webp)
+| Header                                      | Description                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------- |
+| `X-DFNS-USERACTION: <user-action-signature>` | One time signature <br/> (see [User Action Signing flows](/api-reference/auth/signing-flows)) |
 
-<Note>
-You can read more about WebAuthn on [webauthn.guide](https://webauthn.guide/), and if you want you can test a WebAuthn demo on [webauthn.io](https://webauthn.io/)
-</Note>
 
+
+To obtain that signature, you need to follow the [User Action Signing flows](/api-reference/auth/signing-flows):
+
+1. You tell Dfns "I want to perform this exact request"
+2. Dfns sends you back a challenge to be signed with your Credential.
+3. You sign the challenge with your Credentials, and send it to Dfns.
+4. Dfns gives you back a "user action signature", which you'll need include in the headers when you perform the actual request (`X-DFNS-USERACTION` header)
+
+The credential -- essentially being a cryptographic key -- you'll need to use to sign the challenge will depend on who is calling the api (User / Service Account), see more about that on the [dedicated page](/advanced/credentials).
+
+-----

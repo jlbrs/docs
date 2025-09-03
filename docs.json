@@ -239,6 +239,7 @@
             "group": "Advanced",
             "icon": "flask-vial",
             "pages": [
+              "advanced/credentials",
               "advanced/delegated-signing",
               "advanced/interoperability",
               "advanced/on-premise-deployment",
@@ -305,18 +306,18 @@
           "api-reference/environments",
           "api-reference/core-objects",
           "api-reference/error-codes",
-          "api-reference/request-headers",
           "api-reference/idempotency",
           "api-reference/rate-limits",
           "api-reference/postman-collection",
           {
-            "group": "API Authorization headers",
+            "group": "API Authorization",
+            "icon": "key",
             "pages": [
+                  "api-reference/auth/index",
               {
                 "group": "Authentication",
                 "pages": [
-                  "api-reference/auth/index",
-                  "api-reference/auth/flows",
+                  "api-reference/auth/login-flows",
                   "post /auth/login/code",
                   "post /auth/login/init",
                   "post /auth/login",
@@ -328,7 +329,7 @@
               {
                 "group": "User Action Signature",
                 "pages": [
-                  "api-reference/signing-flows",
+                  "api-reference/auth/signing-flows",
                   "post /auth/action/init",
                   "post /auth/action"
                 ]
@@ -341,7 +342,7 @@
               {
                 "group": "Registration",
                 "pages": [
-                  "api-reference/registration-flows",
+                  "api-reference/auth/registration-flows",
                   "post /auth/registration/init",
                   "post /auth/registration/delegated",
                   "post /auth/registration/social",

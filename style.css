@@ -218,6 +218,28 @@ a.link:not(.nav-tabs-item),
     }
 }
 
+/* nested list, to change the bullet style for 2nd level in the list */
+#content-area ul>li {
+    & li:before {
+        background-color: rgb(var(--background-light));
+        border-color: #160c32;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+    & li:is(.dark *):before {
+        background-color: rgb(var(--background-dark));
+        border-color: rgb(var(--gray-400));
+    }
+}
+
+/* hide the base URL in the API endpoint pages */
+div:has(+ .tryit-button)>:nth-child(2) {
+    &>:first-child {
+        display: none;
+    }
+}
+
 /* Put the card icon (in horizontal card setup) at the top */
 .card>.flex>div[data-component-part="card-icon"] {
     align-self: start;
@@ -235,7 +257,7 @@ a.link:not(.nav-tabs-item),
     font-size: large;
 
     &:is(.dark *) {
-        background-color: rgb(var(--gray-900));
+        background-color: rgb(var(--gray-600));
     }
 }
 
