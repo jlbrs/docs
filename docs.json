@@ -138,6 +138,10 @@
               "guides/permission-based-access-control",
               "guides/email-approval-requests-with-zapier",
               {
+                "group": "Setting up integrations",
+                "icon": "circles-overlap",
+                "pages": [
+                  {
                 "group": "Exchanges",
                 "pages": [
                   "integrations/exchanges/kraken-setup",
@@ -156,9 +160,12 @@
                 "pages": [
                   "integrations/travel-rule/notabene"
                 ]
+              }
+                ]
               },
+              
               {
-                "group": "Developer Guides",
+                "group": "Developers Guides",
                 "icon": "code",
                 "pages": [
                   "developers/index",

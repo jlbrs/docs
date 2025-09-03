@@ -14,7 +14,7 @@ body {
 }
 
 
-/* Table of contents box styling ("On this page") */
+/* Table of contents box styling ("On this page" box) */
 #table-of-contents-layout:has(div) {
     border: 1px solid rgb(var(--gray-200));
     background-color: #fcfcfc;
@@ -34,25 +34,15 @@ body {
     }
 }
 
-/* #navbar {
-    background: #fffff2;
-} */
-
-/* footer {
-    margin-top: 2rem;
-} */
-
+/* Sidebar content styling */
 #sidebar-content {
     background-color: #fcfcfc;
-} 
 
-.dark #sidebar-content {
-    background-color: #151417;
+    &:is(.dark *) {
+        background-color: #151417;
+    }
 }
 
-/* .tracking-tight {
-    letter-spacing: 0.02rem;
-} */
 
 h1,
 h2,
@@ -78,6 +68,7 @@ h6 {
 #content-area table td {
     border: 1px solid rgb(var(--gray-200));
     padding: 0.5rem 1rem;
+
     &:is(.dark *) {
         border: 1px solid rgb(var(--gray-600));
     }
@@ -88,6 +79,7 @@ h6 {
     background-color: rgb(var(--gray-200));
     font-weight: bold;
     vertical-align: middle;
+
     &:is(.dark *) {
         background-color: rgb(var(--gray-600));
     }
@@ -95,17 +87,11 @@ h6 {
 
 #content-area table tr:nth-child(even) {
     background-color: #f9f9fb;
+
     &:is(.dark *) {
         background-color: rgb(var(--gray-900));
     }
 }
-
-/*
-#navigation-items {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-*/
 
 /* This is for aligning the METHOD (POST GET etc) with the icons in the sidebar menu */
 #sidebar-content li>a:has(:nth-child(2))> :first-child {
@@ -113,18 +99,66 @@ h6 {
     flex-basis: 2rem;
 }
 
-/* Left alignment for sub-menu items in the sidebar */
-#sidebar-content ul>li>ul>li>a {
-    padding-left: 2rem !important;
+/* Left alignment for sidebar items */
+#sidebar-content ul#sidebar-group {
+
+    /* all level 1 items (Level 1 = always visible) */
+    &>li {
+
+        /* level 1 - only sub-group (level 2) headers */
+        &[data-group-tag]>div {
+            margin-left: -18px;
+            padding-left: 16px !important;
+        }
+
+        /* all level 2 items */
+        &>ul>li {
+            margin-left: 1.5px;
+
+            /* level 2 - only pages */
+            &>a {
+                padding-left: 13.5px !important;
+            }
+
+            /* level 2 - only sub-group (level 3) headers */
+            &[data-group-tag]>div {
+                padding-left: 13.5px !important;
+            }
+
+            /* all level 3 items (consider there are only pages at that level, we shouldn't go to Level 4 sub menus!) */
+            &>ul>li {
+                margin-left: 17.5px;
+
+                /* level 3 - only pages */
+                &>a {
+                    padding-left: 13.5px !important;
+                }
+            }
+
+        }
+
+        /* Left border gray, and primary when selected */
+        & li {
+            border-left: 1px solid rgb(var(--gray-300));
+
+            &:is(.dark *) {
+                border-color: rgb(var(--gray-600));
+            }
+
+            &:has(>a.font-semibold) {
+                border-color: rgb(var(--primary));
+
+                &:is(.dark *) {
+                    border-color: rgb(var(--primary-light));
+                }
+            }
+        }
+    }
 }
 
-/* Left alignment for sub-menu items in the sidebar */
-#sidebar-content ul>li>ul>li>a {
-    padding-left: 2rem !important;
-}
-
-/* Sidebar links hover effect */
-#sidebar-content a:hover {
+/* Sidebar links hover effect, data-group-tag is for the sub-groups headers */
+#sidebar-content a:hover,
+#sidebar-content [data-group-tag]>div:hover {
     background-color: #f2f2f4;
 
     &:is(.dark *) {
@@ -149,12 +183,6 @@ h6 {
 .callout strong {
     color: inherit
 }
-
-/* Left alignment for sub-menu items in the sidebar */
-/* #sidebar-content ul>li>a {
-    font-weight: 300;
-
-} */
 
 /* pages description (1st paragraph under the title) */
 #content-area header>.text-lg {
@@ -190,21 +218,10 @@ a.link:not(.nav-tabs-item),
     }
 }
 
-/*
-.card .block {
-
-    border-bottom: 1px solid rgb(var(--gray-200));;
-
-} */
-
 /* Put the card icon (in horizontal card setup) at the top */
 .card>.flex>div[data-component-part="card-icon"] {
     align-self: start;
 }
-
-/* .hover\:\!border-primary:hover {
-    border-color: #94a0bc !important;
-} */
 
 /* Dfns logo bigger */
 .nav-logo {
@@ -252,20 +269,8 @@ h4#user-kinds-allowed {
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: rgb(var(--gray-600));
+
     &:is(.dark *) {
         color: rgb(var(--gray-400));
     }
 }
-
-/*
-.max-w-8xl {
-    max-width: 100%;
-}
-
-.peer.is-not-custom~.peer-\[\.is-not-custom\]\:max-w-8xl {
-    // max-width: 100%;
-}
-.peer.is-not-custom~.peer-\[\.is-not-custom\]\:lg\:px-5 {
-    padding-left: 0;
-    padding-right: 0;
-} */
