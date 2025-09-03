@@ -16,13 +16,11 @@ This registration process includes registering the user's authentication method.
 
 ## Regular users registration flow
 <Steps>
-<Step title="Send a registration code">
+<Step title="Invite the user">
 
-Use <Put>/auth/registration/code</Put> to send a registration code to the user.
+If you are running an existing organization, then you need to invite the new user to join you. Use <Post>/auth/users</Post>([Create User](/api-reference/auth/create-user)) to add the new users. They will receive an email from Dfns with a registration code they will need to provide in the next step.
 
-Your user receives an email from Dfns with a registration code they will need to provide in the next step.
-
-See [Send Registration Code](/api-reference/auth/send-registration-code) for more details.
+If you have done that before and the code has expired, you can use <Put>/auth/registration/code</Put>([Resend Registration Code](/api-reference/auth/resend-registration-code)) to send a new registration code. 
 
 </Step>
 <Step title="Create a user registration challenge">
@@ -40,7 +38,7 @@ Depending on the type of credentials being used, the challenge can be signed in 
 </Step>
 <Step title="Complete the user registration">
 
-Use <Post>/auth/registration</Post>  : [Register](/api-reference/auth/register).
+Use <Post>/auth/registration</Post>  : [Register](/api-reference/auth/complete-user-registration).
 
 Here you will register an authentication method, and send the previous challenge with a signature.
 
@@ -98,7 +96,7 @@ When the user has completed the creation, you obtain the signed challenge in ret
 
 <Step title="Complete the registration">
 Finally, you can either call:
-* <Post>/auth/registration</Post> : the [Register](/api-reference/auth/register) endpoint to complete the user's registration: 
-* <Post>/auth/registration/enduser</Post> : the [Register End User](/api-reference/auth/register-end-user) endpoint to complete the registration and create wallets for that user in one go: 
+* <Post>/auth/registration</Post> : the [Register](/api-reference/auth/complete-user-registration) endpoint to complete the user's registration: 
+* <Post>/auth/registration/enduser</Post> : the [Register End User](/api-reference/auth/complete-end-user-registration-with-wallets) endpoint to complete the registration and create wallets for that user in one go: 
 </Step>
 </Steps>

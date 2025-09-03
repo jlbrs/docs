@@ -11,8 +11,9 @@ Make sure you go through our [core objects documentation](/api-reference/core-ob
 
 ## Authentication
 
-This is a key aspect of working with the Dfns API. You'll need to include a token in the headers of your requests to authenticate to all APIs, but also to sign change-inducing requests.
-We use passkeys to replace passwords, and you can read all about it in our [authentication documentation](/advanced-topics/authentication).
+This is a key aspect of working with the Dfns API. You'll need to include a token in the headers of your requests to authenticate to all APIs, but also to sign change-inducing requests. See the [API Authorization](/api-reference/auth) documentation for more details. 
+
+We use passkeys to replace passwords, you can read all about it in our [credentials documentation](/advanced/credentials).
 
 ## API format & HTTP headers
 
@@ -23,11 +24,3 @@ To ensure correct processing of API calls, please follow these conventions
 | _Content-type_ | `application/json`    |
 | _User-agent_   | `<must not be empty>` |
 
-
-
-## Rate Limits
-
-Today, current rate limit on our API for a Dfns organisation is:
-
-* if your organisation is on Trial:  100 req/min
-* otherwise:  1000 req/min

@@ -68,7 +68,7 @@ cd examples/sdk/nextjs-delegated/
   </Step>
 
   <Step title="Delegated registration">
-    The service account can use [delegated registration](/api-reference/registration-flows#delegated-users-registration-flow) to register an end user (a.k.a. one of your customers) to Dfns.  Registering this user to your platform and validating his login is out of scope here, we just consider that you have properly authenticated your user before creating his Dfns account.  The flow is similar to users registration:
+    The service account can use [delegated registration](/api-reference/auth/registration-flows#delegated-users-registration-flow) to register an end user (a.k.a. one of your customers) to Dfns.  Registering this user to your platform and validating his login is out of scope here, we just consider that you have properly authenticated your user before creating his Dfns account.  The flow is similar to users registration:
     1. Requesting a challenge from Dfns.  Note that the username comes from the frontend in this example, but it doesn't have to, you could be providing it directly from your backend. 
     <CodeBlock title="[Backend] app/api/register/init/route.ts" lang="typescript">
       {`const client = apiClient()

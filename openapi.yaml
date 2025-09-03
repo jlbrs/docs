@@ -4644,8 +4644,8 @@ paths:
 
         On successful creation, the user's registration challenge will be
         returned. You will then need to call [Complete User
-        Registration](/api-reference/auth/register) or [Complete End User
-        Registration with Wallets](/api-reference/auth/register-end-user) to
+        Registration](/api-reference/auth/complete-user-registration) or [Complete End User
+        Registration with Wallets](/api-reference/auth/complete-end-user-registration-with-wallets) to
         complete the user's registration.
       x-mint:
         content: |-

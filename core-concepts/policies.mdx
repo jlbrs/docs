@@ -58,7 +58,7 @@ Policies do not cover delegated wallets owned by the end users. Because [delegat
 A "`Wallets:Sign`" activity represents any activity which involves signing with a wallet. Currently, in our API, these can be:
 
 * a Transfer Request (created using the endpoint [Transfer Asset from Wallet](/api-reference/wallets/transfer-asset))
-* a Transaction Request (created using the endpoint [Broadcast Transaction from Wallet](/api-reference/wallets/broadcast-transaction))
+* a Transaction Request (created using the endpoint [Broadcast Transaction from Wallet](/api-reference/wallets/sign-and-broadcast-transaction))
 * a Signature Request (created using the endpoint [Generate Signature from Keys](/api-reference/keys/generate-signature))
 
 ### `Wallets:IncomingTransaction` activity
@@ -76,8 +76,8 @@ A "`Permissions:Modify`" activity represents any activity which involves updatin
 
 A "`Permissions:Assign`" activity represents any activity which involves assigning a permission (or revoking it, aka "deleting a permission assignment"). These activities are Assignment change requests, created as a result of calling either:
 
-* the endpoint [Assign Permission](/api-reference/permissions/create-assignment)
-* the endpoint [Revoke Permission](/api-reference/permissions/delete-assignment)
+* the endpoint [Assign Permission](/api-reference/permissions/assign-permission)
+* the endpoint [Revoke Permission](/api-reference/permissions/revoke-permission)
 
 ### `Policies:Modify` activity
 

@@ -58,11 +58,11 @@ We plan to add support for more blockchain networks over time. The supported fea
 
 ### Tier-1 blockchain networks
 
-Tier-1 blockchain networks support all wallet features, including automatic detection of wallet [asset](/api-reference/wallets/get-wallet-assets) and [NFT](/api-reference/wallets/get-wallet-nfts) balances if applicable, and on-chain asset transfer [history](/api-reference/wallets/get-wallet-history). Tier-1 support also include [transfer asset](/api-reference/wallets/transfer-asset), [broadcast transaction](/api-reference/wallets/broadcast-transaction) and [generate signature](/api-reference/keys/generate-signature). Tier-1 chains also support [Webhooks](/developers/webhooks) driven by chain indexing.
+Tier-1 blockchain networks support all wallet features, including automatic detection of wallet [asset](/api-reference/wallets/get-wallet-assets) and [NFT](/api-reference/wallets/get-wallet-nfts) balances if applicable, and on-chain asset transfer [history](/api-reference/wallets/get-wallet-history). Tier-1 support also include [transfer asset](/api-reference/wallets/transfer-asset), [broadcast transaction](/api-reference/wallets/sign-and-broadcast-transaction) and [generate signature](/api-reference/keys/generate-signature). Tier-1 chains also support [Webhooks](/developers/webhooks) driven by chain indexing.
 
 ### Tier-2 blockchain networks
 
-Tier-2 blockchain networks do not track tokens or on-chain history. Only the [balance](/api-reference/wallets/get-wallet-assets) of the native token, which is used to pay transaction fees, is returned. Tier-2 support includes [Broadcast Transaction](/api-reference/wallets/broadcast-transaction), [Generate Signature](/api-reference/keys/generate-signature), and Transfer Asset for native chain cryptocurrency only. Webhooks are not available for Tier-2 chains.
+Tier-2 blockchain networks do not track tokens or on-chain history. Only the [balance](/api-reference/wallets/get-wallet-assets) of the native token, which is used to pay transaction fees, is returned. Tier-2 support includes [Broadcast Transaction](/api-reference/wallets/sign-and-broadcast-transaction), [Generate Signature](/api-reference/keys/generate-signature), and Transfer Asset for native chain cryptocurrency only. Webhooks are not available for Tier-2 chains.
 
 ## Footnotes
 
