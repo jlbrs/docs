@@ -34,15 +34,6 @@ body {
     }
 }
 
-/* Sidebar content styling */
-#sidebar-content {
-    background-color: #fcfcfc;
-
-    &:is(.dark *) {
-        background-color: #151417;
-    }
-}
-
 
 h1,
 h2,
@@ -90,6 +81,16 @@ h6 {
 
     &:is(.dark *) {
         background-color: rgb(var(--gray-900));
+    }
+}
+
+
+/* Sidebar content styling */
+#sidebar-content {
+    background-color: #f4f5fa;
+
+    &:is(.dark *) {
+        background-color: #151417;
     }
 }
 
@@ -159,7 +160,8 @@ h6 {
 /* Sidebar links hover effect, data-group-tag is for the sub-groups headers */
 #sidebar-content a:hover,
 #sidebar-content [data-group-tag]>div:hover {
-    background-color: #f2f2f4;
+    background-color: #e9e9f6;
+    border-radius: .25rem;
 
     &:is(.dark *) {
         background-color: #1e1e1e;
