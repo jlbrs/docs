@@ -16,19 +16,13 @@ Once a recovery credential is used, all the user credentials (recovery and regul
 
 The process is as follows:
 
-1. Construct the `newCredential` object, using the challenge obtained from either the [Create Recovery Challenge](/api-reference/auth/create-recovery-challenge) or [Create Delegated Recovery Challenge](/api-reference/auth/create-delegated-recovery-challenge) API.
+1. Construct the `newCredential` object, using the challenge obtained from either the [Create Recovery Challenge](/api-reference/auth/create-recovery-challenge) endpoint.
 2. Serialize the `newCredential` object to JSON and then base64url-encode the resulting JSON string. This _base64url-encoded_ string will serve as the challenge for the `recovery.credentialAssertion` object.
 3. Construct the `recovery.credentialAssertion` object, using the _base64url-encoded_ string generated in step 2 as its challenge.
+4. Recover User: use `POST /auth/recover/user` to recover a user, using a recovery credential. The `recovery.credentialAssertion.clientData` field's challenge must be the _base64url-encoded_ representation of the `newCredential` object.
 
+After successfully recovering the user, all of the user's previous credentials and personal access tokens will be invalidated.
 
-
-# Recover User
-
-`POST /auth/recover/user`
-
-Recovers a user, using a recovery credential. After successfully recovering the user, all of the user's previous credentials and personal access tokens will be invalidated.
-
-This flow requires cryptographic validation of newly created credential(s) using a recovery credential. The `recovery.credentialAssertion.clientData` field's challenge must be the _base64url-encoded_ representation of the `newCredential` object.
 
 ## End User Recovery
 
@@ -37,10 +31,10 @@ You can decide where in your UX flow to create recovery credentials for your end
 Here are the general steps required to perform an end-user recovery:
 
 * Verify the identity of your user via your existing authentication methods, KYC, etc.
-* Call the [delegated recovery](/api-reference/auth/recover) endpoint from a service account (`DfnsApiClient.auth.createDelegatedUserRecovery` in the SDK).
+* Call the [Create Delegated Recovery Challenge](/api-reference/auth/create-delegated-recovery-challenge) endpoint from a service account (`DfnsApiClient.auth.createDelegatedUserRecovery` in the SDK).
 * Dfns generates a new registration context, so that you can create the user’s new credentials.  Forward this to your user.
 * The user creates a new credential (and optional new recovery credential)
-* The user signs the new credential(s) with their existing recovery credential, and sends the new credential(s) + signature to Dfns to [Recover User](/api-reference/auth/recover/user) endpoint (`DfnsDelegatedApiClient.auth.createUserRecovery` in the SDK)
+* The user signs the new credential(s) with their existing recovery credential, and sends the new credential(s) + signature to Dfns to [Recover](/api-reference/auth/recover) endpoint (`DfnsDelegatedApiClient.auth.createUserRecovery` in the SDK)
 * Dfns verifies the signature is valid
 * Dfns archives all of the user’s current credentials (regular + recovery)
 * Dfns adds the user’s new credentials
