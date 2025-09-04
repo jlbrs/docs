@@ -601,7 +601,7 @@
           {
             "group": "Webhook Configuration",
             "pages": [
-              "api-reference/endpoints/webhooks/index",
+              "api-reference/webhooks",
               "get /webhooks",
               "post /webhooks",
               "get /webhooks/{webhookId}",

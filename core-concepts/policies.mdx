@@ -70,7 +70,7 @@ A "`Wallets:IncomingTransaction`" activity represents when our indexers detected
 A "`Permissions:Modify`" activity represents any activity which involves updating or archiving a permission. These activities are Permission change requests, created as a result of calling either:
 
 * the endpoint [Update Permission](/api-reference/permissions/update-permission)
-* the endpoint [Archive Permission](/api-reference/permissions/archive-permission)
+* the endpoint [Delete Permission](/api-reference/permissions/delete-permission)
 
 ### `Permissions:Assign` activity
 
@@ -84,7 +84,7 @@ A "`Permissions:Assign`" activity represents any activity which involves assigni
 A "`Policies:Modify`" activity represents any activity which involves updating or archiving a policy. These activities are Policy change requests, created as a result of calling either:
 
 * the endpoint [Update Policy](/api-reference/policies/update-policy)
-* the endpoint [Archive Policy](/api-reference/policies/archive-policy)
+* the endpoint [Delete Policy](/api-reference/policies/delete-policy)
 
 Every policy requires a rule to be specified. Upon policy evaluation, the configuration specified in the rule will be used to determine whether the policy should trigger or not for a given activity. &#x20;
 
