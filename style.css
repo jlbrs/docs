@@ -248,8 +248,13 @@ div:has(+ .tryit-button)>:nth-child(2) {
 }
 
 /* Put the card icon (in horizontal card setup) at the top */
-.card>.flex>div[data-component-part="card-icon"] {
+.card {
+    &>.flex>div[data-component-part="card-icon"] {
     align-self: start;
+    }
+    & div[data-component-part="card-icon"]>svg {
+        background-color: rgb(var(--gray-600));
+    }
 }
 
 /* Dfns logo bigger */

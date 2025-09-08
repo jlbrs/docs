@@ -643,6 +643,7 @@
           },
           {
             "group": "Go",
+            "tag": "Beta",
             "pages": [
               "sdks/go/index",
               "sdks/go/development",
@@ -651,6 +652,7 @@
           },
           {
             "group": "Flutter",
+            "tag": "Beta",
             "pages": [
               "sdks/flutter/index",
               "sdks/flutter/development",
@@ -659,6 +661,7 @@
           },
           {
             "group": "Kotlin",
+            "tag": "Beta",
             "pages": [
               "sdks/kotlin/index",
               "sdks/kotlin/development",
@@ -667,6 +670,7 @@
           },
           {
             "group": "Swift",
+            "tag": "Beta",
             "pages": [
               "sdks/swift/index",
               "sdks/swift/development",
@@ -674,19 +678,9 @@
             ]
           },
           {
-            "group": "Rust",
-            "pages": [
-              "sdks/rust/index",
-              "sdks/rust/development",
-              "sdks/rust/examples"
-            ]
-          },
-          {
             "group": "Python",
             "pages": [
-              "sdks/python/index",
-              "sdks/python/development",
-              "sdks/python/examples"
+              "sdks/python/index"
             ]
           }
         ]

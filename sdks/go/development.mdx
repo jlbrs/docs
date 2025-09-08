@@ -1,95 +1,103 @@
 ---
 title: 'Development'
-description: 'Preview changes locally to update your docs'
-tag: To do
 ---
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+## Concepts
 
-Follow these steps to install and run Mintlify on your operating system.
+### `CredentialSigner`
 
-<Steps>
-<Step title="Install the Mintlify CLI">
+All state-changing requests made to the Dfns API need to be cryptographically signed by credentials registered with the User/Service Account.
 
-```bash
-npm i -g mint
-```
-</Step>
+> **Note:** To be more precise, it's not the request itself that needs to be signed, but rather a "User Action Challenge" issued by Dfns. For simplicity, we refer to this process as "request signing".
 
-<Step title="Preview locally">
+This request signature serves as cryptographic proof that only authorized entities are making the request. Without it, the request would result in an Unauthorized error.
 
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
+Credentials currently support only Key Credentials (_refer to our [API documentation](https://docs.dfns.co/dfns-docs/getting-started/authentication-authorization#credentials) for more details_). Key Credentials are responsible for signing the challenge.
 
-```bash
-mint dev
-```
+#### `AsymmetricKeySigner`
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+This functionality is exposed in the `credential` repository. It is primarily intended for server-side use. Although it could be employed client-side, we don't recommend it. In a browser context, any key-based crypto signing should be handled within a service worker. We are actively working on additional helper classes to facilitate this support.
 
-</Step>
-</Steps>
+```golang
+import (
+  .....
+	"github.com/dfns/dfns-sdk-go/credentials"
+)
 
-## Custom ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
-
-```bash
-mint dev --port 3333
+conf := &credentials.AsymmetricKeySignerConfig{
+		PrivateKey: os.Getenv("DFNS_PRIVATE_KEY"), // Credential private key
+		CredId:     os.Getenv("DFNS_CRED_ID"),     // Credential Id
+	}
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+- `credential Id`: ID of the Credential registered with the auth token you’re using (Personal Access Token, or Service Account Token). In Dfns dashboard, you can find it next to your token (in `Settings` > `My Access Tokens` or `Settings > Service Accounts`)
+- `Private Key`: private key (in .pem format) which only you have, associated with the public key you registered when you created your PAT / Service Account.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
+### `DfnsApiClient`
+
+`DfnsApiClient` is the main Dfns client, holding most supported functionalities of Dfns API.
+
+It needs to be authenticated, so `DfnsApiClient` needs to be passed a valid `authToken`. This `authToken` can be:
+
+- a Service Account token - _long-lived_
+- a User Personal Access Token (PAT) - _long-lived_
+- a User token issued after on User login - _expires_
+
+`DfnsApiClient` also needs to be passed a [CredentialSigner](#credentialsigner), in order to sign requests.
+
+The `DfnsApiClient` provides a single function that creates a http client -> `CreateDfnsApiClient`
+The http.Client returned will handle all the authentification process.
+
+When the user performs a `POST, PUT or DELETE` using the client, it will automatically perform a `useraction` process (aka challenge signing).
+If for a `POST, PUT or DELETE` endpoint, the `useraction` is not required, you should provide the header:
+
+`x-dfns-useraction` to `false`. Doing that, it indicates the client to skip the challenge signing.
+
+Please refer to the [Dfns API Docs](https://docs.dfns.co) to know which endpoints need a user action.
+
+_Note: You can include a context directly in your httprequest if you want some control on shutdown logic_
+
+```golang
+import (
+  .....
+	api "github.com/dfns/dfns-sdk-go/dfnsapiclient"
+	"github.com/dfns/dfns-sdk-go/credentials"
+)
+
+signer := ... // a Credential Signer (webauthN or key signer from section above)
+
+// Create a DfnsApiClient instance
+apiOptions, err := api.NewDfnsBaseApiOptions(&api.DfnsBaseApiConfig{
+	OrgId:     os.Getenv("DFNS_ORG_ID"),     // ID of the Dfns Organisation
+	AuthToken: os.Getenv("DFNS_AUTH_TOKEN"), // an auth token
+	BaseUrl:   os.Getenv("DFNS_API_URL"),    // base Url of DFNS API
+}, signer)
+if err != nil {
+	fmt.Printf("Error creating DfnsApiOptions: %s", err)
+	return
+}
+
+dfnsClient := api.CreateDfnsApiClient(apiOptions)
+
+// Create wallet
+walletData := struct {
+		Network string `json:"network"`
+	}{
+		Network: "EthereumGoerli",
+	}
+
+jsonData, err := json.Marshal(walletData)
+if err != nil {
+  return fmt.Errorf("error marshaling JSON: %v", err)
+}
+
+req, err := http.NewRequest("POST", apiOptions.BaseUrl+"/wallets", bytes.NewBuffer(jsonData))
+if err != nil {
+  return fmt.Errorf("error creating POST request: %v", err)
+}
+
+response, err := dfnsClient.Do(req)
+if err != nil {
+  return fmt.Errorf("error creating wallet: %v", err)
+}
 ```
-
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
-```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
-mint broken-links
-```
-
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  ![Screenshot of a deployment confirmation message that says All checks have passed.](/images/checks-passed.png)
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).

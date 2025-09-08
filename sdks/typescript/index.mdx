@@ -1,10 +1,22 @@
 ---
-title: 'Installation'
-description: 'Preview changes locally to update your docs'
-tag: To do
+title: 'Typescript SDK'
 ---
 
-One of the core principles of software development is DRY (Don't Repeat
-Yourself). This is a principle that applies to documentation as
-well. If you find yourself repeating the same content in multiple places, you
-should consider creating a custom snippet to keep your content in sync.
+The Dfns Typescript SDK offers utilities to help Typescript developers get Dfns up and running more quickly. It automatically populates all the [required headers](/api-reference/auth) and implements the cryptography for request signing. 
+
+This is a full SDK implementation which includes strongly typed function definitions which should enable IntelliSense in an IDE like Visual Studio Code.
+
+## Installation
+
+Simply install `@dfns/sdk` in your node environment: 
+
+```bash
+npm i @dfns/sdk
+```
+
+**Requirements:**
+- Node version 18 or more recent. 
+
+## React Native
+
+We've built specific bindings for React Native into the Typescript SDK to help accelerate hybrid mobile development projects predicated on this popular framework.  Please see [the React Native section here](https://github.com/dfns/dfns-sdk-ts/tree/m/packages/sdk-react-native) for more details.

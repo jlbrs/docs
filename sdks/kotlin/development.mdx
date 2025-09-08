@@ -1,95 +1,34 @@
 ---
 title: 'Development'
-description: 'Preview changes locally to update your docs'
-tag: To do
 ---
+## Concepts
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+### `PasskeysSigner`
 
-Follow these steps to install and run Mintlify on your operating system.
+All state-changing requests made to the Dfns API need to be cryptographically signed by credentials
+registered with the User.
 
-<Steps>
-<Step title="Install the Mintlify CLI">
+> **Note:** To be more precise, it's not the request itself that needs to be signed, but rather a "
+> User Action Challenge" issued by Dfns. For simplicity, we refer to this process as "request
+> signing".
 
-```bash
-npm i -g mint
+This request signature serves as cryptographic proof that only authorized entities are making the
+request. Without it, the request would result in an Unauthorized error.
+
+While implementing an Android application your backend server will have to communicate with the DFNS API to retrieve this challenge and pass it to your application, `PasskeysSigner` will be used to register and authenticate a user.
+
 ```
-</Step>
-
-<Step title="Preview locally">
-
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
-
-```bash
-mint dev
+val passkeysSigner = PasskeysSigner(context, RelyingParty(id, name))
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+#### Register
 
-</Step>
-</Steps>
-
-## Custom ports
-
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
-
-```bash
-mint dev --port 3333
+```
+val fido2Attestation = passkeysSigner.register(challenge)
 ```
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+#### Sign
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
 ```
-
-## Mintlify versions
-
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
-
-```bash
-npm mint update
+val fido2Assertion = passkeysSigner.sign(challenge)
 ```
-
-## Validating links
-
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
-
-```bash
-mint broken-links
-```
-
-## Deployment
-
-If the deployment is successful, you should see the following:
-
-<Frame>
-  ![Screenshot of a deployment confirmation message that says All checks have passed.](/images/checks-passed.png)
-</Frame>
-
-## Code formatting
-
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
