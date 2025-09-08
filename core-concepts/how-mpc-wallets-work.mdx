@@ -1,14 +1,54 @@
 ---
-title: 'How Mpc Wallets Work'
-description: 'An overview of How Mpc Wallets Work.'
-tag: To do
+title: 'How MPC security Work'
 ---
 
-# How Mpc Wallets Work
+Dfns wallets are built on a security model called **Multi-Party Computation (MPC)**. This technology fundamentally redesigns how digital assets are secured by eliminating the single greatest risk: the existence of a complete, single private key.
 
-This page provides a comprehensive overview of **How Mpc Wallets Work**.
+Instead of one key, Dfns uses a **Threshold Signature Scheme (TSS)** to create multiple secret **key shares** (or shards) for each wallet. These shares are mathematically linked. To sign a transaction, a minimum number (a threshold) of these shares are required to participate in a cryptographic ceremony. The key itself is never reconstructed during this process, providing robust security against both internal and external threats.
 
-## Key Concepts
+-----
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+### The Dfns Cloud: Simple & Secure
+
+The standard and most common way to use Dfns is through our **fully-managed cloud**. This configuration is designed to provide the highest level of security with maximum convenience.
+
+Here's how it works:
+
+1.  **Wallet Creation:** When you create a new wallet via the Dfns API, our system generates a set of encrypted key shares.
+2.  **Secure Storage:** In the fully-managed cloud model, Dfns securely stores and manages all of these key shares on your behalf. Our infrastructure is geographically distributed, highly available, and purpose-built for secure cryptographic operations.
+3.  **Effortless Operations:** You can initiate transactions through a simple API call. The entire complex MPC signing ceremony is handled by the Dfns platform, completely abstracting the cryptographic heavy lifting away from your team.
+
+This model allows you to get the benefits of institutional-grade MPC security without needing to manage any cryptographic hardware or infrastructure.
+
+-----
+
+### 🔑 The Separation of Keys: A Core Security Principle
+
+A critical aspect of the Dfns architecture is the complete separation between **authentication credentials** and **wallet keys**. Understanding this distinction is fundamental to grasping our security model.
+
+  * **Wallet Keys (MPC Key Shares):** These are the secret cryptographic shares used exclusively to sign blockchain transactions (e.g., sending ETH or an NFT). They have **no ability** to authorize actions within the Dfns platform. They are managed entirely by the Dfns MPC protocol.
+
+  * **Authentication Credentials (API Keys & Tokens):** These are what you use to prove your identity and make requests to the Dfns API—for example, to ask the system to create a wallet or initiate a transaction. These credentials **cannot** sign blockchain transactions directly.
+
+Think of it like a bank vault. Your **authentication credential** is the key card that gets you into the secure room and allows you to submit a withdrawal slip to the bank manager. The **MPC key shares** are the multiple, unique keys held by different senior bank managers that, when used together, are the only way to actually open the vault and release the funds.
+
+This separation ensures that even in the unlikely event an API key is compromised, an attacker cannot derive the wallet keys or forge signatures. All they can do is make API requests, which are still subject to your organization's security policies, such as spending limits and multi-user approvals.
+
+-----
+
+### The Secure Signing Process in the Cloud
+
+When you're ready to send a transaction, a seamless and secure process unfolds in seconds:
+
+1.  **API Request:** Your application sends an authenticated request to the Dfns API to initiate a transaction from one of your wallets.
+2.  **Authentication & Policy Check:** Dfns first verifies your **authentication credential**. It then evaluates the request against any security policies you've configured for that wallet, such as spending limits or whitelisted addresses.
+3.  **MPC Ceremony:** Once the request is authorized, Dfns orchestrates a distributed cryptographic ceremony between the nodes holding the wallet's key shares. Each node uses its secret share to generate a *partial signature*.
+4.  **Signature & Broadcast:** The partial signatures are mathematically combined to create a single, valid transaction signature. This final signature is then broadcast to the appropriate blockchain. **The full private key is never revealed or reconstructed at any point.**
+
+-----
+
+### Advanced Deployment Options
+
+While the fully-managed cloud is ideal for most customers, Dfns offers flexible deployment models for enterprises with specific regulatory or infrastructure requirements. These advanced options include hybrid models (where you hold some key shares) and fully on-premise deployments.
+
+For a detailed comparison of these configurations, please see our [Deployment Models](/advanced/deployment-models) documentation.

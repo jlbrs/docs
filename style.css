@@ -250,8 +250,9 @@ div:has(+ .tryit-button)>:nth-child(2) {
 /* Put the card icon (in horizontal card setup) at the top */
 .card {
     &>.flex>div[data-component-part="card-icon"] {
-    align-self: start;
+        align-self: start;
     }
+
     & div[data-component-part="card-icon"]>svg {
         background-color: rgb(var(--gray-600));
     }
@@ -307,4 +308,23 @@ h4#user-kinds-allowed {
     &:is(.dark *) {
         color: rgb(var(--gray-400));
     }
+}
+
+/* to be displayed except if we pay for the biggest license */
+#navigation-items+div:has(button[aria-label="Toggle dark mode"]) {
+
+    &::before {
+        content: "Powered by Mintlify";
+        font-size: x-small;
+        color: rgb(var(--gray-300));
+    }
+
+    &:is(.dark *)::before {
+        color: rgb(var(--gray-600));
+    }
+}
+
+#content-area #pagination,
+#content-area footer {
+    display: none;
 }

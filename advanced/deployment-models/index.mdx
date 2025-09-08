@@ -1,0 +1,58 @@
+---
+title: Dfns deployment models
+---
+
+At Dfns, we understand that security is not one-size-fits-all. Different organizations have unique requirements for control, compliance, and operational responsibility. That's why we offer several **deployment models** for our MPC signing infrastructure.
+
+A deployment model simply defines **where your wallet's secret key shares are stored and operated**. It determines the balance of responsibility between Dfns and your organization, allowing you to choose the perfect setup for your security posture and business needs.
+
+Whether you prefer a simple and secure hands-off approach or require maximum control over your cryptographic operations, Dfns has a model to match.
+
+### The Models at a Glance
+
+We offer three primary deployment models. Each provides the same core security of our MPC-TSS protocol but varies in operational management and control.
+
+#### Dfns Cloud (Fully-Managed) ☁️
+
+This is the standard, default, and most popular option. In this model, Dfns securely manages all the key shares within our robust, geographically distributed cloud infrastructure. It's a turnkey solution that provides institutional-grade security with zero operational overhead for your team.
+
+- **You get:** Maximum convenience and the full security of the Dfns platform without managing any infrastructure.
+
+#### Hybrid Cloud 🤝
+
+The Hybrid model offers a powerful balance of control and convenience. Dfns manages a portion of the key shares in our cloud, while your organization securely holds one or more shares within your own environment. This makes you a required participant in every signing ceremony, giving you a direct cryptographic veto over any transaction.
+
+- **You get:** Shared security responsibility and direct control over transaction finality.
+
+#### On-Premise (Self-Hosted) 🏢
+
+For organizations with the strictest data residency, compliance, or infrastructure requirements, we offer a fully on-premise deployment. In this model, you run the Dfns signing software and manage all key shares entirely within your own data centers or private cloud.
+
+- **You get:** Maximum control over your keys and infrastructure.
+
+
+### Enhancing Security with On-Premise HSMs 🛡️
+
+For organizations seeking the highest level of assurance, Dfns supports integrating customer-owned **Hardware Security Modules (HSMs)**. Customers using the **Hybrid Cloud** or **On-Premise** models can store their key shares within their own FIPS 140-2 compliant HSMs.
+
+This adds a layer of physically-enforced, tamper-resistant security to your cryptographic operations, ensuring your key shares never leave the protected boundary of your hardware.
+
+
+### Choosing the Right Model for You
+
+The best model depends on your specific needs for control versus convenience. The table below outlines the key differences to help you decide.
+
+| Feature                  | Dfns Cloud (Fully-Managed)                                                                       | Hybrid Cloud                                                                                             | On-Premise (Self-Hosted)                                                                                            |
+| :----------------------- | :----------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| **Key Share Custody**    | All shares secured and stored by Dfns                                                            | Shared (Dfns & Customer)                                                                                 | All shares held by Customer                                                                                         |
+| **HSM Support**          | No                                                                                               | No                                                                                                       | Yes                                                                                                                 |
+| **Primary Benefit**      | Simplicity & Speed                                                                               | Shared Control & Veto Power                                                                              | Maximum Control & Data Residency                                                                                    |
+| **Best For**             | Most startups, fintechs, and enterprises that want to move fast without managing infrastructure. | Institutions that require a cryptographic role in transaction signing for compliance or internal policy. | Financial institutions or government entities with strict data locality rules or dedicated internal security teams. |
+
+
+### More information
+
+To learn more about the technical architecture and operational requirements of each model, please explore the detailed guides:
+
+- [Detailed Guide: Using HSMs](/advanced/deployment-models/hsm)
+- [Detailed Guide: On-Premise Deployment](/advanced/deployment-models/on-premise-deployment)

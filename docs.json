@@ -142,28 +142,27 @@
                 "icon": "circles-overlap",
                 "pages": [
                   {
-                "group": "Exchanges",
-                "pages": [
-                  "integrations/exchanges/kraken-setup",
-                  "integrations/exchanges/binance-setup",
-                  "integrations/exchanges/coinbase-prime-setup"
+                    "group": "Exchanges",
+                    "pages": [
+                      "integrations/exchanges/kraken-setup",
+                      "integrations/exchanges/binance-setup",
+                      "integrations/exchanges/coinbase-prime-setup"
+                    ]
+                  },
+                  {
+                    "group": "AML / KYT",
+                    "pages": [
+                      "integrations/aml-kyt/chainalysis"
+                    ]
+                  },
+                  {
+                    "group": "Travel Rule",
+                    "pages": [
+                      "integrations/travel-rule/notabene"
+                    ]
+                  }
                 ]
               },
-              {
-                "group": "AML / KYT",
-                "pages": [
-                  "integrations/aml-kyt/chainalysis"
-                ]
-              },
-              {
-                "group": "Travel Rule",
-                "pages": [
-                  "integrations/travel-rule/notabene"
-                ]
-              }
-                ]
-              },
-              
               {
                 "group": "Developers Guides",
                 "icon": "code",
@@ -242,8 +241,14 @@
               "advanced/credentials",
               "advanced/delegated-signing",
               "advanced/interoperability",
-              "advanced/on-premise-deployment",
-              "advanced/hsm",
+              {
+                "group": "Deployment models",
+                "pages": [
+                  "advanced/deployment-models",
+                  "advanced/deployment-models/on-premise-deployment",
+                  "advanced/deployment-models/hsm"
+                ]
+              },
               "advanced/paying-dfns-with-canton-coin"
             ]
           },
@@ -313,7 +318,7 @@
             "group": "API Authorization",
             "icon": "key",
             "pages": [
-                  "api-reference/auth/index",
+              "api-reference/auth/index",
               {
                 "group": "Authentication",
                 "pages": [

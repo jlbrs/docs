@@ -1,14 +1,68 @@
 ---
-title: 'Platform Overview'
-description: 'An overview of Platform Overview.'
-tag: To do
+title: 'Dfns Platform Overview'
+description: 'Understand the core concepts, architecture, and benefits of the Dfns API-first wallet infrastructure.'
 ---
 
-# Platform Overview
+## What is Dfns?
 
-This page provides a comprehensive overview of **Platform Overview**.
+Dfns is the secure **operating system** for all your blockchain interactions. We provide a robust, API-driven infrastructure that serves as a central control plane for your digital asset strategy, allowing you to build, launch, and scale your Web3 application with institutional-grade security.
 
-## Key Concepts
+Our core technology, Multi-Party Computation (MPC), eliminates the single point of failure associated with traditional private keys. With Dfns, a complete private key is never generated or exposed. Instead, you interact with a simple, powerful API, and Dfns handles the underlying cryptographic complexity.
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+Think of Dfns as the OS layer for Web3. It unifies your interactions across all blockchains through a single API, manages your core resources like wallets and policies, and provides essential services like secure signing and transaction broadcasting.
+
+## Your Blockchain Operating System
+
+Positioning Dfns as an OS isn't just a metaphor; it's how our platform is architected to give you maximum control and efficiency.
+
+* **Abstracts Complexity:** An OS manages complex hardware so applications don't have to. Dfns abstracts the immense complexity of diverse blockchains, private key cryptography, and gas management, presenting it all through a clean, unified API.
+
+* **Provides Core Services:** Dfns provides the fundamental services every Web3 application needs: secure key management, wallet creation, transaction signing, and policy enforcement. These are the building blocks for any digital asset product.
+
+* **Manages Resources:** From a single control plane, you can create and manage all your on-chain resources—wallets, security policies, user permissions, and API keys—across any blockchain.
+
+* **Enables Application Development:** By handling the core infrastructure, Dfns empowers your developers to focus on what they do best: building your application and delivering value to your users.
+
+## Why Choose Dfns?
+
+Building secure and scalable blockchain infrastructure is hard. Dfns solves the hardest problems so you can focus on your product.
+
+| Benefit | Description |
+| :--- | :--- |
+| **Unmatched Security** | Dfns offers flexible cryptographic configurations to meet your specific security requirements. Our core MPC-TSS can be enhanced with self-hosted deployments or by storing key shares in dedicated HSMs. The platform is SOC 2 Type II certified. |
+| **Developer Experience** | With our API-first design, clear documentation, and language-specific SDKs, you can integrate secure wallets into your application in hours, not months. |
+| **Scalability & Speed** | Dfns is built for high-throughput applications. Our infrastructure handles key generation, signing, and broadcasting at scale with sub-second latency. |
+| **Programmable Control** | Implement granular, programmatic security policies to govern how and when transactions can be signed. Enforce spending limits, address whitelisting, and multi-user approvals. |
+| **Unified Chain Access** | Your OS provides a single, unified API to access the entire Web3 ecosystem (EVM & non-EVM), without needing to manage disparate clients or SDKs for each chain. |
+
+## Core Concepts
+
+Understanding these core concepts is key to integrating with the Dfns platform.
+
+### Wallets as a Service
+A `Wallet` is the primary resource in Dfns. It represents an on-chain account that can hold assets and sign transactions. Each wallet has a unique ID and a public address. You can create as many wallets as you need, for example, one for each of your end-users.
+
+### Programmable Security Policies
+A `Policy` is a set of rules that must be satisfied for a transaction or action to be approved. This is the heart of Dfns' programmable security model. Policies can define rules such as:
+
+* **Spending Velocity Limits:** e.g., no more than 1 ETH per hour.
+* **Address Whitelisting:** only allow sending assets to pre-approved addresses.
+* **Multi-User Approval (M-of-N):** require approval from 2 out of 3 admins for any transaction or intent matching your criteria.
+
+Policies are attached to wallets and are enforced by the Dfns platform *before* a transaction is ever signed.
+
+### Users and Permissions
+Dfns provides robust Role-Based Access Control (RBAC) to manage your team's access to the platform. You can create different roles with specific permissions, ensuring that developers, operators, and administrators only have the access they need to perform their duties.
+
+### Audit Logs
+Every action taken through the Dfns API or dashboard is securely logged. This provides a complete, immutable audit trail for compliance, security reviews, and incident response. You can see who created a wallet, who initiated a transaction, and which policy was enforced at any given time.
+
+## Get Started
+
+Ready to build? Your journey with Dfns begins here.
+
+1.  **Get your API Keys:** Sign up for a Dfns account and generate your first set of API credentials.
+2.  **Follow the Quickstart Guide:** Our Quickstart Guide will walk you through creating your first wallet and sending your first transaction in under 15 minutes.
+3.  **Explore the API Reference:** Dive deep into all available endpoints in our comprehensive API Reference.
+
+If you have any questions or want to discuss a custom solution, don't hesitate to contact our team.
