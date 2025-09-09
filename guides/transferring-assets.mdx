@@ -1,0 +1,53 @@
+---
+title: Transferring assets
+description: >-
+    This guide will walk you through making a one-off transfer directly from the Dfns Dashboard. For automated or high-volume transfers, we recommend using the **Dfns API**.
+---
+
+
+
+### Prerequisites
+
+Before you begin, make sure you have the following:
+* You are logged into your Dfns account.
+* You have a wallet with a sufficient balance of the asset you wish to transfer.
+* You know the recipient's wallet address.
+
+
+<Steps>
+  <Step title="Navigate to your source Wallet">
+    From the main menu on the left, click on the **Wallets** tab. This will display a list of all the wallets in your organization.
+    
+    Find and click on the wallet you want to send the asset **from**. This will take you to the wallet's detail page, showing its balances and transaction history.
+
+<Frame>![](/images/transfer1.png)</Frame>
+
+  </Step>
+  <Step title="Initiate the Transfer">
+    In the assets list, find the asset you want to transfer and click the **Send** button. This will open the transfer modal where you will enter the transaction details.
+
+Fill in the following fields carefully:
+
+    * **To**: Paste the destination wallet address. Always double-check that the address is correct and corresponds to the correct blockchain network.
+    * **Amount**: Enter the amount of the asset you wish to transfer. 
+    * **Pay the fees with another wallet**: You can chose to use our [Fee Sponsor](/features/fee-sponsors) feature for that transfer. In such case, select the sponsor. 
+
+**Review carefully** to ensure the asset, amount, and recipient address are all correct.
+
+    When you are ready, click **Transfer**.
+
+<Frame>![](/images/transfer2.png)</Frame>
+
+<Warning> 
+**Important**
+    
+    Transactions on the blockchain are irreversible. Once confirmed, you cannot cancel or reverse the transfer.
+    </Warning>
+  </Step>
+  <Step title="Await for Policy Approval (If Applicable)">
+    If your organization has security policies in place (e.g., requiring a manager's approval for transactions over a certain amount), your transfer will be placed in a **Pending** state. 
+  </Step>
+  <Step title="Monitor Your Transaction">
+    You can then see your transfer at the top of the list. The status will update in real-time, moving from **Pending Approval** (someone needs to approve your transfer) -> **Executing** -> **Broadcasted** -> **Confirmed**. 
+  </Step>
+</Steps>

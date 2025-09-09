@@ -1,5 +1,36 @@
 ---
-title: 'Webhook description'
+title: 'Webhooks Configuration'
 description: 'Learn about the different webhook events supported by our platform.'
 icon: 'webhook'
 ---
+import { Post } from '/snippets/post.jsx';
+import { Put } from '/snippets/put.jsx';
+import { Get } from '/snippets/get.jsx';
+import { Delete } from '/snippets/delete.jsx';
+
+Stop polling our API and let us tell you when something important happens. 
+
+Webhooks allow you to receive real-time notifications about events that occur within your Dfns organization. Instead of constantly querying our API to check the status of a transaction or a policy, you can configure Dfns to send an HTTP `POST` request directly to your specified URL as soon as an event occurs.
+
+This event-driven approach is more efficient and enables you to build responsive, automated workflows. For example, you can use webhooks to:
+
+* Get instant notifications on the entire transaction lifecycle: `Created`, `Signed`, `Broadcasted`, `Confirmed`, or `Failed`.
+* Trigger internal alerts when a policy requires your team's approval.
+* Update a customer's order status in your database as soon as a payment is confirmed on-chain.
+
+All webhook requests are signed so you can cryptographically verify that they originated from Dfns. This guide will walk you through how to set up, secure, and subscribe to webhook events.
+
+## API reference
+
+<Get>/webhooks</Get> [List Webhooks](/api-reference/webhooks/list-webhooks)    
+
+<Post>/webhooks</Post> [Create Webhook](/api-reference/webhooks/create-webhook)       
+
+<Get>/webhooks/\{webhookId\}</Get> [Get Webhook](/api-reference/webhooks/get-webhook)       
+
+<Put>/webhooks/\{webhookId\}</Put> [Update Webhook](/api-reference/webhooks/update-webhook)       
+
+<Delete>/webhooks/\{webhookId\}</Delete> [Delete Webhook](/api-reference/webhooks/delete-webhook)     
+
+<Post>/webhooks/\{webhookId\}/ping</Post> [Ping Webhook](/api-reference/webhooks/ping-webhook)
+

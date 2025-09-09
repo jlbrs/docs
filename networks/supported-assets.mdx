@@ -5,8 +5,16 @@ description: Dfns offers a wide array of chain-specific crypto asset support.
 
 Before reviewing our support matrix, it's important to understand how Dfns exposes APIs for facilitating blockchain interactions. See more details [here](/features/transactions). 
 
-When using the high-level [Transfer API](/api-reference/wallets/transfer-asset), Dfns supports various assets across multiple chains, such as native cryptocurrencies, ERC-20 tokens, NFTs, and non-EVM assets. In the Dfns API, the `kind` variable specifies the type of asset being transferred. It determines how the transaction is processed based on the asset's blockchain standard. For example, `kind` can be set to `Native` for base cryptocurrencies (e.g., Bitcoin, Ethereum), `ERC20` for fungible tokens on Ethereum, or `ERC721` for NFTs. Other possible values include standards from non-EVM chains like `SPL` or `ASA`. Correctly setting the kind ensures that the API handles the transaction according to the asset's unique characteristics.
+## Transfer feature
+
+When using the high-level [Transfer](/guides/transferring-assets) feature or [API](/api-reference/wallets/transfer-asset), Dfns supports various assets across multiple chains, such as native cryptocurrencies, ERC-20 tokens, NFTs, and non-EVM assets. 
+
+In the Dfns API, the `kind` variable specifies the type of asset being transferred. It determines how the transaction is processed based on the asset's blockchain standard. For example, `kind` can be set to `Native` for base cryptocurrencies (e.g., Bitcoin, Ethereum), `ERC20` for fungible tokens on Ethereum, or `ERC721` for NFTs. Other possible values include standards from non-EVM chains like `SPL` or `ASA`. Correctly setting the kind ensures that the API handles the transaction according to the asset's unique characteristics.
 
 Please refer to the list of supported assets standards here for each network: [Supported Networks](/networks).
 
-Each asset type requires specific parameters, such as contract addresses for ERC-20 and ERC-721 tokens, or asset IDs for non-EVM assets. Transactions involve specifying the asset type, destination address, and amount, with additional fields varying by asset type. 
+## Raw signature
+
+Using our low-level APIs [Generate Signature](http://localhost:3000/api-reference/keys/generate-signature) or [Sign and Broadcast](/api-reference/wallets/sign-and-broadcast-transaction) you can interact with any arbitrary smart contract. It requires developers to integrate with native chain SDKs to format transactions as inputs. It requires more development but provides greater control over the transaction: build your transaction and ask use Dfns MPC signing directly. 
+
+These APIs make it possible to execute any interaction with any chain that supports our underlying cryptographic schemes: ECDSA, EdDSA, and Schnorr.

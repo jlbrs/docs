@@ -1,0 +1,63 @@
+---
+title: Policy Approvals
+icon: shield-check
+---
+
+When a policy is triggered and the action defined is `RequestApproval`, an Approval object is created containing:
+
+* details about the activity that triggered this approval flow
+* details on the different policy evaluations that happened for that activity and their result
+* details about the decisions given by each approvers
+
+When a new Approval object is created and an approval process is required, a [webhook event](/developers/webhooks#webhook-events) is emitted (event kind "`policy.approval.pending`"). You can subscribe to it to react to this event, eg. send notifications to the users that need to give their approval.
+
+The Approval object can be queried using the `approvalId` returned from the endpoint that triggered the approval process, using the [Get Approval](/api-reference/policies/get-approval) / [List Approvals](/api-reference/policies/list-approvals) endpoints.
+
+Users can then call the [Create Approval Decision](/api-reference/policies/create-approval-decision) endpoint to either approve / reject this activity.  Of course this can also be done via the Dfns dashboard.
+
+A user can only give his approval / rejection if he is defined inside one of the approval groups defined on the policies that triggered.
+
+A given user can only approve or reject once. If multiple approval groups exist, a decision from a single user will count as a decision for any of the groups this user belongs to.
+
+A rejection from any user of any groups immediately rejects an activity.
+
+The initiator is not allowed to approve their activity, but can deny it if they need to cancel it.
+
+Here's an Approval object example
+
+```json
+{
+  "id":"ap-...",
+  "initiatorId":"us-...",
+  "status":"Pending",
+  "expirationDate":"2023-12-22T21:16:16.659Z",
+  "dateCreated":"2023-12-22T20:56:16.662Z",
+  "dateUpdated":"2023-12-22T20:56:16.662Z",
+  "activity":{
+    "kind": "Wallets:Sign",
+    "transferRequest": { // the transfer request object from transfer endpoint
+      "id": "xfr-...",
+      ...
+    },
+  },
+  "evaluatedPolicies":[
+    {
+      "policyId":"plc-...",
+      "triggerStatus":"Triggered",
+      "reason":"Number of transactions (2) is above limit (2)."
+    },
+    {
+      "policyId":"plc-...",
+      "triggerStatus":"Triggered",
+      "reason":"Cumulative transfer amount (USD 20) is above limit (USD 2)."
+    }
+  ],
+  "decisions":[
+    {
+      "userId":"us-...",
+      "dateActioned":"2023-12-22T20:56:16.662Z",
+      "value":"Approved"
+    }
+  ],
+}
+```

@@ -1,14 +1,98 @@
 ---
 title: 'Architecture'
-description: 'An overview of Architecture.'
-tag: To do
+description: Welcome to Dfns! This page will walk you through the Dfns architecture, explaining how we help businesses securely manage digital assets. We've designed this for a broad audience, so you don't need to be a cryptography expert to understand it.
 ---
 
-# Architecture
+## At a Glance: The Dfns Philosophy
 
-This page provides a comprehensive overview of **Architecture**.
+At its core, Dfns is a **Wallet-as-a-Service (WaaS)** platform. Think of it as the engine that powers secure digital asset management for businesses. Our main goal is to make it incredibly simple and safe for companies to create, embed, and manage digital asset wallets. We handle the complex, behind-the-scenes security so our clients can focus on building their products and services.
 
-## Key Concepts
+Our architecture is built on three key pillars:
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+* **Security**: We use advanced cryptography and security practices to protect digital assets from theft and unauthorized access.
+* **Scalability**: Our platform can handle millions of wallets and high transaction volumes without breaking a sweat.
+* **Simplicity**: We provide powerful tools for developers and businesses that are easy to use and integrate.
+
+### Wallet-as-a-Service (WaaS): Your Wallets, Your Way
+
+Our WaaS platform is the foundation of everything we do. It allows businesses to programmatically create and manage wallets for their users or for their own internal needs.
+
+
+Here's what makes our WaaS special:
+
+* **Programmability**: We offer powerful APIs and SDKs that let developers quickly integrate wallet functionality into their applications. This means less development time and faster time-to-market.
+* **Advanced Security**: We use a technology called **Multi-Party Computation (MPC)**. Instead of having a single private key that could be a single point of failure, MPC splits the key into multiple pieces and stores them in different, highly secure locations. This makes it virtually impossible for an attacker to compromise a wallet.
+* **Scalability for Growth**: Whether you need ten wallets or ten million, our cloud-based infrastructure can handle it. We support over 30 blockchains and more than 1,000 tokens, so you can grow without limitations.
+
+We offer two main types of wallets to fit different needs:
+
+* **Org-Controlled Wallets**: These are ideal for businesses that need full control over their assets. The organization manages the signing process and transaction approvals.
+* **User-Controlled Wallets**: These empower end-users with full control over their own wallets and assets. This is a great option for applications where users need to maintain self-custody.
+
+### Wallet Entitlement Management (WEM): Secure Governance for Your Assets
+
+Think of WEM as the security guard and rulebook for your digital assets. It's a system that allows you to define and enforce who can do what with your wallets. This is crucial for businesses that need to maintain strict compliance and governance standards.
+
+
+With WEM, you can:
+
+* **Create Custom Workflows**: Set up multi-level approval processes for transactions. For example, you could require that any transaction over a certain amount needs to be approved by both the finance team and a senior manager.
+* **Manage Permissions**: Assign roles and permissions to different users, limiting access to sensitive operations.
+* **Monitor Transactions**: Get real-time alerts and detailed logs for all wallet activity, providing a clear audit trail.
+* **Secure Your Transfers**: Create "allow-lists" and "deny-lists" of approved wallet addresses to prevent funds from being sent to unauthorized recipients.
+
+### Key Deployment Service (KDS): Flexible and Secure Key Management
+
+The "keys" to a digital wallet are everything. Our Key Deployment Service offers a flexible and secure way to manage these keys, tailored to the specific needs and regulatory requirements of your business.
+
+We offer several deployment options:
+
+* **Managed (SaaS)**: This is our most popular, hands-off option. We securely store the key components in our top-tier, geographically distributed data centers. You get all the security without the headache of managing the infrastructure.
+* **Hybrid (Cloud)**: This option offers a balance of control and convenience. You can store some of the key components on your own infrastructure, while we manage the rest in our secure cloud. This is a great choice for businesses that want an extra layer of control.
+* **On-Premises**: For organizations with the strictest security and regulatory requirements, we offer the option to host the entire key management system on your own infrastructure. This gives you the ultimate level of control.
+
+No matter which option you choose, our use of MPC ensures that there is no single point of failure, providing the highest level of security for your digital assets.
+
+---
+
+## The Anatomy of a Secure Transaction: A Story
+
+Meet Alice. She's a finance operator at Acme Corp, and she needs to pay a large invoice from the company's digital asset treasury. The application she uses is powered by Dfns. This is the story of her transaction, from a simple click to its final confirmation on the blockchain.
+
+### Chapter 1: The Secure Handshake
+
+Alice's day begins not with a password, but with a glance. She opens the Acme treasury app on her laptop and it prompts her to log in. She simply uses her fingerprint. There are no passwords to be phished or stolen.
+
+Behind this seamless experience, a sophisticated cryptographic exchange is happening. Her laptop’s secure hardware, her **Passkey**, proves her identity to the Dfns authentication service by signing a unique challenge. This digital signature acts as a secure handshake, confirming it's truly Alice. In return, Dfns grants her a temporary, authenticated session—a digital passport for what comes next.
+
+### Chapter 2: The Request and the Gatekeeper
+
+Now inside the application, Alice creates the payment order: "Send 50,000 USDC to Vendor XYZ." When she clicks "Submit," she isn't just sending money; she's dispatching a request into the heart of the Dfns system.
+
+Before the request can go anywhere, it meets its first checkpoint: the **Permissions Gatekeeper**. This service checks Alice's digital passport and asks a simple question: "Does Alice have the authority to initiate a transfer from this treasury wallet?" The system confirms her role as a `Finance Operator`. The first gate swings open, and the request proceeds.
+
+### Chapter 3: The Guardian's Gauntlet
+
+Alice's request now faces its most rigorous test: the **Policy Engine**, a tireless guardian that enforces Acme's security rulebook. This guardian doesn't have opinions; it only has rules, written in code.
+
+It scrutinizes the transaction. "Is the destination address on the approved vendor list?" *Check.* "Is the amount within the daily transfer limit?" *Check.*
+
+Then, it finds a critical rule: "Any transaction over $10,000 requires approval from a manager." Alice's request, while valid, cannot proceed alone. The guardian places the transaction in a secure holding area, a state of `Pending Approval`, and sends out a call for reinforcement.
+
+### Chapter 4: The Council of Approvers
+
+Miles away, a notification pings on the phone of Bob, a treasury manager at Acme. He sees Alice’s pending transaction. He logs in with his own secure Passkey, reviews the invoice details, and with a single click, provides his cryptographic approval.
+
+His approval is the second key needed for this high-value transfer. The Policy Engine sees that the approval quorum is now met. The transaction is fully authorized. The guardian gives its final nod, and the request is finally cleared for its most critical step.
+
+### Chapter 5: The Cryptographic Conclave
+
+The approved request now descends into the cryptographic core of Dfns—a distributed network of **MPC Nodes**. Think of these nodes as ancient guardians, each living in its own impenetrable digital fortress, a **Secure Enclave**. None of these guardians holds the complete master key to the treasury. Instead, each holds a single, unique shard of the key. By design, the complete key has never existed and never will.
+
+The transaction details are presented to the conclave. The guardians don't bring their shards together to rebuild the key —-that would be a catastrophic security risk. Instead, they begin a secret, multi-step ritual. They talk to each other in a cryptographic language, performing complex calculations. Each guardian contributes its piece of the puzzle without revealing its secret. From this distributed ritual, a perfect, valid digital signature emerges, forged from the collaboration of the group. A signature is born, but the key remains a distributed secret.
+
+### Chapter 6: The Final Voyage
+
+This newly forged signature is attached to Alice's transaction data, transforming it into an unforgeable, blockchain-ready command. The Dfns system now plays the role of a messenger, broadcasting this signed transaction to the vast, decentralized expanse of the public blockchain.
+
+The story ends as network validators pick up the transaction and immortalize it in a new block. A confirmation message flows back through the system. Alice and Bob both see the status update in their app: "Payment Complete." The vendor has been paid, Acme's strict security policies were automatically enforced, and it all happened without a single, complete private key ever being exposed to anyone or anything.

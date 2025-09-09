@@ -3,6 +3,7 @@ title: Fee Sponsors
 ---
 
 import { Pill } from "/snippets/pill.jsx"
+import { Youtube } from "/snippets/youtube.jsx"
  
 Typically submitting transactions to a blockchain requires the sender to pay a small amount of fees called gas fees. These fees compensate network participants, such as miners or validators, for the computational resources needed to execute transactions, smart contracts, and other operations. What it means in practice is that for users to transfer some stable coins such as `USDC`, they must also hold a small amount of the native tokens of the blockchains used to pay the gas fees. This creates friction because you must constantly top up all your wallets in order for them to stay functional.
 
@@ -18,7 +19,7 @@ To sponsor a transfer,
 The fee sponsor feature only works for custodial wallets. Delegated wallets are not supported for now.
 </Note>
 
-### Supported networks
+## Supported networks
 
 Not all networks support this feature. You can create fee sponsors for the following supported networks.
 
@@ -35,3 +36,9 @@ Not all networks support this feature. You can create fee sponsors for the follo
 | `Stellar`        | `StellarTestnet`                   |
 
 [^1]: ⚠️ <Pill text="BETA"/> The EVM fee sponsor is currently in beta. The implementation leverages [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) that turns your EOA into a smart contract account. When you use this feature, the on chain account of the sponsoree wallet will become a smart contract. You can view the source code of the smart contract we use [here](https://github.com/dfns/dfns-smart-account).
+
+## Getting Started
+
+<Youtube videoId="4k_Pm6JyA4g" />
+
+---

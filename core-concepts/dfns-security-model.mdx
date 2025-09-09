@@ -1,18 +1,70 @@
 ---
 title: 'Dfns Security Model'
-description: 'An overview of Dfns Security Model.'
-tag: To do
+description: >-
+    Our security model is built on a simple but powerful idea: **the best way to protect a secret is to ensure no single person or system ever knows it.** 
+    At Dfns, we've designed our entire platform around this principle, eliminating single points of failure to provide mathematically provable and layered security for your digital assets.
 ---
 
-# Dfns Security Model
 
-This page provides a comprehensive overview of **Dfns Security Model**.
+### Cryptographic Core: Multi-Party Computation (MPC) 🔐
 
-## Key Concepts
+The biggest risk in digital assets has always been the **private key**—a single piece of data that can unlock and control all your funds. Our platform eliminates this risk by using **Multi-Party Computation (MPC)**.
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+Here’s how it works:
+1.  **No More Private Keys**: When you create a Dfns wallet, a complete private key is **never generated**. Instead, a distributed protocol creates multiple secret "key shares."
+2.  **Distributed Security**: Each key share is stored on a separate, independent, and isolated server. These servers are geographically and logically separated from one another to prevent collusion.
+3.  **Collaborative Signing**: To approve a transaction, a required number of these servers (a quorum) collaborate. They use their individual shares in a sophisticated cryptographic protocol to produce a valid signature **without ever combining the shares or revealing the private key**.
 
-## Compliance & Security
+This means there is no single secret to steal. An attacker would need to breach multiple secure, independent systems at the exact same time, which is practically impossible.
 
-Detail the security implications and how this feature helps customers meet their compliance obligations.
+
+### Driven by Cutting-Edge Research 🔬
+
+Our leadership in cryptography is no accident. Dfns is powered by a dedicated, in-house **research team** composed of world-class cryptographers and security engineers.
+
+This team is at the forefront of MPC and digital asset security, responsible for:
+* **Designing Novel Protocols**: Developing and implementing proprietary, state-of-the-art cryptographic protocols that enhance security and performance.
+* **Publishing Academic Research**: Contributing to the broader security community by publishing peer-reviewed papers and advancing the field of applied cryptography.
+* **Continuous Vetting**: Constantly analyzing the threat landscape and stress-testing our own systems to stay ahead of future vulnerabilities.
+
+This commitment to fundamental research ensures our security model is not just robust today but is built to withstand the threats of tomorrow.
+
+### Authentication: Passwordless & Phishing-Resistant 🛡️
+
+Securely storing keys is only half the battle; user access must also be ironclad. Dfns eliminates the risks of traditional passwords by using **Passkeys**, built on the FIDO2 WebAuthn standard.
+
+* **No Phishable Credentials**: Passkeys create unique cryptographic credentials on your device (like your phone or laptop). There are no passwords to be stolen, forgotten, or phished.
+* **Built-in 2FA**: This method natively incorporates two-factor authentication, using something you have (your device) and something you are (your biometric data like a fingerprint or face scan) to prevent impersonation.
+* **Secure Recovery**: Users can add multiple devices and recovery passcodes to their accounts, ensuring they never lose access.
+
+
+### Governance & Policy Enforcement ⚖️
+
+Technology alone isn't enough. Human error is a major security risk, which is why we built a powerful and flexible **Wallet Entitlement Management (WEM)** policy engine. This acts as a programmable rulebook for your wallets.
+
+You can enforce strict, automated rules *before* any transaction is even signed, such as:
+* **Approval Quorums**: Require multiple team members to approve high-value transactions.
+* **Address Whitelisting**: Only allow transfers to pre-approved, trusted addresses.
+* **Velocity Limits**: Set limits on transaction amounts or frequency to prevent unauthorized drainage of funds.
+
+This layer of security moves governance from manual checklists to automated, code-enforced rules, dramatically reducing the risk of both internal and external threats.
+
+
+### Audits, Certifications, and Compliance 📜
+
+Trust must be earned and verified. We are committed to transparency and adhere to the highest industry standards, validated by continuous third-party audits and certifications.
+
+**Certifications:**
+* **SOC 2 Type II**: This certification affirms that our information security practices, policies, and procedures meet rigorous standards for security, availability, confidentiality, and privacy.
+* **ISO 27001**: An international standard for information security management, demonstrating our commitment to a systematic and robust security program.
+
+**Continuous Audits & Penetration Testing:**
+Our platform, including our MPC libraries, authentication services, and infrastructure, is regularly audited and tested by leading security firms like **Kudelski Security, Halborn, and Redacted**. These engagements include:
+* Whitebox and Blackbox Penetration Tests
+* Cryptographic Library Audits
+* Full Security Model Reviews
+
+**Compliance-Ready Platform:**
+We provide the tools to help you meet your regulatory obligations, including:
+* **AML/KYT Integrations**: Real-time transaction monitoring with partners like **Chainalysis** and **Elliptic**.
+* **Travel Rule Support**: Integrations to help you comply with global data transfer regulations.

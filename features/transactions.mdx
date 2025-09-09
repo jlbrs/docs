@@ -3,42 +3,45 @@ title: 'Transactions'
 description: 'Dfns offers three primary ways to create a transaction, each offering a different balance of convenience and control. Your choice depends on how much of the transaction lifecycle you want to manage yourself.'
 ---
 
-
-| API	| Supported Transaction Types	| When to Use It |
-| :--- | :--- | :--- |
-| Transfer API	| Native Coins, Fungible Tokens (ERC-20), NFTs (ERC-721/1155).	| For simple, standardized "send" operations where convenience is key. |
-| Sign / Sign & Broadcast API	| Any valid transaction, including all simple transfers plus complex smart contract calls, minting, staking, etc.	| For interacting with DeFi, DAOs, or any custom smart contract where you need full control over the transaction data. |
-
+| API                         | Supported Transaction Types                                                                                     | When to Use It                                                                                                       |
+| :-------------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| Transfer API                | Native Coins, Fungible Tokens (ERC-20), NFTs (ERC-721/1155).                                                    | For simple, standardized "send" operations where convenience is key.                                                 |
+| Sign / Sign & Broadcast API | Any valid transaction, including all simple transfers plus complex smart contract calls, minting, staking, etc. | For interacting with DeFi, DAOs, or any custom smart contract where you need full control over the transaction data. |
 
 ## Transfer API
+
 This is the simplest, most all-in-one method. You simply specify the high-level details of your transfer—like the recipient, amount, and asset—and the API handles the rest. It automatically builds the blockchain-specific transaction, signs it securely, and broadcasts it to the network.
 
 The Transfer API abstracts away the complexities of different blockchain protocols, making it easy to send assets without needing to understand the underlying mechanics. See the list of [supported assets here](/networks/supported-assets).
 
-<Tip> 
-**Use this when:** You want maximum convenience and don't need to customize low-level transaction parameters like gas or nonce. 🤝
+<Tip>
+  **Use this when:** You want maximum convenience and don't need to customize low-level transaction parameters like gas or nonce. 🤝
 </Tip>
 
+**From the Dashboard:**
+Checkout the [related guide](/guides/transferring-assets).
+
 **API Reference:**
-    [Transfer API](/api-reference/wallets/transfer-asset)
+[Transfer API](/api-reference/wallets/transfer-asset)
 
 ## Sign & Broadcast API
 
 This method offers a middle ground. You construct the raw, unsigned transaction yourself, giving you full control over all its parameters (e.g., gas limits, nonce, contract call data). You then submit this raw transaction to the API, which securely signs it and broadcasts it to the network for you.
 
-<Tip> 
-**Use this when:** You need to define specific transaction details but want to offload the responsibility of secure signing and broadcasting. ⚙️
+<Tip>
+  **Use this when:** You need to define specific transaction details but want to offload the responsibility of secure signing and broadcasting. ⚙️
 </Tip>
 
 **API Reference:**
-    [Sign & Broadcast API](/api-reference/wallets/sign-and-broadcast-transaction)
+[Sign & Broadcast API](/api-reference/wallets/sign-and-broadcast-transaction)
 
 ## Sign API
+
 This is the most advanced option, providing you with maximum control. You construct the raw, unsigned transaction and send it to the API. The API's only job is to sign it with the secure key and return the signed transaction payload to you. You are then responsible for broadcasting it to the blockchain network yourself.
 
-<Tip> 
-**Use this when:** You need complete control over the transaction's lifecycle, such as managing your own broadcast strategy, using a private mempool, or submitting it to multiple nodes. 📡
+<Tip>
+  **Use this when:** You need complete control over the transaction's lifecycle, such as managing your own broadcast strategy, using a private mempool, or submitting it to multiple nodes. 📡
 </Tip>
 
 **API Reference:**
-    [Sign API](/api-reference/keys/generate-signature)
+[Sign API](/api-reference/keys/generate-signature)

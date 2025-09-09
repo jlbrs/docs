@@ -69,8 +69,8 @@
             "pages": [
               "index",
               "platform-overview",
-              "core-concepts/how-mpc-wallets-work",
               "core-concepts/architecture",
+              "core-concepts/how-mpc-wallets-work",
               "core-concepts/dfns-security-model",
               {
                 "group": "Quickstart Guide",
@@ -89,6 +89,17 @@
             ]
           },
           {
+            "group": "Core Concepts",
+            "icon": "layer-group",
+            "pages": [
+              "core-concepts/wallets-and-keys",
+              "core-concepts/non-custodial-wallets",
+              "core-concepts/permissions",
+              "core-concepts/policies",
+              "core-concepts/passkeys"
+            ]
+          },
+          {
             "group": "Platform Features",
             "icon": "cubes",
             "pages": [
@@ -98,21 +109,9 @@
               "features/swaps",
               "features/fee-sponsors",
               "features/exchanges",
-              "features/account-abstraction-on-evms",
               "features/aml-kyt",
               "features/travel-rule",
               "features/fiat-on-offboarding"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "icon": "layer-group",
-            "pages": [
-              "core-concepts/wallets-and-keys",
-              "core-concepts/non-custodial-wallets",
-              "core-concepts/permissions",
-              "core-concepts/policies",
-              "core-concepts/passkeys"
             ]
           },
           {
@@ -134,11 +133,21 @@
             "group": "Guides",
             "icon": "compass",
             "pages": [
+              "guides/transferring-assets",
               "guides/using-networks-testnets",
+              "guides/dashboard-videos",
               "guides/permission-based-access-control",
+              "guides/managing-users-and-roles",
+              "guides/user-account-recovery",
+              "guides/creating-policies",
+              "guides/approving-transactions",
               "guides/email-approval-requests-with-zapier",
+              "guides/registering-a-new-passkey-credential",
+              "guides/onboarding-a-new-device",
+              "guides/storing-webauthn-credentials-in-password-managers",
+              "guides/paying-dfns-with-canton-coin",
               {
-                "group": "Setting up integrations",
+                "group": "3ʳᵈ-party integrations",
                 "icon": "circles-overlap",
                 "pages": [
                   {
@@ -177,59 +186,7 @@
                   "developers/guides/signing-requests",
                   "developers/guides/passkey-settings-migration-guide",
                   "developers/guides/keys-and-multichain-migration-guide",
-                  "developers/guides/applications-deprecation",
-                  {
-                    "group": "Core Skills",
-                    "pages": [
-                      "developers/core/setup-and-authentication",
-                      "developers/core/creating-and-managing-wallets",
-                      "developers/core/displaying-portfolio-history"
-                    ]
-                  },
-                  {
-                    "group": "Building Blocks",
-                    "pages": [
-                      "developers/building/wallets-and-transactions",
-                      "developers/building/policies-and-permissions",
-                      "developers/building/staking",
-                      "developers/building/exchange-integrations",
-                      "developers/building/aml-and-travel-rule"
-                    ]
-                  },
-                  {
-                    "group": "Architectural Patterns",
-                    "pages": [
-                      "developers/architecture/designing-an-exchange-hot-wallet",
-                      "developers/architecture/managing-wallets-for-millions-of-users",
-                      "developers/architecture/designing-for-high-availability",
-                      "developers/architecture/event-driven-architecture",
-                      "developers/architecture/scalability-and-performance"
-                    ]
-                  },
-                  {
-                    "group": "Advanced Topics",
-                    "pages": [
-                      "developers/advanced/key-derivation",
-                      "developers/advanced/using-hsms",
-                      "developers/advanced/on-premise-deployment",
-                      "developers/advanced/keys-and-multichain-migration"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Dashboard Guides",
-                "icon": "browser",
-                "pages": [
-                  "dashboard/overview",
-                  "dashboard/registering-a-new-passkey-credential",
-                  "dashboard/storing-webauthn-credentials-in-password-managers",
-                  "dashboard/videos",
-                  "dashboard/onboarding-a-new-device",
-                  "dashboard/managing-users-and-roles",
-                  "dashboard/creating-policies",
-                  "dashboard/approving-transactions",
-                  "dashboard/user-account-recovery"
+                  "developers/guides/applications-deprecation"
                 ]
               }
             ]
@@ -241,61 +198,13 @@
               "advanced/credentials",
               "advanced/delegated-signing",
               "advanced/interoperability",
+              "advanced/account-abstraction-on-evms",
               {
                 "group": "Deployment models",
                 "pages": [
-                  "advanced/deployment-models",
+                  "advanced/deployment-models/index",
                   "advanced/deployment-models/on-premise-deployment",
                   "advanced/deployment-models/hsm"
-                ]
-              },
-              "advanced/paying-dfns-with-canton-coin"
-            ]
-          },
-          {
-            "group": "Security & Compliance",
-            "icon": "shield-check",
-            "pages": [
-              "security/overview",
-              "security/our-soc-2-type-ii-compliance",
-              "security/configuring-institutional-grade-policies",
-              "security/audit-log-deep-dive",
-              "security/dfns-vs-self-hosted-solutions",
-              "security/meeting-fiduciary-duties-with-dfns",
-              "security/compliance-for-micar-and-travel-rule"
-            ]
-          },
-          {
-            "group": "Solutions",
-            "icon": "briefcase",
-            "pages": [
-              "solutions/index",
-              {
-                "group": "For Business Leaders",
-                "pages": [
-                  "solutions/strategy/accelerating-time-to-market",
-                  "solutions/strategy/total-cost-of-ownership-tco",
-                  "solutions/strategy/de-risking-your-digital-asset-strategy",
-                  "solutions/strategy/a-phased-approach-for-banks"
-                ]
-              },
-              {
-                "group": "For Verticals",
-                "pages": [
-                  "solutions/verticals/psp-and-payments",
-                  "solutions/verticals/neobanks",
-                  "solutions/verticals/custody-and-exchanges",
-                  "solutions/verticals/tokenization",
-                  "solutions/verticals/enterprise-and-loyalty"
-                ]
-              },
-              {
-                "group": "Operational Playbooks",
-                "pages": [
-                  "solutions/playbooks/daily-treasury-reconciliation",
-                  "solutions/playbooks/onboarding-an-institutional-client",
-                  "solutions/playbooks/processing-large-otc-trades",
-                  "solutions/playbooks/secure-user-and-device-lifecycle"
                 ]
               }
             ]
@@ -525,6 +434,7 @@
                       "api-reference/raw-transactions/sui",
                       "api-reference/raw-transactions/tezos",
                       "api-reference/raw-transactions/tron",
+                      "api-reference/raw-transactions/ton",
                       "api-reference/raw-transactions/xrp"
                     ]
                   }
@@ -577,6 +487,7 @@
           {
             "group": "Policies",
             "pages": [
+              "api-reference/policies",
               "get /v2/policies",
               "post /v2/policies",
               "get /v2/policies/{policyId}",
@@ -587,6 +498,7 @@
           {
             "group": "Approval management",
             "pages": [
+              "api-reference/policy-approvals",
               "post /v2/policy-approvals/{approvalId}/decisions",
               "get /v2/policy-approvals/{approvalId}",
               "get /v2/policy-approvals"
@@ -618,6 +530,7 @@
           {
             "group": "Webhooks History",
             "pages": [
+              "api-reference/webhook-events",
               "get /webhooks/{webhookId}/events/{webhookEventId}",
               "get /webhooks/{webhookId}/events"
             ]

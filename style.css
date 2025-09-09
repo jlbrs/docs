@@ -53,6 +53,17 @@ h6 {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     overflow: hidden;
+
+    /* allow to cut long links anywhere so the table fit the page */
+    & a {
+        overflow-wrap: anywhere;
+    }
+}
+
+/* bug fix: API arguments with too many options would outgrow the page */
+.api-section ul {
+    width: 1px;
+    max-width: 100%;
 }
 
 #content-area table th,
@@ -240,12 +251,12 @@ a.link:not(.nav-tabs-item),
     }
 }
 
+
 /* hide the base URL in the API endpoint pages */
-div:has(+ .tryit-button)>:nth-child(2) {
-    &>:first-child {
-        display: none;
-    }
+div:not([data-testid="api-playground-modal"])>div>div>div:has(+ .tryit-button)>div:nth-child(2)>:first-child {
+    display: none;
 }
+
 
 /* Put the card icon (in horizontal card setup) at the top */
 .card {
