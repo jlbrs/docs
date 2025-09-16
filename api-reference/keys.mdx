@@ -1,5 +1,48 @@
 ---
-title: keys
+title: Keys
 icon: key
-tag: To do
+description: "A technical overview of the `Key` object, used to derive wallets and perform raw signing operations via the API."
 ---
+
+The `Key` is a core API resource in Dfns. It represents a **distributed private key** managed by our MPC network. You don't interact with the key material directly; instead, you use its unique `keyId` to perform cryptographic operations.
+
+The `Key` object has two primary functions for a developer:
+1.  **To create `Wallet` objects.**
+2.  **To sign arbitrary data (`raw signing`).**
+
+
+## 1. Creating Multi-chain Wallets from a Key
+
+A single `Key` object is blockchain-agnostic and can be used to derive multiple `Wallet` objects across different networks. This creates a one-to-many relationship that simplifies your infrastructure, as you only need to reference one `keyId` to manage assets on various chains.
+
+Think of it like this:
+* `Key` (with `keyId`)
+    * `-> Wallet` (Ethereum, with `address` and `walletId`)
+    * `-> Wallet` (Solana, with `address` and `walletId`)
+    * `-> Wallet` (Bitcoin, with `address` and `walletId`)
+
+When you call the [Create Wallet](/api-reference/wallets/create-wallet) endpoint, you can pass the `signingKey` in the request body to specify which underlying key should control the new wallet.
+
+
+## 2. Performing Raw Signing
+
+The most powerful feature of the `Key` object is the ability to perform **raw signing**. This is essential for any action beyond a simple [asset transfer](/api-reference/wallets/transfer-asset), such as interacting with a smart contract or signing an off-chain message.
+
+You do this by making a `POST` request to the `/keys/{keyId}/signatures` [endpoint](/api-reference/keys/generate-signature).
+
+Your application is then responsible for broadcasting the transaction with the returned signature to the network. This gives you full control over transaction assembly, gas, and nonce management, while Dfns handles the secure signing operation.
+
+<Info>
+  **What about broadcasting?** The `Key` object only signs. Broadcasting is a function of the `Wallet` object, as it is network-specific. See the [Sign & Broadcast](/api-reference/wallets/sign-and-broadcast-transaction) endpoint for broadcasting after the signature has been issued.
+</Info>
+
+Head to the [Raw Transactions](/api-reference/raw-transactions) documentation to find more information about those endpoints. 
+
+
+
+## Security: The Developer Takeaway
+
+From a developer's perspective, the security model is simple: **the `Key` object is a inaccessible secret**. You can use it to generate signatures, but you can never read the underlying private key material. Our MPC architecture enforces this guarantee.
+
+For a deeper technical dive, see our **[MPC Architecture](/core-concepts/architecture)** page.
+

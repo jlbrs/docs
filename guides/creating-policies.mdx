@@ -1,14 +1,68 @@
 ---
-title: 'Creating Policies'
-description: 'An overview of Creating Policies.'
-tag: To do
+title: "Creating policies"
+description: "Make sure your internal processes are directly replicated into your Dfns org."
 ---
 
-# Creating Policies
+> _This feature is available starting from our Basic plan. For more details see_ [_our pricing page_](https://www.dfns.co/pricing)_._
 
-This page provides a comprehensive overview of **Creating Policies**.
+Policies are a programmable set of safeguards behind all actions on the Dfns infrastructure. You can configure them to validate actions taken in your organization. For more details, please read the dedicated section: [policy-engine](/core-concepts/policies)
 
-## Key Concepts
+<Tip > 
+**Pro tip: initial policies you should create**
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+We recommend setting up three initial Policies in order to lock down your organization:
+  1. **Permission Assignment:** requiring quorum approval before assigning permissions to any user. This way a rogue admin cannot create fake users with elevated permissions by himself.
+  2. **Permission Modification:** ensure permission sets cannot be modified without quorum approval, to prevent a rogue actor to elevate existing roles by whitelisting extra actions.
+  3. **Policy Modification:** a policy preventing to change policies. That's to make sure your established policies stay in place and a quorum approval is required for modifications.
+  Those are actually the first 3 options available when you follow the policy creation flow on the dashboard.
+</Tip>
+
+<Info> 
+**Follow this tutorial in a video!**
+
+  Tired of reading? Head to the [end of the page](#new-follow-this-tutorial-in-a-video) to see a video demo of this tutorial!
+</Info>
+
+In this example, we are going to control transactions whitelisting specific recipient addresses, and requiring approvals for others.
+
+<Steps>
+  <Step title="Create a new Policy">
+    On the dashboard, head to `Org > Policies` (direct link: [https://app.dfns.io/v3/org/policies](https://app.dfns.io/v3/org/policies)) and click ➕ New Policy.
+    <Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2FWTxdGWlNQZGesWCDbWju_2FCapture_20d_E2_80_99e_CC_81cran_202025-07-16_20a_CC_80_2014.12.15.png)</Frame>
+  </Step>
+
+  <Step title="Select the targeted activity">
+    What should the policy apply on? For our example, select "Wallet usage (transfer, transaction, signature)"
+    <Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2F1xU1cUxLJb5RpuUr55SK_2FCapture_20d_E2_80_99e_CC_81cran_202025-07-16_20a_CC_80_2014.16.05.png)</Frame>
+  </Step>
+
+  <Step title="Select the criteria to evaluate">
+    In which case should the policy trigger? For our example, select "Transaction recipient whitelist", then click Configuration and paste the whitelisted destination wallet address. All transactions to this wallet address will go through, while all others will trigger the policy.
+    <Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2FszDUoPpDz3Scqf2uRL9e_2FCapture_20d_E2_80_99e_CC_81cran_202025-07-16_20a_CC_80_2014.21.23.png)</Frame>
+  </Step>
+
+  <Step title="Select the action to take">
+    When a transaction triggers the policy filters, then there are different actions you can take. In our case, we'll request approval from another employee. Select "Request Approval", and add an "Approver" group, with a quorum of 1, then click "Any Employee" and select the employee who should approve the transaction.
+    <Info>
+      The user triggering the action can never approve it himself. Make sure the approvers are not the same users who will issue the requests!
+    </Info>
+    <Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2FvhFWhd151c6195YbjaG8_2FCapture_20d_E2_80_99e_CC_81cran_202025-07-16_20a_CC_80_2014.27.40.png)</Frame>
+  </Step>
+
+  <Step title="Finish the configuration">
+    Hit "Continue", give a name to your policy, and keep going until you get to the Summary. Click Save and 🔑 sign the request with your passkey.
+    <Frame>![](/images/spaces_2FtnSPOZGQ2hBmgoVWX5H6_2Fuploads_2FXANwIJBr4f4qadFLgzVl_2FCapture_20d_E2_80_99e_CC_81cran_202025-07-16_20a_CC_80_2014.32.49.png)</Frame>
+  </Step>
+</Steps>
+
+<Check>
+  Congratulation! you have created a policy requesting approval from your coworker when a transaction is requested, unless it's for transferring to the designated wallet. You can refine these rules and add as many as you need to match your internal policies and safeguards.
+</Check>
+
+### ⭐ New! Follow this tutorial in a video! ⭐
+
+<iframe 
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube-nocookie.com/embed/IICkUb4ZmL4?si=7PxLmenAw-WVpkcT" title="YouTube video player" 
+  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

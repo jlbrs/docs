@@ -145,7 +145,6 @@
               "guides/registering-a-new-passkey-credential",
               "guides/onboarding-a-new-device",
               "guides/storing-webauthn-credentials-in-password-managers",
-              "guides/paying-dfns-with-canton-coin",
               {
                 "group": "3ʳᵈ-party integrations",
                 "icon": "circles-overlap",
@@ -245,13 +244,16 @@
                 "pages": [
                   "api-reference/auth/signing-flows",
                   "post /auth/action/init",
-                  "post /auth/action"
+                  "post /auth/action",
+                  "get /auth/action/logs",
+                  "get /auth/action/logs/{id}"
                 ]
               }
             ]
           },
           {
             "group": "Identity & Access Management",
+        "icon": "user",
             "pages": [
               {
                 "group": "Registration",
@@ -345,6 +347,7 @@
           },
           {
             "group": "Wallets & Transactions",
+            "icon": "globe",
             "pages": [
               {
                 "group": "Wallets",
@@ -377,7 +380,15 @@
                       "get /wallets/{walletId}/offers",
                       "get /wallets/{walletId}/offers/{offerId}",
                       "put /wallets/{walletId}/offers/{offerId}/accept",
-                      "put /wallets/{walletId}/offers/{offerId}/reject"
+                      "put /wallets/{walletId}/offers/{offerId}/reject",
+                      {
+                        "group": "Webhooks",
+                        "pages": [
+                          "webhook wallet.offer.accepted",
+                          "webhook wallet.offer.received",
+                          "webhook wallet.offer.rejected"
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -404,7 +415,17 @@
                 "pages": [
                   "post /wallets/{walletId}/transfers",
                   "get /wallets/{walletId}/transfers",
-                  "get /wallets/{walletId}/transfers/{transferId}"
+                  "get /wallets/{walletId}/transfers/{transferId}",
+                  {
+                    "group": "Webhooks",
+                    "pages": [
+                      "webhook wallet.transfer.requested",
+                      "webhook wallet.transfer.broadcasted",
+                      "webhook wallet.transfer.confirmed",
+                      "webhook wallet.transfer.failed",
+                      "webhook wallet.transfer.rejected"
+                    ]
+                  }
                 ]
               },
               {
@@ -422,7 +443,6 @@
                       "api-reference/raw-transactions/algorand",
                       "api-reference/raw-transactions/aptos",
                       "api-reference/raw-transactions/bitcoin",
-                      "api-reference/raw-transactions/canton",
                       "api-reference/raw-transactions/cardano",
                       "api-reference/raw-transactions/cosmos",
                       "api-reference/raw-transactions/evm",
@@ -439,108 +459,130 @@
                     ]
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "group": "Exchanges",
-            "pages": [
-              "get /exchanges",
-              "post /exchanges",
-              "get /exchanges/{exchangeId}",
-              "get /exchanges/{exchangeId}/accounts",
-              "get /exchanges/{exchangeId}/accounts/{accountId}/assets",
-              "get /exchanges/{exchangeId}/accounts/{accountId}/assets/{asset}/withdrawal-networks",
-              "post /exchanges/{exchangeId}/accounts/{accountId}/deposits",
-              "post /exchanges/{exchangeId}/accounts/{accountId}/withdrawals",
-              "delete /exchanges/{exchangeId}"
-            ]
-          },
-          {
-            "group": "Fee Sponsors",
-            "pages": [
-              "get /fee-sponsors",
-              "post /fee-sponsors",
-              "get /fee-sponsors/{feeSponsorId}",
-              "put /fee-sponsors/{feeSponsorId}/activate",
-              "put /fee-sponsors/{feeSponsorId}/deactivate",
-              "delete /fee-sponsors/{feeSponsorId}",
-              "get /fee-sponsors/{feeSponsorId}/fees"
-            ]
-          },
-          {
-            "group": "Networks",
-            "pages": [
-              "get /networks/fees",
-              "post /networks/read-contract",
+              },
               {
-                "group": "Canton Validators",
+                "group": "Fee Sponsors",
                 "pages": [
-                  "get /networks/{network}/validators",
-                  "post /networks/{network}/validators",
-                  "put /networks/{network}/validators/{validatorId}",
-                  "delete /networks/{network}/validators/{validatorId}"
+                  "get /fee-sponsors",
+                  "post /fee-sponsors",
+                  "get /fee-sponsors/{feeSponsorId}",
+                  "put /fee-sponsors/{feeSponsorId}/activate",
+                  "put /fee-sponsors/{feeSponsorId}/deactivate",
+                  "delete /fee-sponsors/{feeSponsorId}",
+                  "get /fee-sponsors/{feeSponsorId}/fees"
+                ]
+              },
+              {
+                "group": "Swaps",
+                "pages": [
+                  "get /swaps",
+                  "get /swaps/quotes/{quoteId}",
+                  "get /swaps/{swapId}",
+                  "post /swaps",
+                  "post /swaps/quotes"
+                ]
+              },
+              {
+                "group": "Staking",
+                "pages": [
+                  "get /staking/stakes",
+                  "post /staking/stakes",
+                  "get /staking/stakes/{stakeId}",
+                  "get /staking/stakes/{stakeId}/actions",
+                  "post /staking/stakes/{stakeId}/actions",
+                  "get /staking/stakes/{stakeId}/rewards"
+                ]
+              },
+              {
+                "group": "Networks",
+                "pages": [
+                  "get /networks/fees",
+                  "post /networks/read-contract",
+                  {
+                    "group": "Canton Validators",
+                    "pages": [
+                      "get /networks/{network}/validators",
+                      "post /networks/{network}/validators",
+                      "put /networks/{network}/validators/{validatorId}",
+                      "delete /networks/{network}/validators/{validatorId}"
+                    ]
+                  }
+                ]
+              },
+            
+              {
+                "group": "Exchanges",
+                "pages": [
+                  "get /exchanges",
+                  "post /exchanges",
+                  "get /exchanges/{exchangeId}",
+                  "get /exchanges/{exchangeId}/accounts",
+                  "get /exchanges/{exchangeId}/accounts/{accountId}/assets",
+                  "get /exchanges/{exchangeId}/accounts/{accountId}/assets/{asset}/withdrawal-networks",
+                  "post /exchanges/{exchangeId}/accounts/{accountId}/deposits",
+                  "post /exchanges/{exchangeId}/accounts/{accountId}/withdrawals",
+                  "delete /exchanges/{exchangeId}"
                 ]
               }
             ]
           },
           {
-            "group": "Policies",
+            "group": "Management",
+            "icon": "list-check",
             "pages": [
-              "api-reference/policies",
-              "get /v2/policies",
-              "post /v2/policies",
-              "get /v2/policies/{policyId}",
-              "put /v2/policies/{policyId}",
-              "delete /v2/policies/{policyId}"
+              {
+                "group": "Policies",
+                "pages": [
+                  "api-reference/policies",
+                  "get /v2/policies",
+                  "post /v2/policies",
+                  "get /v2/policies/{policyId}",
+                  "put /v2/policies/{policyId}",
+                  "delete /v2/policies/{policyId}"
+                ]
+              },
+              {
+                "group": "Approval management",
+                "pages": [
+                  "api-reference/policy-approvals",
+                  "post /v2/policy-approvals/{approvalId}/decisions",
+                  "get /v2/policy-approvals/{approvalId}",
+                  "get /v2/policy-approvals"
+                ]
+              },
+              {
+                "group": "Agreements",
+                "pages": [
+                  "get /agreements/latest-unaccepted",
+                  "post /agreements/{agreementId}/accept"
+                ]
+              }
             ]
           },
           {
-            "group": "Approval management",
+            "group": "Webhooks",
+            "icon": "webhook",
             "pages": [
-              "api-reference/policy-approvals",
-              "post /v2/policy-approvals/{approvalId}/decisions",
-              "get /v2/policy-approvals/{approvalId}",
-              "get /v2/policy-approvals"
-            ]
-          },
-          {
-            "group": "Staking",
-            "pages": [
-              "get /staking/stakes",
-              "post /staking/stakes",
-              "get /staking/stakes/{stakeId}",
-              "get /staking/stakes/{stakeId}/actions",
-              "post /staking/stakes/{stakeId}/actions",
-              "get /staking/stakes/{stakeId}/rewards"
-            ]
-          },
-          {
-            "group": "Webhook Configuration",
-            "pages": [
-              "api-reference/webhooks",
-              "get /webhooks",
-              "post /webhooks",
-              "get /webhooks/{webhookId}",
-              "put /webhooks/{webhookId}",
-              "delete /webhooks/{webhookId}",
-              "post /webhooks/{webhookId}/ping"
-            ]
-          },
-          {
-            "group": "Webhooks History",
-            "pages": [
-              "api-reference/webhook-events",
-              "get /webhooks/{webhookId}/events/{webhookEventId}",
-              "get /webhooks/{webhookId}/events"
-            ]
-          },
-          {
-            "group": "Applications",
-            "tag": "Deprecated",
-            "pages": [
-              "get /auth/apps",
-              "get /auth/apps/{appId}"
+              {
+                "group": "Webhook Configuration",
+                "pages": [
+                  "api-reference/webhooks",
+                  "get /webhooks",
+                  "post /webhooks",
+                  "get /webhooks/{webhookId}",
+                  "put /webhooks/{webhookId}",
+                  "delete /webhooks/{webhookId}",
+                  "post /webhooks/{webhookId}/ping"
+                ]
+              },
+              {
+                "group": "Events History",
+                "pages": [
+                  "api-reference/webhook-events",
+                  "get /webhooks/{webhookId}/events/{webhookEventId}",
+                  "get /webhooks/{webhookId}/events"
+                ]
+              }
             ]
           }
         ],
@@ -612,6 +654,12 @@
       }
     ]
   },
+  "redirects": [
+  {
+    "source": "/source/path",
+    "destination": "/destination/path"
+  }
+],
   "footer": {
     "socials": {
       "x": "https://x.com/dfnsHQ",

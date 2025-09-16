@@ -1,0 +1,5 @@
+[
+    "get /signers",
+    "get /auth/apps",
+              "get /auth/apps/{appId}"
+]

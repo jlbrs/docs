@@ -1,14 +1,109 @@
 ---
 title: 'User Account Recovery'
-description: 'An overview of User Account Recovery.'
+description: Step-by-step instructions for recovering access for both your team members (Users) and your application’s customers (End-Users).
 tag: To do
 ---
 
-# User Account Recovery
+Recovery is a critical security process. In Dfns, the procedure differs depending on who needs to be recovered. It's essential to first identify the type of user you are dealing with.
 
-This page provides a comprehensive overview of **User Account Recovery**.
+<Info>
+  **Understanding the Difference:**
+  - **Dfns User:** A member of your organization who logs into the Dfns dashboard and has API credentials (e.g., an admin, developer, or approver).
+  - **End-User:** A customer of your application. They are represented in Dfns by a `username` and use a passkey to authorize actions within your app, but they never log into Dfns directly.
+</Info>
 
-## Key Concepts
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+## Recovering a Dfns User (A Team Member)
+
+This process is for when a team member loses the passkey used to access the Dfns dashboard. Recovery must be initiated by the users themselves.
+
+<Warning>
+The recovery process is meant to be used in situations when you have lost all access means to your Dfns account. 
+It will wipe all existing credentials and initiate the process to create a new one. 
+</Warning>
+
+
+### From the dashboard
+
+The user will receive an email containing a secure link. This link will guide them through the process of registering a **new passkey**. Once they complete the registration, their old, lost passkey will be invalidated, and they will regain full access to their account with the new one.
+
+<Warning>
+  **What if our only Admin is locked out?**
+  If your organization's only Admin loses their passkey, they cannot recover their own account. Please contact Dfns support for assistance in this specific scenario.
+</Warning>
+
+### Using the API
+
+## Recovering an End-User (Your Application's Customer)
+
+This is a developer-led flow for when a customer of your application loses their device or passkey. Your application is responsible for verifying the user's identity before Dfns can allow them to register a new credential.
+
+### Developer's Responsibility: Identity Verification
+
+Before starting the Dfns recovery flow, you **must** have a secure, out-of-band method to verify that the user is who they claim to be. Dfns cannot do this for you. Common methods include:
+
+-   Email confirmation loops
+-   SMS One-Time Passcodes (OTP)
+-   Answering security questions
+-   Knowledge-Based Authentication (KBA)
+-   Identity document verification
+
+**Only proceed with the technical steps below after you have confidently authenticated your user.**
+
+### Step-by-Step Recovery Flow
+
+This process involves your backend "sponsoring" the recovery by signing a challenge on the user's behalf with a temporary key.
+
+**Step 1: Get a Recovery Challenge**
+Your backend makes a request to the Dfns API to initiate the recovery process for the user, identified by their `username`.
+
+```bash
+# POST /auth/recoveries
+{
+  "username": "customer-123"
+}
+```
+
+Dfns will respond with a `challenge` that needs to be signed.
+
+**Step 2: Create a Temporary Signer and Sign the Challenge**
+In your backend, generate a new, temporary key pair. This key is used only for this single recovery event. Use the temporary private key to sign the `challenge` returned by Dfns.
+
+```typescript
+// Example using ethers.js
+import { Wallet } from 'ethers';
+
+// Generate a temporary, single-use signer
+const tempSigner = Wallet.createRandom();
+
+// Sign the challenge received from Dfns
+const signature = await tempSigner.signMessage(challenge.payload);
+```
+
+**Step 3: Complete the Recovery**
+Make a final API call to Dfns, providing the `challengeIdentifier`, the `signature` you just created, and the `publicKey` of your temporary signer.
+
+```bash
+# POST /auth/recoveries/complete
+{
+  "challengeIdentifier": "...",
+  "signature": {
+    "encoded": "0x...",
+    "publicKey": "0x..." // public key of the temporary signer
+  }
+}
+```
+
+If successful, Dfns marks the user's old credentials as invalid.
+
+**Step 4: Guide User to Register a New Passkey**
+The recovery is now complete on the Dfns side. The next time you need a `UserAction` signature from this user (e.g., for a transaction), the Dfns SDKs or APIs will automatically trigger the passkey **registration** flow instead of the signing flow. Guide your user through creating their new passkey in your application's UI.
+
+<CardGroup>
+  <Card title="User Credentials Guide" href="/developers/guides/user-credentials">
+    Learn how to register users and their passkeys with Dfns.
+  </Card>
+  <Card title="API Reference: Auth" href="/api-reference/auth">
+    Explore the recovery endpoints and schemas in detail.
+  </Card>
+</CardGroup>

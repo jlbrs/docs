@@ -1,14 +1,72 @@
 ---
-title: 'Managing Users And Roles'
-description: 'An overview of Managing Users And Roles.'
-tag: To do
+title: 'Managing Users & Roles'
+description: 'Learn how to manage team members and their permissions within your Dfns organization.'
 ---
 
-# Managing Users And Roles
+<Info>
+  **Key Takeaways:**
+  - **Users** are individuals invited to your Dfn's organization.
+  - **Permissions** are collections of operations that a user can see and do.
+  - **Best Practice:** Grant users the minimum permissions necessary for their job (principle of least privilege).
+</Info>
 
-This page provides a comprehensive overview of **Managing Users And Roles**.
+## Managing Users
 
-## Key Concepts
+You can easily invite new team members to your Dfns organization and manage their access directly from the dashboard.
 
-* **Concept A:** Detail about the first key concept.
-* **Concept B:** Detail about the second key concept.
+### Inviting a New User
+
+To add a new member to your team:
+
+1.  Navigate to **Users**.
+2.  Click the **New User** button in the top-right corner.
+3.  Enter the user's **email address**.
+5.  Click **Create**.
+
+The user will receive an email invitation to join your Dfns organization. 
+They are created without any permission to do or see anything. You should then assign permissions to them. 
+
+
+
+### Deactivating a User
+
+If a team member no longer requires access, you can deactivate their account. Deactivating a user immediately revokes their access to the Dfns dashboard and their ability to use API credentials associated with them.
+
+1.  Navigate to **Users**.
+2.  Find the user you wish to remove in the list.
+3.  Click the <Icon icon="trash"/> icon.
+
+
+
+## Managing Permissions with Roles
+
+Permissions allow you to define granular permissions and apply them consistently to different users. This approach simplifies access management and enhances security.
+
+### Creating a Custom Role
+
+Dfns provides default permissions like `DfnsFullAdminAccess` (which is applied when you set someone as an Admin), but we highly recommend creating custom permissions tailored to your team's specific responsibilities.
+
+1.  Navigate to **Settings** > **Permissions**.
+2.  Click **New Permission**.
+3.  Give the permission a descriptive **Name** (e.g., "Approver", "Auditor", "Transaction Operator").
+4.  Select the specific **Operations** you authorize for this permission. Each operation is broken down by action (`Create`, `Read`, `Update`) and resource (`Wallets`, `Policies`, etc.).
+5.  Click **Create** to save the new permission.
+
+
+
+### Assigning Roles to Users
+
+You can assign or change a user's roles at any time.
+
+1.  Navigate to **Users**.
+2.  Click on the user you wish to edit.
+3.  In the **Permissions** section, you can add or remove permissions from the user's profile.
+4.  Changes are saved automatically.
+
+
+
+## Recommendations & Best Practices
+
+Adhering to the **principle of least privilege** is crucial for security. Each user should only have the permissions essential to perform their duties. Avoid using the broad `Admin` role for daily operations.
+
+See an example with an "Approver" permission in the [Permission-Based Access Control](/guides/permission-based-access-control) tutorial. 

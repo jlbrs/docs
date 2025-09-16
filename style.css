@@ -111,57 +111,67 @@ h6 {
     flex-basis: 2rem;
 }
 
+
 /* Left alignment for sidebar items */
-#sidebar-content ul#sidebar-group {
+#sidebar-content {
 
-    /* all level 1 items (Level 1 = always visible) */
-    &>li {
+    /* Level 1 group headers (the ones in bold with an icon */
+    & div.sidebar-group-header:has(svg) {
+        /* go left for: icon .875rem + gap .625rem; */
+        margin-left: -1.5rem;
+    }
 
-        /* level 1 - only sub-group (level 2) headers */
-        &[data-group-tag]>div {
-            margin-left: -18px;
-            padding-left: 16px !important;
-        }
+    & ul#sidebar-group {
 
-        /* all level 2 items */
-        &>ul>li {
-            margin-left: 1.5px;
+        /* all level 1 items (Level 1 = always visible) */
+        &>li {
 
-            /* level 2 - only pages */
-            &>a {
-                padding-left: 13.5px !important;
-            }
-
-            /* level 2 - only sub-group (level 3) headers */
+            /* level 1 - only sub-group (level 2) headers */
             &[data-group-tag]>div {
-                padding-left: 13.5px !important;
+                margin-left: -18px;
+                padding-left: 16px !important;
             }
 
-            /* all level 3 items (consider there are only pages at that level, we shouldn't go to Level 4 sub menus!) */
+            /* all level 2 items */
             &>ul>li {
-                margin-left: 17.5px;
+                margin-left: 1.5px;
 
-                /* level 3 - only pages */
+                /* level 2 - only pages */
                 &>a {
                     padding-left: 13.5px !important;
                 }
+
+                /* level 2 - only sub-group (level 3) headers */
+                &[data-group-tag]>div {
+                    padding-left: 13.5px !important;
+                }
+
+                /* all level 3 items (consider there are only pages at that level, we shouldn't go to Level 4 sub menus!) */
+                &>ul>li {
+                    margin-left: 17.5px;
+
+                    /* level 3 - only pages */
+                    &>a {
+                        padding-left: 13.5px !important;
+                    }
+                }
+
             }
 
-        }
-
-        /* Left border gray, and primary when selected */
-        & li {
-            border-left: 1px solid rgb(var(--gray-300));
-
-            &:is(.dark *) {
-                border-color: rgb(var(--gray-600));
-            }
-
-            &:has(>a.font-semibold) {
-                border-color: rgb(var(--primary));
+            /* Left border gray, and primary when selected */
+            & li {
+                border-left: 1px solid rgb(var(--gray-300));
 
                 &:is(.dark *) {
-                    border-color: rgb(var(--primary-light));
+                    border-color: rgb(var(--gray-600));
+                }
+
+                &:has(>a.font-semibold) {
+                    border-color: rgb(var(--primary));
+
+                    &:is(.dark *) {
+                        border-color: rgb(var(--primary-light));
+                    }
                 }
             }
         }
